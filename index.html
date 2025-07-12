@@ -40,6 +40,19 @@
     <label for="sortOldest">古い順</label>
 </div>
 
+<div class="nuSegment" id="fruitsSegment">
+    <input type="radio" name="sortOption" id="fruitsApple" value="りんご" checked />
+    <label for="fruitsApple">りんご</label>
+
+    <input type="radio" name="sortOption" id="fruitsBanana" value="バナナ" />
+    <label for="fruitsBanana">バナナ</label>
+
+    <input type="radio" name="sortOption" id="fruitsMelon" value="メロン" />
+    <label for="fruitsMelon">メロン</label>
+</div>
+
+
+
 
 <h2>色々なinput</h2>
 <div>
@@ -128,18 +141,20 @@
         //------------------------------------------------------------------------------------
         // ドロップダウンメニュー
         //------------------------------------------------------------------------------------
-        const btn = document.getElementById("dropdownBtn");
-        neoux.dropdown.attach(btn, [
-            { label: "設定", callback: () => console.log("設定") },
-            { label: "ログアウト", callback: () => console.log("ログアウト") }
-        ]);
+        neoux.dropdown.attach(
+            document.getElementById("dropdownBtn"),
+            [
+                { label: "設定", callback: () => console.log("設定") },
+                { label: "ログアウト", callback: () => console.log("ログアウト") }
+            ]);
 
 
-        const btnLeft = document.getElementById("dropdownBtnLeft");
-        neoux.dropdown.attach(btnLeft, [
-            { label: "設定", callback: () => console.log("設定") },
-            { label: "ログアウト", callback: () => console.log("ログアウト") }
-        ]);
+        neoux.dropdown.attach(
+            document.getElementById("dropdownBtnLeft"),
+            [
+                { label: "設定", callback: () => console.log("設定") },
+                { label: "ログアウト", callback: () => console.log("ログアウト") }
+            ]);
 
 
         //------------------------------------------------------------------------------------
@@ -147,6 +162,14 @@
         //------------------------------------------------------------------------------------
         neoux.segment.attach(
             document.getElementById("sortSegment"),
+            (selectedValue) => {
+                console.log("選択:", selectedValue);
+                // 必要に応じて処理を追加
+            }
+        );
+
+        neoux.segment.attach(
+            document.getElementById("fruitsSegment"),
             (selectedValue) => {
                 console.log("選択:", selectedValue);
                 // 必要に応じて処理を追加
