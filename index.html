@@ -28,6 +28,22 @@
 <button onclick="document.getElementById('siteCode').value='KTN';">Change hidden value</button>
 <p>hiddenだとchangeイベントは発生しない</p>
 
+<h2>色々なinput</h2>
+<div>
+    <label>年/月/日：<input type="date"></label>
+</div>
+<div>
+    <label>年 / 月 / 日 +時:分：<input type="datetime-local"></label>
+</div>
+<div>
+    <label>カラーパレッド：<input type="color" value="#0b80dc"></label>
+</div>
+
+<div>
+    <label>範囲を選択：<input type="range" min="0" max="100"></label>
+</div>
+
+
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 
