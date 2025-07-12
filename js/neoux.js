@@ -171,6 +171,74 @@
 })();
 
 //------------------------------------------------------------------------------------
+// ドロップダウンメニュー
+//------------------------------------------------------------------------------------
+(function () {
+
+    function createDropdown(buttonElement, items = [], onSelect) {
+        const dropdown = document.createElement("div");
+        dropdown.className = "nuDropdownMenu";
+
+        items.forEach(item => {
+            const option = document.createElement("div");
+            option.className = "nuDropdownItem";
+            option.textContent = item.label;
+            option.addEventListener("click", (e) => {
+                e.stopPropagation(); // 外部クリック判定を防ぐ
+                hideDropdown(dropdown);
+                onSelect?.(item.value);
+            });
+            dropdown.appendChild(option);
+        });
+
+        // ボタンの直下に配置
+        const rect = buttonElement.getBoundingClientRect();
+        dropdown.style.top = `${rect.bottom + window.scrollY}px`;
+        dropdown.style.left = `${rect.left + window.scrollX}px`;
+
+        document.body.appendChild(dropdown);
+
+        // 外部クリックで閉じる
+        function outsideClickListener(e) {
+            if (!dropdown.contains(e.target) && e.target !== buttonElement) {
+                hideDropdown(dropdown);
+                document.removeEventListener("click", outsideClickListener);
+            }
+        }
+        document.addEventListener("click", outsideClickListener);
+
+        return dropdown;
+    }
+
+    function hideDropdown(dropdown) {
+        if (dropdown && dropdown.parentNode) {
+            dropdown.remove();
+        }
+    }
+
+    //------------------------------------------------------------------------------------
+    // グローバルに公開
+    //------------------------------------------------------------------------------------
+    window.neoux.dropdown = {
+        attach: function (buttonElement, items, onSelect) {
+            buttonElement.addEventListener("click", (e) => {
+                e.stopPropagation(); // 外部クリック判定を防ぐ
+                // 既に開いているメニューがあれば閉じる
+                const existing = document.querySelector(".nuDropdownMenu");
+                if (existing) {
+                    alert('remove');
+                    existing.remove();
+                } else {
+                    createDropdown(buttonElement, items, onSelect);
+                }
+            });
+        }
+    };
+
+})();
+
+
+//------------------------------------------------------------------------------------
 // オーバーレイ制御ユーティリティ
 //------------------------------------------------------------------------------------
 (function () {

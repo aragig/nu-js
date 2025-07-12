@@ -22,7 +22,10 @@
 <button id="nuToast">Toast</button>
 <button id="nuToastDelay">Toast with delay</button>
 
-<h2>状態管理</h2>
+<h2>ドロップダウンメニュー</h2>
+<button id="dropdownBtn" style="position:absolute;right:0;">Open</button>
+
+<h2>状態管理のテスト</h2>
 <input type="text" name="filename" value="" />
 <input type="hidden" name="siteCode" id="siteCode" value="ASN" />
 <button onclick="document.getElementById('siteCode').value='KTN';">Change hidden value</button>
@@ -42,11 +45,16 @@
 <div>
     <label>範囲を選択：<input type="range" min="0" max="100"></label>
 </div>
-
+<canvas id="stockGraph" width="150" height="150">
+    現在の株価: $3.15 + 0.15
+</canvas>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 
+        //------------------------------------------------------------------------------------
+        // アラート用スタイル
+        //------------------------------------------------------------------------------------
         document.getElementById("nuAlert").addEventListener("click", () => {
             neoux.alert("This is some message area.<br><b>HTML</b>で装飾できます。", function() {
                 console.log("ok");
@@ -70,6 +78,9 @@
             ]);
         });
 
+        //------------------------------------------------------------------------------------
+        // ローディングインジケータ用スタイル
+        //------------------------------------------------------------------------------------
         document.getElementById("nuLoading").addEventListener("click", () => {
             neoux.loading.show("ダウンロード中です");
 
@@ -79,6 +90,9 @@
             }, 3000);
         });
 
+        //------------------------------------------------------------------------------------
+        // トースト通知
+        //------------------------------------------------------------------------------------
         document.getElementById("nuToast").addEventListener("click", () => {
             neoux.toast.show("保存が完了しました！");
         });
@@ -87,6 +101,22 @@
             neoux.toast.show("エラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
         });
 
+
+        //------------------------------------------------------------------------------------
+        // ドロップダウンメニュー
+        //------------------------------------------------------------------------------------
+        const btn = document.getElementById("dropdownBtn");
+        neoux.dropdown.attach(btn, [
+            { label: "設定", value: "settings" },
+            { label: "ログアウト", value: "logout" }
+        ], (selectedValue) => {
+            console.log("選択:", selectedValue);
+        });
+
+
+        //------------------------------------------------------------------------------------
+        // 状態管理のテスト
+        //------------------------------------------------------------------------------------
         const formState = {};
         document.querySelectorAll("input, select, textarea").forEach(el => {
             el.addEventListener("change", () => {

@@ -102,6 +102,25 @@
   transition: opacity 0.2s ease, transform 0.2s ease;
   pointer-events: none; }
 
+.nuDropdownMenu {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10001;
+  min-width: 160px;
+  padding: 4px 0;
+  font-family: sans-serif;
+  overflow: hidden; }
+
+.nuDropdownItem {
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease; }
+  .nuDropdownItem:hover {
+    background: #f0f0f0; }
+
 .nuOverlay {
   position: fixed;
   top: 0;
