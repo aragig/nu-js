@@ -10,80 +10,65 @@
 <body>
 <h1>neoux.js</h1>
 
-<h2>アラート</h2>
+<h2 class="mt50">アラート</h2>
 <button id="nuAlert">Alert</button>
 <button id="nuConfirm">Confirm</button>
 <button id="nuSheet">Sheet</button>
 
-<h2>ローディングインジケータ</h2>
+<h2 class="mt50">ローディングインジケータ</h2>
 <button id="nuLoading">Indicator</button>
 
-<h2>トースト</h2>
+<h2 class="mt50">トースト</h2>
 <button id="nuToast">Toast</button>
 <button id="nuToastDelay">Toast with delay</button>
 
-<h2>ドロップダウンメニュー</h2>
+<h2 class="mt50">ドロップダウンメニュー</h2>
 <div style="display:flex; justify-content:space-between;">
     <button id="dropdownBtn">Menu</button>
     <button id="dropdownBtnLeft">Left side menu</button>
 </div>
 
-<h2>UISegmentedControl風ラジオボタン</h2>
-<div class="nuSegment" id="sortSegment">
-    <input type="radio" name="sortOption" id="sortLatest" value="最新" checked />
-    <label for="sortLatest">最新</label>
-
-    <input type="radio" name="sortOption" id="sortPopular" value="人気" />
-    <label for="sortPopular">人気</label>
-
-    <input type="radio" name="sortOption" id="sortOldest" value="古い順" />
-    <label for="sortOldest">古い順</label>
-</div>
-
-<div class="nuSegment" id="fruitsSegment">
-    <input type="radio" name="sortOption" id="fruitsApple" value="りんご" checked />
-    <label for="fruitsApple">りんご</label>
-
-    <input type="radio" name="sortOption" id="fruitsBanana" value="バナナ" />
-    <label for="fruitsBanana">バナナ</label>
-
-    <input type="radio" name="sortOption" id="fruitsMelon" value="メロン" />
-    <label for="fruitsMelon">メロン</label>
+<h2 class="mt50">UISegmentedControl風ラジオボタン</h2>
+<div class="nuFlexColumn">
+    <div id="sortSegmentArea"></div>
+    <div id="fruitsSegmentArea"></div>
 </div>
 
 
 
 
-<h2>色々なinput</h2>
-<div>
-    <input type="text" class="nuInput" placeholder="お名前を入力してください" />
-</div>
-<div>
-    <textarea class="nuTextarea" placeholder="ご意見・ご感想"></textarea>
-</div>
-<div>
-    <select class="nuSelect">
-        <option value="">選択してください</option>
-        <option value="a">選択肢A</option>
-        <option value="b">選択肢B</option>
-    </select>
-</div>
-<div>
-    <label>年/月/日：<input type="date"></label>
-</div>
-<div>
-    <label>年 / 月 / 日 +時:分：<input type="datetime-local"></label>
-</div>
-<div>
-    <label>カラーパレッド：<input type="color" value="#0b80dc"></label>
-</div>
+<h2 class="mt50">色々なinput</h2>
+<div class="nuFlexColumn">
+    <div>
+        <input type="text" class="nuInput" placeholder="お名前を入力してください" />
+    </div>
+    <div>
+        <textarea class="nuTextarea" placeholder="ご意見・ご感想"></textarea>
+    </div>
+    <div>
+        <select class="nuSelect">
+            <option value="">選択してください</option>
+            <option value="a">選択肢A</option>
+            <option value="b">選択肢B</option>
+        </select>
+    </div>
+    <div>
+        <label>年/月/日：<input type="date"></label>
+    </div>
+    <div>
+        <label>年 / 月 / 日 +時:分：<input type="datetime-local"></label>
+    </div>
+    <div>
+        <label>カラーパレッド：<input type="color" value="#0b80dc"></label>
+    </div>
 
-<div>
-    <label>範囲を選択：<input type="range" min="0" max="100"></label>
+    <div>
+        <label>範囲を選択：<input type="range" min="0" max="100"></label>
+    </div>
+    <canvas id="stockGraph" width="150" height="150">
+        現在の株価: $3.15 + 0.15
+    </canvas>
 </div>
-<canvas id="stockGraph" width="150" height="150">
-    現在の株価: $3.15 + 0.15
-</canvas>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -160,21 +145,29 @@
         //------------------------------------------------------------------------------------
         // UISegmentedControl風 ラジオグループ呼び出し
         //------------------------------------------------------------------------------------
-        neoux.segment.attach(
-            document.getElementById("sortSegment"),
-            (selectedValue) => {
-                console.log("選択:", selectedValue);
-                // 必要に応じて処理を追加
-            }
-        );
+        const sortSegment = neoux.segment.create({
+            id: "sortSegment",
+            name: "sortOption",
+            value: "最新",
+            options: [
+                { label: "最新", value: "最新" },
+                { label: "人気", value: "人気" },
+                { label: "古い順", value: "古い順" }
+            ]
+        }, (val) => console.log("Sort:", val));
+        document.getElementById("sortSegmentArea").appendChild(sortSegment);
 
-        neoux.segment.attach(
-            document.getElementById("fruitsSegment"),
-            (selectedValue) => {
-                console.log("選択:", selectedValue);
-                // 必要に応じて処理を追加
-            }
-        );
+        const fruitsSegment = neoux.segment.create({
+            id: "fruitsSegment",
+            name: "fruitsOption",
+            value: "メロン",
+            options: [
+                { label: "りんご", value: "りんご" },
+                { label: "バナナ", value: "バナナ" },
+                { label: "メロン", value: "メロン" }
+            ]
+        }, (val) => console.log("Fruits:", val));
+        document.getElementById("fruitsSegmentArea").appendChild(fruitsSegment);
 
     });
 </script>
