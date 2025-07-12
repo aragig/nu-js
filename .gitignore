@@ -30,5 +30,5 @@ idea-sandbox/
 .idea_modules/
 
 
-# VSCode langserver artifacts
 .DS_Store
+**/.sass-cache/
