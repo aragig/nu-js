@@ -1,4 +1,4 @@
-.customAlertBox {
+.nuAlertBox {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -14,32 +14,32 @@
   text-align: center;
   opacity: 0;
   transition: opacity 0.2s ease; }
-  .customAlertBox.sheetMode {
+  .nuAlertBox.sheetMode {
     padding: 20px 0 10px; }
-    .customAlertBox.sheetMode .customAlertButtonRow {
+    .nuAlertBox.sheetMode .nuAlertButtonRow {
       flex-direction: column;
       align-items: stretch;
       gap: 0; }
-    .customAlertBox.sheetMode .customAlertButton {
+    .nuAlertBox.sheetMode .nuAlertButton {
       background: #f9f9f9;
       color: #007AFF;
       border-top: 1px solid #ccc;
       border-radius: 0;
       font-weight: normal;
       padding: 12px 0; }
-      .customAlertBox.sheetMode .customAlertButton:last-child {
+      .nuAlertBox.sheetMode .nuAlertButton:last-child {
         background: #fff;
         font-weight: bold; }
-      .customAlertBox.sheetMode .customAlertButton.cancel {
+      .nuAlertBox.sheetMode .nuAlertButton.cancel {
         color: #ff3b30; }
-  .customAlertBox .customAlertMessage {
+  .nuAlertBox .nuAlertMessage {
     margin-bottom: 20px;
     font-size: 16px; }
-  .customAlertBox .customAlertButtonRow {
+  .nuAlertBox .nuAlertButtonRow {
     display: flex;
     justify-content: center;
     gap: 20px; }
-  .customAlertBox .customAlertButton {
+  .nuAlertBox .nuAlertButton {
     padding: 8px 16px;
     background: #007AFF;
     color: white;
@@ -48,10 +48,10 @@
     cursor: pointer;
     font-size: 14px;
     min-width: 70px; }
-    .customAlertBox .customAlertButton.cancel {
+    .nuAlertBox .nuAlertButton.cancel {
       background: #aaa; }
 
-.loadingSpinner {
+.nuLoadingSpinner {
   width: 48px;
   height: 48px;
   border: 4px solid #ccc;
@@ -66,7 +66,7 @@
   pointer-events: none;
   opacity: 0; }
 
-.loadingMessage {
+.nuLoadingMessage {
   position: fixed;
   top: 55%;
   left: 50%;
@@ -84,7 +84,7 @@
     transform: translate(-50%, -50%) rotate(0deg); }
   100% {
     transform: translate(-50%, -50%) rotate(360deg); } }
-.neouxToast {
+.nuToast {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -101,7 +101,7 @@
   transition: opacity 0.2s ease, transform 0.2s ease;
   pointer-events: none; }
 
-.neouxOverlay {
+.nuOverlay {
   position: fixed;
   top: 0;
   left: 0;

@@ -6,7 +6,7 @@
         neoux.__overlay.show();
 
         const box = document.createElement("div");
-        box.className = "customAlertBox";
+        box.className = "nuAlertBox";
 
         // ボタン数でシートモードを判定
         const isSheetMode = buttons.length >= 3;
@@ -17,16 +17,16 @@
         box.style.opacity = "0";
 
         const msg = document.createElement("div");
-        msg.className = "customAlertMessage";
+        msg.className = "nuAlertMessage";
         // msg.textContent = message;
         msg.innerHTML = message;
 
         const buttonRow = document.createElement("div");
-        buttonRow.className = "customAlertButtonRow";
+        buttonRow.className = "nuAlertButtonRow";
 
         buttons.forEach(btn => {
             const button = document.createElement("button");
-            button.className = "customAlertButton";
+            button.className = "nuAlertButton";
             if (btn.cancel) button.classList.add("cancel");
             button.textContent = btn.label;
 
@@ -89,11 +89,11 @@
 
         // スピナー
         const spinner = document.createElement("div");
-        spinner.className = "loadingSpinner";
+        spinner.className = "nuLoadingSpinner";
 
         // メッセージ（省略可能）
         const msgBox = document.createElement("div");
-        msgBox.className = "loadingMessage";
+        msgBox.className = "nuLoadingMessage";
         msgBox.textContent = message || "";
 
         document.body.appendChild(spinner);
@@ -108,8 +108,8 @@
 
     function hideLoading() {
 
-        const spinner = document.querySelector(".loadingSpinner");
-        const msgBox = document.querySelector(".loadingMessage");
+        const spinner = document.querySelector(".nuLoadingSpinner");
+        const msgBox = document.querySelector(".nuLoadingMessage");
 
         if (spinner) {
             spinner.style.opacity = "0";
@@ -142,7 +142,7 @@
 
     function showToast(message, duration = 3000) {
         const toast = document.createElement("div");
-        toast.className = "neouxToast";
+        toast.className = "nuToast";
         toast.textContent = message;
 
         document.body.appendChild(toast);
@@ -174,7 +174,7 @@
 // オーバーレイ制御ユーティリティ
 //------------------------------------------------------------------------------------
 (function () {
-    const overlayClassName = "neouxOverlay";
+    const overlayClassName = "nuOverlay";
 
     window.neoux.__overlay = {
         show: function () {
