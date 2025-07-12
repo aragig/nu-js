@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>neoux.js</title>
-    <script src="./js/neoux.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <link rel="stylesheet" href="css/neoux.css">
+    <script src="js/neoux.js"></script>
 </head>
 <body>
 <h1>neoux.js</h1>
@@ -18,21 +20,21 @@
     document.addEventListener("DOMContentLoaded", () => {
 
         document.getElementById("nuAlert").addEventListener("click", () => {
-            neoux.alert("This is some message area.", function(ans) {
-                alert(ans);
+            neoux.alert("This is some message area.", function() {
+                console.log("ok");
             });
         });
         document.getElementById("nuConfirm").addEventListener("click", () => {
-            neoux.confirm("This is some message area.", function(ans) {
+            neoux.confirm("This is some message area.", function() {
                 // ok
-                alert(ans);
+                console.log("ok");
             }, function(ans) {
                 // cancel
-                alert(ans);
+                console.log("cancel");
             });
         });
         document.getElementById("nuSheet").addEventListener("click", () => {
-            neoux.sheet("どれを選びますか？", [
+            neoux.sheet("操作を選んでください", [
                 { label: "編集", callback: () => console.log("編集") },
                 { label: "削除", callback: () => console.log("削除") },
                 { label: "複製", callback: () => console.log("複製") },
