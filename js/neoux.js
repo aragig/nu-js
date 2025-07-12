@@ -262,7 +262,7 @@
      * @param {HTMLElement} container - inputとlabelを内包する親div
      * @param {Function} callback - 選択時のコールバック（valueを引数として渡す）
      */
-    neoux.segment.attach = function (container, callback) {
+    function segmentAttach(container, callback) {
         const radios = container.querySelectorAll('input[type="radio"]');
         radios.forEach(radio => {
             radio.addEventListener('change', () => {
@@ -271,6 +271,46 @@
                 }
             });
         });
+    };
+
+    /**
+     * segment要素を生成して返す
+     * @param {Object} config
+     * @param {string} config.id - div要素のid
+     * @param {string} config.name - ラジオグループ名
+     * @param {Array} config.options - { label, value } の配列
+     * @param {string} config.value - 初期選択値
+     * @param {Function} callback - 選択時のコールバック
+     * @returns {HTMLElement} segmentのdiv要素
+     */
+    neoux.segment.create = function (config, callback) {
+        const { id, name, options, value: initialValue } = config;
+        const container = document.createElement("div");
+        container.className = "nuSegment";
+        container.id = id;
+
+        options.forEach(opt => {
+            const inputId = `${id}_${opt.value}`;
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = name;
+            input.id = inputId;
+            input.value = opt.value;
+            if (opt.value === initialValue) input.checked = true;
+
+            const label = document.createElement("label");
+            label.setAttribute("for", inputId);
+            label.textContent = opt.label;
+
+            container.appendChild(input);
+            container.appendChild(label);
+        });
+
+        // コールバックバインド
+        segmentAttach(container, callback);
+
+        return container;
     };
 })();
 
