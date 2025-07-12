@@ -51,30 +51,31 @@
             }
         }
     }
-}
 
-.customAlertMessage {
-    margin-bottom: 20px;
-    font-size: 16px;
-}
-
-.customAlertButtonRow {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.customAlertButton {
-    padding: 8px 16px;
-    background: #007AFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    min-width: 70px;
-
-    &.cancel {
-        background: #aaa;
+    .customAlertMessage {
+        margin-bottom: 20px;
+        font-size: 16px;
     }
+
+    .customAlertButtonRow {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .customAlertButton {
+        padding: 8px 16px;
+        background: #007AFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        min-width: 70px;
+
+        &.cancel {
+            background: #aaa;
+        }
+    }
+
 }

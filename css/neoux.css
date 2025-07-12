@@ -43,26 +43,23 @@
         font-weight: bold; }
       .customAlertBox.sheetMode .customAlertButton.cancel {
         color: #ff3b30; }
-
-.customAlertMessage {
-  margin-bottom: 20px;
-  font-size: 16px; }
-
-.customAlertButtonRow {
-  display: flex;
-  justify-content: center;
-  gap: 20px; }
-
-.customAlertButton {
-  padding: 8px 16px;
-  background: #007AFF;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  min-width: 70px; }
-  .customAlertButton.cancel {
-    background: #aaa; }
+  .customAlertBox .customAlertMessage {
+    margin-bottom: 20px;
+    font-size: 16px; }
+  .customAlertBox .customAlertButtonRow {
+    display: flex;
+    justify-content: center;
+    gap: 20px; }
+  .customAlertBox .customAlertButton {
+    padding: 8px 16px;
+    background: #007AFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    min-width: 70px; }
+    .customAlertBox .customAlertButton.cancel {
+      background: #aaa; }
 
 /*# sourceMappingURL=neoux.css.map */
