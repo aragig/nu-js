@@ -237,11 +237,9 @@
                 // 既に開いているメニューがあれば閉じる
                 const existing = document.querySelector(".nuDropdownMenu");
                 if (existing) {
-                    alert('remove');
                     existing.remove();
-                } else {
-                    createDropdown(buttonElement, items, onSelect);
                 }
+                createDropdown(buttonElement, items, onSelect);
             });
         }
     };
