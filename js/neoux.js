@@ -248,6 +248,28 @@
 
 })();
 
+//------------------------------------------------------------------------------------
+// UISegmentedControl風 ラジオボタンラッパー
+//------------------------------------------------------------------------------------
+(function () {
+    if (!neoux.segment) neoux.segment = {};
+    /**
+     * segment要素にアタッチ
+     * @param {HTMLElement} container - inputとlabelを内包する親div
+     * @param {Function} callback - 選択時のコールバック（valueを引数として渡す）
+     */
+    neoux.segment.attach = function (container, callback) {
+        const radios = container.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.checked) {
+                    callback(radio.value);
+                }
+            });
+        });
+    };
+})();
+
 
 //------------------------------------------------------------------------------------
 // オーバーレイ制御ユーティリティ

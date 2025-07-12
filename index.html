@@ -28,11 +28,18 @@
     <button id="dropdownBtnLeft">Left side menu</button>
 </div>
 
-<h2>状態管理のテスト</h2>
-<input type="text" name="filename" value="" />
-<input type="hidden" name="siteCode" id="siteCode" value="ASN" />
-<button onclick="document.getElementById('siteCode').value='KTN';">Change hidden value</button>
-<p>hiddenだとchangeイベントは発生しない</p>
+<h2>UISegmentedControl風ラジオボタン</h2>
+<div class="nuSegment" id="sortSegment">
+    <input type="radio" name="sortOption" id="sortLatest" value="最新" checked />
+    <label for="sortLatest">最新</label>
+
+    <input type="radio" name="sortOption" id="sortPopular" value="人気" />
+    <label for="sortPopular">人気</label>
+
+    <input type="radio" name="sortOption" id="sortOldest" value="古い順" />
+    <label for="sortOldest">古い順</label>
+</div>
+
 
 <h2>色々なinput</h2>
 <div>
@@ -134,20 +141,18 @@
             { label: "ログアウト", callback: () => console.log("ログアウト") }
         ]);
 
+
         //------------------------------------------------------------------------------------
-        // 状態管理のテスト
+        // UISegmentedControl風 ラジオグループ呼び出し
         //------------------------------------------------------------------------------------
-        const formState = {};
-        document.querySelectorAll("input, select, textarea").forEach(el => {
-            el.addEventListener("change", () => {
-                document.querySelectorAll("input, select, textarea").forEach(input => {
-                    if (input.name) {
-                        formState[input.name] = input.value;
-                        console.log(formState[input.name]);
-                    }
-                });
-            });
-        });
+        neoux.segment.attach(
+            document.getElementById("sortSegment"),
+            (selectedValue) => {
+                console.log("選択:", selectedValue);
+                // 必要に応じて処理を追加
+            }
+        );
+
     });
 </script>
 

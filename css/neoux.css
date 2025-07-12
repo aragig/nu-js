@@ -193,6 +193,34 @@ select {
   .nuDropdownItem:hover {
     background: #f0f0f0; }
 
+.nuSegment {
+  display: inline-flex;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: sans-serif; }
+  .nuSegment input[type="radio"] {
+    display: none; }
+    .nuSegment input[type="radio"]:checked + label {
+      background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+      color: black; }
+    .nuSegment input[type="radio"]:focus + label {
+      outline: 2px solid #4d90fe;
+      z-index: 1; }
+  .nuSegment label {
+    padding: 8px 16px;
+    cursor: pointer;
+    background: #f2f2f2;
+    color: #666;
+    font-size: 14px;
+    border-right: 1px solid #ccc;
+    user-select: none;
+    transition: background 0.2s; }
+    .nuSegment label:last-of-type {
+      border-right: none; }
+    .nuSegment label:hover {
+      background: #e8e8e8; }
+
 .nuOverlay {
   position: fixed;
   top: 0;

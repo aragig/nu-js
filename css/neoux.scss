@@ -248,6 +248,50 @@ select {
 }
 
 //------------------------------------------------------------------------------------
+// UISegmentedControl風ラジオボタン
+//------------------------------------------------------------------------------------
+.nuSegment{
+    display: inline-flex;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: sans-serif;
+
+    input[type="radio"] {
+        display: none;
+
+        &:checked + label {
+            background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+            color: black;
+        }
+
+        &:focus + label {
+            outline: 2px solid #4d90fe;
+            z-index: 1;
+        }
+    }
+
+    label {
+        padding: 8px 16px;
+        cursor: pointer;
+        background: #f2f2f2;
+        color: #666;
+        font-size: 14px;
+        border-right: 1px solid #ccc;
+        user-select: none;
+        transition: background 0.2s;
+
+        &:last-of-type {
+            border-right: none;
+        }
+
+        &:hover {
+            background: #e8e8e8;
+        }
+    }
+}
+
+//------------------------------------------------------------------------------------
 // オーバーレイ制御ユーティリティ
 //------------------------------------------------------------------------------------
 .nuOverlay {
