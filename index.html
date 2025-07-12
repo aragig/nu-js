@@ -23,7 +23,10 @@
 <button id="nuToastDelay">Toast with delay</button>
 
 <h2>ドロップダウンメニュー</h2>
-<button id="dropdownBtn" style="position:absolute;right:0;">Open</button>
+<div style="display:flex; justify-content:space-between;">
+    <button id="dropdownBtn">Menu</button>
+    <button id="dropdownBtnLeft">Left side menu</button>
+</div>
 
 <h2>状態管理のテスト</h2>
 <input type="text" name="filename" value="" />
@@ -110,9 +113,18 @@
             { label: "設定", value: "settings" },
             { label: "ログアウト", value: "logout" }
         ], (selectedValue) => {
+            // TODO valueで判定するのではなくcallbackにした方が良いのでは？
             console.log("選択:", selectedValue);
         });
 
+
+        const btnLeft = document.getElementById("dropdownBtnLeft");
+        neoux.dropdown.attach(btnLeft, [
+            { label: "設定", value: "settings" },
+            { label: "ログアウト", value: "logout" }
+        ], (selectedValue) => {
+            console.log("選択:", selectedValue);
+        });
 
         //------------------------------------------------------------------------------------
         // 状態管理のテスト

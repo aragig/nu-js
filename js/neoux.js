@@ -184,17 +184,27 @@
             option.className = "nuDropdownItem";
             option.textContent = item.label;
             option.addEventListener("click", (e) => {
-                e.stopPropagation(); // 外部クリック判定を防ぐ
+                e.stopPropagation();
                 hideDropdown(dropdown);
                 onSelect?.(item.value);
             });
             dropdown.appendChild(option);
         });
 
-        // ボタンの直下に配置
+        // ボタン位置取得
         const rect = buttonElement.getBoundingClientRect();
+        const dropdownWidth = 160; // メニューの最小幅
+        const margin = 10;
+
+        // 横位置調整
+        let left = rect.left + window.scrollX;
+        if (left + dropdownWidth + margin > window.innerWidth) {
+            // はみ出す場合は右寄せ
+            left = window.innerWidth - dropdownWidth - margin;
+        }
+
         dropdown.style.top = `${rect.bottom + window.scrollY}px`;
-        dropdown.style.left = `${rect.left + window.scrollX}px`;
+        dropdown.style.left = `${left}px`;
 
         document.body.appendChild(dropdown);
 
@@ -209,6 +219,7 @@
 
         return dropdown;
     }
+
 
     function hideDropdown(dropdown) {
         if (dropdown && dropdown.parentNode) {
