@@ -2,7 +2,7 @@
 // カスタムアラート
 //------------------------------------------------------------------------------------
 (function () {
-    
+
     //------------------------------------------------------------------------------------
     // 共通表示関数
     //------------------------------------------------------------------------------------
@@ -24,7 +24,8 @@
 
         const msg = document.createElement("div");
         msg.className = "customAlertMessage";
-        msg.textContent = message;
+        // msg.textContent = message;
+        msg.innerHTML = message;
 
         const buttonRow = document.createElement("div");
         buttonRow.className = "customAlertButtonRow";

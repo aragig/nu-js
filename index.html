@@ -20,7 +20,7 @@
     document.addEventListener("DOMContentLoaded", () => {
 
         document.getElementById("nuAlert").addEventListener("click", () => {
-            neoux.alert("This is some message area.", function() {
+            neoux.alert("This is some message area.<br><b>HTML</b>で装飾できます。", function() {
                 console.log("ok");
             });
         });
@@ -38,7 +38,7 @@
                 { label: "編集", callback: () => console.log("編集") },
                 { label: "削除", callback: () => console.log("削除") },
                 { label: "複製", callback: () => console.log("複製") },
-                { label: "キャンセル", callback: null } // キャンセル時はcallbackなし（または明示的にnull）
+                { label: "キャンセル", callback: null }
             ]);
         });
 
