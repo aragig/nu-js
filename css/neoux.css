@@ -1,14 +1,3 @@
-.customAlertOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 9998;
-  opacity: 0;
-  transition: opacity 0.2s ease; }
-
 .customAlertBox {
   position: fixed;
   top: 50%;
@@ -95,5 +84,15 @@
     transform: translate(-50%, -50%) rotate(0deg); }
   100% {
     transform: translate(-50%, -50%) rotate(360deg); } }
+.neouxOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  opacity: 0;
+  transition: opacity 0.2s ease; }
 
 /*# sourceMappingURL=neoux.css.map */

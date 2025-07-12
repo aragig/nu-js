@@ -3,9 +3,7 @@
 //------------------------------------------------------------------------------------
 (function () {
     function showSheet(message, buttons) {
-        const overlay = document.createElement("div");
-        overlay.className = "customAlertOverlay";
-        overlay.style.opacity = "0";
+        neoux.overlay.show();
 
         const box = document.createElement("div");
         box.className = "customAlertBox";
@@ -33,10 +31,9 @@
             button.textContent = btn.label;
 
             button.addEventListener("click", () => {
-                overlay.style.opacity = "0";
+                neoux.overlay.hide();
                 box.style.opacity = "0";
                 setTimeout(() => {
-                    document.body.removeChild(overlay);
                     document.body.removeChild(box);
                     if (typeof btn.callback === "function") {
                         btn.callback();
@@ -49,12 +46,10 @@
 
         box.appendChild(msg);
         box.appendChild(buttonRow);
-        document.body.appendChild(overlay);
         document.body.appendChild(box);
 
         // フェードイン
         requestAnimationFrame(() => {
-            overlay.style.opacity = "1";
             box.style.opacity = "1";
         });
     }
@@ -90,10 +85,7 @@
 (function () {
 
     function showLoading(message) {
-        // オーバーレイ
-        const overlay = document.createElement("div");
-        overlay.className = "customAlertOverlay";
-        overlay.style.opacity = "0";
+        neoux.overlay.show();
 
         // スピナー
         const spinner = document.createElement("div");
@@ -104,43 +96,32 @@
         msgBox.className = "loadingMessage";
         msgBox.textContent = message || "";
 
-        document.body.appendChild(overlay);
         document.body.appendChild(spinner);
         document.body.appendChild(msgBox);
 
         // フェードイン
         requestAnimationFrame(() => {
-            overlay.style.opacity = "1";
             spinner.style.opacity = "1";
             msgBox.style.opacity = "1";
         });
     }
 
     function hideLoading() {
-        const overlay = document.querySelector(".customAlertOverlay");
+
         const spinner = document.querySelector(".loadingSpinner");
         const msgBox = document.querySelector(".loadingMessage");
 
         if (spinner) {
             spinner.style.opacity = "0";
-            setTimeout(() => {
-                spinner.remove();
-            }, 200);
+            setTimeout(() => spinner.remove(), 200);
         }
 
         if (msgBox) {
             msgBox.style.opacity = "0";
-            setTimeout(() => {
-                msgBox.remove();
-            }, 200);
+            setTimeout(() => msgBox.remove(), 200);
         }
 
-        if (overlay) {
-            overlay.style.opacity = "0";
-            setTimeout(() => {
-                overlay.remove();
-            }, 200);
-        }
+        neoux.overlay.hide();
     }
 
     //------------------------------------------------------------------------------------
@@ -151,4 +132,36 @@
         hide: hideLoading
     };
 
+})();
+
+
+//------------------------------------------------------------------------------------
+// オーバーレイ制御ユーティリティ
+//------------------------------------------------------------------------------------
+(function () {
+    const overlayClassName = "neouxOverlay";
+
+    window.neoux.overlay = {
+        show: function () {
+            const overlay = document.createElement("div");
+            overlay.className = overlayClassName;
+            overlay.style.opacity = "0";
+            document.body.appendChild(overlay);
+
+            requestAnimationFrame(() => {
+                overlay.style.opacity = "1";
+            });
+
+            return overlay;
+        },
+
+        hide: function () {
+            const overlay = document.querySelector(`.${overlayClassName}`);
+            if (!overlay) return;
+            overlay.style.opacity = "0";
+            setTimeout(() => {
+                overlay.remove();
+            }, 200);
+        },
+    };
 })();
