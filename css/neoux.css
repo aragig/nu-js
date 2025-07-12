@@ -62,4 +62,38 @@
     .customAlertBox .customAlertButton.cancel {
       background: #aaa; }
 
+.loadingSpinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #ccc;
+  border-top: 4px solid #333;
+  border-radius: 50%;
+  animation: spinnerRotate 0.8s linear infinite;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0; }
+
+.loadingMessage {
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  font-family: sans-serif;
+  color: #fff;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center; }
+
+@keyframes spinnerRotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg); }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg); } }
+
 /*# sourceMappingURL=neoux.css.map */

@@ -15,6 +15,8 @@
 <button id="nuConfirm">Confirm</button>
 <button id="nuSheet">Sheet</button>
 
+<h2>ローディングインジケータ</h2>
+<button id="nuLoading">Indicator</button>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -40,6 +42,15 @@
                 { label: "複製", callback: () => console.log("複製") },
                 { label: "キャンセル", callback: null }
             ]);
+        });
+
+        document.getElementById("nuLoading").addEventListener("click", () => {
+            neoux.loading.show("ダウンロード中です");
+
+            // 3秒後に非表示
+            setTimeout(() => {
+                neoux.loading.hide();
+            }, 3000);
         });
 
     });

@@ -2,10 +2,6 @@
 // カスタムアラート
 //------------------------------------------------------------------------------------
 (function () {
-
-    //------------------------------------------------------------------------------------
-    // 共通表示関数
-    //------------------------------------------------------------------------------------
     function showSheet(message, buttons) {
         const overlay = document.createElement("div");
         overlay.className = "customAlertOverlay";
@@ -83,6 +79,76 @@
         sheet: function (message, buttons) {
             showSheet(message, buttons);
         }
+    };
+
+})();
+
+
+//------------------------------------------------------------------------------------
+// ローディングインジケータ
+//------------------------------------------------------------------------------------
+(function () {
+
+    function showLoading(message) {
+        // オーバーレイ
+        const overlay = document.createElement("div");
+        overlay.className = "customAlertOverlay";
+        overlay.style.opacity = "0";
+
+        // スピナー
+        const spinner = document.createElement("div");
+        spinner.className = "loadingSpinner";
+
+        // メッセージ（省略可能）
+        const msgBox = document.createElement("div");
+        msgBox.className = "loadingMessage";
+        msgBox.textContent = message || "";
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(spinner);
+        document.body.appendChild(msgBox);
+
+        // フェードイン
+        requestAnimationFrame(() => {
+            overlay.style.opacity = "1";
+            spinner.style.opacity = "1";
+            msgBox.style.opacity = "1";
+        });
+    }
+
+    function hideLoading() {
+        const overlay = document.querySelector(".customAlertOverlay");
+        const spinner = document.querySelector(".loadingSpinner");
+        const msgBox = document.querySelector(".loadingMessage");
+
+        if (spinner) {
+            spinner.style.opacity = "0";
+            setTimeout(() => {
+                spinner.remove();
+            }, 200);
+        }
+
+        if (msgBox) {
+            msgBox.style.opacity = "0";
+            setTimeout(() => {
+                msgBox.remove();
+            }, 200);
+        }
+
+        if (overlay) {
+            overlay.style.opacity = "0";
+            setTimeout(() => {
+                overlay.remove();
+            }, 200);
+        }
+    }
+
+    //------------------------------------------------------------------------------------
+    // グローバルに公開
+    //------------------------------------------------------------------------------------
+    window.neoux.loading = {
+        show: showLoading,
+        hide: hideLoading
     };
 
 })();
