@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>neoux.js</title>
+    <script src="./js/neoux.js"></script>
+</head>
+<body>
+<h1>neoux.js</h1>
+
+<h2>アラート</h2>
+<button id="nuAlert">Alert</button>
+<button id="nuConfirm">Confirm</button>
+<button id="nuSheet">Sheet</button>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        document.getElementById("nuAlert").addEventListener("click", () => {
+            neoux.alert("This is some message area.", function(ans) {
+                alert(ans);
+            });
+        });
+        document.getElementById("nuConfirm").addEventListener("click", () => {
+            neoux.confirm("This is some message area.", function(ans) {
+                // ok
+                alert(ans);
+            }, function(ans) {
+                // cancel
+                alert(ans);
+            });
+        });
+        document.getElementById("nuSheet").addEventListener("click", () => {
+            neoux.sheet("どれを選びますか？", [
+                { label: "編集", callback: () => console.log("編集") },
+                { label: "削除", callback: () => console.log("削除") },
+                { label: "複製", callback: () => console.log("複製") },
+                { label: "キャンセル", callback: null } // キャンセル時はcallbackなし（または明示的にnull）
+            ]);
+        });
+
+    });
+</script>
+
+</body>
+</html>
