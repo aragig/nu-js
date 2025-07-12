@@ -67,6 +67,9 @@ select {
 .mt50 {
   margin-top: 50px; }
 
+.wFull {
+  width: 100%; }
+
 .nuFlexRow {
   display: flex;
   gap: 20px;
