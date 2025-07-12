@@ -314,6 +314,96 @@
     };
 })();
 
+//------------------------------------------------------------------------------------
+// 検索ボックス
+//------------------------------------------------------------------------------------
+(function () {
+    if (!neoux.search) neoux.search = {};
+
+    /**
+     * 検索UIを生成し、検索ロジックをバインドする
+     * @param {HTMLElement} container - 検索UIを配置する親要素
+     * @param {string} jsonPath - 検索インデックスJSONのURL
+     */
+    neoux.search.attach = function (container, jsonPath) {
+        // すでに追加済みなら2重生成防止
+        if (container.querySelector(".nuSearchContainer")) return;
+
+        // 検索ボックス＋アイコン
+        const wrapper = document.createElement("div");
+        wrapper.className = "nuSearchContainer";
+        wrapper.innerHTML = `
+            <svg class="nuSearchIcon" viewBox="0 0 24 24" fill="none">
+                <path d="M10 2a8 8 0 015.292 13.708l5 5a1 1 0 01-1.414 1.414l-5-5A8 8 0 1110 2zm0 2a6 6 0 100 12 6 6 0 000-12z" fill="currentColor"/>
+            </svg>
+            <input type="search" class="nuSearchInput" id="nuSearchBox" placeholder="検索" />
+        `;
+
+        // 結果表示エリア
+        const resultContainer = document.createElement("div");
+        resultContainer.id = "searchResults";
+        resultContainer.className = "nuSearchResults";
+
+        container.appendChild(wrapper);
+        container.appendChild(resultContainer);
+
+        const searchBox = wrapper.querySelector("#nuSearchBox");
+        let cachedData = null;
+
+        // JSONキャッシュ取得
+        fetch(jsonPath)
+            .then(response => response.json())
+            .then(data => {
+                cachedData = data;
+            });
+
+        // 入力イベント
+        searchBox.addEventListener("input", function () {
+            const searchText = this.value.toLowerCase();
+            resultContainer.innerHTML = "";
+
+            if (!searchText.trim() || !cachedData) return;
+
+            const searchWords = searchText.split(/\s+/);
+            let matched = 0;
+
+            Object.keys(cachedData).forEach(word => {
+                const keyword = word.toLowerCase();
+                const isMatch = searchWords.every(w => keyword.includes(w));
+
+                if (isMatch) {
+                    const { article } = cachedData[word];
+                    const title = article.title || word;
+                    const url = article.url || "#";
+
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.target = "_blank";
+                    a.textContent = title;
+                    resultContainer.appendChild(a);
+
+                    matched++;
+                }
+            });
+
+            if (matched === 0) {
+                const noHit = document.createElement("div");
+                noHit.textContent = "該当する記事がありません";
+                resultContainer.appendChild(noHit);
+            }
+        });
+
+        // "/"キーで検索にフォーカス
+        document.addEventListener('keydown', function (event) {
+            if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+                event.preventDefault();
+                searchBox.scrollIntoView({ behavior: "smooth", block: "center" });
+                searchBox.focus();
+            }
+        });
+    };
+
+})();
 
 //------------------------------------------------------------------------------------
 // オーバーレイ制御ユーティリティ

@@ -307,6 +307,55 @@ select {
 }
 
 //------------------------------------------------------------------------------------
+// 検索ボックス
+//------------------------------------------------------------------------------------
+.nuSearchContainer {
+    position: relative;
+    display: inline-block;
+
+    .nuSearchIcon {
+        position: absolute;
+        top: 50%;
+        left: 12px;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        color: #888888;
+        pointer-events: none;
+    }
+
+    .nuSearchInput {
+        padding: 8px 12px 8px 36px;
+        border: 1px solid #cccccc;
+        border-radius: 8px;
+        font-size: 14px;
+        font-family: sans-serif;
+        outline: none;
+
+        &:focus {
+            border-color: #007aff;
+        }
+    }
+}
+.nuSearchResults {
+    margin-top: 8px;
+    font-family: sans-serif;
+    font-size: 14px;
+
+    a {
+        display: block;
+        padding: 4px 8px;
+        text-decoration: none;
+        color: #007aff;
+        border-radius: 4px;
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+    }
+}
+
+//------------------------------------------------------------------------------------
 // オーバーレイ制御ユーティリティ
 //------------------------------------------------------------------------------------
 .nuOverlay {
