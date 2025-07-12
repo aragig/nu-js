@@ -57,7 +57,7 @@
     //------------------------------------------------------------------------------------
     // グローバルに公開
     //------------------------------------------------------------------------------------
-    window.neoux = {
+    neoux = {
         // 使いやすいようにラッパーする
         alert: function (message, onOk) {
             showSheet(message, [
@@ -127,7 +127,7 @@
     //------------------------------------------------------------------------------------
     // グローバルに公開
     //------------------------------------------------------------------------------------
-    window.neoux.loading = {
+    neoux.loading = {
         show: showLoading,
         hide: hideLoading
     };
@@ -164,7 +164,7 @@
     //------------------------------------------------------------------------------------
     // グローバルに公開
     //------------------------------------------------------------------------------------
-    window.neoux.toast = {
+    neoux.toast = {
         show: showToast
     };
 
@@ -232,18 +232,22 @@
     //------------------------------------------------------------------------------------
     // グローバルに公開
     //------------------------------------------------------------------------------------
-    window.neoux.dropdown = {
-        attach: function (buttonElement, items) {
-            buttonElement.addEventListener("click", (e) => {
-                e.stopPropagation(); // 外部クリック判定を防ぐ
-                // 既に開いているメニューがあれば閉じる
-                const existing = document.querySelector(".nuDropdownMenu");
-                if (existing) {
-                    existing.remove();
-                }
-                createDropdown(buttonElement, items);
-            });
-        }
+    if (!neoux.dropdown) neoux.dropdown = {};
+    /**
+     * メニューボタンにアタッチ
+     * @param buttonElement - メニューボタンのbutton
+     * @param items - ドロップダウンアイテム {label, callback}
+     */
+    neoux.dropdown.attach = function (buttonElement, items) {
+        buttonElement.addEventListener("click", (e) => {
+            e.stopPropagation(); // 外部クリック判定を防ぐ
+            // 既に開いているメニューがあれば閉じる
+            const existing = document.querySelector(".nuDropdownMenu");
+            if (existing) {
+                existing.remove();
+            }
+            createDropdown(buttonElement, items);
+        });
     };
 
 })();
@@ -277,7 +281,7 @@
 (function () {
     const overlayClassName = "nuOverlay";
 
-    window.neoux.__overlay = {
+    neoux.__overlay = {
         show: function () {
             const overlay = document.createElement("div");
             overlay.className = overlayClassName;
