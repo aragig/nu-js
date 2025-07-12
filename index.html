@@ -22,6 +22,12 @@
 <button id="nuToast">Toast</button>
 <button id="nuToastDelay">Toast with delay</button>
 
+<h2>状態管理</h2>
+<input type="text" name="filename" value="" />
+<input type="hidden" name="siteCode" id="siteCode" value="ASN" />
+<button onclick="document.getElementById('siteCode').value='KTN';">Change hidden value</button>
+<p>hiddenだとchangeイベントは発生しない</p>
+
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 
@@ -65,6 +71,17 @@
             neoux.toast.show("エラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
         });
 
+        const formState = {};
+        document.querySelectorAll("input, select, textarea").forEach(el => {
+            el.addEventListener("change", () => {
+                document.querySelectorAll("input, select, textarea").forEach(input => {
+                    if (input.name) {
+                        formState[input.name] = input.value;
+                        console.log(formState[input.name]);
+                    }
+                });
+            });
+        });
     });
 </script>
 
