@@ -175,7 +175,7 @@
 //------------------------------------------------------------------------------------
 (function () {
 
-    function createDropdown(buttonElement, items = [], onSelect) {
+    function createDropdown(buttonElement, items = []) {
         const dropdown = document.createElement("div");
         dropdown.className = "nuDropdownMenu";
 
@@ -186,7 +186,9 @@
             option.addEventListener("click", (e) => {
                 e.stopPropagation();
                 hideDropdown(dropdown);
-                onSelect?.(item.value);
+                if (typeof item.callback === "function") {
+                    item.callback();
+                }
             });
             dropdown.appendChild(option);
         });
@@ -209,13 +211,13 @@
         document.body.appendChild(dropdown);
 
         // 外部クリックで閉じる
-        function outsideClickListener(e) {
+        function __outsideClickListener(e) {
             if (!dropdown.contains(e.target) && e.target !== buttonElement) {
                 hideDropdown(dropdown);
-                document.removeEventListener("click", outsideClickListener);
+                document.removeEventListener("click", __outsideClickListener);
             }
         }
-        document.addEventListener("click", outsideClickListener);
+        document.addEventListener("click", __outsideClickListener);
 
         return dropdown;
     }
@@ -231,7 +233,7 @@
     // グローバルに公開
     //------------------------------------------------------------------------------------
     window.neoux.dropdown = {
-        attach: function (buttonElement, items, onSelect) {
+        attach: function (buttonElement, items) {
             buttonElement.addEventListener("click", (e) => {
                 e.stopPropagation(); // 外部クリック判定を防ぐ
                 // 既に開いているメニューがあれば閉じる
@@ -239,7 +241,7 @@
                 if (existing) {
                     existing.remove();
                 }
-                createDropdown(buttonElement, items, onSelect);
+                createDropdown(buttonElement, items);
             });
         }
     };

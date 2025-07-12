@@ -110,21 +110,16 @@
         //------------------------------------------------------------------------------------
         const btn = document.getElementById("dropdownBtn");
         neoux.dropdown.attach(btn, [
-            { label: "設定", value: "settings" },
-            { label: "ログアウト", value: "logout" }
-        ], (selectedValue) => {
-            // TODO valueで判定するのではなくcallbackにした方が良いのでは？
-            console.log("選択:", selectedValue);
-        });
+            { label: "設定", callback: () => console.log("設定") },
+            { label: "ログアウト", callback: () => console.log("ログアウト") }
+        ]);
 
 
         const btnLeft = document.getElementById("dropdownBtnLeft");
         neoux.dropdown.attach(btnLeft, [
-            { label: "設定", value: "settings" },
-            { label: "ログアウト", value: "logout" }
-        ], (selectedValue) => {
-            console.log("選択:", selectedValue);
-        });
+            { label: "設定", callback: () => console.log("設定") },
+            { label: "ログアウト", callback: () => console.log("ログアウト") }
+        ]);
 
         //------------------------------------------------------------------------------------
         // 状態管理のテスト
