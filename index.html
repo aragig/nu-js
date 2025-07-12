@@ -18,6 +18,10 @@
 <h2>ローディングインジケータ</h2>
 <button id="nuLoading">Indicator</button>
 
+<h2>トースト</h2>
+<button id="nuToast">Toast</button>
+<button id="nuToastDelay">Toast with delay</button>
+
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 
@@ -51,6 +55,14 @@
             setTimeout(() => {
                 neoux.loading.hide();
             }, 3000);
+        });
+
+        document.getElementById("nuToast").addEventListener("click", () => {
+            neoux.toast.show("保存が完了しました！");
+        });
+
+        document.getElementById("nuToastDelay").addEventListener("click", () => {
+            neoux.toast.show("エラーが発生しました", 5000); // 5秒表示
         });
 
     });

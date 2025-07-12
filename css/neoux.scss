@@ -114,6 +114,26 @@
     }
 }
 
+//------------------------------------------------------------------------------------
+// トースト通知
+//------------------------------------------------------------------------------------
+.neouxToast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: sans-serif;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+}
 
 //------------------------------------------------------------------------------------
 // オーバーレイ制御ユーティリティ

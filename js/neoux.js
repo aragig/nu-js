@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------------
 (function () {
     function showSheet(message, buttons) {
-        neoux.overlay.show();
+        neoux.__overlay.show();
 
         const box = document.createElement("div");
         box.className = "customAlertBox";
@@ -31,7 +31,7 @@
             button.textContent = btn.label;
 
             button.addEventListener("click", () => {
-                neoux.overlay.hide();
+                neoux.__overlay.hide();
                 box.style.opacity = "0";
                 setTimeout(() => {
                     document.body.removeChild(box);
@@ -85,7 +85,7 @@
 (function () {
 
     function showLoading(message) {
-        neoux.overlay.show();
+        neoux.__overlay.show();
 
         // スピナー
         const spinner = document.createElement("div");
@@ -121,7 +121,7 @@
             setTimeout(() => msgBox.remove(), 200);
         }
 
-        neoux.overlay.hide();
+        neoux.__overlay.hide();
     }
 
     //------------------------------------------------------------------------------------
@@ -136,12 +136,47 @@
 
 
 //------------------------------------------------------------------------------------
+// トースト通知
+//------------------------------------------------------------------------------------
+(function () {
+
+    function showToast(message, duration = 3000) {
+        const toast = document.createElement("div");
+        toast.className = "neouxToast";
+        toast.textContent = message;
+
+        document.body.appendChild(toast);
+
+        // 表示トリガー（アニメーション）
+        requestAnimationFrame(() => {
+            toast.style.opacity = "1";
+            toast.style.transform = "translateY(0)";
+        });
+
+        // 一定時間後に非表示
+        setTimeout(() => {
+            toast.style.opacity = "0";
+            toast.style.transform = "translateY(20px)";
+            setTimeout(() => toast.remove(), 200);
+        }, duration);
+    }
+
+    //------------------------------------------------------------------------------------
+    // グローバルに公開
+    //------------------------------------------------------------------------------------
+    window.neoux.toast = {
+        show: showToast
+    };
+
+})();
+
+//------------------------------------------------------------------------------------
 // オーバーレイ制御ユーティリティ
 //------------------------------------------------------------------------------------
 (function () {
     const overlayClassName = "neouxOverlay";
 
-    window.neoux.overlay = {
+    window.neoux.__overlay = {
         show: function () {
             const overlay = document.createElement("div");
             overlay.className = overlayClassName;
