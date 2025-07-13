@@ -42,10 +42,10 @@
     <h2 class="mt50">色々なinput</h2>
     <div class="nuFlexColumn">
         <div>
-            <input name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
+            <input name="sampleName" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
         </div>
         <div>
-            <textarea name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5"></textarea>
+            <textarea name="sampleInquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5"></textarea>
         </div>
         <div>
             <select name="sampleSelect" class="nuSelect">
@@ -55,17 +55,17 @@
             </select>
         </div>
         <div>
-            <label>年/月/日：<input type="date"></label>
+            <label>年/月/日：<input name="sampleDate" type="date"></label>
         </div>
         <div>
-            <label>年 / 月 / 日 +時:分：<input type="datetime-local"></label>
+            <label>年 / 月 / 日 +時:分：<input name="sampleDatetimeLocal" type="datetime-local"></label>
         </div>
         <div>
-            <label>カラーパレッド：<input type="color" value="#0b80dc"></label>
+            <label>カラーパレッド：<input name="sampleColor" type="color" value="#0b80dc"></label>
         </div>
 
         <div>
-            <label>範囲を選択：<input type="range" min="0" max="100"></label>
+            <label>範囲を選択：<input name="sampleRange" type="range" min="0" max="100"></label>
         </div>
     </div>
 
@@ -152,7 +152,7 @@
         //------------------------------------------------------------------------------------
         neoux.segment.create(document.getElementById("sortSegmentArea"), {
             id: "sortSegment",
-            name: "sortOption",
+            name: "sampleSortOption",
             value: "最新",
             options: [
                 { label: "最新", value: "最新" },
@@ -163,7 +163,7 @@
 
         neoux.segment.create(document.getElementById("fruitsSegmentArea"), {
             id: "fruitsSegment",
-            name: "fruitsOption",
+            name: "sampleFruitsOption",
             value: "メロン",
             options: [
                 { label: "りんご", value: "りんご" },
@@ -179,43 +179,14 @@
         neoux.search.attach(document.getElementById("searchArea"), "/sample/site_search_index.json");
 
 
-        /**
-         * 指定したフォーム（またはdiv）内のすべての入力値をオブジェクトで取得する
-         * @param {HTMLElement} container - form要素またはdiv要素
-         * @returns {Object} キーがname属性、値がその入力値のオブジェクト
-         */
-        function getFormValues(container) {
-            const formData = {};
-            const elements = container.querySelectorAll('input, select, textarea');
-
-            elements.forEach(el => {
-                if (!el.name) return;
-
-                if (el.type === 'checkbox') {
-                    formData[el.name] = el.checked;
-                } else if (el.type === 'radio') {
-                    if (el.checked) {
-                        formData[el.name] = el.value;
-                    }
-                } else {
-                    formData[el.name] = el.value;
-                }
-            });
-
-            return formData;
-        }
-
+        //------------------------------------------------------------------------------------
+        // Submit
+        //------------------------------------------------------------------------------------
         document.getElementById("nuSubmit").addEventListener("click", () => {
-            const form = document.getElementById("nuForm");
-            const values = getFormValues(form);
-            console.log("フォーム値:", values);
-
-            // ここで非同期POST処理などが可能
-            // fetch('/api/post', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(values)
-            // });
+            neoux.submit.values(
+                document.getElementById("nuForm"),
+                (vals) => console.log("フォーム値:", vals)
+            );
         });
 
     });

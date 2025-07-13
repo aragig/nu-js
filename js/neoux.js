@@ -418,6 +418,53 @@
 
 
 //------------------------------------------------------------------------------------
+// Submit
+//------------------------------------------------------------------------------------
+(function () {
+    if (!neoux.submit) neoux.submit = {};
+
+    /**
+     * 指定したフォーム（またはdiv）内のすべての入力値をオブジェクトで取得する
+     * @param {HTMLElement} container - form要素またはdiv要素
+     * @returns {Object} キーがname属性、値がその入力値のオブジェクト
+     */
+    function getFormValues(container) {
+        const formData = {};
+        const elements = container.querySelectorAll('input, select, textarea');
+
+        elements.forEach(el => {
+            if (!el.name) return;
+
+            if (el.type === 'checkbox') {
+                formData[el.name] = el.checked;
+            } else if (el.type === 'radio') {
+                if (el.checked) {
+                    formData[el.name] = el.value;
+                }
+            } else {
+                formData[el.name] = el.value;
+            }
+        });
+
+        return formData;
+    }
+
+
+    /**
+     * フォームの値を取得し、コールバックに渡す
+     * @param {HTMLElement} target - 対象のform要素またはdiv
+     * @param {Function} callback - 結果を受け取る関数（formDataを引数に渡す）
+     */
+    neoux.submit.values = function (target, callback) {
+        if (!target || typeof callback !== "function") return;
+        const values = getFormValues(target);
+        callback(values);
+    };
+
+})();
+
+
+//------------------------------------------------------------------------------------
 // オーバーレイ制御ユーティリティ
 //------------------------------------------------------------------------------------
 (function () {
