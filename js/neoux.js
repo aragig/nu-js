@@ -1,496 +1,531 @@
-//------------------------------------------------------------------------------------
-// カスタムアラート
-//------------------------------------------------------------------------------------
+
 (function () {
-    function showSheet(message, buttons) {
-        neoux.__overlay.show();
+    if(!window.neoux) window.neoux = {};
 
-        const box = document.createElement("div");
-        box.className = "nuAlertBox";
+    //------------------------------------------------------------------------------------
+    // オーバーレイ制御ユーティリティ
+    //------------------------------------------------------------------------------------
+    {
+        if(!window.neoux.overlay) window.neoux.overlay = {};
 
-        // ボタン数でシートモードを判定
-        const isSheetMode = buttons.length >= 3;
-        if (isSheetMode) {
-            box.classList.add("sheetMode");
-        }
+        const overlayClassName = "nuOverlay";
 
-        box.style.opacity = "0";
+        window.neoux.overlay = {
+            show: function () {
+                const overlay = document.createElement("div");
+                overlay.className = overlayClassName;
+                overlay.style.opacity = "0";
+                document.body.appendChild(overlay);
 
-        const msg = document.createElement("div");
-        msg.className = "nuAlertMessage";
-        // msg.textContent = message;
-        msg.innerHTML = message;
+                requestAnimationFrame(() => {
+                    overlay.style.opacity = "1";
+                });
 
-        const buttonRow = document.createElement("div");
-        buttonRow.className = "nuAlertButtonRow";
+                return overlay;
+            },
 
-        buttons.forEach(btn => {
-            const button = document.createElement("button");
-            button.className = "nuAlertButton";
-            if (btn.cancel) button.classList.add("cancel");
-            button.textContent = btn.label;
-
-            button.addEventListener("click", () => {
-                neoux.__overlay.hide();
-                box.style.opacity = "0";
+            hide: function () {
+                const overlay = document.querySelector(`.${overlayClassName}`);
+                if (!overlay) return;
+                overlay.style.opacity = "0";
                 setTimeout(() => {
-                    document.body.removeChild(box);
-                    if (typeof btn.callback === "function") {
-                        btn.callback();
-                    }
+                    overlay.remove();
                 }, 200);
-            });
-
-            buttonRow.appendChild(button);
-        });
-
-        box.appendChild(msg);
-        box.appendChild(buttonRow);
-        document.body.appendChild(box);
-
-        // フェードイン
-        requestAnimationFrame(() => {
-            box.style.opacity = "1";
-        });
+            },
+        };
     }
 
+
     //------------------------------------------------------------------------------------
-    // グローバルに公開
+    // カスタムアラート
     //------------------------------------------------------------------------------------
-    neoux = {
-        // 使いやすいようにラッパーする
-        alert: function (message, onOk) {
+    {
+        function showSheet(message, buttons) {
+            window.neoux.overlay.show();
+
+            const box = document.createElement("div");
+            box.className = "nuAlertBox";
+
+            // ボタン数でシートモードを判定
+            const isSheetMode = buttons.length >= 3;
+            if (isSheetMode) {
+                box.classList.add("sheetMode");
+            }
+
+            box.style.opacity = "0";
+
+            const msg = document.createElement("div");
+            msg.className = "nuAlertMessage";
+            // msg.textContent = message;
+            msg.innerHTML = message;
+
+            const buttonRow = document.createElement("div");
+            buttonRow.className = "nuAlertButtonRow";
+
+            buttons.forEach(btn => {
+                const button = document.createElement("button");
+                button.className = "nuAlertButton";
+                if (btn.cancel) button.classList.add("cancel");
+                button.textContent = btn.label;
+
+                button.addEventListener("click", () => {
+                    neoux.overlay.hide();
+                    box.style.opacity = "0";
+                    setTimeout(() => {
+                        document.body.removeChild(box);
+                        if (typeof btn.callback === "function") {
+                            btn.callback();
+                        }
+                    }, 200);
+                });
+
+                buttonRow.appendChild(button);
+            });
+
+            box.appendChild(msg);
+            box.appendChild(buttonRow);
+            document.body.appendChild(box);
+
+            // フェードイン
+            requestAnimationFrame(() => {
+                box.style.opacity = "1";
+            });
+        }
+
+        //------------------------------------------------------------------------------------
+        // グローバルに公開
+        //------------------------------------------------------------------------------------
+        window.neoux.alert = function (message, onOk) {
             showSheet(message, [
                 { label: "OK", callback: () => onOk?.() }
             ]);
-        },
-        // 使いやすいようにラッパーする
-        confirm: function (message, onOk, onCancel) {
+        };
+        window.neoux.confirm = function (message, onOk, onCancel) {
             showSheet(message, [
                 { label: "キャンセル", cancel: true, callback: () => onCancel?.() },
                 { label: "OK", callback: () => onOk?.() }
             ]);
-        },
-        sheet: function (message, buttons) {
+        };
+        window.neoux.sheet = function (message, buttons) {
             showSheet(message, buttons);
-        }
-    };
-
-})();
-
-
-//------------------------------------------------------------------------------------
-// ローディングインジケータ
-//------------------------------------------------------------------------------------
-(function () {
-
-    function showLoading(message) {
-        neoux.__overlay.show();
-
-        // スピナー
-        const spinner = document.createElement("div");
-        spinner.className = "nuLoadingSpinner";
-
-        // メッセージ（省略可能）
-        const msgBox = document.createElement("div");
-        msgBox.className = "nuLoadingMessage";
-        msgBox.textContent = message || "";
-
-        document.body.appendChild(spinner);
-        document.body.appendChild(msgBox);
-
-        // フェードイン
-        requestAnimationFrame(() => {
-            spinner.style.opacity = "1";
-            msgBox.style.opacity = "1";
-        });
+        };
     }
 
-    function hideLoading() {
-
-        const spinner = document.querySelector(".nuLoadingSpinner");
-        const msgBox = document.querySelector(".nuLoadingMessage");
-
-        if (spinner) {
-            spinner.style.opacity = "0";
-            setTimeout(() => spinner.remove(), 200);
-        }
-
-        if (msgBox) {
-            msgBox.style.opacity = "0";
-            setTimeout(() => msgBox.remove(), 200);
-        }
-
-        neoux.__overlay.hide();
-    }
 
     //------------------------------------------------------------------------------------
-    // グローバルに公開
+    // ローディングインジケータ
     //------------------------------------------------------------------------------------
-    neoux.loading = {
-        show: showLoading,
-        hide: hideLoading
-    };
+    {
+        if(!window.neoux.loading) window.neoux.loading = {};
 
-})();
+        function showLoading(message) {
+            window.neoux.overlay.show();
 
+            // スピナー
+            const spinner = document.createElement("div");
+            spinner.className = "nuLoadingSpinner";
 
-//------------------------------------------------------------------------------------
-// トースト通知
-//------------------------------------------------------------------------------------
-(function () {
+            // メッセージ（省略可能）
+            const msgBox = document.createElement("div");
+            msgBox.className = "nuLoadingMessage";
+            msgBox.textContent = message || "";
 
-    function showToast(message, duration = 3000) {
-        const toast = document.createElement("div");
-        toast.className = "nuToast";
-        toast.textContent = message;
+            document.body.appendChild(spinner);
+            document.body.appendChild(msgBox);
 
-        document.body.appendChild(toast);
-
-        // 表示トリガー（アニメーション）
-        requestAnimationFrame(() => {
-            toast.style.opacity = "1";
-            toast.style.transform = "translateY(0)";
-        });
-
-        // 一定時間後に非表示
-        setTimeout(() => {
-            toast.style.opacity = "0";
-            toast.style.transform = "translateY(20px)";
-            setTimeout(() => toast.remove(), 200);
-        }, duration);
-    }
-
-    //------------------------------------------------------------------------------------
-    // グローバルに公開
-    //------------------------------------------------------------------------------------
-    neoux.toast = {
-        show: showToast
-    };
-
-})();
-
-//------------------------------------------------------------------------------------
-// ドロップダウンメニュー
-//------------------------------------------------------------------------------------
-(function () {
-
-    function createDropdown(buttonElement, items = []) {
-        const dropdown = document.createElement("div");
-        dropdown.className = "nuDropdownMenu";
-
-        items.forEach(item => {
-            const option = document.createElement("div");
-            option.className = "nuDropdownItem";
-            option.textContent = item.label;
-            option.addEventListener("click", (e) => {
-                e.stopPropagation();
-                hideDropdown(dropdown);
-                if (typeof item.callback === "function") {
-                    item.callback();
-                }
+            // フェードイン
+            requestAnimationFrame(() => {
+                spinner.style.opacity = "1";
+                msgBox.style.opacity = "1";
             });
-            dropdown.appendChild(option);
-        });
-
-        // ボタン位置取得
-        const rect = buttonElement.getBoundingClientRect();
-        const dropdownWidth = 160; // メニューの最小幅
-        const margin = 10;
-
-        // 横位置調整
-        let left = rect.left + window.scrollX;
-        if (left + dropdownWidth + margin > window.innerWidth) {
-            // はみ出す場合は右寄せ
-            left = window.innerWidth - dropdownWidth - margin;
         }
 
-        dropdown.style.top = `${rect.bottom + window.scrollY}px`;
-        dropdown.style.left = `${left}px`;
+        function hideLoading() {
 
-        document.body.appendChild(dropdown);
+            const spinner = document.querySelector(".nuLoadingSpinner");
+            const msgBox = document.querySelector(".nuLoadingMessage");
 
-        // 外部クリックで閉じる
-        function __outsideClickListener(e) {
-            if (!dropdown.contains(e.target) && e.target !== buttonElement) {
-                hideDropdown(dropdown);
-                document.removeEventListener("click", __outsideClickListener);
+            if (spinner) {
+                spinner.style.opacity = "0";
+                setTimeout(() => spinner.remove(), 200);
+            }
+
+            if (msgBox) {
+                msgBox.style.opacity = "0";
+                setTimeout(() => msgBox.remove(), 200);
+            }
+
+            window.neoux.overlay.hide();
+        }
+
+        //------------------------------------------------------------------------------------
+        // グローバルに公開
+        //------------------------------------------------------------------------------------
+        window.neoux.loading.show = showLoading;
+        window.neoux.loading.hide = hideLoading;
+    }
+
+
+    //------------------------------------------------------------------------------------
+    // トースト通知
+    //------------------------------------------------------------------------------------
+    {
+        if(!window.neoux.toast) window.neoux.toast = {};
+
+        function showToast(message, duration = 3000) {
+            const toast = document.createElement("div");
+            toast.className = "nuToast";
+            toast.textContent = message;
+
+            document.body.appendChild(toast);
+
+            // 表示トリガー（アニメーション）
+            requestAnimationFrame(() => {
+                toast.style.opacity = "1";
+                toast.style.transform = "translateY(0)";
+            });
+
+            // 一定時間後に非表示
+            setTimeout(() => {
+                toast.style.opacity = "0";
+                toast.style.transform = "translateY(20px)";
+                setTimeout(() => toast.remove(), 200);
+            }, duration);
+        }
+
+        //------------------------------------------------------------------------------------
+        // グローバルに公開
+        //------------------------------------------------------------------------------------
+        window.neoux.toast.show = showToast;
+    }
+
+
+    //------------------------------------------------------------------------------------
+    // ドロップダウンメニュー
+    //------------------------------------------------------------------------------------
+    {
+        function createDropdown(buttonElement, items = []) {
+            const dropdown = document.createElement("div");
+            dropdown.className = "nuDropdownMenu";
+
+            items.forEach(item => {
+                const option = document.createElement("div");
+                option.className = "nuDropdownItem";
+                option.textContent = item.label;
+                option.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    hideDropdown(dropdown);
+                    if (typeof item.callback === "function") {
+                        item.callback();
+                    }
+                });
+                dropdown.appendChild(option);
+            });
+
+            // ボタン位置取得
+            const rect = buttonElement.getBoundingClientRect();
+            const dropdownWidth = 160; // メニューの最小幅
+            const margin = 10;
+
+            // 横位置調整
+            let left = rect.left + window.scrollX;
+            if (left + dropdownWidth + margin > window.innerWidth) {
+                // はみ出す場合は右寄せ
+                left = window.innerWidth - dropdownWidth - margin;
+            }
+
+            dropdown.style.top = `${rect.bottom + window.scrollY}px`;
+            dropdown.style.left = `${left}px`;
+
+            document.body.appendChild(dropdown);
+
+            // 外部クリックで閉じる
+            function __outsideClickListener(e) {
+                if (!dropdown.contains(e.target) && e.target !== buttonElement) {
+                    hideDropdown(dropdown);
+                    document.removeEventListener("click", __outsideClickListener);
+                }
+            }
+            document.addEventListener("click", __outsideClickListener);
+
+            return dropdown;
+        }
+
+
+        function hideDropdown(dropdown) {
+            if (dropdown && dropdown.parentNode) {
+                dropdown.remove();
             }
         }
-        document.addEventListener("click", __outsideClickListener);
 
-        return dropdown;
-    }
-
-
-    function hideDropdown(dropdown) {
-        if (dropdown && dropdown.parentNode) {
-            dropdown.remove();
-        }
-    }
-
-    //------------------------------------------------------------------------------------
-    // グローバルに公開
-    //------------------------------------------------------------------------------------
-    if (!neoux.dropdown) neoux.dropdown = {};
-    /**
-     * メニューボタンにアタッチ
-     * @param buttonElement - メニューボタンのbutton
-     * @param items - ドロップダウンアイテム {label, callback}
-     */
-    neoux.dropdown.attach = function (buttonElement, items) {
-        buttonElement.addEventListener("click", (e) => {
-            e.stopPropagation(); // 外部クリック判定を防ぐ
-            // 既に開いているメニューがあれば閉じる
-            const existing = document.querySelector(".nuDropdownMenu");
-            if (existing) {
-                existing.remove();
-            }
-            createDropdown(buttonElement, items);
-        });
-    };
-
-})();
-
-//------------------------------------------------------------------------------------
-// UISegmentedControl風 ラジオボタンラッパー
-//------------------------------------------------------------------------------------
-(function () {
-    if (!neoux.segment) neoux.segment = {};
-    /**
-     * segment要素にアタッチ
-     * @param {HTMLElement} container - inputとlabelを内包する親div
-     * @param {Function} callback - 選択時のコールバック（valueを引数として渡す）
-     */
-    function segmentAttach(container, callback) {
-        const radios = container.querySelectorAll('input[type="radio"]');
-        radios.forEach(radio => {
-            radio.addEventListener('change', () => {
-                if (radio.checked) {
-                    callback(radio.value);
+        //------------------------------------------------------------------------------------
+        // グローバルに公開
+        //------------------------------------------------------------------------------------
+        if (!window.neoux.dropdown) window.neoux.dropdown = {};
+        /**
+         * メニューボタンにアタッチ
+         * @param buttonElement - メニューボタンのbutton
+         * @param items - ドロップダウンアイテム {label, callback}
+         */
+        window.neoux.dropdown.attach = function (buttonElement, items) {
+            buttonElement.addEventListener("click", (e) => {
+                e.stopPropagation(); // 外部クリック判定を防ぐ
+                // 既に開いているメニューがあれば閉じる
+                const existing = document.querySelector(".nuDropdownMenu");
+                if (existing) {
+                    existing.remove();
                 }
+                createDropdown(buttonElement, items);
             });
-        });
-    };
+        };
 
-    /**
-     * segment要素を生成してDOMに追加
-     * @param {HTMLElement} mountTarget - 追加先の親要素
-     * @param {Object} config
-     * @param {string} config.id - div要素のid
-     * @param {string} config.name - ラジオグループ名
-     * @param {Array} config.options - { label, value } の配列
-     * @param {string} config.value - 初期選択値
-     * @param {Function} callback - 選択時のコールバック
-     */
-    neoux.segment.create = function (mountTarget, config, callback) {
-        const { id, name, options, value: initialValue } = config;
-        const container = document.createElement("div");
-        container.className = "nuSegment";
-        container.id = id;
+    }
 
-        options.forEach(opt => {
-            const inputId = `${id}_${opt.value}`;
 
-            const input = document.createElement("input");
-            input.type = "radio";
-            input.name = name;
-            input.id = inputId;
-            input.value = opt.value;
-            if (opt.value === initialValue) input.checked = true;
+    //------------------------------------------------------------------------------------
+    // UISegmentedControl風 ラジオボタンラッパー
+    //------------------------------------------------------------------------------------
+    {
+        if (!window.neoux.segment) window.neoux.segment = {};
+        /**
+         * segment要素にアタッチ
+         * @param {HTMLElement} container - inputとlabelを内包する親div
+         * @param {Function} callback - 選択時のコールバック（valueを引数として渡す）
+         */
+        function segmentAttach(container, callback) {
+            const radios = container.querySelectorAll('input[type="radio"]');
+            radios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    if (radio.checked) {
+                        callback(radio.value);
+                    }
+                });
+            });
+        };
 
-            const label = document.createElement("label");
-            label.setAttribute("for", inputId);
-            label.textContent = opt.label;
+        /**
+         * segment要素を生成してDOMに追加
+         * @param {HTMLElement} mountTarget - 追加先の親要素
+         * @param {Object} config
+         * @param {string} config.id - div要素のid
+         * @param {string} config.name - ラジオグループ名
+         * @param {Array} config.options - { label, value } の配列
+         * @param {string} config.value - 初期選択値
+         * @param {Function} callback - 選択時のコールバック
+         */
+        window.neoux.segment.create = function (mountTarget, config, callback) {
+            const { id, name, options, value: initialValue } = config;
+            const container = document.createElement("div");
+            container.className = "nuSegment";
+            container.id = id;
 
-            container.appendChild(input);
-            container.appendChild(label);
-        });
+            options.forEach(opt => {
+                const inputId = `${id}_${opt.value}`;
 
-        // コールバックバインド
-        segmentAttach(container, callback);
+                const input = document.createElement("input");
+                input.type = "radio";
+                input.name = name;
+                input.id = inputId;
+                input.value = opt.value;
+                if (opt.value === initialValue) input.checked = true;
 
-        // DOMに追加
-        mountTarget.appendChild(container);
-    };
-})();
+                const label = document.createElement("label");
+                label.setAttribute("for", inputId);
+                label.textContent = opt.label;
 
-//------------------------------------------------------------------------------------
-// 検索ボックス
-//------------------------------------------------------------------------------------
-(function () {
-    if (!neoux.search) neoux.search = {};
-    /**
-     * 検索UIを生成し、検索ロジックをバインドする
-     * @param {HTMLElement} container - 検索UIを配置する親要素
-     * @param {string} jsonPath - 検索インデックスJSONのURL
-     */
-    neoux.search.attach = function (container, jsonPath) {
-        if (container.querySelector(".nuSearchContainer")) return;
+                container.appendChild(input);
+                container.appendChild(label);
+            });
 
-        // 検索ボックス＋アイコン
-        const wrapper = document.createElement("div");
-        wrapper.className = "nuSearchContainer";
-        wrapper.innerHTML = `
+            // コールバックバインド
+            segmentAttach(container, callback);
+
+            // DOMに追加
+            mountTarget.appendChild(container);
+        };
+    }
+
+
+    //------------------------------------------------------------------------------------
+    // 検索ボックス
+    //------------------------------------------------------------------------------------
+    {
+        if (!window.neoux.search) window.neoux.search = {};
+        /**
+         * 検索UIを生成し、検索ロジックをバインドする
+         * @param {HTMLElement} container - 検索UIを配置する親要素
+         * @param {string} jsonPath - 検索インデックスJSONのURL
+         */
+        window.neoux.search.attach = function (container, jsonPath) {
+            if (container.querySelector(".nuSearchContainer")) return;
+
+            // 検索ボックス＋アイコン
+            const wrapper = document.createElement("div");
+            wrapper.className = "nuSearchContainer";
+            wrapper.innerHTML = `
             <svg class="nuSearchIcon" viewBox="0 0 24 24" fill="none">
                 <path d="M10 2a8 8 0 015.292 13.708l5 5a1 1 0 01-1.414 1.414l-5-5A8 8 0 1110 2zm0 2a6 6 0 100 12 6 6 0 000-12z" fill="currentColor"/>
             </svg>
             <input type="search" class="nuSearchInput" id="nuSearchBox" placeholder="検索" />
         `;
 
-        // 結果表示エリア
-        const resultContainer = document.createElement("div");
-        resultContainer.id = "searchResults";
-        resultContainer.className = "nuSearchResults";
+            // 結果表示エリア
+            const resultContainer = document.createElement("div");
+            resultContainer.id = "searchResults";
+            resultContainer.className = "nuSearchResults";
 
-        container.appendChild(wrapper);
-        container.appendChild(resultContainer);
+            container.appendChild(wrapper);
+            container.appendChild(resultContainer);
 
-        const searchBox = wrapper.querySelector("#nuSearchBox");
-        let cachedData = null;
-        let isLoaded = false;
+            const searchBox = wrapper.querySelector("#nuSearchBox");
+            let cachedData = null;
+            let isLoaded = false;
 
-        // 初回フォーカスでJSONを取得
-        searchBox.addEventListener("focus", function () {
-            if (isLoaded) return;
+            // 初回フォーカスでJSONを取得
+            searchBox.addEventListener("focus", function () {
+                if (isLoaded) return;
 
-            fetch(jsonPath)
-                .then(response => response.json())
-                .then(data => {
-                    cachedData = data;
-                    isLoaded = true;
-                })
-                .catch(error => {
-                    console.error("検索インデックスの読み込みに失敗しました", error);
+                fetch(jsonPath)
+                    .then(response => response.json())
+                    .then(data => {
+                        cachedData = data;
+                        isLoaded = true;
+                    })
+                    .catch(error => {
+                        console.error("検索インデックスの読み込みに失敗しました", error);
+                    });
+            });
+
+            // 入力イベント
+            searchBox.addEventListener("input", function () {
+                const searchText = this.value.toLowerCase();
+                resultContainer.innerHTML = "";
+
+                if (!searchText.trim() || !cachedData) return;
+
+                const searchWords = searchText.split(/\s+/);
+                let matched = 0;
+
+                Object.keys(cachedData).forEach(word => {
+                    const keyword = word.toLowerCase();
+                    const isMatch = searchWords.every(w => keyword.includes(w));
+
+                    if (isMatch) {
+                        const { article } = cachedData[word];
+                        const title = article.title || word;
+                        const url = article.url || "#";
+
+                        const a = document.createElement("a");
+                        a.href = url;
+                        a.target = "_blank";
+                        a.textContent = title;
+                        resultContainer.appendChild(a);
+
+                        matched++;
+                    }
                 });
-        });
 
-        // 入力イベント
-        searchBox.addEventListener("input", function () {
-            const searchText = this.value.toLowerCase();
-            resultContainer.innerHTML = "";
-
-            if (!searchText.trim() || !cachedData) return;
-
-            const searchWords = searchText.split(/\s+/);
-            let matched = 0;
-
-            Object.keys(cachedData).forEach(word => {
-                const keyword = word.toLowerCase();
-                const isMatch = searchWords.every(w => keyword.includes(w));
-
-                if (isMatch) {
-                    const { article } = cachedData[word];
-                    const title = article.title || word;
-                    const url = article.url || "#";
-
-                    const a = document.createElement("a");
-                    a.href = url;
-                    a.target = "_blank";
-                    a.textContent = title;
-                    resultContainer.appendChild(a);
-
-                    matched++;
+                if (matched === 0) {
+                    const noHit = document.createElement("div");
+                    noHit.textContent = "該当する記事がありません";
+                    resultContainer.appendChild(noHit);
                 }
             });
 
-            if (matched === 0) {
-                const noHit = document.createElement("div");
-                noHit.textContent = "該当する記事がありません";
-                resultContainer.appendChild(noHit);
-            }
-        });
-
-        // "/"キーで検索にフォーカス
-        document.addEventListener("keydown", function (event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-            }
-            if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
-                event.preventDefault();
-                searchBox.scrollIntoView({ behavior: "smooth", block: "center" });
-                searchBox.focus();
-            }
-        });
-    };
-
-})();
-
-
-//------------------------------------------------------------------------------------
-// Submit
-//------------------------------------------------------------------------------------
-(function () {
-    if (!neoux.submit) neoux.submit = {};
-
-    /**
-     * 指定したフォーム（またはdiv）内のすべての入力値をオブジェクトで取得する
-     * @param {HTMLElement} container - form要素またはdiv要素
-     * @returns {Object} キーがname属性、値がその入力値のオブジェクト
-     */
-    function getFormValues(container) {
-        const formData = {};
-        const elements = container.querySelectorAll('input, select, textarea');
-
-        elements.forEach(el => {
-            if (!el.name) return;
-
-            if (el.type === 'checkbox') {
-                formData[el.name] = el.checked;
-            } else if (el.type === 'radio') {
-                if (el.checked) {
-                    formData[el.name] = el.value;
+            // "/"キーで検索にフォーカス
+            document.addEventListener("keydown", function (event) {
+                if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+                    event.preventDefault();
+                    searchBox.scrollIntoView({ behavior: "smooth", block: "center" });
+                    searchBox.focus();
                 }
-            } else {
-                formData[el.name] = el.value;
-            }
-        });
-
-        return formData;
+            });
+        };
     }
 
 
-    /**
-     * フォームの値を取得し、コールバックに渡す
-     * @param {HTMLElement} target - 対象のform要素またはdiv
-     * @param {Function} callback - 結果を受け取る関数（formDataを引数に渡す）
-     */
-    neoux.submit.values = function (target, callback) {
-        if (!target || typeof callback !== "function") return;
-        const values = getFormValues(target);
-        callback(values);
-    };
+    //------------------------------------------------------------------------------------
+    // Submit
+    //------------------------------------------------------------------------------------
+    {
+        if (!window.neoux.submit) window.neoux.submit = {};
 
-})();
+        /**
+         * 指定したフォーム（またはdiv）内のすべての入力値をオブジェクトで取得する
+         * @param {HTMLElement} container - form要素またはdiv要素
+         * @returns {Object} キーがname属性、値がその入力値のオブジェクト
+         */
+        function getFormValues(container) {
+            const formData = {};
+            const elements = container.querySelectorAll('input, select, textarea');
 
+            elements.forEach(el => {
+                if (!el.name) return;
 
-//------------------------------------------------------------------------------------
-// オーバーレイ制御ユーティリティ
-//------------------------------------------------------------------------------------
-(function () {
-    const overlayClassName = "nuOverlay";
-
-    neoux.__overlay = {
-        show: function () {
-            const overlay = document.createElement("div");
-            overlay.className = overlayClassName;
-            overlay.style.opacity = "0";
-            document.body.appendChild(overlay);
-
-            requestAnimationFrame(() => {
-                overlay.style.opacity = "1";
+                if (el.type === 'checkbox') {
+                    formData[el.name] = el.checked;
+                } else if (el.type === 'radio') {
+                    if (el.checked) {
+                        formData[el.name] = el.value;
+                    }
+                } else {
+                    formData[el.name] = el.value;
+                }
             });
 
-            return overlay;
-        },
+            return formData;
+        }
 
-        hide: function () {
-            const overlay = document.querySelector(`.${overlayClassName}`);
-            if (!overlay) return;
-            overlay.style.opacity = "0";
-            setTimeout(() => {
-                overlay.remove();
-            }, 200);
-        },
-    };
+
+        /**
+         * フォームの値を取得し、コールバックに渡す
+         * @param {HTMLElement} target - 対象のform要素またはdiv
+         * @param {Function} callback - 結果を受け取る関数（formDataを引数に渡す）
+         */
+        window.neoux.submit.values = function (target, callback) {
+            if (!target || typeof callback !== "function") return;
+            const values = getFormValues(target);
+            callback(values);
+        };
+
+    }
+
+
+    //------------------------------------------------------------------------------------
+    // 入力欄に対して文字数カウンターを追加する
+    //------------------------------------------------------------------------------------
+    {
+        if (!window.neoux.charCount) window.neoux.charCount = {};
+
+        /**
+         * 入力欄に対して文字数カウンターを追加する
+         * @param {HTMLElement} input - inputまたはtextarea要素
+         * @param {number} limit - 文字数制限（例: 30）
+         */
+        window.neoux.charCount.attach = function (input, limit) {
+            if (!input || typeof limit !== "number" || !input.id) return;
+
+            // すでにカウンターが追加済みならスキップ
+            const existing = document.getElementById(input.id + "_counter");
+            if (existing) return;
+
+            const counter = document.createElement("div");
+            counter.id = input.id + "_counter";
+            counter.className = "nuCharCounter";
+
+            // inputの直後に挿入（同じ親の中）
+            input.insertAdjacentElement("afterend", counter);
+
+            const update = () => {
+                const len = input.value.length;
+                counter.textContent = len;
+                counter.style.color = len > limit ? "red" : "#888";
+            };
+
+            input.addEventListener("input", update);
+            update(); // 初期表示
+        };
+    }
+
 })();
+

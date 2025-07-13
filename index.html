@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>neoux.js</title>
@@ -40,12 +40,12 @@
 
 
     <h2 class="mt50">色々なinput</h2>
-    <div class="nuFlexColumn">
+    <div class="nuFlexColumn gap20">
         <div>
-            <input name="sampleName" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
+            <input id="formName" name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
         </div>
         <div>
-            <textarea name="sampleInquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5"></textarea>
+            <textarea id="formInquire" name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5">テキスト</textarea>
         </div>
         <div>
             <select name="sampleSelect" class="nuSelect">
@@ -180,12 +180,19 @@
 
 
         //------------------------------------------------------------------------------------
+        // 入力欄に対して文字数カウンターを追加する
+        //------------------------------------------------------------------------------------
+        neoux.charCount.attach(document.getElementById("formName"), 30);
+        neoux.charCount.attach(document.getElementById("formInquire"), 300);
+
+
+        //------------------------------------------------------------------------------------
         // Submit
         //------------------------------------------------------------------------------------
         document.getElementById("nuSubmit").addEventListener("click", () => {
             neoux.submit.values(
                 document.getElementById("nuForm"),
-                (vals) => console.log("フォーム値:", vals)
+                (vals) => console.table(vals)
             );
         });
 

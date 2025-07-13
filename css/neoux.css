@@ -59,21 +59,54 @@ body {
   background-size: 24px;
   padding-right: 40px; }
 
+.mt10 {
+  margin-top: 10px; }
+
+.mt20 {
+  margin-top: 20px; }
+
+.mt30 {
+  margin-top: 30px; }
+
+.mt40 {
+  margin-top: 40px; }
+
 .mt50 {
   margin-top: 50px; }
 
 .wFull {
   width: 100%; }
 
+.gap5 {
+  gap: 5px; }
+
+.gap10 {
+  gap: 10px; }
+
+.gap15 {
+  gap: 15px; }
+
+.gap20 {
+  gap: 20px; }
+
 .nuFlexRow {
   display: flex;
-  gap: 20px;
   flex-direction: row; }
 
 .nuFlexColumn {
   display: flex;
-  gap: 20px;
   flex-direction: column; }
+
+.nuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  opacity: 0;
+  transition: opacity 0.2s ease; }
 
 .nuAlertBox {
   position: fixed;
@@ -280,15 +313,10 @@ body {
     .nuSearchResults a:hover {
       background-color: #f0f0f0; }
 
-.nuOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 9998;
-  opacity: 0;
-  transition: opacity 0.2s ease; }
+.nuCharCounter {
+  font-size: 12px;
+  color: #888;
+  pointer-events: none;
+  text-align: right; }
 
 /*# sourceMappingURL=neoux.css.map */
