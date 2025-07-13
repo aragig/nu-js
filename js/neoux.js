@@ -320,7 +320,6 @@
 //------------------------------------------------------------------------------------
 (function () {
     if (!neoux.search) neoux.search = {};
-
     /**
      * 検索UIを生成し、検索ロジックをバインドする
      * @param {HTMLElement} container - 検索UIを配置する親要素
@@ -404,6 +403,9 @@
 
         // "/"キーで検索にフォーカス
         document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+            }
             if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
                 event.preventDefault();
                 searchBox.scrollIntoView({ behavior: "smooth", block: "center" });
