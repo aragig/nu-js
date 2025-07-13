@@ -327,7 +327,6 @@
      * @param {string} jsonPath - 検索インデックスJSONのURL
      */
     neoux.search.attach = function (container, jsonPath) {
-        // すでに追加済みなら2重生成防止
         if (container.querySelector(".nuSearchContainer")) return;
 
         // 検索ボックス＋アイコン
@@ -350,13 +349,22 @@
 
         const searchBox = wrapper.querySelector("#nuSearchBox");
         let cachedData = null;
+        let isLoaded = false;
 
-        // JSONキャッシュ取得
-        fetch(jsonPath)
-            .then(response => response.json())
-            .then(data => {
-                cachedData = data;
-            });
+        // 初回フォーカスでJSONを取得
+        searchBox.addEventListener("focus", function () {
+            if (isLoaded) return;
+
+            fetch(jsonPath)
+                .then(response => response.json())
+                .then(data => {
+                    cachedData = data;
+                    isLoaded = true;
+                })
+                .catch(error => {
+                    console.error("検索インデックスの読み込みに失敗しました", error);
+                });
+        });
 
         // 入力イベント
         searchBox.addEventListener("input", function () {
@@ -395,7 +403,7 @@
         });
 
         // "/"キーで検索にフォーカス
-        document.addEventListener('keydown', function (event) {
+        document.addEventListener("keydown", function (event) {
             if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
                 event.preventDefault();
                 searchBox.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -405,6 +413,7 @@
     };
 
 })();
+
 
 //------------------------------------------------------------------------------------
 // オーバーレイ制御ユーティリティ
