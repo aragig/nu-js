@@ -42,10 +42,10 @@
 <h2 class="mt50">色々なinput</h2>
 <div class="nuFlexColumn">
     <div>
-        <input type="text" class="nuInput" placeholder="お名前を入力してください" />
+        <input name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
     </div>
     <div>
-        <textarea class="nuTextarea wFull" placeholder="ご意見・ご感想"></textarea>
+        <textarea name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想"></textarea>
     </div>
     <div>
         <select class="nuSelect">
@@ -147,7 +147,7 @@
         //------------------------------------------------------------------------------------
         // UISegmentedControl風 ラジオグループ呼び出し
         //------------------------------------------------------------------------------------
-        const sortSegment = neoux.segment.create({
+        neoux.segment.create(document.getElementById("sortSegmentArea"), {
             id: "sortSegment",
             name: "sortOption",
             value: "最新",
@@ -157,9 +157,8 @@
                 { label: "古い順", value: "古い順" }
             ]
         }, (val) => console.log("Sort:", val));
-        document.getElementById("sortSegmentArea").appendChild(sortSegment);
 
-        const fruitsSegment = neoux.segment.create({
+        neoux.segment.create(document.getElementById("fruitsSegmentArea"), {
             id: "fruitsSegment",
             name: "fruitsOption",
             value: "メロン",
@@ -169,7 +168,6 @@
                 { label: "メロン", value: "メロン" }
             ]
         }, (val) => console.log("Fruits:", val));
-        document.getElementById("fruitsSegmentArea").appendChild(fruitsSegment);
 
 
         //------------------------------------------------------------------------------------

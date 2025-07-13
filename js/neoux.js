@@ -274,16 +274,16 @@
     };
 
     /**
-     * segment要素を生成して返す
+     * segment要素を生成してDOMに追加
+     * @param {HTMLElement} mountTarget - 追加先の親要素
      * @param {Object} config
      * @param {string} config.id - div要素のid
      * @param {string} config.name - ラジオグループ名
      * @param {Array} config.options - { label, value } の配列
      * @param {string} config.value - 初期選択値
      * @param {Function} callback - 選択時のコールバック
-     * @returns {HTMLElement} segmentのdiv要素
      */
-    neoux.segment.create = function (config, callback) {
+    neoux.segment.create = function (mountTarget, config, callback) {
         const { id, name, options, value: initialValue } = config;
         const container = document.createElement("div");
         container.className = "nuSegment";
@@ -310,7 +310,8 @@
         // コールバックバインド
         segmentAttach(container, callback);
 
-        return container;
+        // DOMに追加
+        mountTarget.appendChild(container);
     };
 })();
 
