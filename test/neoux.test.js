@@ -47,6 +47,41 @@ describe("neoux.overlay", () => {
     });
 });
 
+//------------------------------------------------------------------------------------
+// カスタムアラート
+//------------------------------------------------------------------------------------
+describe("neoux.alert / confirm / sheet", () => {
+    // 各テスト前に強制的に初期化
+    beforeEach(() => {
+        document.body.innerHTML = "";
+    });
+
+    afterEach(() => {
+        document.body.innerHTML = "";
+    });
+
+    it("alert: should render OK button and call callback", (done) => {
+        let called = false;
+        window.neoux.alert("アラートメッセージ", () => {
+            called = true;
+        });
+
+        const button = document.querySelector(".nuAlertButton");
+        expect(button).to.exist;
+        expect(button.textContent).to.equal("OK");
+
+        // simulate click
+        button.click();
+
+        setTimeout(() => {
+            expect(called).to.be.true;
+            const box = document.querySelector(".nuAlertBox");
+            expect(box).to.be.null;
+            done();
+        }, 250);
+    });
+
+});
 
 //------------------------------------------------------------------------------------
 // ローディングインジケータ
@@ -54,6 +89,10 @@ describe("neoux.overlay", () => {
 describe("neoux.loading", () => {
     // 各テスト前に強制的に初期化
     beforeEach(() => {
+        document.body.innerHTML = "";
+    });
+
+    afterEach(() => {
         document.body.innerHTML = "";
     });
 

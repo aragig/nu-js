@@ -77,7 +77,7 @@
                 button.textContent = btn.label;
 
                 button.addEventListener("click", () => {
-                    neoux.overlay.hide();
+                    window.neoux.overlay.hide();
                     box.style.opacity = "0";
                     setTimeout(() => {
                         document.body.removeChild(box);
