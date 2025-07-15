@@ -31,19 +31,15 @@ describe("neoux.overlay", () => {
         expect(el.className).to.equal("nuOverlay");
     });
 
-    it("should remove overlay element from DOM after hide()", (done) => {
+    it("should remove overlay element from DOM after hide()", async() => {
         window.neoux.overlay.show();
         const overlay = document.querySelector(".nuOverlay");
-
         expect(overlay).to.exist;
 
-        window.neoux.overlay.hide();
+        await window.neoux.overlay.hide();
 
-        setTimeout(() => {
-            const exists = document.querySelector(".nuOverlay");
-            expect(exists).to.be.null;
-            done();
-        }, 250); // hide() 内の setTimeout(…, 200) に合わせる
+        const exists = document.querySelector(".nuOverlay");
+        expect(exists).to.be.null;
     });
 });
 
@@ -72,13 +68,13 @@ describe("neoux.alert / confirm / sheet", () => {
 
         // simulate click
         button.click();
+        expect(called).to.be.true;
 
         setTimeout(() => {
-            expect(called).to.be.true;
             const box = document.querySelector(".nuAlertBox");
             expect(box).to.be.null;
             done();
-        }, 250);
+        }, window.neoux.overlay.timeout);
     });
 
 });
@@ -112,21 +108,17 @@ describe("neoux.loading", () => {
         expect(overlay).to.exist;
     });
 
-    it("should hide loading spinner and message after delay", (done) => {
+    it("should hide loading spinner and message after delay", async() => {
         window.neoux.loading.show("処理中");
-        window.neoux.loading.hide();
+        await window.neoux.loading.hide();
 
-        setTimeout(() => {
-            const spinner = document.querySelector(".nuLoadingSpinner");
-            const msgBox = document.querySelector(".nuLoadingMessage");
-            const overlay = document.querySelector(".nuOverlay");
+        const spinner = document.querySelector(".nuLoadingSpinner");
+        const msgBox = document.querySelector(".nuLoadingMessage");
+        const overlay = document.querySelector(".nuOverlay");
 
-            expect(spinner).to.be.null;
-            expect(msgBox).to.be.null;
-            expect(overlay).to.be.null;
-
-            done();
-        }, 200); // remove() まで200msなので余裕を持って250ms待つ
+        expect(spinner).to.be.null;
+        expect(msgBox).to.be.null;
+        expect(overlay).to.be.null;
     });
 
     it("should handle show() with no message", () => {

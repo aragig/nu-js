@@ -17,6 +17,7 @@
         if(!window.neoux.overlay) window.neoux.overlay = {};
 
         const overlayClassName = "nuOverlay";
+        const defaultTimeout = 200; // 外部からもアクセス可能にするための初期値
 
         window.neoux.overlay = {
             show: function () {
@@ -34,12 +35,18 @@
 
             hide: function () {
                 const overlay = document.querySelector(`.${overlayClassName}`);
-                if (!overlay) return;
+                if (!overlay) return Promise.resolve(false);
+
                 overlay.style.opacity = "0";
-                setTimeout(() => {
-                    overlay.remove();
-                }, 200);
+
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        overlay.remove();
+                        resolve(true);
+                    }, defaultTimeout);
+                });
             },
+            timeout: defaultTimeout
         };
     }
 
@@ -76,15 +83,15 @@
                 if (btn.cancel) button.classList.add("cancel");
                 button.textContent = btn.label;
 
-                button.addEventListener("click", () => {
-                    window.neoux.overlay.hide();
+                button.addEventListener("click", async () => {
+                    if (typeof btn.callback === "function") {
+                        btn.callback();
+                    }
+
                     box.style.opacity = "0";
-                    setTimeout(() => {
-                        document.body.removeChild(box);
-                        if (typeof btn.callback === "function") {
-                            btn.callback();
-                        }
-                    }, 200);
+                    // オーバーレイを非表示 → 完了を待ってからボックス削除
+                    await window.neoux.overlay.hide();
+                    document.body.removeChild(box);
                 });
 
                 buttonRow.appendChild(button);
@@ -148,22 +155,17 @@
             });
         }
 
-        function hideLoading() {
+        async function hideLoading() {
 
             const spinner = document.querySelector(".nuLoadingSpinner");
             const msgBox = document.querySelector(".nuLoadingMessage");
+            if (spinner) spinner.style.opacity = "0";
+            if (msgBox) msgBox.style.opacity = "0";
 
-            if (spinner) {
-                spinner.style.opacity = "0";
-                setTimeout(() => spinner.remove(), 200);
-            }
+            await window.neoux.overlay.hide();
 
-            if (msgBox) {
-                msgBox.style.opacity = "0";
-                setTimeout(() => msgBox.remove(), 200);
-            }
-
-            window.neoux.overlay.hide();
+            if (spinner) spinner.remove();
+            if (msgBox) msgBox.remove();
         }
 
         //------------------------------------------------------------------------------------
