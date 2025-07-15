@@ -89,6 +89,12 @@ body {
 .gap20 {
   gap: 20px; }
 
+.gap30 {
+  gap: 30px; }
+
+.gap40 {
+  gap: 40px; }
+
 .nuFlexRow {
   display: flex;
   flex-direction: row; }
