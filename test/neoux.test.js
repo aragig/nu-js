@@ -3,7 +3,7 @@ const neoux = require("../js/neoux.js")
 
 
 //------------------------------------------------------------------------------------
-// テストコードのテスト用
+// テスト: テストコード用のテスト
 //------------------------------------------------------------------------------------
 describe("neoux", function() {
     it("example関数が2倍を返す", function() {
@@ -13,7 +13,7 @@ describe("neoux", function() {
 
 
 //------------------------------------------------------------------------------------
-// カスタムアラート
+// テスト: カスタムアラート
 //------------------------------------------------------------------------------------
 describe("neoux.overlay", () => {
     // 各テスト前に強制的に初期化
@@ -44,7 +44,7 @@ describe("neoux.overlay", () => {
 });
 
 //------------------------------------------------------------------------------------
-// カスタムアラート
+// テスト: カスタムアラート
 //------------------------------------------------------------------------------------
 describe("neoux.alert / confirm / sheet", () => {
     // 各テスト前に強制的に初期化
@@ -80,7 +80,7 @@ describe("neoux.alert / confirm / sheet", () => {
 });
 
 //------------------------------------------------------------------------------------
-// ローディングインジケータ
+// テスト: ローディングインジケータ
 //------------------------------------------------------------------------------------
 describe("neoux.loading", () => {
     // 各テスト前に強制的に初期化
@@ -92,7 +92,7 @@ describe("neoux.loading", () => {
         document.body.innerHTML = "";
     });
 
-    it("should show loading spinner and message", () => {
+    it("show()のテスト: 読み込みスピナーとメッセージを表示", () => {
         window.neoux.loading.show("読み込み中...");
 
         const spinner = document.querySelector(".nuLoadingSpinner");
@@ -108,7 +108,7 @@ describe("neoux.loading", () => {
         expect(overlay).to.exist;
     });
 
-    it("should hide loading spinner and message after delay", async() => {
+    it("hide()のテスト: 遅延後に読み込みスピナーとメッセージの非表示確認", async() => {
         window.neoux.loading.show("処理中");
         await window.neoux.loading.hide();
 
@@ -121,7 +121,7 @@ describe("neoux.loading", () => {
         expect(overlay).to.be.null;
     });
 
-    it("should handle show() with no message", () => {
+    it("show()のテスト: メッセージなしで確認", () => {
         window.neoux.loading.show();
 
         const msgBox = document.querySelector(".nuLoadingMessage");
