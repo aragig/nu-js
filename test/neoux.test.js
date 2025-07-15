@@ -13,7 +13,7 @@ describe("neoux", function() {
 
 
 //------------------------------------------------------------------------------------
-// テスト: カスタムアラート
+// テスト: オーバーレイ制御ユーティリティ
 //------------------------------------------------------------------------------------
 describe("neoux.overlay", () => {
     // 各テスト前に強制的に初期化
@@ -56,7 +56,7 @@ describe("neoux.alert / confirm / sheet", () => {
         document.body.innerHTML = "";
     });
 
-    it("alert: should render OK button and call callback", (done) => {
+    it("neoux.alert()のテスト: OKボタンをレンダリングし、コールバックを呼び出す必要があります", (done) => {
         let called = false;
         window.neoux.alert("アラートメッセージ", () => {
             called = true;
@@ -77,6 +77,73 @@ describe("neoux.alert / confirm / sheet", () => {
         }, window.neoux.overlay.timeout);
     });
 
+    it("neoux.confirm()のテスト: OKとキャンセルボタンをレンダリングし、コールバックを呼び出す必要があります", (done) => {
+        let okCalled = false;
+        let cancelCalled = false;
+
+        window.neoux.confirm("確認メッセージ", () => {
+            okCalled = true;
+        }, () => {
+            cancelCalled = true;
+        });
+
+        const buttons = document.querySelectorAll(".nuAlertButton");
+        expect(buttons.length).to.equal(2);
+
+        const cancelButton = [...buttons].find(btn => btn.textContent === "キャンセル");
+        const okButton = [...buttons].find(btn => btn.textContent === "OK");
+
+        expect(cancelButton).to.exist;
+        expect(okButton).to.exist;
+
+        // キャンセルを先にクリック
+        cancelButton.click();
+        expect(cancelCalled).to.be.true;
+
+        // DOMが消えるのを確認して次の処理へ
+        setTimeout(() => {
+            expect(document.querySelector(".nuAlertBox")).to.be.null;
+
+            // confirmの再表示（OKボタンテスト）
+            window.neoux.confirm("再確認", () => {
+                okCalled = true;
+            }, () => {});
+
+            const okBtn2 = [...document.querySelectorAll(".nuAlertButton")]
+                .find(btn => btn.textContent === "OK");
+            okBtn2.click();
+
+            setTimeout(() => {
+                expect(okCalled).to.be.true;
+                expect(document.querySelector(".nuAlertBox")).to.be.null;
+                done();
+            }, window.neoux.overlay.timeout);
+        }, window.neoux.overlay.timeout);
+    });
+
+    it("neoux.sheet()のテスト: 複数ボタンを表示し、クリックで対応するラベルが一致するか", (done) => {
+        const labels = ["編集", "削除", "複製", "キャンセル"];
+        const clicked = [];
+
+        window.neoux.sheet("操作を選んでください", labels.map(label => ({
+            label,
+            callback: () => clicked.push(label)
+        })));
+
+        const buttons = document.querySelectorAll(".nuAlertButton");
+        expect(buttons.length).to.equal(labels.length);
+
+        // "複製"ボタンをクリック
+        const copyBtn = [...buttons].find(btn => btn.textContent === "複製");
+        expect(copyBtn).to.exist;
+        copyBtn.click();
+
+        setTimeout(() => {
+            expect(clicked).to.include("複製");
+            expect(document.querySelector(".nuAlertBox")).to.be.null;
+            done();
+        }, window.neoux.overlay.timeout);
+    });
 });
 
 //------------------------------------------------------------------------------------
