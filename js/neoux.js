@@ -33,18 +33,15 @@
                 return overlay;
             },
 
-            hide: function () {
+            hide: async function () {
                 const overlay = document.querySelector(`.${overlayClassName}`);
-                if (!overlay) return Promise.resolve(false);
+                if (!overlay) return false;
 
                 overlay.style.opacity = "0";
 
-                return new Promise(resolve => {
-                    setTimeout(() => {
-                        overlay.remove();
-                        resolve(true);
-                    }, defaultTimeout);
-                });
+                await new Promise(resolve => setTimeout(resolve, defaultTimeout));
+                overlay.remove();
+                return true;
             },
             timeout: defaultTimeout
         };
