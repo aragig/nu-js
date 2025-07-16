@@ -83,6 +83,20 @@ body {
     background-size: 24px;
     padding-right: 40px; // アイコン分余白
 }
+.nuCodeBlock {
+    display: block;
+    overflow-x: auto;
+    font-family: Menlo, Consolas, 'DejaVu sans Mono', monospace;
+    font-size: 0.70rem;
+    line-height:1.1rem;
+    color: #fff;
+    background: #323e52;
+    padding: 16px;
+    font-family: Menlo, Consolas, monospace;
+    white-space: pre;
+    word-break: normal;
+    margin-bottom: 24px;
+}
 //------------------------------------------------------------------------------------
 // 汎用スタイル
 //------------------------------------------------------------------------------------

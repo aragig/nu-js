@@ -11,9 +11,44 @@
 <h1>neoux.js</h1>
 <form id="nuForm">
     <h2 class="mt50">アラート</h2>
+    <h3 class="mt50">Usage: </h3>
+
+    <pre class="nuCodeBlock" data-exec>
+document.getElementById("nuAlert").addEventListener("click", () => {
+    neoux.alert("This is some message area.<br><b>HTML</b>で装飾できます。", function() {
+        console.log("ok");
+    });
+});
+</pre>
     <button id="nuAlert" class="nuButton" type="button">Alert</button>
+
+
+    <h3 class="mt50">Usage: </h3>
+
+    <pre class="nuCodeBlock" data-exec>
+document.getElementById("nuConfirm").addEventListener("click", () => {
+    neoux.confirm("This is some message area.", function() {
+        console.log("ok");
+    }, function(ans) {
+        console.log("cancel");
+    });
+});
+</pre>
     <button id="nuConfirm" class="nuButton" type="button">Confirm</button>
+
+    <h3 class="mt50">Usage: </h3>
+    <pre class="nuCodeBlock" data-exec>
+document.getElementById("nuSheet").addEventListener("click", () => {
+    neoux.sheet("操作を選んでください", [
+        { label: "編集",    callback: () => console.log("編集") },
+        { label: "削除",    callback: () => console.log("削除") },
+        { label: "複製",    callback: () => console.log("複製") },
+        { label: "キャンセル", callback: null }
+    ]);
+});
+</pre>
     <button id="nuSheet" class="nuButton" type="button">Sheet</button>
+
 
     <h2 class="mt50">ローディングインジケータ</h2>
     <button id="nuLoading" class="nuButton" type="button">Indicator</button>
@@ -77,30 +112,40 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 
+
         //------------------------------------------------------------------------------------
         // アラート用スタイル
         //------------------------------------------------------------------------------------
-        document.getElementById("nuAlert").addEventListener("click", () => {
-            neoux.alert("This is some message area.<br><b>HTML</b>で装飾できます。", function() {
-                console.log("ok");
-            });
-        });
-        document.getElementById("nuConfirm").addEventListener("click", () => {
-            neoux.confirm("This is some message area.", function() {
-                // ok
-                console.log("ok");
-            }, function(ans) {
-                // cancel
-                console.log("cancel");
-            });
-        });
-        document.getElementById("nuSheet").addEventListener("click", () => {
-            neoux.sheet("操作を選んでください", [
-                { label: "編集", callback: () => console.log("編集") },
-                { label: "削除", callback: () => console.log("削除") },
-                { label: "複製", callback: () => console.log("複製") },
-                { label: "キャンセル", callback: null }
-            ]);
+        // document.getElementById("nuAlert").addEventListener("click", () => {
+        //     neoux.alert("This is some message area.<br><b>HTML</b>で装飾できます。", function() {
+        //         console.log("ok");
+        //     });
+        // });
+        // document.getElementById("nuConfirm").addEventListener("click", () => {
+        //     neoux.confirm("This is some message area.", function() {
+        //         // ok
+        //         console.log("ok");
+        //     }, function(ans) {
+        //         // cancel
+        //         console.log("cancel");
+        //     });
+        // });
+        // document.getElementById("nuSheet").addEventListener("click", () => {
+        //     neoux.sheet("操作を選んでください", [
+        //         { label: "編集", callback: () => console.log("編集") },
+        //         { label: "削除", callback: () => console.log("削除") },
+        //         { label: "複製", callback: () => console.log("複製") },
+        //         { label: "キャンセル", callback: null }
+        //     ]);
+        // });
+        document.querySelectorAll('pre.nuCodeBlock[data-exec]').forEach(pre => {
+            // 1) テキストをそのままコードとして表示（エスケープ不要なら skip）
+            pre.textContent = pre.textContent.trim();
+
+            // 2) 取得した文字列を実行
+            //    ・new Function ならローカル変数を汚さずに実行できます
+            const fn = new Function(pre.textContent);
+            fn();
         });
 
         //------------------------------------------------------------------------------------
