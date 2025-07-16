@@ -283,4 +283,25 @@ describe("neoux.charCount", () => {
         const counter = document.querySelector(".nuCharCounter");
         expect(counter).to.be.null;
     });
+
+    it("文字を追加したときにカウントが更新される", () => {
+        const input = document.createElement("input");
+        input.id = "dynamicInput";
+        input.value = "123";
+        document.body.appendChild(input);
+
+        window.neoux.charCount.attach(input, 10);
+
+        const counter = document.getElementById("dynamicInput_counter");
+        expect(counter.textContent).to.equal("3");
+
+        // 値を追加
+        input.value += "45";
+
+        // inputイベントを発火（手動で）
+        const event = new window.Event("input", { bubbles: true });
+        input.dispatchEvent(event);
+
+        expect(counter.textContent).to.equal("5");
+    });
 });
