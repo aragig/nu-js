@@ -127,6 +127,11 @@ body {
   display: flex;
   flex-direction: column; }
 
+.nuFlexSpread {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
 .nuOverlay {
   position: fixed;
   top: 0;
