@@ -101,6 +101,21 @@ body {
 .mt50 {
   margin-top: 50px; }
 
+.mt60 {
+  margin-top: 60px; }
+
+.mt70 {
+  margin-top: 70px; }
+
+.mt80 {
+  margin-top: 80px; }
+
+.mt90 {
+  margin-top: 90px; }
+
+.mt100 {
+  margin-top: 100px; }
+
 .wFull {
   width: 100%; }
 
@@ -134,7 +149,8 @@ body {
 .nuFlexSpread {
   display: flex;
   flex-direction: row;
-  justify-content: space-between; }
+  justify-content: space-between;
+  align-items: center; }
 
 .nuOverlay {
   position: fixed;

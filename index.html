@@ -10,7 +10,7 @@
 <body>
 <h1>neoux.js</h1>
 <form id="nuForm">
-    <h2 class="mt50">アラート</h2>
+    <h2 class="mt80">アラート</h2>
     <div class="nuFlexRow gap10 mt30">
         <h3>neoux.alert</h3>
         <button id="nuAlert" class="nuButton" type="button">Run</button>
@@ -56,7 +56,7 @@ document.getElementById("nuSheet").addEventListener("click", () => {
 </pre>
 
 
-    <h2 class="mt50">ローディングインジケータ</h2>
+    <h2 class="mt80">ローディングインジケータ</h2>
     <div class="nuFlexRow gap10 mt30">
         <h3>neoux.loading</h3>
         <button id="nuLoading" class="nuButton" type="button">Run</button>
@@ -73,7 +73,7 @@ document.getElementById("nuLoading").addEventListener("click", () => {
 </pre>
 
 
-    <h2 class="mt50">トースト</h2>
+    <h2 class="mt80">トースト</h2>
     <div class="nuFlexRow gap10 mt30">
         <h3>neoux.toast</h3>
         <button id="nuToast" class="nuButton" type="button">Run</button>
@@ -95,24 +95,24 @@ document.getElementById("nuToastDelay").addEventListener("click", () => {
 </pre>
 
 
-    <h2 class="mt50">ドロップダウンメニュー</h2>
-    <div style="display:flex; justify-content:space-between;">
+    <h2 class="mt80">ドロップダウンメニュー</h2>
+    <div class="nuFlexSpread">
         <button id="dropdownBtn" class="nuButton" type="button">Menu</button>
         <button id="dropdownBtnLeft" class="nuMenuButton" type="button"></button>
     </div>
 
-    <h2 class="mt50">UISegmentedControl風ラジオボタン</h2>
+    <h2 class="mt80">UISegmentedControl風ラジオボタン</h2>
     <div class="nuFlexColumn gap10">
         <div id="sortSegmentArea"></div>
         <div id="fruitsSegmentArea"></div>
     </div>
 
-    <h2 class="mt50">検索ボックス</h2>
+    <h2 class="mt80">検索ボックス</h2>
     <div id="searchArea"></div>
 
 
 
-    <h2 class="mt50">色々なinput</h2>
+    <h2 class="mt80">色々なinput</h2>
     <div class="nuFlexColumn gap20">
         <div>
             <input id="formName" name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
@@ -150,39 +150,7 @@ document.getElementById("nuToastDelay").addEventListener("click", () => {
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 
-        // TODO このロジックをneouxで実装して汎用的にする
         document.querySelectorAll('pre.nuCodeBlock[data-exec]').forEach((pre, index) => {
-            // // localStorageキーを生成
-            // const storageKey = `nuCodeVisible_${index}`;
-            // const isVisible = localStorage.getItem(storageKey) === 'true';
-            //
-            // // トグルボタンを作成して挿入
-            // const toggleBtn = document.createElement('div');
-            // // toggleBtn.type = 'button';
-            // toggleBtn.id = `nuCodeToggle${index}`;
-            // toggleBtn.className = 'nuCodeToggle';
-            // toggleBtn.textContent = isVisible ? 'Close' : 'Source Code';
-            // pre.parentNode.insertBefore(toggleBtn, pre);
-            //
-            // // 初期状態: collapsedクラスで非表示に
-            // if (!isVisible) {
-            //     pre.classList.add('collapsed');
-            // }
-            //
-            // // ボタンクリックで開閉＆状態保存
-            // toggleBtn.addEventListener('click', () => {
-            //     const nowVisible = !pre.classList.contains('collapsed');
-            //     if (nowVisible) {
-            //         pre.classList.add('collapsed');
-            //         toggleBtn.textContent = 'Source Code';
-            //         localStorage.setItem(storageKey, 'false');
-            //     } else {
-            //         pre.classList.remove('collapsed');
-            //         toggleBtn.textContent = 'Close';
-            //         localStorage.setItem(storageKey, 'true');
-            //     }
-            // });
-
             // ソースをトリムして実行（元の動作を維持）
             pre.textContent = pre.textContent.trim();
             const fn = new Function(pre.textContent);
