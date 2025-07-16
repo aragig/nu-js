@@ -67,20 +67,21 @@ document.getElementById("nuLoading").addEventListener("click", () => {
 
     <h2 class="mt50">トースト</h2>
     <h3 class="mt30">neoux.toast: </h3>
+    <button id="nuToast" class="nuButton" type="button">Toast</button>
     <pre class="nuCodeBlock" data-exec>
 document.getElementById("nuToast").addEventListener("click", () => {
     neoux.toast.show("保存が完了しました！");
 });
 </pre>
-    <button id="nuToast" class="nuButton" type="button">Toast</button>
+
     <h3 class="mt30">neoux.toast: </h3>
+    <button id="nuToastDelay" class="nuButton" type="button">Toast with delay</button>
     <pre class="nuCodeBlock" data-exec>
 document.getElementById("nuToastDelay").addEventListener("click", () => {
     neoux.toast.show("エラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
 });
 </pre>
 
-    <button id="nuToastDelay" class="nuButton" type="button">Toast with delay</button>
 
     <h2 class="mt50">ドロップダウンメニュー</h2>
     <div style="display:flex; justify-content:space-between;">
@@ -144,8 +145,8 @@ document.getElementById("nuToastDelay").addEventListener("click", () => {
             const isVisible = localStorage.getItem(storageKey) === 'true';
 
             // トグルボタンを作成して挿入
-            const toggleBtn = document.createElement('button');
-            toggleBtn.type = 'button';
+            const toggleBtn = document.createElement('div');
+            // toggleBtn.type = 'button';
             toggleBtn.id = `nuCodeToggle${index}`;
             toggleBtn.className = 'nuCodeToggle';
             toggleBtn.textContent = isVisible ? 'Close' : 'Source Code';
