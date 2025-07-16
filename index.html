@@ -16,7 +16,7 @@
         <button id="nuAlert" class="nuButton" type="button">Run</button>
     </div>
 
-    <pre class="nuCodeBlock" data-exec>
+    <pre id="nuAlertPre" class="nuCodeBlock" data-exec>
 document.getElementById("nuAlert").addEventListener("click", () => {
     neoux.alert("This is some message area.<br><b>HTML</b>で装飾できます。", function() {
         console.log("ok");
@@ -150,12 +150,25 @@ document.getElementById("nuToastDelay").addEventListener("click", () => {
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 
-        document.querySelectorAll('pre.nuCodeBlock[data-exec]').forEach((pre, index) => {
-            // ソースをトリムして実行（元の動作を維持）
-            pre.textContent = pre.textContent.trim();
-            const fn = new Function(pre.textContent);
-            fn();
-        });
+        const code = `
+document.getElementById("nuAlert").addEventListener("click", () => {
+    neoux.alert("This is some message area.<br><b>HTML</b>で装飾できます。", function() {
+        console.log("ok");
+    });
+});
+`.trim();
+
+        document.getElementById("nuAlertPre").textContent = code;
+
+        const fn = new Function(code);
+        fn();
+
+        // document.querySelectorAll('pre.nuCodeBlock[data-exec]').forEach((pre, index) => {
+        //     // ソースをトリムして実行（元の動作を維持）
+        //     pre.textContent = pre.textContent.trim();
+        //     const fn = new Function(pre.textContent);
+        //     fn();
+        // });
 
 
 
