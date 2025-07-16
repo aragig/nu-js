@@ -135,7 +135,7 @@ document.getElementById("nuLoading").addEventListener("click", () => {
             toggleBtn.type = 'button';
             toggleBtn.id = `nuCodeToggle${index}`;
             toggleBtn.className = 'nuCodeToggle';
-            toggleBtn.textContent = isVisible ? 'Hide Code' : 'Show Code';
+            toggleBtn.textContent = isVisible ? 'Close' : 'Source Code';
             pre.parentNode.insertBefore(toggleBtn, pre);
 
             // 初期状態: collapsedクラスで非表示に
@@ -148,11 +148,11 @@ document.getElementById("nuLoading").addEventListener("click", () => {
                 const nowVisible = !pre.classList.contains('collapsed');
                 if (nowVisible) {
                     pre.classList.add('collapsed');
-                    toggleBtn.textContent = 'Show Code';
+                    toggleBtn.textContent = 'Source Code';
                     localStorage.setItem(storageKey, 'false');
                 } else {
                     pre.classList.remove('collapsed');
-                    toggleBtn.textContent = 'Hide Code';
+                    toggleBtn.textContent = 'Close';
                     localStorage.setItem(storageKey, 'true');
                 }
             });
