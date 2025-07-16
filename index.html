@@ -124,7 +124,7 @@ document.getElementById("nuLoading").addEventListener("click", () => {
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 
-
+        // TODO このロジックをneouxで実装して汎用的にする
         document.querySelectorAll('pre.nuCodeBlock[data-exec]').forEach((pre, index) => {
             // localStorageキーを生成
             const storageKey = `nuCodeVisible_${index}`;
