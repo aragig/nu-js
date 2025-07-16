@@ -52,10 +52,6 @@ describe("neoux.alert / confirm / sheet", () => {
         document.body.innerHTML = "";
     });
 
-    afterEach(() => {
-        document.body.innerHTML = "";
-    });
-
     it("neoux.alert()のテスト: OKボタンをレンダリングし、コールバックを呼び出す必要があります", (done) => {
         let called = false;
         window.neoux.alert("アラートメッセージ", () => {
@@ -152,9 +148,6 @@ describe("neoux.alert / confirm / sheet", () => {
 describe("neoux.loading", () => {
     // 各テスト前に強制的に初期化
     beforeEach(() => {
-        document.body.innerHTML = "";
-    });
-    afterEach(() => {
         document.body.innerHTML = "";
     });
 
@@ -307,9 +300,6 @@ describe("neoux.submit.values", () => {
 describe("neoux.charCount", () => {
     // 各テスト前に強制的に初期化
     beforeEach(() => {
-        document.body.innerHTML = "";
-    });
-    afterEach(() => {
         document.body.innerHTML = "";
     });
 
