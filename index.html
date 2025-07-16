@@ -66,7 +66,20 @@ document.getElementById("nuLoading").addEventListener("click", () => {
 
 
     <h2 class="mt50">トースト</h2>
+    <h3 class="mt30">neoux.toast: </h3>
+    <pre class="nuCodeBlock" data-exec>
+document.getElementById("nuToast").addEventListener("click", () => {
+    neoux.toast.show("保存が完了しました！");
+});
+</pre>
     <button id="nuToast" class="nuButton" type="button">Toast</button>
+    <h3 class="mt30">neoux.toast: </h3>
+    <pre class="nuCodeBlock" data-exec>
+document.getElementById("nuToastDelay").addEventListener("click", () => {
+    neoux.toast.show("エラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
+});
+</pre>
+
     <button id="nuToastDelay" class="nuButton" type="button">Toast with delay</button>
 
     <h2 class="mt50">ドロップダウンメニュー</h2>
@@ -163,17 +176,6 @@ document.getElementById("nuLoading").addEventListener("click", () => {
             fn();
         });
 
-
-        //------------------------------------------------------------------------------------
-        // トースト通知
-        //------------------------------------------------------------------------------------
-        document.getElementById("nuToast").addEventListener("click", () => {
-            neoux.toast.show("保存が完了しました！");
-        });
-
-        document.getElementById("nuToastDelay").addEventListener("click", () => {
-            neoux.toast.show("エラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
-        });
 
 
         //------------------------------------------------------------------------------------
