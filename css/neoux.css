@@ -73,6 +73,19 @@ body {
   word-break: normal;
   margin-bottom: 1.5rem; }
 
+.nuCodeToggle {
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  padding: 0;
+  font-family: inherit;
+  font-size: 0.9rem;
+  margin-bottom: 0.5em; }
+
+.nuCodeBlock.collapsed {
+  display: none; }
+
 .mt10 {
   margin-top: 10px; }
 

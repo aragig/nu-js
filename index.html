@@ -12,6 +12,7 @@
 <form id="nuForm">
     <h2 class="mt50">アラート</h2>
     <h3 class="mt30">neoux.alert: </h3>
+    <button id="nuAlert" class="nuButton" type="button">Alert</button>
 
     <pre class="nuCodeBlock" data-exec>
 document.getElementById("nuAlert").addEventListener("click", () => {
@@ -20,10 +21,10 @@ document.getElementById("nuAlert").addEventListener("click", () => {
     });
 });
 </pre>
-    <button id="nuAlert" class="nuButton" type="button">Alert</button>
 
 
     <h3 class="mt30">neoux.confirm: </h3>
+    <button id="nuConfirm" class="nuButton" type="button">Confirm</button>
     <pre class="nuCodeBlock" data-exec>
 document.getElementById("nuConfirm").addEventListener("click", () => {
     neoux.confirm("This is some message area.", function() {
@@ -33,10 +34,10 @@ document.getElementById("nuConfirm").addEventListener("click", () => {
     });
 });
 </pre>
-    <button id="nuConfirm" class="nuButton" type="button">Confirm</button>
 
 
     <h3 class="mt30">neoux.sheet: </h3>
+    <button id="nuSheet" class="nuButton" type="button">Sheet</button>
     <pre class="nuCodeBlock" data-exec>
 document.getElementById("nuSheet").addEventListener("click", () => {
     neoux.sheet("操作を選んでください", [
@@ -47,11 +48,11 @@ document.getElementById("nuSheet").addEventListener("click", () => {
     ]);
 });
 </pre>
-    <button id="nuSheet" class="nuButton" type="button">Sheet</button>
 
 
     <h2 class="mt50">ローディングインジケータ</h2>
     <h3 class="mt30">neoux.loading: </h3>
+    <button id="nuLoading" class="nuButton" type="button">Indicator</button>
     <pre class="nuCodeBlock" data-exec>
 document.getElementById("nuLoading").addEventListener("click", () => {
     neoux.loading.show("読み込み中...");
@@ -62,7 +63,6 @@ document.getElementById("nuLoading").addEventListener("click", () => {
     }, 3000);
 });
 </pre>
-    <button id="nuLoading" class="nuButton" type="button">Indicator</button>
 
 
     <h2 class="mt50">トースト</h2>
@@ -125,12 +125,40 @@ document.getElementById("nuLoading").addEventListener("click", () => {
     document.addEventListener("DOMContentLoaded", () => {
 
 
-        document.querySelectorAll('pre.nuCodeBlock[data-exec]').forEach(pre => {
-            // 1) テキストをそのままコードとして表示（エスケープ不要なら skip）
-            pre.textContent = pre.textContent.trim();
+        document.querySelectorAll('pre.nuCodeBlock[data-exec]').forEach((pre, index) => {
+            // localStorageキーを生成
+            const storageKey = `nuCodeVisible_${index}`;
+            const isVisible = localStorage.getItem(storageKey) === 'true';
 
-            // 2) 取得した文字列を実行
-            //    ・new Function ならローカル変数を汚さずに実行できます
+            // トグルボタンを作成して挿入
+            const toggleBtn = document.createElement('button');
+            toggleBtn.type = 'button';
+            toggleBtn.id = `nuCodeToggle${index}`;
+            toggleBtn.className = 'nuCodeToggle';
+            toggleBtn.textContent = isVisible ? 'Hide Code' : 'Show Code';
+            pre.parentNode.insertBefore(toggleBtn, pre);
+
+            // 初期状態: collapsedクラスで非表示に
+            if (!isVisible) {
+                pre.classList.add('collapsed');
+            }
+
+            // ボタンクリックで開閉＆状態保存
+            toggleBtn.addEventListener('click', () => {
+                const nowVisible = !pre.classList.contains('collapsed');
+                if (nowVisible) {
+                    pre.classList.add('collapsed');
+                    toggleBtn.textContent = 'Show Code';
+                    localStorage.setItem(storageKey, 'false');
+                } else {
+                    pre.classList.remove('collapsed');
+                    toggleBtn.textContent = 'Hide Code';
+                    localStorage.setItem(storageKey, 'true');
+                }
+            });
+
+            // ソースをトリムして実行（元の動作を維持）
+            pre.textContent = pre.textContent.trim();
             const fn = new Function(pre.textContent);
             fn();
         });

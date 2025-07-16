@@ -83,6 +83,7 @@ body {
     background-size: 24px;
     padding-right: 40px; // アイコン分余白
 }
+//---
 .nuCodeBlock {
     display: block;
     overflow-x: auto;
@@ -96,6 +97,22 @@ body {
     white-space: pre;
     word-break: normal;
     margin-bottom: 1.5rem;
+}
+//---
+.nuCodeToggle {
+    cursor: pointer;
+    background: none;
+    border: none;
+    text-decoration: underline;
+    padding: 0;
+    font-family: inherit;
+    font-size: 0.9rem;
+    margin-bottom: 0.5em;
+}
+.nuCodeBlock {
+    &.collapsed {
+        display: none;
+    }
 }
 //------------------------------------------------------------------------------------
 // 汎用スタイル
