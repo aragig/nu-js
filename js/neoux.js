@@ -1,11 +1,11 @@
 (function () {
-    if(!window.neoux) window.neoux = {};
+    if(!window.nu) window.nu = {};
 
     //------------------------------------------------------------------------------------
     // テストコードのテスト用
     //------------------------------------------------------------------------------------
     {
-        window.neoux.__example = function (x) {
+        window.nu.__example = function (x) {
             return x * 2;
         };
     }
@@ -14,12 +14,12 @@
     // オーバーレイ制御ユーティリティ
     //------------------------------------------------------------------------------------
     {
-        if(!window.neoux.overlay) window.neoux.overlay = {};
+        if(!window.nu.overlay) window.nu.overlay = {};
 
         const overlayClassName = "nuOverlay";
         const defaultTimeout = 200; // 外部からもアクセス可能にするための初期値
 
-        window.neoux.overlay = {
+        window.nu.overlay = {
             show: function () {
                 const overlay = document.createElement("div");
                 overlay.className = overlayClassName;
@@ -53,7 +53,7 @@
     //------------------------------------------------------------------------------------
     {
         function showSheet(message, buttons) {
-            window.neoux.overlay.show();
+            window.nu.overlay.show();
 
             const box = document.createElement("div");
             box.className = "nuAlertBox";
@@ -87,7 +87,7 @@
 
                     box.style.opacity = "0";
                     // オーバーレイを非表示 → 完了を待ってからボックス削除
-                    await window.neoux.overlay.hide();
+                    await window.nu.overlay.hide();
                     document.body.removeChild(box);
                 });
 
@@ -107,18 +107,18 @@
         //------------------------------------------------------------------------------------
         // グローバルに公開
         //------------------------------------------------------------------------------------
-        window.neoux.alert = function (message, onOk) {
+        window.nu.alert = function (message, onOk) {
             showSheet(message, [
                 { label: "OK", callback: () => onOk?.() }
             ]);
         };
-        window.neoux.confirm = function (message, onOk, onCancel) {
+        window.nu.confirm = function (message, onOk, onCancel) {
             showSheet(message, [
                 { label: "キャンセル", cancel: true, callback: () => onCancel?.() },
                 { label: "OK", callback: () => onOk?.() }
             ]);
         };
-        window.neoux.sheet = function (message, buttons) {
+        window.nu.sheet = function (message, buttons) {
             showSheet(message, buttons);
         };
     }
@@ -128,10 +128,10 @@
     // ローディングインジケータ
     //------------------------------------------------------------------------------------
     {
-        if(!window.neoux.loading) window.neoux.loading = {};
+        if(!window.nu.loading) window.nu.loading = {};
 
         function showLoading(message) {
-            window.neoux.overlay.show();
+            window.nu.overlay.show();
 
             // スピナー
             const spinner = document.createElement("div");
@@ -159,7 +159,7 @@
             if (spinner) spinner.style.opacity = "0";
             if (msgBox) msgBox.style.opacity = "0";
 
-            await window.neoux.overlay.hide();
+            await window.nu.overlay.hide();
 
             if (spinner) spinner.remove();
             if (msgBox) msgBox.remove();
@@ -168,8 +168,8 @@
         //------------------------------------------------------------------------------------
         // グローバルに公開
         //------------------------------------------------------------------------------------
-        window.neoux.loading.show = showLoading;
-        window.neoux.loading.hide = hideLoading;
+        window.nu.loading.show = showLoading;
+        window.nu.loading.hide = hideLoading;
     }
 
 
@@ -177,7 +177,7 @@
     // トースト通知
     //------------------------------------------------------------------------------------
     {
-        if(!window.neoux.toast) window.neoux.toast = {};
+        if(!window.nu.toast) window.nu.toast = {};
 
         function showToast(message, duration = 3000) {
             const toast = document.createElement("div");
@@ -203,7 +203,7 @@
         //------------------------------------------------------------------------------------
         // グローバルに公開
         //------------------------------------------------------------------------------------
-        window.neoux.toast.show = showToast;
+        window.nu.toast.show = showToast;
     }
 
 
@@ -268,13 +268,13 @@
         //------------------------------------------------------------------------------------
         // グローバルに公開
         //------------------------------------------------------------------------------------
-        if (!window.neoux.dropdown) window.neoux.dropdown = {};
+        if (!window.nu.dropdown) window.nu.dropdown = {};
         /**
          * メニューボタンにアタッチ
          * @param buttonElement - メニューボタンのbutton
          * @param items - ドロップダウンアイテム {label, callback}
          */
-        window.neoux.dropdown.attach = function (buttonElement, items) {
+        window.nu.dropdown.attach = function (buttonElement, items) {
             buttonElement.addEventListener("click", (e) => {
                 e.stopPropagation(); // 外部クリック判定を防ぐ
                 // 既に開いているメニューがあれば閉じる
@@ -301,7 +301,7 @@
     // セグメントボタン
     //------------------------------------------------------------------------------------
     {
-        if (!window.neoux.segment) window.neoux.segment = {};
+        if (!window.nu.segment) window.nu.segment = {};
         /**
          * segment要素にアタッチ
          * @param {HTMLElement} container - inputとlabelを内包する親div
@@ -328,7 +328,7 @@
          * @param {string} config.value - 初期選択値
          * @param {Function} callback - 選択時のコールバック
          */
-        window.neoux.segment.create = function (mountTarget, config, callback) {
+        window.nu.segment.create = function (mountTarget, config, callback) {
             const { id, name, options, value: initialValue } = config;
             const container = document.createElement("div");
             container.className = "nuSegment";
@@ -365,13 +365,13 @@
     // 検索ボックス
     //------------------------------------------------------------------------------------
     {
-        if (!window.neoux.search) window.neoux.search = {};
+        if (!window.nu.search) window.nu.search = {};
         /**
          * 検索UIを生成し、検索ロジックをバインドする
          * @param {HTMLElement} container - 検索UIを配置する親要素
          * @param {string} jsonPath - 検索インデックスJSONのURL
          */
-        window.neoux.search.attach = function (container, jsonPath) {
+        window.nu.search.attach = function (container, jsonPath) {
             if (container.querySelector(".nuSearchContainer")) return;
 
             // 検索ボックス＋アイコン
@@ -463,7 +463,7 @@
     // Submit
     //------------------------------------------------------------------------------------
     {
-        if (!window.neoux.submit) window.neoux.submit = {};
+        if (!window.nu.submit) window.nu.submit = {};
 
         /**
          * 指定したフォーム（またはdiv）内のすべての入力値をオブジェクトで取得する
@@ -497,7 +497,7 @@
          * @param {HTMLElement} target - 対象のform要素またはdiv
          * @param {Function} callback - 結果を受け取る関数（formDataを引数に渡す）
          */
-        window.neoux.submit.values = function (target, callback) {
+        window.nu.submit.values = function (target, callback) {
             if (!target || typeof callback !== "function") return;
             const values = getFormValues(target);
             callback(values);
@@ -510,14 +510,14 @@
     // 入力欄に対して文字数カウンターを追加する
     //------------------------------------------------------------------------------------
     {
-        if (!window.neoux.charCount) window.neoux.charCount = {};
+        if (!window.nu.charCount) window.nu.charCount = {};
 
         /**
          * 入力欄に対して文字数カウンターを追加する
          * @param {HTMLElement} input - inputまたはtextarea要素
          * @param {number} limit - 文字数制限（例: 30）
          */
-        window.neoux.charCount.attach = function (input, limit) {
+        window.nu.charCount.attach = function (input, limit) {
             if (!input || typeof limit !== "number" || !input.id) return;
 
             // すでにカウンターが追加済みならスキップ
@@ -546,5 +546,5 @@
 
 
 if (typeof module !== "undefined") {
-    module.exports = window.neoux;
+    module.exports = window.nu;
 }

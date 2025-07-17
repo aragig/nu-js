@@ -11,19 +11,17 @@ global.HTMLElement = dom.window.HTMLElement;
 global.requestAnimationFrame = dom.window.requestAnimationFrame;
 global.cancelAnimationFrame = dom.window.cancelAnimationFrame;
 
-// // neouxのグローバル初期化
-// window.neoux = {};
 
 const {expect} = require("chai");
-const neoux = require("../js/neoux.js")
+const nu = require("../js/neoux.js")
 
 
 //------------------------------------------------------------------------------------
 // テスト: テストコード用のテスト
 //------------------------------------------------------------------------------------
-describe("neoux", function() {
+describe("nu.__example", function() {
     it("example関数が2倍を返す", function() {
-        expect(neoux.__example(3)).to.equal(6);
+        expect(nu.__example(3)).to.equal(6);
     });
 });
 
@@ -31,7 +29,7 @@ describe("neoux", function() {
 //------------------------------------------------------------------------------------
 // テスト: オーバーレイ制御ユーティリティ
 //------------------------------------------------------------------------------------
-describe("neoux.overlay", () => {
+describe("nu.overlay", () => {
     // 各テスト前に強制的に初期化
     beforeEach(() => {
         document.body.innerHTML = "";
@@ -40,7 +38,7 @@ describe("neoux.overlay", () => {
     it("should add overlay element to DOM", () => {
         const before = document.querySelectorAll(".nuOverlay").length;
 
-        const el = window.neoux.overlay.show();
+        const el = nu.overlay.show();
 
         const after = document.querySelectorAll(".nuOverlay").length;
         expect(after).to.equal(before + 1);
@@ -48,11 +46,11 @@ describe("neoux.overlay", () => {
     });
 
     it("should remove overlay element from DOM after hide()", async() => {
-        window.neoux.overlay.show();
+        nu.overlay.show();
         const overlay = document.querySelector(".nuOverlay");
         expect(overlay).to.exist;
 
-        await window.neoux.overlay.hide();
+        await nu.overlay.hide();
 
         const exists = document.querySelector(".nuOverlay");
         expect(exists).to.be.null;
@@ -62,15 +60,15 @@ describe("neoux.overlay", () => {
 //------------------------------------------------------------------------------------
 // テスト: カスタムアラート
 //------------------------------------------------------------------------------------
-describe("neoux.alert / confirm / sheet", () => {
+describe("nu.alert / confirm / sheet", () => {
     // 各テスト前に強制的に初期化
     beforeEach(() => {
         document.body.innerHTML = "";
     });
 
-    it("neoux.alert()のテスト: OKボタンをレンダリングし、コールバックを呼び出す必要があります", (done) => {
+    it("nu.alert()のテスト: OKボタンをレンダリングし、コールバックを呼び出す必要があります", (done) => {
         let called = false;
-        window.neoux.alert("アラートメッセージ", () => {
+        nu.alert("アラートメッセージ", () => {
             called = true;
         });
 
@@ -86,14 +84,14 @@ describe("neoux.alert / confirm / sheet", () => {
             const box = document.querySelector(".nuAlertBox");
             expect(box).to.be.null;
             done();
-        }, window.neoux.overlay.timeout);
+        }, nu.overlay.timeout);
     });
 
-    it("neoux.confirm()のテスト: OKとキャンセルボタンをレンダリングし、コールバックを呼び出す必要があります", (done) => {
+    it("nu.confirm()のテスト: OKとキャンセルボタンをレンダリングし、コールバックを呼び出す必要があります", (done) => {
         let okCalled = false;
         let cancelCalled = false;
 
-        window.neoux.confirm("確認メッセージ", () => {
+        nu.confirm("確認メッセージ", () => {
             okCalled = true;
         }, () => {
             cancelCalled = true;
@@ -117,7 +115,7 @@ describe("neoux.alert / confirm / sheet", () => {
             expect(document.querySelector(".nuAlertBox")).to.be.null;
 
             // confirmの再表示（OKボタンテスト）
-            window.neoux.confirm("再確認", () => {
+            nu.confirm("再確認", () => {
                 okCalled = true;
             }, () => {});
 
@@ -129,15 +127,15 @@ describe("neoux.alert / confirm / sheet", () => {
                 expect(okCalled).to.be.true;
                 expect(document.querySelector(".nuAlertBox")).to.be.null;
                 done();
-            }, window.neoux.overlay.timeout);
-        }, window.neoux.overlay.timeout);
+            }, nu.overlay.timeout);
+        }, nu.overlay.timeout);
     });
 
-    it("neoux.sheet()のテスト: 複数ボタンを表示し、クリックで対応するラベルが一致するか", (done) => {
+    it("nu.sheet()のテスト: 複数ボタンを表示し、クリックで対応するラベルが一致するか", (done) => {
         const labels = ["編集", "削除", "複製", "キャンセル"];
         const clicked = [];
 
-        window.neoux.sheet("操作を選んでください", labels.map(label => ({
+        nu.sheet("操作を選んでください", labels.map(label => ({
             label,
             callback: () => clicked.push(label)
         })));
@@ -154,21 +152,21 @@ describe("neoux.alert / confirm / sheet", () => {
             expect(clicked).to.include("複製");
             expect(document.querySelector(".nuAlertBox")).to.be.null;
             done();
-        }, window.neoux.overlay.timeout);
+        }, nu.overlay.timeout);
     });
 });
 
 //------------------------------------------------------------------------------------
 // テスト: ローディングインジケータ
 //------------------------------------------------------------------------------------
-describe("neoux.loading", () => {
+describe("nu.loading", () => {
     // 各テスト前に強制的に初期化
     beforeEach(() => {
         document.body.innerHTML = "";
     });
 
     it("show()のテスト: 読み込みスピナーとメッセージを表示", () => {
-        window.neoux.loading.show("読み込み中...");
+        nu.loading.show("読み込み中...");
 
         const spinner = document.querySelector(".nuLoadingSpinner");
         const msgBox = document.querySelector(".nuLoadingMessage");
@@ -184,8 +182,8 @@ describe("neoux.loading", () => {
     });
 
     it("hide()のテスト: 遅延後に読み込みスピナーとメッセージの非表示確認", async() => {
-        window.neoux.loading.show("処理中");
-        await window.neoux.loading.hide();
+        nu.loading.show("処理中");
+        await nu.loading.hide();
 
         const spinner = document.querySelector(".nuLoadingSpinner");
         const msgBox = document.querySelector(".nuLoadingMessage");
@@ -197,7 +195,7 @@ describe("neoux.loading", () => {
     });
 
     it("show()のテスト: メッセージなしで確認", () => {
-        window.neoux.loading.show();
+        nu.loading.show();
 
         const msgBox = document.querySelector(".nuLoadingMessage");
         expect(msgBox).to.exist;
@@ -230,7 +228,7 @@ describe("neoux.loading", () => {
 //------------------------------------------------------------------------------------
 // テスト: Submit
 //------------------------------------------------------------------------------------
-describe("neoux.submit.values", () => {
+describe("nu.submit.values", () => {
     // 各テスト前に初期化
     beforeEach(() => {
         document.body.innerHTML = "";
@@ -291,7 +289,7 @@ describe("neoux.submit.values", () => {
 
         document.body.appendChild(form);
 
-        window.neoux.submit.values(form, (values) => {
+        window.nu.submit.values(form, (values) => {
             expect(values).to.deep.equal({
                 username: "Alice",
                 comment: "Hello",
@@ -304,8 +302,8 @@ describe("neoux.submit.values", () => {
     });
 
     it("targetが不正またはcallbackが関数でない場合はエラーにならない", () => {
-        expect(() => window.neoux.submit.values(null, () => {})).to.not.throw();
-        expect(() => window.neoux.submit.values(document.createElement('div'), null)).to.not.throw();
+        expect(() => window.nu.submit.values(null, () => {})).to.not.throw();
+        expect(() => window.nu.submit.values(document.createElement('div'), null)).to.not.throw();
     });
 });
 
@@ -313,7 +311,7 @@ describe("neoux.submit.values", () => {
 //------------------------------------------------------------------------------------
 // 入力欄に対して文字数カウンターを追加する
 //------------------------------------------------------------------------------------
-describe("neoux.charCount", () => {
+describe("nu.charCount", () => {
     // 各テスト前に強制的に初期化
     beforeEach(() => {
         document.body.innerHTML = "";
@@ -325,7 +323,7 @@ describe("neoux.charCount", () => {
         input.value = "abc";
         document.body.appendChild(input);
 
-        window.neoux.charCount.attach(input, 10);
+        nu.charCount.attach(input, 10);
 
         const counter = document.getElementById("testInput_counter");
         expect(counter).to.exist;
@@ -339,7 +337,7 @@ describe("neoux.charCount", () => {
         textarea.value = "これは長いテキストです";
         document.body.appendChild(textarea);
 
-        window.neoux.charCount.attach(textarea, 5); // 制限5を超えている
+        nu.charCount.attach(textarea, 5); // 制限5を超えている
 
         const counter = document.getElementById("testTextarea_counter");
         expect(counter).to.exist;
@@ -353,8 +351,8 @@ describe("neoux.charCount", () => {
         input.value = "1234";
         document.body.appendChild(input);
 
-        window.neoux.charCount.attach(input, 10);
-        window.neoux.charCount.attach(input, 10); // 2回呼び出し
+        nu.charCount.attach(input, 10);
+        nu.charCount.attach(input, 10); // 2回呼び出し
 
         const counters = document.querySelectorAll("#doubleInput_counter");
         expect(counters.length).to.equal(1);
@@ -365,7 +363,7 @@ describe("neoux.charCount", () => {
         input.value = "no id";
         document.body.appendChild(input);
 
-        window.neoux.charCount.attach(input, 10);
+        nu.charCount.attach(input, 10);
 
         const counter = document.querySelector(".nuCharCounter");
         expect(counter).to.be.null;
@@ -377,7 +375,7 @@ describe("neoux.charCount", () => {
         input.value = "123";
         document.body.appendChild(input);
 
-        window.neoux.charCount.attach(input, 10);
+        nu.charCount.attach(input, 10);
 
         const counter = document.getElementById("dynamicInput_counter");
         expect(counter.textContent).to.equal("3");

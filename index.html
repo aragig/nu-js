@@ -2,22 +2,22 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>neoux.js</title>
+  <title>nu.js</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <link rel="stylesheet" href="css/neoux.css">
   <script src="js/neoux.js"></script>
 </head>
 <body>
 <div id="nuContents">
-  <h1>neoux.js</h1>
+  <h1>ぬ - nu.js</h1>
   <form id="nuForm">
     <h2 class="mt40">アラート</h2>
     <div class="nuFlexRow gap10 mt30">
-      <h3>neoux.alert</h3>
+      <h3>nu.alert</h3>
       <button id="nuAlert" class="nuButton" type="button">Run</button>
     </div>
     <pre class="nuCodeBlock" data-html-safe>
-neoux.alert(
+nu.alert(
   "This is some message area.<br><b>HTML</b>で装飾できます。",
   function() {
       console.log("ok");
@@ -27,11 +27,11 @@ neoux.alert(
 
 
     <div class="nuFlexRow gap10 mt30">
-      <h3>neoux.confirm</h3>
+      <h3>nu.confirm</h3>
       <button id="nuConfirm" class="nuButton" type="button">Run</button>
     </div>
     <pre class="nuCodeBlock">
-neoux.confirm("This is some message area.", function() {
+nu.confirm("This is some message area.", function() {
   console.log("ok");
 }, function() {
   console.log("cancel");
@@ -40,11 +40,11 @@ neoux.confirm("This is some message area.", function() {
 
 
     <div class="nuFlexRow gap10 mt30">
-      <h3>neoux.sheet</h3>
+      <h3>nu.sheet</h3>
       <button id="nuSheet" class="nuButton" type="button">Run</button>
     </div>
     <pre class="nuCodeBlock">
-neoux.sheet("操作を選んでください", [
+nu.sheet("操作を選んでください", [
   { label: "編集",    callback: () => console.log("編集") },
   { label: "削除",    callback: () => console.log("削除") },
   { label: "複製",    callback: () => console.log("複製") },
@@ -55,44 +55,44 @@ neoux.sheet("操作を選んでください", [
 
     <h2 class="mt80">ローディングインジケータ</h2>
     <div class="nuFlexRow gap10 mt30">
-      <h3>neoux.loading</h3>
+      <h3>nu.loading</h3>
       <button id="nuLoading" class="nuButton" type="button">Run</button>
     </div>
     <pre class="nuCodeBlock">
-neoux.loading.show("読み込み中...");
+nu.loading.show("読み込み中...");
 
 // 3秒後に非表示
 setTimeout(() => {
-  neoux.loading.hide();
+  nu.loading.hide();
 }, 3000);
 </pre>
 
 
     <h2 class="mt80">トースト</h2>
     <div class="nuFlexRow gap10 mt30">
-      <h3>neoux.toast</h3>
+      <h3>nu.toast</h3>
       <button id="nuToast" class="nuButton" type="button">Run</button>
     </div>
     <pre class="nuCodeBlock">
-neoux.toast.show("保存が完了しました！");
+nu.toast.show("保存が完了しました！");
 </pre>
 
     <div class="nuFlexRow gap10 mt30">
-      <h3>neoux.toast</h3>
+      <h3>nu.toast</h3>
       <button id="nuToastDelay" class="nuButton" type="button">Run</button>
     </div>
     <pre class="nuCodeBlock">
-neoux.toast.show("エラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
+nu.toast.show("エラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
 </pre>
 
 
     <h2 class="mt80">ドロップダウンメニュー</h2>
     <div class="nuFlexRow gap10 mt30">
-      <h3>neoux.dropdown</h3>
+      <h3>nu.dropdown</h3>
       <button id="dropdownBtn" class="nuButton" type="button">Run</button>
     </div>
     <pre class="nuCodeBlock">
-neoux.dropdown.attach(
+nu.dropdown.attach(
   document.getElementById("dropdownBtn"),
   [
       { label: "設定", callback: () => console.log("設定") },
@@ -102,11 +102,11 @@ neoux.dropdown.attach(
 
 
     <div class="nuFlexSpread gap10 mt30">
-      <h3>neoux.dropdown</h3>
+      <h3>nu.dropdown</h3>
       <button id="dropdownBtnLeft" class="nuMenuButton" type="button"></button>
     </div>
     <pre class="nuCodeBlock">
-neoux.dropdown.attach(
+nu.dropdown.attach(
   document.getElementById("dropdownBtnLeft"),
   [
       { label: "設定", callback: () => console.log("設定") },
@@ -116,11 +116,11 @@ neoux.dropdown.attach(
 
     <h2 class="mt80">セグメントボタン</h2>
     <div class="nuFlexColumn gap10 mt30">
-      <h3>neoux.segment</h3>
+      <h3>nu.segment</h3>
       <div id="sortSegmentArea"></div>
     </div>
     <pre class="nuCodeBlock">
-neoux.segment.create(document.getElementById("sortSegmentArea"), {
+nu.segment.create(document.getElementById("sortSegmentArea"), {
   id: "sortSegment",
   name: "sampleSortOption",
   value: "最新",
@@ -133,11 +133,11 @@ neoux.segment.create(document.getElementById("sortSegmentArea"), {
 </pre>
 
     <div class="nuFlexColumn gap10 mt30">
-      <h3>neoux.segment</h3>
+      <h3>nu.segment</h3>
       <div id="fruitsSegmentArea"></div>
     </div>
     <pre class="nuCodeBlock">
-neoux.segment.create(document.getElementById("fruitsSegmentArea"), {
+nu.segment.create(document.getElementById("fruitsSegmentArea"), {
   id: "fruitsSegment",
   name: "sampleFruitsOption",
   value: "メロン",
@@ -152,11 +152,11 @@ neoux.segment.create(document.getElementById("fruitsSegmentArea"), {
 
     <h2 class="mt80">検索ボックス</h2>
     <div class="nuFlexColumn gap10 mt30">
-      <h3>neoux.search</h3>
+      <h3>nu.search</h3>
       <div id="searchArea"></div>
     </div>
     <pre class="nuCodeBlock">
-neoux.search.attach(
+nu.search.attach(
   document.getElementById("searchArea"),
   "/sample/site_search_index.json"
 );
@@ -165,28 +165,28 @@ neoux.search.attach(
 
     <h2 class="mt80">入力欄に対して文字数カウンターを追加する</h2>
     <div class="nuFlexColumn gap10 mt30">
-      <h3>neoux.charCount</h3>
+      <h3>nu.charCount</h3>
       <input id="formName" name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
     </div>
     <pre class="nuCodeBlock">
-neoux.charCount.attach(document.getElementById("formName"), 30);
+nu.charCount.attach(document.getElementById("formName"), 30);
 </pre>
 
     <div class="nuFlexColumn gap10 mt30">
-      <h3>neoux.charCount</h3>
+      <h3>nu.charCount</h3>
       <textarea id="formInquire" name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5">テキスト</textarea>
     </div>
     <pre class="nuCodeBlock">
-neoux.charCount.attach(document.getElementById("formInquire"), 300);
+nu.charCount.attach(document.getElementById("formInquire"), 300);
 </pre>
 
     <h2 class="mt80">フォーム値取得</h2>
     <div class="nuFlexRow gap10 mt30">
-      <h3>neoux.submit</h3>
+      <h3>nu.submit</h3>
       <button id="nuSubmit" class="nuButton" type="button">Submit</button>
     </div>
     <pre class="nuCodeBlock">
-neoux.submit.values(
+nu.submit.values(
   document.getElementById("nuForm"),
   (vals) => console.table(vals)
 );
@@ -240,13 +240,13 @@ neoux.submit.values(
         // カスタムアラート
         //------------------------------------------------------------------------------------
         document.getElementById("nuAlert").addEventListener("click", () => {
-            neoux.alert("This is some message area.<br><b>HTML</b>で装飾できます。", function() {
+            nu.alert("This is some message area.<br><b>HTML</b>で装飾できます。", function() {
                 console.log("ok");
             });
         });
 
         document.getElementById("nuConfirm").addEventListener("click", () => {
-            neoux.confirm("This is some message area.", function() {
+            nu.confirm("This is some message area.", function() {
                 console.log("ok");
             }, function() {
                 console.log("cancel");
@@ -254,7 +254,7 @@ neoux.submit.values(
         });
 
         document.getElementById("nuSheet").addEventListener("click", () => {
-            neoux.sheet("操作を選んでください", [
+            nu.sheet("操作を選んでください", [
                 { label: "編集",    callback: () => console.log("編集") },
                 { label: "削除",    callback: () => console.log("削除") },
                 { label: "複製",    callback: () => console.log("複製") },
@@ -266,11 +266,11 @@ neoux.submit.values(
         // ローディングインジケータ
         //------------------------------------------------------------------------------------
         document.getElementById("nuLoading").addEventListener("click", () => {
-            neoux.loading.show("読み込み中...");
+            nu.loading.show("読み込み中...");
 
             // 3秒後に非表示
             setTimeout(() => {
-                neoux.loading.hide();
+                nu.loading.hide();
             }, 3000);
         });
 
@@ -278,18 +278,18 @@ neoux.submit.values(
         // トースト通知
         //------------------------------------------------------------------------------------
         document.getElementById("nuToast").addEventListener("click", () => {
-            neoux.toast.show("保存が完了しました！");
+            nu.toast.show("保存が完了しました！");
         });
 
         document.getElementById("nuToastDelay").addEventListener("click", () => {
-            neoux.toast.show("エラーが発生しました<br>エラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
+            nu.toast.show("エラーが発生しました<br>エラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
         });
 
 
         //------------------------------------------------------------------------------------
         // ドロップダウンメニュー
         //------------------------------------------------------------------------------------
-        neoux.dropdown.attach(
+        nu.dropdown.attach(
             document.getElementById("dropdownBtn"),
             [
                 { label: "設定", callback: () => console.log("設定") },
@@ -297,7 +297,7 @@ neoux.submit.values(
             ]);
 
 
-        neoux.dropdown.attach(
+        nu.dropdown.attach(
             document.getElementById("dropdownBtnLeft"),
             [
                 { label: "設定", callback: () => console.log("設定") },
@@ -308,7 +308,7 @@ neoux.submit.values(
         //------------------------------------------------------------------------------------
         // セグメントボタン
         //------------------------------------------------------------------------------------
-        neoux.segment.create(document.getElementById("sortSegmentArea"), {
+        nu.segment.create(document.getElementById("sortSegmentArea"), {
             id: "sortSegment",
             name: "sampleSortOption",
             value: "最新",
@@ -319,7 +319,7 @@ neoux.submit.values(
             ]
         }, (val) => console.log("Sort:", val));
 
-        neoux.segment.create(document.getElementById("fruitsSegmentArea"), {
+        nu.segment.create(document.getElementById("fruitsSegmentArea"), {
             id: "fruitsSegment",
             name: "sampleFruitsOption",
             value: "メロン",
@@ -334,21 +334,21 @@ neoux.submit.values(
         //------------------------------------------------------------------------------------
         // 検索ボックス
         //------------------------------------------------------------------------------------
-        neoux.search.attach(document.getElementById("searchArea"), "/sample/site_search_index.json");
+        nu.search.attach(document.getElementById("searchArea"), "/sample/site_search_index.json");
 
 
         //------------------------------------------------------------------------------------
         // 入力欄に対して文字数カウンターを追加する
         //------------------------------------------------------------------------------------
-        neoux.charCount.attach(document.getElementById("formName"), 30);
-        neoux.charCount.attach(document.getElementById("formInquire"), 300);
+        nu.charCount.attach(document.getElementById("formName"), 30);
+        nu.charCount.attach(document.getElementById("formInquire"), 300);
 
 
         //------------------------------------------------------------------------------------
         // Submit
         //------------------------------------------------------------------------------------
         document.getElementById("nuSubmit").addEventListener("click", () => {
-            neoux.submit.values(
+            nu.submit.values(
                 document.getElementById("nuForm"),
                 (vals) => console.table(vals)
             );
