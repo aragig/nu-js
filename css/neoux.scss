@@ -3,7 +3,16 @@
 //------------------------------------------------------------------------------------
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+
+    #nuContents {
+        margin: 0 auto;
+        padding: 16px 8px;
+        max-width: 480px;
+    }
 }
+
 .nuButton {
     all: unset; // すべてのデフォルトをリセット
     box-sizing: border-box;
@@ -85,18 +94,22 @@ body {
     padding-right: 40px; // アイコン分余白
 }
 //---
-.nuCodeBlock {
+pre.nuCodeBlock {
     display: block;
-    overflow-x: auto;
-    font-family: Menlo, Consolas, 'DejaVu sans Mono', monospace;
-    font-size: 0.70rem;
-    line-height:1.1rem;
-    //color: #fff;
-    //background: #323e52;
-    //padding: 16px;
-    font-family: Menlo, Consolas, monospace;
-    white-space: pre;
-    word-break: normal;
+    //overflow-x: auto;
+    //white-space: pre;
+    //word-break: normal;
+    white-space: pre-wrap;     // 折り返しを有効にする
+    word-break: break-word;    // 単語単位で折り返す（長いURLなどにも対応）
+    overflow-wrap: anywhere;   // ブラウザによってはこちらも必要
+
+    font-size: 0.80rem;
+    line-height:1.2rem;
+    //font-family: Menlo, Consolas, monospace;
+    //font-family: Iosevka, SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-family: SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+    padding:1rem;
     margin-bottom: 1.5rem;
 }
 //---

@@ -1,5 +1,11 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; }
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0; }
+  body #nuContents {
+    margin: 0 auto;
+    padding: 16px 8px;
+    max-width: 480px; }
 
 .nuButton {
   all: unset;
@@ -60,15 +66,15 @@ body {
   background-size: 24px;
   padding-right: 40px; }
 
-.nuCodeBlock {
+pre.nuCodeBlock {
   display: block;
-  overflow-x: auto;
-  font-family: Menlo, Consolas, 'DejaVu sans Mono', monospace;
-  font-size: 0.70rem;
-  line-height: 1.1rem;
-  font-family: Menlo, Consolas, monospace;
-  white-space: pre;
-  word-break: normal;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  font-size: 0.80rem;
+  line-height: 1.2rem;
+  font-family: SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  padding: 1rem;
   margin-bottom: 1.5rem; }
 
 .nuCodeToggle {

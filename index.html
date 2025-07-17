@@ -8,38 +8,42 @@
     <script src="js/neoux.js"></script>
 </head>
 <body>
-<h1>neoux.js</h1>
-<form id="nuForm">
-    <h2 class="mt40">アラート</h2>
-    <div class="nuFlexRow gap10 mt30">
-        <h3>neoux.alert</h3>
-        <button id="nuAlert" class="nuButton" type="button">Run</button>
-    </div>
-<pre class="nuCodeBlock" data-html-safe>
-neoux.alert("This is some message area.<br><b>HTML</b>で装飾できます。", function() {
-    console.log("ok");
-});
+<div id="nuContents">
+    <h1>neoux.js</h1>
+    <form id="nuForm">
+        <h2 class="mt40">アラート</h2>
+        <div class="nuFlexRow gap10 mt30">
+            <h3>neoux.alert</h3>
+            <button id="nuAlert" class="nuButton" type="button">Run</button>
+        </div>
+        <pre class="nuCodeBlock" data-html-safe>
+neoux.alert(
+    "This is some message area.<br><b>HTML</b>で装飾できます。",
+    function() {
+        console.log("ok");
+    }
+);
 </pre>
 
 
-    <div class="nuFlexRow gap10 mt30">
-        <h3>neoux.confirm</h3>
-        <button id="nuConfirm" class="nuButton" type="button">Run</button>
-    </div>
-<pre class="nuCodeBlock">
+        <div class="nuFlexRow gap10 mt30">
+            <h3>neoux.confirm</h3>
+            <button id="nuConfirm" class="nuButton" type="button">Run</button>
+        </div>
+        <pre class="nuCodeBlock">
 neoux.confirm("This is some message area.", function() {
     console.log("ok");
-}, function(ans) {
+}, function() {
     console.log("cancel");
 });
 </pre>
 
 
-    <div class="nuFlexRow gap10 mt30">
-        <h3>neoux.sheet</h3>
-        <button id="nuSheet" class="nuButton" type="button">Run</button>
-    </div>
-<pre class="nuCodeBlock">
+        <div class="nuFlexRow gap10 mt30">
+            <h3>neoux.sheet</h3>
+            <button id="nuSheet" class="nuButton" type="button">Run</button>
+        </div>
+        <pre class="nuCodeBlock">
 neoux.sheet("操作を選んでください", [
     { label: "編集",    callback: () => console.log("編集") },
     { label: "削除",    callback: () => console.log("削除") },
@@ -49,12 +53,12 @@ neoux.sheet("操作を選んでください", [
 </pre>
 
 
-    <h2 class="mt80">ローディングインジケータ</h2>
-    <div class="nuFlexRow gap10 mt30">
-        <h3>neoux.loading</h3>
-        <button id="nuLoading" class="nuButton" type="button">Run</button>
-    </div>
-<pre class="nuCodeBlock">
+        <h2 class="mt80">ローディングインジケータ</h2>
+        <div class="nuFlexRow gap10 mt30">
+            <h3>neoux.loading</h3>
+            <button id="nuLoading" class="nuButton" type="button">Run</button>
+        </div>
+        <pre class="nuCodeBlock">
 neoux.loading.show("読み込み中...");
 
 // 3秒後に非表示
@@ -64,30 +68,30 @@ setTimeout(() => {
 </pre>
 
 
-    <h2 class="mt80">トースト</h2>
-    <div class="nuFlexRow gap10 mt30">
-        <h3>neoux.toast</h3>
-        <button id="nuToast" class="nuButton" type="button">Run</button>
-    </div>
-<pre class="nuCodeBlock">
+        <h2 class="mt80">トースト</h2>
+        <div class="nuFlexRow gap10 mt30">
+            <h3>neoux.toast</h3>
+            <button id="nuToast" class="nuButton" type="button">Run</button>
+        </div>
+        <pre class="nuCodeBlock">
 neoux.toast.show("保存が完了しました！");
 </pre>
 
-    <div class="nuFlexRow gap10 mt30">
-        <h3>neoux.toast</h3>
-        <button id="nuToastDelay" class="nuButton" type="button">Run</button>
-    </div>
-<pre class="nuCodeBlock">
+        <div class="nuFlexRow gap10 mt30">
+            <h3>neoux.toast</h3>
+            <button id="nuToastDelay" class="nuButton" type="button">Run</button>
+        </div>
+        <pre class="nuCodeBlock">
 neoux.toast.show("エラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
 </pre>
 
 
-    <h2 class="mt80">ドロップダウンメニュー</h2>
-    <div class="nuFlexRow gap10 mt30">
-        <h3>neoux.dropdown</h3>
-        <button id="dropdownBtn" class="nuButton" type="button">Run</button>
-    </div>
-<pre class="nuCodeBlock">
+        <h2 class="mt80">ドロップダウンメニュー</h2>
+        <div class="nuFlexRow gap10 mt30">
+            <h3>neoux.dropdown</h3>
+            <button id="dropdownBtn" class="nuButton" type="button">Run</button>
+        </div>
+        <pre class="nuCodeBlock">
 neoux.dropdown.attach(
     document.getElementById("dropdownBtn"),
     [
@@ -97,11 +101,11 @@ neoux.dropdown.attach(
 </pre>
 
 
-    <div class="nuFlexSpread gap10 mt30">
-        <h3>neoux.dropdown</h3>
-        <button id="dropdownBtnLeft" class="nuMenuButton" type="button"></button>
-    </div>
-<pre class="nuCodeBlock">
+        <div class="nuFlexSpread gap10 mt30">
+            <h3>neoux.dropdown</h3>
+            <button id="dropdownBtnLeft" class="nuMenuButton" type="button"></button>
+        </div>
+        <pre class="nuCodeBlock">
 neoux.dropdown.attach(
     document.getElementById("dropdownBtnLeft"),
     [
@@ -110,12 +114,12 @@ neoux.dropdown.attach(
     ]);
 </pre>
 
-    <h2 class="mt80">UISegmentedControl風ラジオボタン</h2>
-    <div class="nuFlexRow gap10 mt30">
-        <h3>neoux.segment</h3>
-        <div id="sortSegmentArea"></div>
-    </div>
-<pre class="nuCodeBlock">
+        <h2 class="mt80">UISegmentedControl風ラジオボタン</h2>
+        <div class="nuFlexRow gap10 mt30">
+            <h3>neoux.segment</h3>
+            <div id="sortSegmentArea"></div>
+        </div>
+        <pre class="nuCodeBlock">
 neoux.segment.create(document.getElementById("sortSegmentArea"), {
     id: "sortSegment",
     name: "sampleSortOption",
@@ -128,11 +132,11 @@ neoux.segment.create(document.getElementById("sortSegmentArea"), {
 }, (val) => console.log("Sort:", val));
 </pre>
 
-    <div class="nuFlexRow gap10 mt30">
-        <h3>neoux.segment</h3>
-        <div id="fruitsSegmentArea"></div>
-    </div>
-<pre class="nuCodeBlock">
+        <div class="nuFlexRow gap10 mt30">
+            <h3>neoux.segment</h3>
+            <div id="fruitsSegmentArea"></div>
+        </div>
+        <pre class="nuCodeBlock">
 neoux.segment.create(document.getElementById("fruitsSegmentArea"), {
     id: "fruitsSegment",
     name: "sampleFruitsOption",
@@ -146,71 +150,76 @@ neoux.segment.create(document.getElementById("fruitsSegmentArea"), {
 </pre>
 
 
-    <h2 class="mt80">検索ボックス</h2>
-    <div class="nuFlexRow gap10 mt30">
-        <h3>neoux.search</h3>
-        <div id="searchArea"></div>
-    </div>
-<pre class="nuCodeBlock">
-neoux.search.attach(document.getElementById("searchArea"), "/sample/site_search_index.json");
+        <h2 class="mt80">検索ボックス</h2>
+        <div class="nuFlexRow gap10 mt30">
+            <h3>neoux.search</h3>
+            <div id="searchArea"></div>
+        </div>
+        <pre class="nuCodeBlock">
+neoux.search.attach(
+    document.getElementById("searchArea"),
+    "/sample/site_search_index.json"
+);
 </pre>
 
 
-    <h2 class="mt80">入力欄に対して文字数カウンターを追加する</h2>
-    <div class="nuFlexColumn gap10 mt30">
-        <h3>neoux.charCount</h3>
-        <input id="formName" name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
-    </div>
-<pre class="nuCodeBlock">
+        <h2 class="mt80">入力欄に対して文字数カウンターを追加する</h2>
+        <div class="nuFlexColumn gap10 mt30">
+            <h3>neoux.charCount</h3>
+            <input id="formName" name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
+        </div>
+        <pre class="nuCodeBlock">
 neoux.charCount.attach(document.getElementById("formName"), 30);
 </pre>
 
-    <div class="nuFlexColumn gap10 mt30">
-        <h3>neoux.charCount</h3>
-        <textarea id="formInquire" name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5">テキスト</textarea>
-    </div>
-<pre class="nuCodeBlock">
+        <div class="nuFlexColumn gap10 mt30">
+            <h3>neoux.charCount</h3>
+            <textarea id="formInquire" name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5">テキスト</textarea>
+        </div>
+        <pre class="nuCodeBlock">
 neoux.charCount.attach(document.getElementById("formInquire"), 300);
 </pre>
 
-    <h2 class="mt80">フォーム値取得</h2>
-    <div class="nuFlexRow gap10 mt30">
-        <h3>neoux.submit</h3>
-        <button id="nuSubmit" class="nuButton" type="button">Submit</button>
-    </div>
-<pre class="nuCodeBlock">
+        <h2 class="mt80">フォーム値取得</h2>
+        <div class="nuFlexRow gap10 mt30">
+            <h3>neoux.submit</h3>
+            <button id="nuSubmit" class="nuButton" type="button">Submit</button>
+        </div>
+        <pre class="nuCodeBlock">
 neoux.submit.values(
     document.getElementById("nuForm"),
     (vals) => console.table(vals)
 );
 </pre>
 
-    <hr class="mt80">
+        <hr class="mt80">
 
-    <h2 class="mt40">色々なinput</h2>
-    <div class="nuFlexColumn gap20">
-        <div>
-            <select name="sampleSelect" class="nuSelect">
-                <option value="">選択してください</option>
-                <option value="a">選択肢A</option>
-                <option value="b">選択肢B</option>
-            </select>
+        <h2 class="mt40">色々なinput</h2>
+        <div class="nuFlexColumn gap20">
+            <div>
+                <select name="sampleSelect" class="nuSelect">
+                    <option value="">選択してください</option>
+                    <option value="a">選択肢A</option>
+                    <option value="b">選択肢B</option>
+                </select>
+            </div>
+            <div>
+                <label>年/月/日：<input name="sampleDate" type="date"></label>
+            </div>
+            <div>
+                <label>年 / 月 / 日 +時:分：<input name="sampleDatetimeLocal" type="datetime-local"></label>
+            </div>
+            <div>
+                <label>カラーパレッド：<input name="sampleColor" type="color" value="#0b80dc"></label>
+            </div>
+            <div>
+                <label>範囲を選択：<input name="sampleRange" type="range" min="0" max="100"></label>
+            </div>
         </div>
-        <div>
-            <label>年/月/日：<input name="sampleDate" type="date"></label>
-        </div>
-        <div>
-            <label>年 / 月 / 日 +時:分：<input name="sampleDatetimeLocal" type="datetime-local"></label>
-        </div>
-        <div>
-            <label>カラーパレッド：<input name="sampleColor" type="color" value="#0b80dc"></label>
-        </div>
-        <div>
-            <label>範囲を選択：<input name="sampleRange" type="range" min="0" max="100"></label>
-        </div>
-    </div>
 
-</form>
+    </form>
+</div>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -239,7 +248,7 @@ neoux.submit.values(
         document.getElementById("nuConfirm").addEventListener("click", () => {
             neoux.confirm("This is some message area.", function() {
                 console.log("ok");
-            }, function(ans) {
+            }, function() {
                 console.log("cancel");
             });
         });
