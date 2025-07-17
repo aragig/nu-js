@@ -330,8 +330,7 @@ pre.nuCodeBlock {
     color: #666;
     font-size: 14px;
     border-right: 1px solid #ccc;
-    user-select: none;
-    transition: background 0.2s; }
+    user-select: none; }
     .nuSegment label:last-of-type {
       border-right: none; }
     .nuSegment label:hover {
