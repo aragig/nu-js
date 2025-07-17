@@ -14,15 +14,28 @@
     <h2 class="mt40">アラート</h2>
     <div class="nuFlexRow gap10 mt30">
       <h3>nu.alert</h3>
-      <button id="nuAlert" class="nuButton" type="button">Run</button>
+      <button id="nuAlertSimple" class="nuButton" type="button">Run</button>
     </div>
     <pre class="nuCodeBlock" data-html-safe>
-nu.alert(
-  "This is some message area.<br><b>HTML</b>で装飾できます。",
-  function() {
-      console.log("ok");
-  }
-);
+nu.alert("メッセージ", function() {
+    console.log("ok");
+});
+</pre>
+
+    <div class="nuFlexRow gap10 mt30">
+      <h3>nu.alert</h3>
+        <button id="nuAlert" class="nuButton" type="button">Run</button>
+      </div>
+    <pre class="nuCodeBlock" data-html-safe>
+const message = `<b>HTML</b>で装飾できます。<br>
+なんと<br>
+画像も表示可能！<br>
+↓<br>
+<a href="https://araisun.com/" target="_blank"><img src="https://araisun.com/img/site-logo.jpg"></a>`;
+
+nu.alert(message, function() {
+    console.log("ok");
+});
 </pre>
 
 
@@ -239,8 +252,20 @@ nu.submit.values(
         //------------------------------------------------------------------------------------
         // カスタムアラート
         //------------------------------------------------------------------------------------
+        document.getElementById("nuAlertSimple").addEventListener("click", () => {
+            nu.alert("メッセージ", function() {
+                console.log("ok");
+            });
+        });
+
         document.getElementById("nuAlert").addEventListener("click", () => {
-            nu.alert("This is some message area.<br><b>HTML</b>で装飾できます。", function() {
+            const message = `<b>HTML</b>で装飾できます。<br>
+なんと<br>
+画像も表示可能！<br>
+↓<br>
+<a href="https://araisun.com/" target="_blank"><img src="https://araisun.com/img/site-logo.jpg"></a>`;
+
+            nu.alert(message, function() {
                 console.log("ok");
             });
         });
