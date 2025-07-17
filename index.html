@@ -10,17 +10,14 @@
 <body>
 <h1>neoux.js</h1>
 <form id="nuForm">
-    <h2 class="mt80">アラート</h2>
+    <h2 class="mt40">アラート</h2>
     <div class="nuFlexRow gap10 mt30">
         <h3>neoux.alert</h3>
         <button id="nuAlert" class="nuButton" type="button">Run</button>
     </div>
-
-    <pre id="nuAlertPre" class="nuCodeBlock" data-exec>
-document.getElementById("nuAlert").addEventListener("click", () => {
-    neoux.alert("This is some message area.<br><b>HTML</b>で装飾できます。", function() {
-        console.log("ok");
-    });
+<pre class="nuCodeBlock" data-html-safe>
+neoux.alert("This is some message area.<br><b>HTML</b>で装飾できます。", function() {
+    console.log("ok");
 });
 </pre>
 
@@ -29,13 +26,11 @@ document.getElementById("nuAlert").addEventListener("click", () => {
         <h3>neoux.confirm</h3>
         <button id="nuConfirm" class="nuButton" type="button">Run</button>
     </div>
-    <pre class="nuCodeBlock" data-exec>
-document.getElementById("nuConfirm").addEventListener("click", () => {
-    neoux.confirm("This is some message area.", function() {
-        console.log("ok");
-    }, function(ans) {
-        console.log("cancel");
-    });
+<pre class="nuCodeBlock">
+neoux.confirm("This is some message area.", function() {
+    console.log("ok");
+}, function(ans) {
+    console.log("cancel");
 });
 </pre>
 
@@ -44,15 +39,13 @@ document.getElementById("nuConfirm").addEventListener("click", () => {
         <h3>neoux.sheet</h3>
         <button id="nuSheet" class="nuButton" type="button">Run</button>
     </div>
-    <pre class="nuCodeBlock" data-exec>
-document.getElementById("nuSheet").addEventListener("click", () => {
-    neoux.sheet("操作を選んでください", [
-        { label: "編集",    callback: () => console.log("編集") },
-        { label: "削除",    callback: () => console.log("削除") },
-        { label: "複製",    callback: () => console.log("複製") },
-        { label: "キャンセル", callback: null }
-    ]);
-});
+<pre class="nuCodeBlock">
+neoux.sheet("操作を選んでください", [
+    { label: "編集",    callback: () => console.log("編集") },
+    { label: "削除",    callback: () => console.log("削除") },
+    { label: "複製",    callback: () => console.log("複製") },
+    { label: "キャンセル", callback: null }
+]);
 </pre>
 
 
@@ -61,15 +54,13 @@ document.getElementById("nuSheet").addEventListener("click", () => {
         <h3>neoux.loading</h3>
         <button id="nuLoading" class="nuButton" type="button">Run</button>
     </div>
-    <pre class="nuCodeBlock" data-exec>
-document.getElementById("nuLoading").addEventListener("click", () => {
-    neoux.loading.show("読み込み中...");
+<pre class="nuCodeBlock">
+neoux.loading.show("読み込み中...");
 
-    // 3秒後に非表示
-    setTimeout(() => {
-        neoux.loading.hide();
-    }, 3000);
-});
+// 3秒後に非表示
+setTimeout(() => {
+    neoux.loading.hide();
+}, 3000);
 </pre>
 
 
@@ -78,48 +69,126 @@ document.getElementById("nuLoading").addEventListener("click", () => {
         <h3>neoux.toast</h3>
         <button id="nuToast" class="nuButton" type="button">Run</button>
     </div>
-    <pre class="nuCodeBlock" data-exec>
-document.getElementById("nuToast").addEventListener("click", () => {
-    neoux.toast.show("保存が完了しました！");
-});
+<pre class="nuCodeBlock">
+neoux.toast.show("保存が完了しました！");
 </pre>
 
     <div class="nuFlexRow gap10 mt30">
         <h3>neoux.toast</h3>
         <button id="nuToastDelay" class="nuButton" type="button">Run</button>
     </div>
-    <pre class="nuCodeBlock" data-exec>
-document.getElementById("nuToastDelay").addEventListener("click", () => {
-    neoux.toast.show("エラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
-});
+<pre class="nuCodeBlock">
+neoux.toast.show("エラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
 </pre>
 
 
     <h2 class="mt80">ドロップダウンメニュー</h2>
-    <div class="nuFlexSpread">
-        <button id="dropdownBtn" class="nuButton" type="button">Menu</button>
+    <div class="nuFlexRow gap10 mt30">
+        <h3>neoux.dropdown</h3>
+        <button id="dropdownBtn" class="nuButton" type="button">Run</button>
+    </div>
+<pre class="nuCodeBlock">
+neoux.dropdown.attach(
+    document.getElementById("dropdownBtn"),
+    [
+        { label: "設定", callback: () => console.log("設定") },
+        { label: "ログアウト", callback: () => console.log("ログアウト") }
+    ]);
+</pre>
+
+
+    <div class="nuFlexSpread gap10 mt30">
+        <h3>neoux.dropdown</h3>
         <button id="dropdownBtnLeft" class="nuMenuButton" type="button"></button>
     </div>
+<pre class="nuCodeBlock">
+neoux.dropdown.attach(
+    document.getElementById("dropdownBtnLeft"),
+    [
+        { label: "設定", callback: () => console.log("設定") },
+        { label: "ログアウト", callback: () => console.log("ログアウト") }
+    ]);
+</pre>
 
     <h2 class="mt80">UISegmentedControl風ラジオボタン</h2>
-    <div class="nuFlexColumn gap10">
+    <div class="nuFlexRow gap10 mt30">
+        <h3>neoux.segment</h3>
         <div id="sortSegmentArea"></div>
+    </div>
+<pre class="nuCodeBlock">
+neoux.segment.create(document.getElementById("sortSegmentArea"), {
+    id: "sortSegment",
+    name: "sampleSortOption",
+    value: "最新",
+    options: [
+        { label: "最新", value: "最新" },
+        { label: "人気", value: "人気" },
+        { label: "古い順", value: "古い順" }
+    ]
+}, (val) => console.log("Sort:", val));
+</pre>
+
+    <div class="nuFlexRow gap10 mt30">
+        <h3>neoux.segment</h3>
         <div id="fruitsSegmentArea"></div>
     </div>
+<pre class="nuCodeBlock">
+neoux.segment.create(document.getElementById("fruitsSegmentArea"), {
+    id: "fruitsSegment",
+    name: "sampleFruitsOption",
+    value: "メロン",
+    options: [
+        { label: "りんご", value: "りんご" },
+        { label: "バナナ", value: "バナナ" },
+        { label: "メロン", value: "メロン" }
+    ]
+}, (val) => console.log("Fruits:", val));
+</pre>
+
 
     <h2 class="mt80">検索ボックス</h2>
-    <div id="searchArea"></div>
+    <div class="nuFlexRow gap10 mt30">
+        <h3>neoux.search</h3>
+        <div id="searchArea"></div>
+    </div>
+<pre class="nuCodeBlock">
+neoux.search.attach(document.getElementById("searchArea"), "/sample/site_search_index.json");
+</pre>
 
 
+    <h2 class="mt80">入力欄に対して文字数カウンターを追加する</h2>
+    <div class="nuFlexColumn gap10 mt30">
+        <h3>neoux.charCount</h3>
+        <input id="formName" name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
+    </div>
+<pre class="nuCodeBlock">
+neoux.charCount.attach(document.getElementById("formName"), 30);
+</pre>
 
-    <h2 class="mt80">色々なinput</h2>
+    <div class="nuFlexColumn gap10 mt30">
+        <h3>neoux.charCount</h3>
+        <textarea id="formInquire" name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5">テキスト</textarea>
+    </div>
+<pre class="nuCodeBlock">
+neoux.charCount.attach(document.getElementById("formInquire"), 300);
+</pre>
+
+    <h2 class="mt80">フォーム値取得</h2>
+    <div class="nuFlexRow gap10 mt30">
+        <h3>neoux.submit</h3>
+        <button id="nuSubmit" class="nuButton" type="button">Submit</button>
+    </div>
+<pre class="nuCodeBlock">
+neoux.submit.values(
+    document.getElementById("nuForm"),
+    (vals) => console.table(vals)
+);
+</pre>
+
+    <hr class="mt80">
+
+    <h2 class="mt40">色々なinput</h2>
     <div class="nuFlexColumn gap20">
-        <div>
-            <input id="formName" name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
-        </div>
-        <div>
-            <textarea id="formInquire" name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5">テキスト</textarea>
-        </div>
         <div>
             <select name="sampleSelect" class="nuSelect">
                 <option value="">選択してください</option>
@@ -141,35 +210,71 @@ document.getElementById("nuToastDelay").addEventListener("click", () => {
         </div>
     </div>
 
-    <h2 class="mt50">フォーム値取得</h2>
-    <div>
-        <button id="nuSubmit" class="nuButton" type="button">Submit</button>
-    </div>
 </form>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+        function escapeHtml(str) {
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+        document.querySelectorAll('pre.nuCodeBlock[data-html-safe]').forEach(pre => {
+            const raw = pre.innerHTML.trim();
+            pre.innerHTML = escapeHtml(raw);
+        });
 
-        const code = `
-document.getElementById("nuAlert").addEventListener("click", () => {
-    neoux.alert("This is some message area.<br><b>HTML</b>で装飾できます。", function() {
-        console.log("ok");
-    });
-});
-`.trim();
+        //------------------------------------------------------------------------------------
+        // カスタムアラート
+        //------------------------------------------------------------------------------------
+        document.getElementById("nuAlert").addEventListener("click", () => {
+            neoux.alert("This is some message area.<br><b>HTML</b>で装飾できます。", function() {
+                console.log("ok");
+            });
+        });
 
-        document.getElementById("nuAlertPre").textContent = code;
+        document.getElementById("nuConfirm").addEventListener("click", () => {
+            neoux.confirm("This is some message area.", function() {
+                console.log("ok");
+            }, function(ans) {
+                console.log("cancel");
+            });
+        });
 
-        const fn = new Function(code);
-        fn();
+        document.getElementById("nuSheet").addEventListener("click", () => {
+            neoux.sheet("操作を選んでください", [
+                { label: "編集",    callback: () => console.log("編集") },
+                { label: "削除",    callback: () => console.log("削除") },
+                { label: "複製",    callback: () => console.log("複製") },
+                { label: "キャンセル", callback: null }
+            ]);
+        });
 
-        // document.querySelectorAll('pre.nuCodeBlock[data-exec]').forEach((pre, index) => {
-        //     // ソースをトリムして実行（元の動作を維持）
-        //     pre.textContent = pre.textContent.trim();
-        //     const fn = new Function(pre.textContent);
-        //     fn();
-        // });
+        //------------------------------------------------------------------------------------
+        // ローディングインジケータ
+        //------------------------------------------------------------------------------------
+        document.getElementById("nuLoading").addEventListener("click", () => {
+            neoux.loading.show("読み込み中...");
 
+            // 3秒後に非表示
+            setTimeout(() => {
+                neoux.loading.hide();
+            }, 3000);
+        });
+
+        //------------------------------------------------------------------------------------
+        // トースト通知
+        //------------------------------------------------------------------------------------
+        document.getElementById("nuToast").addEventListener("click", () => {
+            neoux.toast.show("保存が完了しました！");
+        });
+
+        document.getElementById("nuToastDelay").addEventListener("click", () => {
+            neoux.toast.show("エラーが発生しました<br>エラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
+        });
 
 
         //------------------------------------------------------------------------------------
