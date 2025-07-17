@@ -66,6 +66,24 @@ describe("nu.alert / confirm / sheet", () => {
         document.body.innerHTML = "";
     });
 
+
+    it("nu.alert()のテスト: コールバックなしのシンプルなアラート", (done) => {
+        nu.alert("アラートメッセージ");
+
+        const button = document.querySelector(".nuAlertButton");
+        expect(button).to.exist;
+        expect(button.textContent).to.equal("OK");
+
+        // simulate click
+        button.click();
+
+        setTimeout(() => {
+            const box = document.querySelector(".nuAlertBox");
+            expect(box).to.be.null;
+            done();
+        }, nu.overlay.timeout);
+    });
+
     it("nu.alert()のテスト: OKボタンをレンダリングし、コールバックを呼び出す必要があります", (done) => {
         let called = false;
         nu.alert("アラートメッセージ", () => {

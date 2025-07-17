@@ -17,9 +17,7 @@
       <button id="nuAlertSimple" class="nuButton" type="button">Run</button>
     </div>
     <pre class="nuCodeBlock" data-html-safe>
-nu.alert("メッセージ", function() {
-    console.log("ok");
-});
+nu.alert("メッセージ");
 </pre>
 
     <div class="nuFlexRow gap10 mt30">
@@ -253,9 +251,7 @@ nu.submit.values(
         // カスタムアラート
         //------------------------------------------------------------------------------------
         document.getElementById("nuAlertSimple").addEventListener("click", () => {
-            nu.alert("メッセージ", function() {
-                console.log("ok");
-            });
+            nu.alert("メッセージ");
         });
 
         document.getElementById("nuAlert").addEventListener("click", () => {
