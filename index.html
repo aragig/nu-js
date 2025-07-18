@@ -56,9 +56,9 @@ nu.confirm("This is some message area.", function() {
     </div>
     <pre class="nuCodeBlock">
 nu.sheet("操作を選んでください", [
-  { label: "編集",    callback: () => console.log("編集") },
-  { label: "削除",    callback: () => console.log("削除") },
-  { label: "複製",    callback: () => console.log("複製") },
+  { label: "編集", callback: ()=>console.log("編集") },
+  { label: "削除", callback: ()=>console.log("削除") },
+  { label: "複製", callback: ()=>console.log("複製") },
   { label: "キャンセル", callback: null }
 ]);
 </pre>
@@ -106,8 +106,14 @@ nu.toast.show("エラーが発生しましたエラーが発生しましたエ�
 nu.dropdown.attach(
   document.getElementById("dropdownBtn"),
   [
-      { label: "設定", callback: () => console.log("設定") },
-      { label: "ログアウト", callback: () => console.log("ログアウト") }
+      {
+        label: "設定",
+        callback: ()=>console.log("設定")
+      },
+      {
+        label: "ログアウト",
+        callback: ()=>console.log("ログアウト")
+      }
   ]);
 </pre>
 
@@ -120,8 +126,14 @@ nu.dropdown.attach(
 nu.dropdown.attach(
   document.getElementById("dropdownBtnLeft"),
   [
-      { label: "設定", callback: () => console.log("設定") },
-      { label: "ログアウト", callback: () => console.log("ログアウト") }
+      {
+        label: "設定",
+        callback: () => console.log("設定")
+      },
+      {
+        label: "ログアウト",
+        callback: () => console.log("ログアウト")
+      }
   ]);
 </pre>
 
