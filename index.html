@@ -103,8 +103,7 @@ nu.toast.show("エラーが発生しましたエラーが発生しましたエ�
       <button id="dropdownBtn" class="nuButton" type="button">Run</button>
     </div>
     <pre class="nuCodeBlock">
-nu.dropdown.attach(
-  document.getElementById("dropdownBtn"),
+nu.dropdown.attach("dropdownBtn",
   [
       {
         label: "設定",
@@ -322,8 +321,7 @@ nu.submit.values(
         //------------------------------------------------------------------------------------
         // ドロップダウンメニュー
         //------------------------------------------------------------------------------------
-        nu.dropdown.attach(
-            document.getElementById("dropdownBtn"),
+        nu.dropdown.attach("dropdownBtn",
             [
                 { label: "設定", callback: () => console.log("設定") },
                 { label: "ログアウト", callback: () => console.log("ログアウト") }

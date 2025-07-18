@@ -271,10 +271,19 @@
         if (!window.nu.dropdown) window.nu.dropdown = {};
         /**
          * メニューボタンにアタッチ
-         * @param buttonElement - メニューボタンのbutton
+         * @param idOrElement - メニューボタンのbutton
          * @param items - ドロップダウンアイテム {label, callback}
          */
-        window.nu.dropdown.attach = function (buttonElement, items) {
+        window.nu.dropdown.attach = function (idOrElement, items) {
+            const buttonElement =
+                typeof idOrElement === "string"
+                    ? document.getElementById(idOrElement)
+                    : idOrElement;
+            if (!buttonElement) {
+                console.error("nu.dropdown.attach: ボタンが見つかりません", idOrElement);
+                return;
+            }
+
             buttonElement.addEventListener("click", (e) => {
                 e.stopPropagation(); // 外部クリック判定を防ぐ
                 // 既に開いているメニューがあれば閉じる
