@@ -148,17 +148,13 @@ nu.search.attach(
       <h3>nu.charCount</h3>
       <input id="formName" name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
     </div>
-    <pre class="nuCodeBlock">
-nu.charCount.attach(document.getElementById("formName"), 30);
-</pre>
+    <pre id="formNamePre" class="nuCodeBlock"></pre>
 
     <div class="nuFlexColumn gap10 mt30">
       <h3>nu.charCount</h3>
       <textarea id="formInquire" name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5">テキスト</textarea>
     </div>
-    <pre class="nuCodeBlock">
-nu.charCount.attach(document.getElementById("formInquire"), 300);
-</pre>
+    <pre id="formInquirePre" class="nuCodeBlock"></pre>
 
     <h2 class="mt80">フォーム値取得</h2>
     <div class="nuFlexRow gap10 mt30">
@@ -435,10 +431,29 @@ nu.dropdown.attach(
 
 
         //------------------------------------------------------------------------------------
-        // 入力欄に対して文字数カウンターを追加する
+        // 入力欄に対して文字数カウンターを追加する　フィールド
         //------------------------------------------------------------------------------------
-        nu.charCount.attach(document.getElementById("formName"), 30);
-        nu.charCount.attach(document.getElementById("formInquire"), 300);
+        {
+            const code = `
+nu.charCount.attach(document.getElementById("formName"), 30);
+            `.trim();
+
+            $("#formNamePre").text(code); // 表示用
+            new Function(code)(); // 実行用
+        }
+
+        //------------------------------------------------------------------------------------
+        // 入力欄に対して文字数カウンターを追加する　テキストエリア
+        //------------------------------------------------------------------------------------
+        {
+            const code = `
+nu.charCount.attach(document.getElementById("formInquire"), 300);
+            `.trim();
+
+            $("#formInquirePre").text(code); // 表示用
+            new Function(code)(); // 実行用
+        }
+
 
 
         //------------------------------------------------------------------------------------
