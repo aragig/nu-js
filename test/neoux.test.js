@@ -151,25 +151,35 @@ describe("nu.alert / confirm / sheet", () => {
     });
 
     it("nu.sheet()のテスト: 複数ボタンを表示し、クリックで対応するラベルが一致するか", (done) => {
-        const labels = ["編集", "削除", "複製", "キャンセル"];
         const clicked = [];
 
-        nu.sheet("操作を選んでください", labels.map(label => ({
-            label,
-            callback: () => clicked.push(label)
-        })));
+        const buttonMap = {
+            edit: "編集",
+            delete: "削除",
+            duplicate: "複製",
+            cancel: "キャンセル"
+        };
+
+        const callbacks = {
+            onEdit: () => clicked.push("編集"),
+            onDelete: () => clicked.push("削除"),
+            onDuplicate: () => clicked.push("複製"),
+            onCancel: () => clicked.push("キャンセル")
+        };
+
+        nu.sheet("操作を選んでください", buttonMap, callbacks);
 
         const buttons = document.querySelectorAll(".nuAlertButton");
-        expect(buttons.length).to.equal(labels.length);
+        expect(buttons.length).to.equal(Object.keys(buttonMap).length);
 
         // "複製"ボタンをクリック
-        const copyBtn = [...buttons].find(btn => btn.textContent === "複製");
-        expect(copyBtn).to.exist;
-        copyBtn.click();
+        const duplicateBtn = [...buttons].find(btn => btn.textContent === "複製");
+        expect(duplicateBtn).to.exist;
+        duplicateBtn.click();
 
         setTimeout(() => {
             expect(clicked).to.include("複製");
-            expect(document.querySelector(".nuAlertBox")).to.be.null;
+            expect(document.querySelector(".nuSheetBox")).to.be.null;
             done();
         }, nu.overlay.timeout);
     });
