@@ -328,20 +328,27 @@
         //------------------------------------------------------------------------------------
         // グローバルに公開
         //------------------------------------------------------------------------------------
-        if (!window.nu.dropdown) window.nu.dropdown = {};
+        // if (!window.nu.dropdown) window.nu.dropdown = {};
         /**
          * メニューボタンにアタッチ
-         * @param idOrElement - メニューボタンのbutton
-         * @param {Array.<Object>} items - ドロップダウンアイテム（{label, callback}の形式）
+         * @param buttonId - メニューボタンのid名
+         * @param {Array.<Object>} labelMap - ドロップダウンアイテム
+         * @param {Function} handlers - コールバック
          */
-        window.nu.dropdown.attach = function (idOrElement, items) {
-            const buttonElement =
-                typeof idOrElement === "string"
-                    ? document.getElementById(idOrElement)
-                    : idOrElement;
+        window.nu.dropdown = function (buttonId, labelMap, handlers) {
+            const buttonElement = document.getElementById(buttonId);
             if (!buttonElement) {
-                console.error("nu.dropdown.attach: ボタンが見つかりません", idOrElement);
+                console.error("ボタンが見つかりません", buttonId);
                 return;
+            }
+
+            const items = [];
+            for (let key in labelMap) {
+                const label = labelMap[key];
+                const handlerName = "on" + key[0].toUpperCase() + key.slice(1);
+                const callback = handlers?.[handlerName];
+
+                items.push({ label, callback });
             }
 
             buttonElement.addEventListener("click", (e) => {

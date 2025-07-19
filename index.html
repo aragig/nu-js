@@ -332,11 +332,21 @@ $("#nuToastDelay").click(function() {
         //------------------------------------------------------------------------------------
         {
             const code = `
-nu.dropdown.attach("dropdownBtn",
-  [
-    {label:"設定", callback:()=>console.log("設定")},
-    {label:"ログアウト", callback:()=>console.log("ログアウト")}
-  ]);
+nu.dropdown("dropdownBtn", {
+  setting: "設定",
+  logout: "ログアウト",
+  others: "その他"
+}, {
+  onSetting: function () {
+    console.log("clicked 設定");
+  },
+  onLogout: function () {
+    console.log("clicked ログアウト");
+  },
+  onOthers: function () {
+    console.log("clicked その他");
+  }
+});
             `.trim();
 
             $("#dropdownBtnPre").text(code); // 表示用
@@ -348,12 +358,21 @@ nu.dropdown.attach("dropdownBtn",
         //------------------------------------------------------------------------------------
         {
             const code = `
-nu.dropdown.attach(
-    document.getElementById("dropdownBtnLeft"),
-    [
-        { label: "設定", callback: () => console.log("設定") },
-        { label: "ログアウト", callback: () => console.log("ログアウト") }
-    ]);
+nu.dropdown("dropdownBtnLeft", {
+  hoge: "ほげ",
+  fuga: "ふが",
+  pico: "ぴこ"
+}, {
+  onHoge: function () {
+    console.log("clicked ほげ");
+  },
+  onFuga: function () {
+    console.log("clicked ふが");
+  },
+  onPico: function () {
+    console.log("clicked ぴこ");
+  }
+});
             `.trim();
 
             $("#dropdownBtnLeftPre").text(code); // 表示用
