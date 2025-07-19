@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <link rel="stylesheet" href="css/neoux.css">
   <script src="js/neoux.js"></script>
+  <script src="js/jquery-3.7.1.js"></script>
 </head>
 <body>
 <div id="nuContents">
@@ -291,7 +292,15 @@ nu.submit.values(
                     console.log("ok");
                 });
             });
-            document.getElementById("nuAlertPre").innerHTML = `const message = \`${message}\``;
+            document.getElementById("nuAlertPre").innerHTML = `const message = \`<b>HTML</b>で装飾できます。<br>
+なんと<br>
+画像表示も可能！<br>
+↓<br>
+<a href="https://araisun.com/" target="_blank"><img src="https://araisun.com/img/site-logo.jpg"></a>\`;
+
+nu.alert(message, function() {
+    console.log("ok");
+});`;
         }
 
 
