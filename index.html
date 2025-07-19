@@ -54,18 +54,7 @@
       <h3>nu.loading</h3>
       <button id="nuLoading" class="nuButton" type="button">Run</button>
     </div>
-    <pre class="nuCodeBlock">
-nu.loading.show("読み込み中...");
-
-// 3秒後に非表示
-setTimeout(() => {
-  nu.loading.hide();
-}, 3000);
-</pre>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-        });
-    </script>
+    <pre id="nuLoadingPre" class="nuCodeBlock"></pre>
 
 
     <h2 class="mt80">トースト</h2>
@@ -73,26 +62,14 @@ setTimeout(() => {
       <h3>nu.toast</h3>
       <button id="nuToast" class="nuButton" type="button">Run</button>
     </div>
-    <pre class="nuCodeBlock">
-nu.toast.show("保存が完了しました！");
-</pre>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-        });
-    </script>
+    <pre id="nuToastPre" class="nuCodeBlock"></pre>
 
 
     <div class="nuFlexRow gap10 mt30">
       <h3>nu.toast</h3>
       <button id="nuToastDelay" class="nuButton" type="button">Run</button>
     </div>
-    <pre class="nuCodeBlock">
-nu.toast.show("エラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
-</pre>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-        });
-    </script>
+    <pre id="nuToastDelayPre" class="nuCodeBlock"></pre>
 
 
     <h2 class="mt80">ドロップダウンメニュー</h2>
@@ -100,47 +77,15 @@ nu.toast.show("エラーが発生しましたエラーが発生しましたエ�
       <h3>nu.dropdown</h3>
       <button id="dropdownBtn" class="nuButton" type="button">Run</button>
     </div>
-    <pre class="nuCodeBlock">
-nu.dropdown.attach("dropdownBtn",
-  [
-      {
-        label: "設定",
-        callback: ()=>console.log("設定")
-      },
-      {
-        label: "ログアウト",
-        callback: ()=>console.log("ログアウト")
-      }
-  ]);
-</pre>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-        });
-    </script>
+    <pre id="dropdownBtnPre" class="nuCodeBlock"></pre>
 
 
     <div class="nuFlexSpread gap10 mt30">
       <h3>nu.dropdown</h3>
       <button id="dropdownBtnLeft" class="nuMenuButton" type="button"></button>
     </div>
-    <pre class="nuCodeBlock">
-nu.dropdown.attach(
-  document.getElementById("dropdownBtnLeft"),
-  [
-      {
-        label: "設定",
-        callback: () => console.log("設定")
-      },
-      {
-        label: "ログアウト",
-        callback: () => console.log("ログアウト")
-      }
-  ]);
-</pre>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-        });
-    </script>
+    <pre id="dropdownBtnLeftPre" class="nuCodeBlock"></pre>
+
 
     <h2 class="mt80">セグメントボタン</h2>
     <div class="nuFlexColumn gap10 mt30">
@@ -270,9 +215,13 @@ nu.submit.values(
 
 
 <script>
+
+
+
     document.addEventListener("DOMContentLoaded", () => {
         "use strict";
 
+        nu.d.begin("🚀Welcome to nu.js !");
         //------------------------------------------------------------------------------------
         // カスタムアラート
         //------------------------------------------------------------------------------------
@@ -280,123 +229,161 @@ nu.submit.values(
             const code = `
 $("#nuAlertSimple").click(function() {
     nu.alert("メッセージ");
-});`.trim();
+});
+            `.trim();
 
-            // 表示用
-            document.getElementById("nuAlertSimplePre").textContent = code;
-
-            // 実行用
-            new Function(code)();
+            $("#nuAlertSimplePre").text(code); // 表示用
+            new Function(code)(); // 実行用
         }
 
         {
-            const message = `<b>HTML</b>で装飾できます。<br>
+            const code = `
+const message=\`
+<b>HTML</b>で装飾できます。<br>
 なんと<br>
 画像表示も可能！<br>
 ↓<br>
-<a href="https://araisun.com/" target="_blank"><img src="https://araisun.com/img/site-logo.jpg"></a>`;
+<a href="https://araisun.com/" target="_blank"><img src="https://araisun.com/img/site-logo.jpg"></a>
+\`.trim();
 
-            document.getElementById("nuAlert").addEventListener("click", () => {
-                nu.alert(message, function() {
-                    console.log("ok");
-                });
-            });
-            document.getElementById("nuAlertPre").innerHTML = `const message = \`<b>HTML</b>で装飾できます。<br>
-なんと<br>
-画像表示も可能！<br>
-↓<br>
-<a href="https://araisun.com/" target="_blank"><img src="https://araisun.com/img/site-logo.jpg"></a>\`;
+$("#nuAlert").click(function() {
+    nu.alert(message, function() {
+        console.log("ok");
+    });
+});
+            `.trim();
 
-nu.alert(message, function() {
-    console.log("ok");
-});`;
+            $("#nuAlertPre").html(code); // 表示用
+            new Function(code)(); // 実行用
         }
 
 
         {
-            document.getElementById("nuConfirm").addEventListener("click", () => {
-                nu.confirm("This is some message area.", function() {
-                    console.log("ok");
-                }, function() {
-                    console.log("cancel");
-                });
-            });
-            document.getElementById("nuConfirmPre").textContent = `nu.confirm("This is some message area.", function() {
-    console.log("ok");
-}, function() {
-    console.log("cancel");
-});`;
+            const code = `
+$("#nuConfirm").click(function() {
+    nu.confirm("This is some message area.", function() {
+        console.log("ok");
+    }, function() {
+        console.log("cancel");
+    });
+});
+            `.trim();
+
+            $("#nuConfirmPre").text(code); // 表示用
+            new Function(code)(); // 実行用
         }
 
         {
-            const items = [
-                { label: "いいえ",    callback: () => console.log("いいえ") },
-                { label: "はい",    callback: () => console.log("はい") }
-            ];
-            document.getElementById("nuSheetCustomAlert").addEventListener("click", () => {
-                nu.sheet("アラートをカスタマイズ", items);
-            });
-            document.getElementById("nuSheetCustomAlertPre").textContent = `const items = ${JSON.stringify(items)}
-nu.sheet("アラートをカスタマイズ", items);`;
+            const code = `
+const items = [
+  {label: "いいえ", callback: ()=>console.log("いいえ")},
+  {label: "はい", callback: ()=>console.log("はい")}
+];
+$("#nuSheetCustomAlert").click(function() {
+    nu.sheet("アラートをカスタマイズ", items);
+});
+            `.trim();
+
+            $("#nuSheetCustomAlertPre").text(code); // 表示用
+            new Function(code)(); // 実行用
         }
 
 
         {
-            //TODO: jsonにcallbackのようなロジックを含めるべきではない
-            // →「データとロジックを分離」する
-            const items = [
-                { label: "編集",    callback: () => console.log("編集") },
-                { label: "削除",    callback: () => console.log("削除") },
-                { label: "複製",    callback: () => console.log("複製") },
-                { label: "キャンセル", callback: null }
-            ];
-            document.getElementById("nuSheet").addEventListener("click", () => {
-                nu.sheet("操作を選んでください", items);
-            });
-            document.getElementById("nuSheetPre").textContent = `const items = ${JSON.stringify(items)}
-nu.sheet("操作を選んでください", items);`;
+            const code = `
+const items = [
+  { label: "編集", callback: ()=>console.log("編集") },
+  { label: "削除", callback: ()=>console.log("削除") },
+  { label: "複製", callback: ()=>console.log("複製") },
+  { label: "キャンセル", callback: null }
+];
+$("#nuSheet").click(function() {
+    nu.sheet("操作を選んでください", items);
+});
+            `.trim();
+
+            $("#nuSheetPre").text(code); // 表示用
+            new Function(code)(); // 実行用
+
         }
 
         //------------------------------------------------------------------------------------
         // ローディングインジケータ
         //------------------------------------------------------------------------------------
-        document.getElementById("nuLoading").addEventListener("click", () => {
-            nu.loading.show("読み込み中...");
+        {
+            const code = `
+$("#nuLoading").click(function() {
+    nu.loading.show("読み込み中...");
 
-            // 3秒後に非表示
-            setTimeout(() => {
-                nu.loading.hide();
-            }, 3000);
-        });
+    // 3秒後に非表示
+    setTimeout(() => {
+        nu.loading.hide();
+    }, 3000);
+});
+            `.trim();
+
+            $("#nuLoadingPre").text(code); // 表示用
+            new Function(code)(); // 実行用
+        }
+
 
         //------------------------------------------------------------------------------------
         // トースト通知
         //------------------------------------------------------------------------------------
-        document.getElementById("nuToast").addEventListener("click", () => {
-            nu.toast.show("保存が完了しました！");
-        });
+        {
+            const code = `
+$("#nuToast").click(function() {
+    nu.toast.show("保存が完了しました！");
+});
+            `.trim();
 
-        document.getElementById("nuToastDelay").addEventListener("click", () => {
-            nu.toast.show("エラーが発生しました<br>エラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
-        });
+            $("#nuToastPre").text(code); // 表示用
+            new Function(code)(); // 実行用
+        }
+
+        {
+            const code = `
+$("#nuToastDelay").click(function() {
+    nu.toast.show("エラーが発生しました<br>エラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
+});
+            `.trim();
+
+            $("#nuToastDelayPre").text(code); // 表示用
+            new Function(code)(); // 実行用
+        }
+
 
 
         //------------------------------------------------------------------------------------
         // ドロップダウンメニュー
         //------------------------------------------------------------------------------------
-        nu.dropdown.attach("dropdownBtn",
-            [
-                { label: "設定", callback: () => console.log("設定") },
-                { label: "ログアウト", callback: () => console.log("ログアウト") }
-            ]);
+        {
+            const code = `
+nu.dropdown.attach("dropdownBtn",
+  [
+    {label:"設定", callback:()=>console.log("設定")},
+    {label:"ログアウト", callback:()=>console.log("ログアウト")}
+  ]);
+            `.trim();
 
+            $("#dropdownBtnPre").text(code); // 表示用
+            new Function(code)(); // 実行用
+        }
 
-        nu.dropdown.attach(
-            document.getElementById("dropdownBtnLeft"),
-            [
-                { label: "設定", callback: () => console.log("設定") },
-                { label: "ログアウト", callback: () => console.log("ログアウト") }
-            ]);
+        {
+            const code = `
+nu.dropdown.attach(
+    document.getElementById("dropdownBtnLeft"),
+    [
+        { label: "設定", callback: () => console.log("設定") },
+        { label: "ログアウト", callback: () => console.log("ログアウト") }
+    ]);
+            `.trim();
+
+            $("#dropdownBtnLeftPre").text(code); // 表示用
+            new Function(code)(); // 実行用
+        }
+
 
 
         //------------------------------------------------------------------------------------

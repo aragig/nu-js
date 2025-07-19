@@ -4,6 +4,31 @@
     if(!window.nu) window.nu = {};
 
     //------------------------------------------------------------------------------------
+    // ログユーティリティ
+    //------------------------------------------------------------------------------------
+    {
+        if(!window.nu.d) window.nu.d = {};
+
+        window.nu.d.begin = function (logTitle) {
+            const logStyles = [
+                "background: linear-gradient(to right, #2c3e50, #4ca1af)",
+                "border: 1px solid #fff",
+                "color: #fff",
+                "font-weight: bold",
+                "padding: 6px 12px",
+                "font-size: 1rem",
+                "border-radius: 4px",
+                "box-shadow: 0 2px 6px rgba(0,0,0,0.2)"
+            ].join(";");
+            console.group(`%c${logTitle}`, logStyles);
+        };
+
+        window.nu.d.log = function (...args) {
+            console.log(...args);
+        };
+    }
+
+    //------------------------------------------------------------------------------------
     // テストコードのテスト用
     //------------------------------------------------------------------------------------
     {
