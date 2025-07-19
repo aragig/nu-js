@@ -298,6 +298,14 @@ pre.nuCodeBlock {
   transform: translateY(20px);
   transition: opacity 0.2s ease, transform 0.2s ease;
   pointer-events: none; }
+  .nuToast.nuToast_SUCCESS {
+    background: #2ecc71; }
+  .nuToast.nuToast_ERROR {
+    background: #e74c3c; }
+  .nuToast.nuToast_WARNING {
+    background: #f39c12; }
+  .nuToast.nuToast_INFO {
+    background: #3498db; }
 
 .nuDropdownMenu {
   position: absolute;

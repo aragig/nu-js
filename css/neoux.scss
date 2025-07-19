@@ -352,6 +352,22 @@ pre.nuCodeBlock {
     transform: translateY(20px);
     transition: opacity 0.2s ease, transform 0.2s ease;
     pointer-events: none;
+
+    &.nuToast_SUCCESS {
+        background: #2ecc71;
+    }
+
+    &.nuToast_ERROR {
+        background: #e74c3c;
+    }
+
+    &.nuToast_WARNING {
+        background: #f39c12;
+    }
+
+    &.nuToast_INFO {
+        background: #3498db;
+    }
 }
 
 //------------------------------------------------------------------------------------

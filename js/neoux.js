@@ -251,9 +251,20 @@
     //------------------------------------------------------------------------------------
     {
 
-        window.nu.toast = function showToast(message, duration = 3000) {
+        /**
+         * トースト通知を表示する
+         * @param {string} message - 表示するメッセージ
+         * @param {Object} [options] - 表示オプション（省略可）
+         * @param {number} [options.duration=5000] - 表示時間（ミリ秒）
+         * @param {string} [options.type="default"] - スタイルタイプ: "success" | "error" | "warning" | "info"
+         */
+        window.nu.toast = function showToast(message, options = {}) {
+            const duration = options.duration ?? 5000;
+            const type = options.type ?? "default";
+
             const toast = document.createElement("div");
             toast.className = "nuToast";
+            toast.classList.add(`nuToast_${type.toUpperCase()}`);
             toast.textContent = message;
 
             document.body.appendChild(toast);
