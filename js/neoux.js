@@ -581,14 +581,12 @@
     // 入力欄に対して文字数カウンターを追加する
     //------------------------------------------------------------------------------------
     {
-        if (!window.nu.count) window.nu.count = {};
-
         /**
          * 入力欄に対して文字数カウンターを追加する
          * @param {string} inputId - inputまたはtextareaのid名
          * @param {number} limit - 文字数制限（例: 30）
          */
-        window.nu.count.attach = function (inputId, limit) {
+        window.nu.count = function (inputId, limit) {
             if (!inputId || typeof limit !== "number") return;
 
             const input = document.getElementById(inputId);

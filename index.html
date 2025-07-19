@@ -434,8 +434,7 @@ nu.dropdown.attach(
         // 入力欄に対して文字数カウンターを追加する　フィールド
         //------------------------------------------------------------------------------------
         {
-            const code = `nu.count.attach("formName", 30);`;
-
+            const code = `nu.count("formName", 30);`;
             $("#formNamePre").text(code); // 表示用
             new Function(code)(); // 実行用
         }
@@ -444,8 +443,7 @@ nu.dropdown.attach(
         // 入力欄に対して文字数カウンターを追加する　テキストエリア
         //------------------------------------------------------------------------------------
         {
-            const code = `nu.count.attach("formInquire", 140);`;
-
+            const code = `nu.count("formInquire", 140);`;
             $("#formInquirePre").text(code); // 表示用
             new Function(code)(); // 実行用
         }
