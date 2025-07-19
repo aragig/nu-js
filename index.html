@@ -410,7 +410,17 @@ nu.segment("fruitsSegmentArea", {
         // 検索ボックス
         //------------------------------------------------------------------------------------
         {
-            const code = `nu.search("searchArea", "/sample/site_search_index.json");`;
+            const code = `
+nu.search("searchArea", "/sample/site_search_index.json", {
+    onConfirm: function (text) {
+        console.log("🔍検索確定:", text);
+        nu.toast.show("検索確定: " + text);
+    },
+    onBlur: function (text) {
+        console.log("🔎フォーカスアウト:", text);
+    }
+});
+`.trim();
             $("#searchAreaPre").text(code); // 表示用
             new Function(code)(); // 実行用
         }

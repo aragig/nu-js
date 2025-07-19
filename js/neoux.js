@@ -438,8 +438,11 @@
          * 検索UIを生成し、検索ロジックをバインドする
          * @param {string} areaId - 検索UIを配置するid名
          * @param {string} jsonPath - 検索インデックスJSONのURL
+         * @param {Object} [callbacks] - オプションのコールバック関数
+         * @param {function(string):void} [callbacks.onConfirm] - 確定入力時の処理
+         * @param {function(string):void} [callbacks.onBlur] - フォーカスアウト時の処理
          */
-        window.nu.search = function (areaId, jsonPath) {
+        window.nu.search = function (areaId, jsonPath, callbacks) {
             let container = document.getElementById(areaId);
             if (container.querySelector(".nuSearchContainer")) return;
 
@@ -516,21 +519,27 @@
                 }
             });
 
-            // 入力確定イベント（Enterキー）
+            // 検索確定の判定
+            let isComposing = false;
+            searchBox.addEventListener("compositionstart", () => isComposing = true);
+            searchBox.addEventListener("compositionend", () => isComposing = false);
+
             searchBox.addEventListener("keydown", function (e) {
-                if (e.key === "Enter") {
+                if (!isComposing && e.key === "Enter") {
                     e.preventDefault();
-                    const confirmedValue = this.value.trim();
-                    console.log("確定入力:", confirmedValue);
-                    // ここに任意の処理を追加
+                    const val = this.value.trim();
+                    if (val && typeof callbacks.onConfirm === "function") {
+                        callbacks.onConfirm(val);
+                    }
                 }
             });
 
             // フォーカスが離れたとき
             searchBox.addEventListener("blur", function () {
-                const blurValue = this.value.trim();
-                console.log("フォーカスアウト:", blurValue);
-                // ここに任意の処理を追加
+                const val = this.value.trim();
+                if (val && typeof callbacks.onBlur === "function") {
+                    callbacks.onBlur(val);
+                }
             });
 
             // 「/」キー押下で検索ボックスにフォーカス
