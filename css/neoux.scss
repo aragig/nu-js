@@ -201,34 +201,6 @@ pre.nuCodeBlock {
     opacity: 0;
     transition: opacity 0.2s ease;
 
-    &.sheetMode {
-        padding: 20px 0 10px;
-
-        .nuAlertButtonRow {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 0;
-        }
-
-        .nuAlertButton {
-            background: #f9f9f9;
-            color: #007AFF;
-            border-top: 1px solid #ccc;
-            border-radius: 0;
-            font-weight: normal;
-            padding: 12px 0;
-
-            &:last-child {
-                background: #fff;
-                font-weight: bold;
-            }
-
-            &.cancel {
-                color: #ff3b30;
-            }
-        }
-    }
-
     .nuAlertMessage {
         margin-bottom: 20px;
         font-size: 16px;
@@ -250,10 +222,72 @@ pre.nuCodeBlock {
         font-size: 14px;
         min-width: 70px;
 
-        &.cancel {
+        &.nuAlertButton_DELETE {
+            background: #ff3b30;
+        }
+        &.nuAlertButton_CANCEL {
             background: #aaa;
         }
     }
+}
+
+.nuSheetBox {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px 0 10px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    max-width: 90%;
+    min-width: 250px;
+    font-family: sans-serif;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+
+
+    .nuAlertButtonRow {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    .nuAlertMessage {
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+
+    .nuAlertButtonRow {
+        display: flex;
+        justify-content: center;
+        gap: 0;
+    }
+
+    .nuAlertButton {
+        cursor: pointer;
+        font-size: 15px;
+        padding: 12px 0;
+        background: white;
+        border: none;
+        border-top: 1px solid #ededed;
+        font-weight: normal;
+        color: #007AFF;
+
+        &:last-child {
+            background: #fff;
+            font-weight: bold;
+        }
+
+        &.nuAlertButton_DELETE {
+            color: #ff3b30;
+        }
+        //&.nuAlertButton_CANCEL {
+        //    color: #999;
+        //}
+    }
+
 }
 
 //------------------------------------------------------------------------------------

@@ -185,24 +185,6 @@ pre.nuCodeBlock {
   text-align: center;
   opacity: 0;
   transition: opacity 0.2s ease; }
-  .nuAlertBox.sheetMode {
-    padding: 20px 0 10px; }
-    .nuAlertBox.sheetMode .nuAlertButtonRow {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0; }
-    .nuAlertBox.sheetMode .nuAlertButton {
-      background: #f9f9f9;
-      color: #007AFF;
-      border-top: 1px solid #ccc;
-      border-radius: 0;
-      font-weight: normal;
-      padding: 12px 0; }
-      .nuAlertBox.sheetMode .nuAlertButton:last-child {
-        background: #fff;
-        font-weight: bold; }
-      .nuAlertBox.sheetMode .nuAlertButton.cancel {
-        color: #ff3b30; }
   .nuAlertBox .nuAlertMessage {
     margin-bottom: 20px;
     font-size: 16px; }
@@ -219,8 +201,52 @@ pre.nuCodeBlock {
     cursor: pointer;
     font-size: 14px;
     min-width: 70px; }
-    .nuAlertBox .nuAlertButton.cancel {
+    .nuAlertBox .nuAlertButton.nuAlertButton_DELETE {
+      background: #ff3b30; }
+    .nuAlertBox .nuAlertButton.nuAlertButton_CANCEL {
       background: #aaa; }
+
+.nuSheetBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px 0 10px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  max-width: 90%;
+  min-width: 250px;
+  font-family: sans-serif;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.2s ease; }
+  .nuSheetBox .nuAlertButtonRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0; }
+  .nuSheetBox .nuAlertMessage {
+    margin-bottom: 20px;
+    font-size: 16px; }
+  .nuSheetBox .nuAlertButtonRow {
+    display: flex;
+    justify-content: center;
+    gap: 0; }
+  .nuSheetBox .nuAlertButton {
+    cursor: pointer;
+    font-size: 15px;
+    padding: 12px 0;
+    background: white;
+    border: none;
+    border-top: 1px solid #ededed;
+    font-weight: normal;
+    color: #007AFF; }
+    .nuSheetBox .nuAlertButton:last-child {
+      background: #fff;
+      font-weight: bold; }
+    .nuSheetBox .nuAlertButton.nuAlertButton_DELETE {
+      color: #ff3b30; }
 
 .nuLoadingSpinner {
   width: 48px;

@@ -65,6 +65,7 @@
         };
     }
 
+    //TODO オーバーレイをクリックしたら閉じたい場合もあるため、コールバックを実装する
     //------------------------------------------------------------------------------------
     // オーバーレイ制御ユーティリティ
     //------------------------------------------------------------------------------------
@@ -110,19 +111,28 @@
         /**
          * @private
          * @param {string} message
-         * @param {HTMLElement} buttons
+         * @param {Array.<Object>} buttonMap - ボタンアイテム
+         * @param {Object} [handlers] - オプションのコールバック関数
          */
-        function showSheet(message, buttons) {
+        function showSheet(message, buttonMap, handlers) {
             window.nu.overlay.show();
 
+            // ボタンにコールバックを登録
+            const buttons = [];
+            for (let key in buttonMap) {
+                const label = buttonMap[key];
+                const handlerName = "on" + key[0].toUpperCase() + key.slice(1);
+                const callback = handlers?.[handlerName];
+                const btnClassName = key.toUpperCase();
+
+                buttons.push({ label, callback, btnClassName });
+            }
+
             const box = document.createElement("div");
-            box.className = "nuAlertBox";
 
             // ボタン数でシートモードを判定
             const isSheetMode = buttons.length >= 3;
-            if (isSheetMode) {
-                box.classList.add("sheetMode");
-            }
+            box.className = isSheetMode ? "nuSheetBox" : "nuAlertBox";
 
             box.style.opacity = "0";
 
@@ -137,7 +147,12 @@
             buttons.forEach(btn => {
                 const button = document.createElement("button");
                 button.className = "nuAlertButton";
-                if (btn.cancel) button.classList.add("cancel");
+
+                // キーに応じたクラス名を付ける
+                if (btn.btnClassName) {
+                    button.classList.add(`nuAlertButton_${btn.btnClassName}`); // プレフィックス付きが無難
+                }
+
                 button.textContent = btn.label;
 
                 button.addEventListener("click", async () => {
@@ -168,18 +183,16 @@
         // グローバルに公開
         //------------------------------------------------------------------------------------
         window.nu.alert = function (message, onOk) {
-            showSheet(message, [
-                { label: "OK", callback: () => onOk?.() }
-            ]);
+            showSheet(message, { ok: "OK" }, {onOk: onOk});
         };
         window.nu.confirm = function (message, onOk, onCancel) {
-            showSheet(message, [
-                { label: "キャンセル", cancel: true, callback: () => onCancel?.() },
-                { label: "OK", callback: () => onOk?.() }
-            ]);
+            showSheet(message, { cancel: "キャンセル", ok: "OK" }, {
+                onOk: onOk,
+                onCancel: onCancel
+            });
         };
-        window.nu.sheet = function (message, buttons) {
-            showSheet(message, buttons);
+        window.nu.sheet = function (message, buttons, callbacks) {
+            showSheet(message, buttons, callbacks);
         };
     }
 
@@ -328,7 +341,7 @@
          * メニューボタンにアタッチ
          * @param buttonId - メニューボタンのid名
          * @param {Array.<Object>} menuMap - ドロップダウンアイテム
-         * @param {Function} handlers - コールバック
+         * @param {Object} [handlers] - コールバック
          */
         window.nu.dropdown = function (buttonId, menuMap, handlers) {
             const buttonElement = document.getElementById(buttonId);

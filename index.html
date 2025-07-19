@@ -186,7 +186,7 @@
         {
             const code = `
 $("#nuAlertSimple").click(function() {
-    nu.alert("メッセージ");
+  nu.alert("メッセージ");
 });
             `.trim();
 
@@ -208,9 +208,9 @@ const message=\`
 \`.trim();
 
 $("#nuAlert").click(function() {
-    nu.alert(message, function() {
-        console.log("ok");
-    });
+  nu.alert(message, function() {
+    nu.toast("Clicked OK");
+  });
 });
             `.trim();
 
@@ -225,11 +225,11 @@ $("#nuAlert").click(function() {
         {
             const code = `
 $("#nuConfirm").click(function() {
-    nu.confirm("This is some message area.", function() {
-        console.log("ok");
-    }, function() {
-        console.log("cancel");
-    });
+  nu.confirm("カスタムアラート", function() {
+    nu.toast("Clicked OK");
+  }, function() {
+    nu.toast("Clicked キャンセル");
+  });
 });
             `.trim();
 
@@ -243,12 +243,16 @@ $("#nuConfirm").click(function() {
         //------------------------------------------------------------------------------------
         {
             const code = `
-const items = [
-  {label: "いいえ", callback: ()=>console.log("いいえ")},
-  {label: "はい", callback: ()=>console.log("はい")}
-];
 $("#nuSheetCustomAlert").click(function() {
-    nu.sheet("アラートをカスタマイズ", items);
+  nu.sheet("削除しますがよろしいですか？",
+   {cancel:"キャンセル",delete:"削除"},{
+    onCancel: function() {
+      nu.toast("Clicked キャンセル");
+    },
+    onDelete: function() {
+      nu.toast("Clicked 削除");
+    }
+  });
 });
             `.trim();
 
@@ -262,14 +266,28 @@ $("#nuSheetCustomAlert").click(function() {
         //------------------------------------------------------------------------------------
         {
             const code = `
-const items = [
-  { label: "編集", callback: ()=>console.log("編集") },
-  { label: "削除", callback: ()=>console.log("削除") },
-  { label: "複製", callback: ()=>console.log("複製") },
-  { label: "キャンセル", callback: null }
-];
+const items = {
+  edit: "編集",
+  duplicate: "複製",
+  delete: "削除",
+  cancel: "キャンセル"
+};
+
 $("#nuSheet").click(function() {
-    nu.sheet("操作を選んでください", items);
+  nu.sheet("操作を選んでください", items, {
+    onEdit: function() {
+      console.log("clicked 編集");
+    },
+    onDuplicate: function() {
+      console.log("clicked 複製");
+    },
+    onDelete: function() {
+      console.log("clicked 削除");
+    },
+    onCancel: function() {
+      console.log("clicked キャンセル");
+    }
+  });
 });
             `.trim();
 
