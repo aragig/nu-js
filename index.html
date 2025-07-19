@@ -107,12 +107,7 @@
       <h3>nu.search</h3>
       <div id="searchArea"></div>
     </div>
-    <pre class="nuCodeBlock">
-nu.search.attach(
-  document.getElementById("searchArea"),
-  "/sample/site_search_index.json"
-);
-</pre>
+    <pre id="searchAreaPre" class="nuCodeBlock"></pre>
 
     <h2 class="mt80">入力欄に対して文字数カウンターを追加する</h2>
     <div class="nuFlexColumn gap10 mt30">
@@ -414,7 +409,9 @@ nu.segment("fruitsSegmentArea", {
         // 検索ボックス
         //------------------------------------------------------------------------------------
         {
-            nu.search("searchArea", "/sample/site_search_index.json");
+            const code = `nu.search("searchArea", "/sample/site_search_index.json");`;
+            $("#searchAreaPre").text(code); // 表示用
+            new Function(code)(); // 実行用
         }
 
 
