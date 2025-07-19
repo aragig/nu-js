@@ -433,13 +433,14 @@
     // 検索ボックス
     //------------------------------------------------------------------------------------
     {
-        if (!window.nu.search) window.nu.search = {};
+        // if (!window.nu.search) window.nu.search = {};
         /**
          * 検索UIを生成し、検索ロジックをバインドする
-         * @param {HTMLElement} container - 検索UIを配置する親要素
+         * @param {string} areaId - 検索UIを配置するid名
          * @param {string} jsonPath - 検索インデックスJSONのURL
          */
-        window.nu.search.attach = function (container, jsonPath) {
+        window.nu.search = function (areaId, jsonPath) {
+            let container = document.getElementById(areaId);
             if (container.querySelector(".nuSearchContainer")) return;
 
             // 検索ボックス＋アイコン
