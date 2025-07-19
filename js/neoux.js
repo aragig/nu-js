@@ -370,8 +370,9 @@
     // セグメントボタン
     //------------------------------------------------------------------------------------
     {
-        if (!window.nu.segment) window.nu.segment = {};
+        // if (!window.nu.segment) window.nu.segment = {};
         /**
+         * @private
          * segment要素にアタッチ
          * @param {HTMLElement} container - inputとlabelを内包する親div
          * @param {Function} callback - 選択時のコールバック（valueを引数として渡す）
@@ -389,7 +390,7 @@
 
         /**
          * segment要素を生成してDOMに追加
-         * @param {HTMLElement} mountTarget - 追加先の親要素
+         * @param {string} mountId - 追加先の親要素
          * @param {Object} config - セグメント設定オブジェクト
          * @param {string} config.id - div要素のid
          * @param {string} config.name - ラジオグループ名
@@ -397,7 +398,7 @@
          * @param {string} config.value - 初期選択値
          * @param {Function} callback - 選択時のコールバック（引数: value）
          */
-        window.nu.segment.create = function (mountTarget, config, callback) {
+        window.nu.segment = function (mountId, config, callback) {
             const { id, name, options, value: initialValue } = config;
             const container = document.createElement("div");
             container.className = "nuSegment";
@@ -425,7 +426,7 @@
             segmentAttach(container, callback);
 
             // DOMに追加
-            mountTarget.appendChild(container);
+            document.getElementById(mountId).appendChild(container);
         };
     }
 
