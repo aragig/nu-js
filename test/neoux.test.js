@@ -225,12 +225,40 @@ describe("nu.loading", () => {
 
 
 //------------------------------------------------------------------------------------
-// TODO テスト: トースト通知
+// テスト: トースト通知
 //------------------------------------------------------------------------------------
+describe("nu.toast", () => {
+    beforeEach(() => {
+        document.body.innerHTML = "";
+    });
 
+    it("toastがDOMに追加される", (done) => {
+        nu.toast("テストメッセージ", 1000); // 1秒表示
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast).to.exist;
+        expect(toast.textContent).to.equal("テストメッセージ");
+
+        // アニメーション適用を待つ
+        requestAnimationFrame(() => {
+            expect(toast.style.opacity).to.equal("1");
+            done();
+        });
+    });
+
+    it("一定時間後にtoastが消える", (done) => {
+        nu.toast("消えるテスト", 500); // 0.5秒表示
+
+        setTimeout(() => {
+            const toast = document.querySelector(".nuToast");
+            expect(toast).to.be.null;
+            done();
+        }, 800); // 500ms + α（アニメーション猶予）
+    });
+});
 
 //------------------------------------------------------------------------------------
-// TODO テスト: ドロップダウンメニュー
+// テスト: ドロップダウンメニュー
 //------------------------------------------------------------------------------------
 describe("nu.dropdown", () => {
     beforeEach(() => {
