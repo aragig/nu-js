@@ -342,7 +342,7 @@ describe("nu.count", () => {
         input.value = "abc";
         document.body.appendChild(input);
 
-        nu.count.attach(input, 10);
+        nu.count.attach("testInput", 10);
 
         const counter = document.getElementById("testInput_counter");
         expect(counter).to.exist;
@@ -356,7 +356,7 @@ describe("nu.count", () => {
         textarea.value = "これは長いテキストです";
         document.body.appendChild(textarea);
 
-        nu.count.attach(textarea, 5); // 制限5を超えている
+        nu.count.attach("testTextarea", 5); // 制限5を超えている
 
         const counter = document.getElementById("testTextarea_counter");
         expect(counter).to.exist;
@@ -370,8 +370,8 @@ describe("nu.count", () => {
         input.value = "1234";
         document.body.appendChild(input);
 
-        nu.count.attach(input, 10);
-        nu.count.attach(input, 10); // 2回呼び出し
+        nu.count.attach("doubleInput", 10);
+        nu.count.attach("doubleInput", 10); // 2回呼び出し
 
         const counters = document.querySelectorAll("#doubleInput_counter");
         expect(counters.length).to.equal(1);
@@ -382,7 +382,7 @@ describe("nu.count", () => {
         input.value = "no id";
         document.body.appendChild(input);
 
-        nu.count.attach(input, 10);
+        nu.count.attach("", 10);
 
         const counter = document.querySelector(".nuCharCounter");
         expect(counter).to.be.null;
@@ -394,7 +394,7 @@ describe("nu.count", () => {
         input.value = "123";
         document.body.appendChild(input);
 
-        nu.count.attach(input, 10);
+        nu.count.attach("dynamicInput", 10);
 
         const counter = document.getElementById("dynamicInput_counter");
         expect(counter.textContent).to.equal("3");

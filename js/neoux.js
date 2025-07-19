@@ -585,11 +585,17 @@
 
         /**
          * 入力欄に対して文字数カウンターを追加する
-         * @param {HTMLElement} input - inputまたはtextarea要素
+         * @param {string} inputId - inputまたはtextareaのid名
          * @param {number} limit - 文字数制限（例: 30）
          */
-        window.nu.count.attach = function (input, limit) {
-            if (!input || typeof limit !== "number" || !input.id) return;
+        window.nu.count.attach = function (inputId, limit) {
+            if (!inputId || typeof limit !== "number") return;
+
+            const input = document.getElementById(inputId);
+            if (!input) {
+                console.warn(`inputId "${inputId}" の要素が見つかりません`);
+                return;
+            }
 
             // すでにカウンターが追加済みならスキップ
             const existing = document.getElementById(input.id + "_counter");
