@@ -32,6 +32,12 @@
     </div>
     <pre id="nuConfirmPre" class="nuCodeBlock"></pre>
 
+    <div class="nuFlexRow gap10 mt30">
+      <h3>nu.sheet</h3>
+      <button id="nuSheetCustomAlert" class="nuButton" type="button" data-html-safe>Run</button>
+    </div>
+    <pre id="nuSheetCustomAlertPre" class="nuCodeBlock"></pre>
+
 
     <div class="nuFlexRow gap10 mt30">
       <h3>nu.sheet</h3>
@@ -302,6 +308,18 @@ nu.submit.values(
 }, function() {
     console.log("cancel");
 });`;
+        }
+
+        {
+            const items = [
+                { label: "いいえ",    callback: () => console.log("いいえ") },
+                { label: "はい",    callback: () => console.log("はい") }
+            ];
+            document.getElementById("nuSheetCustomAlert").addEventListener("click", () => {
+                nu.sheet("アラートをカスタマイズ", items);
+            });
+            document.getElementById("nuSheetCustomAlertPre").textContent = `const items = ${JSON.stringify(items)}
+nu.sheet("アラートをカスタマイズ", items);`;
         }
 
 
