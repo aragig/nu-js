@@ -11,6 +11,8 @@
 <body>
 <div id="nuContents">
   <h1>ぬ - nu.js</h1>
+
+  nu.jsはライブラリに依存しない Vanilla JS で作られているUI補助ツールです。jqueryとの共存も可能です。
   <form id="nuForm">
     <h2 class="mt40">アラート</h2>
     <div class="nuFlexRow gap10 mt30">
@@ -269,15 +271,22 @@ nu.submit.values(
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+        "use strict";
 
         //------------------------------------------------------------------------------------
         // カスタムアラート
         //------------------------------------------------------------------------------------
         {
-            document.getElementById("nuAlertSimple").addEventListener("click", () => {
-                nu.alert("メッセージ");
-            });
-            document.getElementById("nuAlertSimplePre").textContent = `nu.alert("メッセージ");`;
+            const code = `
+$("#nuAlertSimple").click(function() {
+    nu.alert("メッセージ");
+});`.trim();
+
+            // 表示用
+            document.getElementById("nuAlertSimplePre").textContent = code;
+
+            // 実行用
+            new Function(code)();
         }
 
         {
