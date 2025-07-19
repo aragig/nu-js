@@ -92,43 +92,14 @@
       <h3>nu.segment</h3>
       <div id="sortSegmentArea"></div>
     </div>
-    <pre class="nuCodeBlock">
-nu.segment.create(document.getElementById("sortSegmentArea"), {
-  id: "sortSegment",
-  name: "sampleSortOption",
-  value: "最新",
-  options: [
-      { label: "最新", value: "最新" },
-      { label: "人気", value: "人気" },
-      { label: "古い順", value: "古い順" }
-  ]
-}, (val) => console.log("Sort:", val));
-</pre>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-        });
-    </script>
+    <pre id="sortSegmentAreaPre" class="nuCodeBlock"></pre>
+
 
     <div class="nuFlexColumn gap10 mt30">
       <h3>nu.segment</h3>
       <div id="fruitsSegmentArea"></div>
     </div>
-    <pre class="nuCodeBlock">
-nu.segment.create(document.getElementById("fruitsSegmentArea"), {
-  id: "fruitsSegment",
-  name: "sampleFruitsOption",
-  value: "メロン",
-  options: [
-      { label: "りんご", value: "りんご" },
-      { label: "バナナ", value: "バナナ" },
-      { label: "メロン", value: "メロン" }
-  ]
-}, (val) => console.log("Fruits:", val));
-</pre>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-        });
-    </script>
+    <pre id="fruitsSegmentAreaPre" class="nuCodeBlock"></pre>
 
 
     <h2 class="mt80">検索ボックス</h2>
@@ -398,30 +369,47 @@ nu.dropdown.attach(
         //------------------------------------------------------------------------------------
         // セグメントボタン　その１
         //------------------------------------------------------------------------------------
-        nu.segment.create(document.getElementById("sortSegmentArea"), {
-            id: "sortSegment",
-            name: "sampleSortOption",
-            value: "最新",
-            options: [
-                { label: "最新", value: "最新" },
-                { label: "人気", value: "人気" },
-                { label: "古い順", value: "古い順" }
-            ]
-        }, (val) => console.log("Sort:", val));
+        {
+            const code = `
+nu.segment.create(document.getElementById("sortSegmentArea"), {
+    id: "sortSegment",
+    name: "sampleSortOption",
+    value: "最新",
+    options: [
+        { label: "最新", value: "最新" },
+        { label: "人気", value: "人気" },
+        { label: "古い順", value: "古い順" }
+    ]
+}, (val) => console.log("Sort:", val));
+            `.trim();
+
+
+            $("#sortSegmentAreaPre").text(code); // 表示用
+            new Function(code)(); // 実行用
+        }
+
 
         //------------------------------------------------------------------------------------
         // セグメントボタン　その２
         //------------------------------------------------------------------------------------
-        nu.segment.create(document.getElementById("fruitsSegmentArea"), {
-            id: "fruitsSegment",
-            name: "sampleFruitsOption",
-            value: "メロン",
-            options: [
-                { label: "りんご", value: "りんご" },
-                { label: "バナナ", value: "バナナ" },
-                { label: "メロン", value: "メロン" }
-            ]
-        }, (val) => console.log("Fruits:", val));
+        {
+            const code = `
+nu.segment.create(document.getElementById("fruitsSegmentArea"), {
+    id: "fruitsSegment",
+    name: "sampleFruitsOption",
+    value: "メロン",
+    options: [
+        { label: "りんご", value: "りんご" },
+        { label: "バナナ", value: "バナナ" },
+        { label: "メロン", value: "メロン" }
+    ]
+}, (val) => console.log("Fruits:", val));
+            `.trim();
+
+            $("#fruitsSegmentAreaPre").text(code); // 表示用
+            new Function(code)(); // 実行用
+        }
+
 
 
         //------------------------------------------------------------------------------------
