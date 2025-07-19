@@ -16,52 +16,28 @@
       <h3>nu.alert</h3>
       <button id="nuAlertSimple" class="nuButton" type="button">Run</button>
     </div>
-    <pre class="nuCodeBlock" data-html-safe>
-nu.alert("メッセージ");
-</pre>
+    <pre id="nuAlertSimplePre" class="nuCodeBlock"></pre>
+
 
     <div class="nuFlexRow gap10 mt30">
       <h3>nu.alert</h3>
         <button id="nuAlert" class="nuButton" type="button">Run</button>
       </div>
-    <pre class="nuCodeBlock" data-html-safe>
-const message = `<b>HTML</b>で装飾できます。<br>
-なんと<br>
-画像も表示可能！<br>
-↓<br>
-<a href="https://araisun.com/" target="_blank"><img src="https://araisun.com/img/site-logo.jpg"></a>`;
-
-nu.alert(message, function() {
-    console.log("ok");
-});
-</pre>
+    <pre id="nuAlertPre" class="nuCodeBlock" data-html-safe></pre>
 
 
     <div class="nuFlexRow gap10 mt30">
       <h3>nu.confirm</h3>
       <button id="nuConfirm" class="nuButton" type="button">Run</button>
     </div>
-    <pre class="nuCodeBlock">
-nu.confirm("This is some message area.", function() {
-  console.log("ok");
-}, function() {
-  console.log("cancel");
-});
-</pre>
+    <pre id="nuConfirmPre" class="nuCodeBlock"></pre>
 
 
     <div class="nuFlexRow gap10 mt30">
       <h3>nu.sheet</h3>
-      <button id="nuSheet" class="nuButton" type="button">Run</button>
+      <button id="nuSheet" class="nuButton" type="button" data-html-safe>Run</button>
     </div>
-    <pre class="nuCodeBlock">
-nu.sheet("操作を選んでください", [
-  { label: "編集", callback: ()=>console.log("編集") },
-  { label: "削除", callback: ()=>console.log("削除") },
-  { label: "複製", callback: ()=>console.log("複製") },
-  { label: "キャンセル", callback: null }
-]);
-</pre>
+    <pre id="nuSheetPre" class="nuCodeBlock"></pre>
 
 
     <h2 class="mt80">ローディングインジケータ</h2>
@@ -77,6 +53,10 @@ setTimeout(() => {
   nu.loading.hide();
 }, 3000);
 </pre>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        });
+    </script>
 
 
     <h2 class="mt80">トースト</h2>
@@ -87,6 +67,11 @@ setTimeout(() => {
     <pre class="nuCodeBlock">
 nu.toast.show("保存が完了しました！");
 </pre>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        });
+    </script>
+
 
     <div class="nuFlexRow gap10 mt30">
       <h3>nu.toast</h3>
@@ -95,6 +80,10 @@ nu.toast.show("保存が完了しました！");
     <pre class="nuCodeBlock">
 nu.toast.show("エラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
 </pre>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        });
+    </script>
 
 
     <h2 class="mt80">ドロップダウンメニュー</h2>
@@ -115,6 +104,10 @@ nu.dropdown.attach("dropdownBtn",
       }
   ]);
 </pre>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        });
+    </script>
 
 
     <div class="nuFlexSpread gap10 mt30">
@@ -135,6 +128,10 @@ nu.dropdown.attach(
       }
   ]);
 </pre>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        });
+    </script>
 
     <h2 class="mt80">セグメントボタン</h2>
     <div class="nuFlexColumn gap10 mt30">
@@ -153,6 +150,10 @@ nu.segment.create(document.getElementById("sortSegmentArea"), {
   ]
 }, (val) => console.log("Sort:", val));
 </pre>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        });
+    </script>
 
     <div class="nuFlexColumn gap10 mt30">
       <h3>nu.segment</h3>
@@ -170,6 +171,10 @@ nu.segment.create(document.getElementById("fruitsSegmentArea"), {
   ]
 }, (val) => console.log("Fruits:", val));
 </pre>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        });
+    </script>
 
 
     <h2 class="mt80">検索ボックス</h2>
@@ -183,7 +188,19 @@ nu.search.attach(
   "/sample/site_search_index.json"
 );
 </pre>
-
+<script>
+  //------------------------------------------------------------------------------------
+  // Submit
+  //------------------------------------------------------------------------------------
+  document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("nuSubmit").addEventListener("click", () => {
+          nu.submit.values(
+              document.getElementById("nuForm"),
+              (vals) => console.table(vals)
+          );
+      });
+  });
+</script>
 
     <h2 class="mt80">入力欄に対して文字数カウンターを追加する</h2>
     <div class="nuFlexColumn gap10 mt30">
@@ -245,54 +262,64 @@ nu.submit.values(
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        function escapeHtml(str) {
-            return str
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
-        document.querySelectorAll('pre.nuCodeBlock[data-html-safe]').forEach(pre => {
-            const raw = pre.innerHTML.trim();
-            pre.innerHTML = escapeHtml(raw);
-        });
 
         //------------------------------------------------------------------------------------
         // カスタムアラート
         //------------------------------------------------------------------------------------
-        document.getElementById("nuAlertSimple").addEventListener("click", () => {
-            nu.alert("メッセージ");
-        });
+        {
+            document.getElementById("nuAlertSimple").addEventListener("click", () => {
+                nu.alert("メッセージ");
+            });
+            document.getElementById("nuAlertSimplePre").textContent = `nu.alert("メッセージ");`;
+        }
 
-        document.getElementById("nuAlert").addEventListener("click", () => {
+        {
             const message = `<b>HTML</b>で装飾できます。<br>
 なんと<br>
-画像も表示可能！<br>
+画像表示も可能！<br>
 ↓<br>
 <a href="https://araisun.com/" target="_blank"><img src="https://araisun.com/img/site-logo.jpg"></a>`;
 
-            nu.alert(message, function() {
-                console.log("ok");
+            document.getElementById("nuAlert").addEventListener("click", () => {
+                nu.alert(message, function() {
+                    console.log("ok");
+                });
             });
-        });
+            document.getElementById("nuAlertPre").innerHTML = `const message = \`${message}\``;
+        }
 
-        document.getElementById("nuConfirm").addEventListener("click", () => {
-            nu.confirm("This is some message area.", function() {
-                console.log("ok");
-            }, function() {
-                console.log("cancel");
+
+        {
+            document.getElementById("nuConfirm").addEventListener("click", () => {
+                nu.confirm("This is some message area.", function() {
+                    console.log("ok");
+                }, function() {
+                    console.log("cancel");
+                });
             });
-        });
+            document.getElementById("nuConfirmPre").textContent = `nu.confirm("This is some message area.", function() {
+    console.log("ok");
+}, function() {
+    console.log("cancel");
+});`;
+        }
 
-        document.getElementById("nuSheet").addEventListener("click", () => {
-            nu.sheet("操作を選んでください", [
+
+        {
+            //TODO: jsonにcallbackのようなロジックを含めるべきではない
+            // →「データとロジックを分離」する
+            const items = [
                 { label: "編集",    callback: () => console.log("編集") },
                 { label: "削除",    callback: () => console.log("削除") },
                 { label: "複製",    callback: () => console.log("複製") },
                 { label: "キャンセル", callback: null }
-            ]);
-        });
+            ];
+            document.getElementById("nuSheet").addEventListener("click", () => {
+                nu.sheet("操作を選んでください", items);
+            });
+            document.getElementById("nuSheetPre").textContent = `const items = ${JSON.stringify(items)}
+nu.sheet("操作を選んでください", items);`;
+        }
 
         //------------------------------------------------------------------------------------
         // ローディングインジケータ
@@ -375,14 +402,19 @@ nu.submit.values(
         nu.charCount.attach(document.getElementById("formInquire"), 300);
 
 
-        //------------------------------------------------------------------------------------
-        // Submit
-        //------------------------------------------------------------------------------------
-        document.getElementById("nuSubmit").addEventListener("click", () => {
-            nu.submit.values(
-                document.getElementById("nuForm"),
-                (vals) => console.table(vals)
-            );
+
+
+        function escapeHtml(str) {
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+        document.querySelectorAll('pre.nuCodeBlock[data-html-safe]').forEach(pre => {
+            const raw = pre.innerHTML.trim();
+            pre.innerHTML = escapeHtml(raw);
         });
 
     });
