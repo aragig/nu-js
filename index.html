@@ -207,9 +207,9 @@ nu.charCount.attach(document.getElementById("formInquire"), 300);
 
         nu.d.begin("🚀Welcome to nu.js !");
         nu.d.log("ログメッセージ");
-        nu.d.warn("警告メッセージ");
-        nu.d.error("エラーが発生しました");
-        nu.d.info("インフォメーション");
+        // nu.d.warn("警告メッセージ");
+        // nu.d.error("エラーが発生しました");
+        // nu.d.info("インフォメーション");
         nu.d.json("jojo.json", {
             "name": "空条承太郎",
             "stand": "ザ・ワールド"
@@ -448,7 +448,7 @@ nu.dropdown.attach(
             const code = `
 $("#nuSubmit").click(function() {
   nu.submit.values(
-    document.getElementById("nuForm"),
+    "nuForm",
     function(vals) {
       $("#nuSubmitResultArea").text(JSON.stringify(vals, null , 2));
       nu.d.table("nu.submit.values", vals);

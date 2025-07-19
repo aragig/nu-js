@@ -558,12 +558,19 @@
 
         /**
          * フォームの値を取得し、コールバックに渡す
-         * @param {HTMLElement} target - 対象のform要素またはdiv
+         * @param {string} formId - 対象のform id名
          * @param {Function} callback - 結果を受け取る関数（formDataを引数に渡す）
          */
-        window.nu.submit.values = function (target, callback) {
-            if (!target || typeof callback !== "function") return;
-            const values = getFormValues(target);
+        window.nu.submit.values = function (formId, callback) {
+            if (!formId || typeof callback !== "function") return;
+
+            const el = document.getElementById(formId);
+            if (!el) {
+                console.warn(`formId "${formId}" の要素が見つかりません`);
+                return;
+            }
+
+            const values = getFormValues(document.getElementById(formId));
             callback(values);
         };
 

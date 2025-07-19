@@ -255,6 +255,7 @@ describe("nu.submit.values", () => {
     it("フォーム内のinput, select, textarea要素から値を取得してコールバックに渡す", (done) => {
         // フォーム要素の作成
         const form = document.createElement("form");
+        form.id = "myForm";
 
         // テキスト入力
         const inputText = document.createElement("input");
@@ -307,7 +308,7 @@ describe("nu.submit.values", () => {
 
         document.body.appendChild(form);
 
-        window.nu.submit.values(form, (values) => {
+        window.nu.submit.values("myForm", (values) => {
             expect(values).to.deep.equal({
                 username: "Alice",
                 comment: "Hello",
