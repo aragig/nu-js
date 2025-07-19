@@ -237,9 +237,8 @@
     // トースト通知
     //------------------------------------------------------------------------------------
     {
-        if(!window.nu.toast) window.nu.toast = {};
 
-        function showToast(message, duration = 3000) {
+        window.nu.toast = function showToast(message, duration = 3000) {
             const toast = document.createElement("div");
             toast.className = "nuToast";
             toast.textContent = message;
@@ -260,10 +259,6 @@
             }, duration);
         }
 
-        //------------------------------------------------------------------------------------
-        // グローバルに公開
-        //------------------------------------------------------------------------------------
-        window.nu.toast.show = showToast;
     }
 
 

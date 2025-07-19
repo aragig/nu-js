@@ -304,7 +304,7 @@ $("#nuLoading").click(function() {
         {
             const code = `
 $("#nuToast").click(function() {
-    nu.toast.show("保存が完了しました！");
+    nu.toast("保存が完了しました！");
 });
             `.trim();
 
@@ -318,7 +318,7 @@ $("#nuToast").click(function() {
         {
             const code = `
 $("#nuToastDelay").click(function() {
-    nu.toast.show("エラーが発生しました<br>エラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
+    nu.toast("エラーが発生しました<br>エラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
 });
             `.trim();
 
@@ -433,7 +433,7 @@ nu.segment("fruitsSegmentArea", {
 nu.search("searchArea", "/sample/site_search_index.json", {
     onConfirm: function (text) {
         console.log("🔍検索確定:", text);
-        nu.toast.show("検索確定: " + text);
+        nu.toast("検索確定: " + text);
     },
     onBlur: function (text) {
         console.log("🔎フォーカスアウト:", text);
