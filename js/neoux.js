@@ -26,6 +26,28 @@
         window.nu.d.log = function (...args) {
             console.log(...args);
         };
+
+        window.nu.d.warn = function (...args) {
+            console.warn(...args);
+        };
+
+        window.nu.d.error = function (...args) {
+            console.error(...args);
+        };
+
+        window.nu.d.info = function (...args) {
+            console.info(...args);
+        };
+
+        window.nu.d.json = function (label, obj) {
+            console.groupCollapsed(`%c${label}`, "color: blue; font-weight: bold;");
+            console.dir(obj);
+            console.groupEnd();
+        };
+
+        window.nu.d.end = function () {
+            console.groupEnd();
+        };
     }
 
     //------------------------------------------------------------------------------------
@@ -65,7 +87,6 @@
                 if (!overlay) return false;
 
                 overlay.style.opacity = "0";
-
                 await new Promise(resolve => setTimeout(resolve, defaultTimeout));
                 overlay.remove();
                 return true;
