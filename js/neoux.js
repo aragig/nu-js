@@ -516,7 +516,24 @@
                 }
             });
 
-            // "/"キーで検索にフォーカス
+            // 入力確定イベント（Enterキー）
+            searchBox.addEventListener("keydown", function (e) {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    const confirmedValue = this.value.trim();
+                    console.log("確定入力:", confirmedValue);
+                    // ここに任意の処理を追加
+                }
+            });
+
+            // フォーカスが離れたとき
+            searchBox.addEventListener("blur", function () {
+                const blurValue = this.value.trim();
+                console.log("フォーカスアウト:", blurValue);
+                // ここに任意の処理を追加
+            });
+
+            // 「/」キー押下で検索ボックスにフォーカス
             document.addEventListener("keydown", function (event) {
                 if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
                     event.preventDefault();
