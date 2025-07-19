@@ -45,6 +45,12 @@
             console.groupEnd();
         };
 
+        window.nu.d.table = function (label, obj) {
+            console.groupCollapsed(`%c${label}`, "color: green; font-weight: bold;");
+            console.table(obj);
+            console.groupEnd();
+        }
+
         window.nu.d.end = function () {
             console.groupEnd();
         };

@@ -142,19 +142,6 @@ nu.search.attach(
   "/sample/site_search_index.json"
 );
 </pre>
-<script>
-  //------------------------------------------------------------------------------------
-  // Submit
-  //------------------------------------------------------------------------------------
-  document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("nuSubmit").addEventListener("click", () => {
-          nu.submit.values(
-              document.getElementById("nuForm"),
-              (vals) => console.table(vals)
-          );
-      });
-  });
-</script>
 
     <h2 class="mt80">入力欄に対して文字数カウンターを追加する</h2>
     <div class="nuFlexColumn gap10 mt30">
@@ -178,12 +165,9 @@ nu.charCount.attach(document.getElementById("formInquire"), 300);
       <h3>nu.submit</h3>
       <button id="nuSubmit" class="nuButton" type="button">Submit</button>
     </div>
-    <pre class="nuCodeBlock">
-nu.submit.values(
-  document.getElementById("nuForm"),
-  (vals) => console.table(vals)
-);
-</pre>
+    <pre id="nuSubmitResultArea" class="nuCodeBlock"></pre>
+
+    <pre id="nuSubmitPre" class="nuCodeBlock"></pre>
 
     <hr class="mt80">
 
@@ -457,6 +441,26 @@ nu.dropdown.attach(
         nu.charCount.attach(document.getElementById("formInquire"), 300);
 
 
+        //------------------------------------------------------------------------------------
+        // Submit
+        //------------------------------------------------------------------------------------
+        {
+            const code = `
+$("#nuSubmit").click(function() {
+  nu.submit.values(
+    document.getElementById("nuForm"),
+    function(vals) {
+      $("#nuSubmitResultArea").text(JSON.stringify(vals, null , 2));
+      nu.d.table("nu.submit.values", vals);
+    }
+  );
+});
+            `.trim();
+
+            $("#nuSubmitPre").text(code); // 表示用
+            new Function(code)(); // 実行用
+
+        }
 
 
         //------------------------------------------------------------------------------------
