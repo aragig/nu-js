@@ -332,10 +332,10 @@
         /**
          * メニューボタンにアタッチ
          * @param buttonId - メニューボタンのid名
-         * @param {Array.<Object>} labelMap - ドロップダウンアイテム
+         * @param {Array.<Object>} menuMap - ドロップダウンアイテム
          * @param {Function} handlers - コールバック
          */
-        window.nu.dropdown = function (buttonId, labelMap, handlers) {
+        window.nu.dropdown = function (buttonId, menuMap, handlers) {
             const buttonElement = document.getElementById(buttonId);
             if (!buttonElement) {
                 console.error("ボタンが見つかりません", buttonId);
@@ -343,8 +343,8 @@
             }
 
             const items = [];
-            for (let key in labelMap) {
-                const label = labelMap[key];
+            for (let key in menuMap) {
+                const label = menuMap[key];
                 const handlerName = "on" + key[0].toUpperCase() + key.slice(1);
                 const callback = handlers?.[handlerName];
 
