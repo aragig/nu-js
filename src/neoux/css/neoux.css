@@ -265,6 +265,38 @@ body {
   .nuMenuButton:active {
     background-color: rgba(0, 0, 0, 0.1); }
 
+.nuUploader {
+  margin: 1rem 0; }
+
+.nuUploaderInput {
+  display: none; }
+
+.nuUploaderDropZone {
+  color: #999;
+  border: 2px dashed #999;
+  padding: 3rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: border-color 0.3s; }
+
+.nuUploaderDropZone.dragOver {
+  border-color: #3498db;
+  background: #ecf0f1; }
+
+.nuUploaderPreview {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; }
+
+.nuUploaderImage {
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 6px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  object-fit: cover; }
+
 .nuSegment {
   display: inline-flex;
   border: 1px solid #ccc;

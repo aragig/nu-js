@@ -116,6 +116,20 @@
 			</div>
 		</section>
 
+		<!-- セクション: 画像アップロード -->
+		<section>
+			<div id="__nuUpload">
+				<h2 class="mt80">画像アップロード</h2>
+<!--				TODO nuFlexColumn→ flexColumn-->
+				<div class="nuFlexColumn gap10 mt30">
+					<h3>nu.upload</h3>
+					<div id="uploadArea"></div>
+				</div>
+				<pre class="nuCodeBlock"></pre>
+
+			</div>
+		</section>
+
 		<!-- セクション: セグメントボタン -->
 		<section>
 			<div id="__nuSegmentSort">
@@ -464,6 +478,21 @@ nu.dropdown("__nuDropdownTriggerRBtn", {
 		}
 
 
+		//------------------------------------------------------------------------------------
+		// 画像アップロードUI
+		//------------------------------------------------------------------------------------
+		{
+			const code = `
+nu.upload("uploadArea", {
+	onUploaded: function(file) {
+		console.log("アップロード完了:", file.name);
+	}
+});
+`.trim();
+
+			$("#__nuUpload pre").text(code); // 表示用
+			new Function(code)(); // 実行用
+		}
 
 		//------------------------------------------------------------------------------------
 		// セグメントボタン　その１

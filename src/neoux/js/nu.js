@@ -437,9 +437,88 @@
 	//------------------------------------------------------------------------------------
 
 	//------------------------------------------------------------------------------------
-	// TODO 画像投稿機能
+	// 画像アップロードUI
 	//------------------------------------------------------------------------------------
+	{
+		if (!window.nu.upload) window.nu.upload = {};
 
+		/**
+		 * @param {string} mountId - 表示領域のID
+		 * @param {Object} options - オプション（省略可能）
+		 * @param {Function} options.onUploaded - アップロード成功時のコールバック
+		 */
+		window.nu.upload = function (mountId, options = {}) {
+			const mountEl = document.getElementById(mountId);
+			if (!mountEl) return;
+
+			// コンテナ作成
+			const wrapper = document.createElement("div");
+			wrapper.className = "nuUploader";
+
+			const input = document.createElement("input");
+			input.type = "file";
+			input.accept = "image/*";
+			input.multiple = true;
+			input.className = "nuUploaderInput";
+
+			const dropZone = document.createElement("div");
+			dropZone.className = "nuUploaderDropZone";
+			dropZone.textContent = "画像をドラッグ＆ドロップ、またはクリックして選択";
+
+			const preview = document.createElement("div");
+			preview.className = "nuUploaderPreview";
+
+			// inputとdropZone連携
+			dropZone.addEventListener("click", () => input.click());
+			input.addEventListener("change", handleFiles);
+			dropZone.addEventListener("dragover", e => {
+				e.preventDefault();
+				dropZone.classList.add("dragOver");
+			});
+			dropZone.addEventListener("dragleave", () => dropZone.classList.remove("dragOver"));
+			dropZone.addEventListener("drop", e => {
+				e.preventDefault();
+				dropZone.classList.remove("dragOver");
+				handleFiles({ target: { files: e.dataTransfer.files } });
+			});
+
+			// ファイル選択・ドロップ共通処理
+			function handleFiles(e) {
+				const files = [...e.target.files];
+				preview.innerHTML = "";
+
+				files.forEach(file => {
+					if (!file.type.startsWith("image/")) return;
+
+					const reader = new FileReader();
+					reader.onload = () => {
+						const img = document.createElement("img");
+						img.src = reader.result;
+						img.className = "nuUploaderImage";
+						preview.appendChild(img);
+
+						// モック送信（実際にはfetchでPOST）
+						mockUpload(file).then(() => {
+							nu.toast(`${file.name} をアップロードしました`, { type: "success" });
+							options.onUploaded?.(file);
+						});
+					};
+					reader.readAsDataURL(file);
+				});
+			}
+
+			// モックのアップロード関数
+			function mockUpload(file) {
+				return new Promise(resolve => setTimeout(resolve, 500)); // 疑似ディレイ
+			}
+
+			// DOMに追加
+			wrapper.appendChild(input);
+			wrapper.appendChild(dropZone);
+			wrapper.appendChild(preview);
+			mountEl.appendChild(wrapper);
+		};
+	}
 	//------------------------------------------------------------------------------------
 	// TODO 投稿画像一覧機能
 	//------------------------------------------------------------------------------------
@@ -452,7 +531,6 @@
 	//------------------------------------------------------------------------------------
 	// セグメントボタン
 	//------------------------------------------------------------------------------------
-	//TODO コールバックはonChangeで返す→clickした場合でもコールバックが帰ってしまうため
 	{
 		// if (!window.nu.segment) window.nu.segment = {};
 		/**
