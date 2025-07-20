@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <title>nu.js</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <link rel="stylesheet" href="css/neoux.css">
-  <script src="js/neoux.js"></script>
-  <script src="js/jquery-3.7.1.js"></script>
+  <link rel="stylesheet" href="src/neoux/css/neoux.css">
+  <script src="src/neoux/js/nu.js"></script>
+  <script src="lib/js/jquery-3.7.1.js"></script>
 </head>
 <body>
 <div id="nuContents">
@@ -186,7 +186,7 @@
         {
             const code = `
 $("#nuAlertSimple").click(function() {
-    nu.alert("メッセージ");
+  nu.alert("メッセージ");
 });
             `.trim();
 
@@ -208,9 +208,9 @@ const message=\`
 \`.trim();
 
 $("#nuAlert").click(function() {
-    nu.alert(message, function() {
-        console.log("ok");
-    });
+  nu.alert(message, function() {
+    nu.toast("Clicked OK");
+  });
 });
             `.trim();
 
@@ -225,11 +225,11 @@ $("#nuAlert").click(function() {
         {
             const code = `
 $("#nuConfirm").click(function() {
-    nu.confirm("This is some message area.", function() {
-        console.log("ok");
-    }, function() {
-        console.log("cancel");
-    });
+  nu.confirm("カスタムアラート", function() {
+    nu.toast("Clicked OK");
+  }, function() {
+    nu.toast("Clicked キャンセル");
+  });
 });
             `.trim();
 
@@ -243,12 +243,16 @@ $("#nuConfirm").click(function() {
         //------------------------------------------------------------------------------------
         {
             const code = `
-const items = [
-  {label: "いいえ", callback: ()=>console.log("いいえ")},
-  {label: "はい", callback: ()=>console.log("はい")}
-];
 $("#nuSheetCustomAlert").click(function() {
-    nu.sheet("アラートをカスタマイズ", items);
+  nu.sheet("削除しますがよろしいですか？",
+   {cancel:"キャンセル",delete:"削除"},{
+    onCancel: function() {
+      nu.toast("Clicked キャンセル");
+    },
+    onDelete: function() {
+      nu.toast("Clicked 削除", { type:"error"});
+    }
+  });
 });
             `.trim();
 
@@ -262,14 +266,28 @@ $("#nuSheetCustomAlert").click(function() {
         //------------------------------------------------------------------------------------
         {
             const code = `
-const items = [
-  { label: "編集", callback: ()=>console.log("編集") },
-  { label: "削除", callback: ()=>console.log("削除") },
-  { label: "複製", callback: ()=>console.log("複製") },
-  { label: "キャンセル", callback: null }
-];
+const items = {
+  edit: "編集",
+  duplicate: "複製",
+  delete: "削除",
+  cancel: "キャンセル"
+};
+
 $("#nuSheet").click(function() {
-    nu.sheet("操作を選んでください", items);
+  nu.sheet("操作を選んでください", items, {
+    onEdit: function() {
+      nu.toast("clicked 編集", { type:"info"})
+    },
+    onDuplicate: function() {
+      nu.toast("clicked 複製", { type:"success"})
+    },
+    onDelete: function() {
+      nu.toast("clicked 削除", { type:"error"});
+    },
+    onCancel: function() {
+      nu.toast("clicked キャンセル", { type:"warn"});
+    }
+  });
 });
             `.trim();
 
@@ -304,7 +322,7 @@ $("#nuLoading").click(function() {
         {
             const code = `
 $("#nuToast").click(function() {
-    nu.toast.show("保存が完了しました！");
+    nu.toast("保存が完了しました！");
 });
             `.trim();
 
@@ -318,7 +336,8 @@ $("#nuToast").click(function() {
         {
             const code = `
 $("#nuToastDelay").click(function() {
-    nu.toast.show("エラーが発生しました<br>エラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
+    nu.toast("エラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しました",
+    {duration: 5000, type: "error", position: "top"}); // 5秒表示
 });
             `.trim();
 
@@ -332,11 +351,21 @@ $("#nuToastDelay").click(function() {
         //------------------------------------------------------------------------------------
         {
             const code = `
-nu.dropdown.attach("dropdownBtn",
-  [
-    {label:"設定", callback:()=>console.log("設定")},
-    {label:"ログアウト", callback:()=>console.log("ログアウト")}
-  ]);
+nu.dropdown("dropdownBtn", {
+  setting: "設定",
+  logout: "ログアウト",
+  others: "その他"
+}, {
+  onSetting: function () {
+    nu.toast("clicked 設定");
+  },
+  onLogout: function () {
+    nu.toast("clicked ログアウト");
+  },
+  onOthers: function () {
+    nu.toast("clicked その他");
+  }
+});
             `.trim();
 
             $("#dropdownBtnPre").text(code); // 表示用
@@ -348,12 +377,21 @@ nu.dropdown.attach("dropdownBtn",
         //------------------------------------------------------------------------------------
         {
             const code = `
-nu.dropdown.attach(
-    document.getElementById("dropdownBtnLeft"),
-    [
-        { label: "設定", callback: () => console.log("設定") },
-        { label: "ログアウト", callback: () => console.log("ログアウト") }
-    ]);
+nu.dropdown("dropdownBtnLeft", {
+  hoge: "ほげ",
+  fuga: "ふが",
+  pico: "ぴこ"
+}, {
+  onHoge: function () {
+    nu.toast("clicked ほげ");
+  },
+  onFuga: function () {
+    nu.toast("clicked ふが");
+  },
+  onPico: function () {
+    nu.toast("clicked ぴこ");
+  }
+});
             `.trim();
 
             $("#dropdownBtnLeftPre").text(code); // 表示用
@@ -375,7 +413,7 @@ nu.segment("sortSegmentArea", {
         { label: "人気", value: "人気" },
         { label: "古い順", value: "古い順" }
     ]
-}, (val) => console.log("Sort:", val));
+}, (val) => nu.toast(val));
             `.trim();
 
 
@@ -397,7 +435,7 @@ nu.segment("fruitsSegmentArea", {
         { label: "バナナ", value: "バナナ" },
         { label: "メロン", value: "メロン" }
     ]
-}, (val) => console.log("Fruits:", val));
+}, (val) => nu.toast(val));
             `.trim();
 
             $("#fruitsSegmentAreaPre").text(code); // 表示用
@@ -413,11 +451,10 @@ nu.segment("fruitsSegmentArea", {
             const code = `
 nu.search("searchArea", "/sample/site_search_index.json", {
     onConfirm: function (text) {
-        console.log("🔍検索確定:", text);
-        nu.toast.show("検索確定: " + text);
+        nu.toast("🔍検索確定: " + text, {position: "top"});
     },
     onBlur: function (text) {
-        console.log("🔎フォーカスアウト:", text);
+        nu.toast("🔎フォーカスアウト: " + text, {position: "top"});
     }
 });
 `.trim();

@@ -13,7 +13,7 @@ global.cancelAnimationFrame = dom.window.cancelAnimationFrame;
 
 
 const {expect} = require("chai");
-const nu = require("../js/neoux.js")
+const nu = require("../src/neoux/js/nu.js")
 
 
 //------------------------------------------------------------------------------------
@@ -151,25 +151,35 @@ describe("nu.alert / confirm / sheet", () => {
     });
 
     it("nu.sheet()のテスト: 複数ボタンを表示し、クリックで対応するラベルが一致するか", (done) => {
-        const labels = ["編集", "削除", "複製", "キャンセル"];
         const clicked = [];
 
-        nu.sheet("操作を選んでください", labels.map(label => ({
-            label,
-            callback: () => clicked.push(label)
-        })));
+        const buttonMap = {
+            edit: "編集",
+            delete: "削除",
+            duplicate: "複製",
+            cancel: "キャンセル"
+        };
+
+        const callbacks = {
+            onEdit: () => clicked.push("編集"),
+            onDelete: () => clicked.push("削除"),
+            onDuplicate: () => clicked.push("複製"),
+            onCancel: () => clicked.push("キャンセル")
+        };
+
+        nu.sheet("操作を選んでください", buttonMap, callbacks);
 
         const buttons = document.querySelectorAll(".nuAlertButton");
-        expect(buttons.length).to.equal(labels.length);
+        expect(buttons.length).to.equal(Object.keys(buttonMap).length);
 
         // "複製"ボタンをクリック
-        const copyBtn = [...buttons].find(btn => btn.textContent === "複製");
-        expect(copyBtn).to.exist;
-        copyBtn.click();
+        const duplicateBtn = [...buttons].find(btn => btn.textContent === "複製");
+        expect(duplicateBtn).to.exist;
+        duplicateBtn.click();
 
         setTimeout(() => {
             expect(clicked).to.include("複製");
-            expect(document.querySelector(".nuAlertBox")).to.be.null;
+            expect(document.querySelector(".nuSheetBox")).to.be.null;
             done();
         }, nu.overlay.timeout);
     });
@@ -225,14 +235,178 @@ describe("nu.loading", () => {
 
 
 //------------------------------------------------------------------------------------
-// TODO テスト: トースト通知
+// テスト: トースト通知
 //------------------------------------------------------------------------------------
+describe("nu.toast", () => {
+    beforeEach(() => {
+        document.body.innerHTML = "";
+    });
 
+    it("toastがDOMに追加される", (done) => {
+        nu.toast("テストメッセージ", {duration: 1000}); // 1秒表示
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast).to.exist;
+        expect(toast.textContent).to.equal("テストメッセージ");
+
+        // アニメーション適用を待つ
+        requestAnimationFrame(() => {
+            expect(toast.style.opacity).to.equal("1");
+            done();
+        });
+    });
+
+    it("一定時間後にtoastが消える", (done) => {
+        nu.toast("消えるテスト", {duration: 500}); // 0.5秒表示
+
+        setTimeout(() => {
+            const toast = document.querySelector(".nuToast");
+            expect(toast).to.be.null;
+            done();
+        }, 800); // 500ms + α（アニメーション猶予）
+    });
+});
+
+describe("nu.toast - カラータイプ付き", () => {
+    beforeEach(() => {
+        document.body.innerHTML = "";
+    });
+
+    it("type: success のとき nuToast_SUCCESS が付与される", () => {
+        nu.toast("成功メッセージ", { type: "success", duration: 100 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast).to.exist;
+        expect(toast.classList.contains("nuToast_SUCCESS")).to.be.true;
+    });
+
+    it("type: error のとき nuToast_ERROR が付与される", () => {
+        nu.toast("エラーメッセージ", { type: "error", duration: 100 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast).to.exist;
+        expect(toast.classList.contains("nuToast_ERROR")).to.be.true;
+    });
+
+    it("type: warning のとき nuToast_WARNING が付与される", () => {
+        nu.toast("警告メッセージ", { type: "warning", duration: 100 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast).to.exist;
+        expect(toast.classList.contains("nuToast_WARNING")).to.be.true;
+    });
+
+    it("type: info のとき nuToast_INFO が付与される", () => {
+        nu.toast("情報メッセージ", { type: "info", duration: 100 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast).to.exist;
+        expect(toast.classList.contains("nuToast_INFO")).to.be.true;
+    });
+
+    it("type未指定時は nuToast_DEFAULT が付与される", () => {
+        nu.toast("デフォルトメッセージ", { duration: 100 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast).to.exist;
+        expect(toast.classList.contains("nuToast_DEFAULT")).to.be.true;
+    });
+
+    // nu.toast position指定のテスト
+    it("position: 'top' を指定すると nuToast_TOP クラスが付く", () => {
+        nu.toast("上部トースト", { position: "top", duration: 1000 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast.classList.contains("nuToast_TOP")).to.be.true;
+    });
+
+    it("position: 'bottom' を指定すると nuToast_BOTTOM クラスが付く", () => {
+        nu.toast("下部トースト", { position: "bottom", duration: 1000 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast.classList.contains("nuToast_BOTTOM")).to.be.true;
+    });
+
+    it("position未指定の場合はデフォルトでnuToast_BOTTOMクラスが付く", () => {
+        nu.toast("デフォルト位置トースト", { duration: 1000 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast.classList.contains("nuToast_BOTTOM")).to.be.true;
+    });
+
+    it("typeとpositionを両方指定したとき、両方のクラスが付与される", () => {
+        nu.toast("error-top toast", { type: "error", position: "top", duration: 1000 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast.classList.contains("nuToast_ERROR")).to.be.true;
+        expect(toast.classList.contains("nuToast_TOP")).to.be.true;
+    });
+});
 
 //------------------------------------------------------------------------------------
-// TODO テスト: ドロップダウンメニュー
+// テスト: ドロップダウンメニュー
 //------------------------------------------------------------------------------------
+describe("nu.dropdown", () => {
+    beforeEach(() => {
+        document.body.innerHTML = `
+            <button id="testDropdownBtn">メニュー</button>
+        `;
+    });
 
+    it("ドロップダウンメニューの正常動作", () => {
+        let calledItem = null;
+
+        nu.dropdown("testDropdownBtn", {
+            foo: "項目1",
+            bar: "項目2"
+        }, {
+            onFoo: () => calledItem = "foo",
+            onBar: () => calledItem = "bar"
+        });
+
+        document.getElementById("testDropdownBtn").click();
+
+        const dropdown = document.querySelector(".nuDropdownMenu");
+        expect(dropdown).to.exist;
+
+        const items = dropdown.querySelectorAll(".nuDropdownItem");
+        expect(items.length).to.equal(2);
+        expect(items[0].textContent).to.equal("項目1");
+        expect(items[1].textContent).to.equal("項目2");
+
+        // simulate click
+        items[1].click();
+        expect(calledItem).to.equal("bar");
+
+        // dropdown should be removed after click
+        expect(document.querySelector(".nuDropdownMenu")).to.be.null;
+    });
+
+    it("存在しないボタンIDを指定した場合はエラーにならない", () => {
+        expect(() => {
+            nu.dropdown("notExistBtn", { foo: "foo" }, { onFoo: () => {} });
+        }).to.not.throw();
+    });
+
+    it("2回目の表示では1回目のインスタンスが使われないことを確認", () => {
+        nu.dropdown("testDropdownBtn", {
+            foo: "一番"
+        }, {
+            onFoo: () => {}
+        });
+
+        // 初回クリック → 表示
+        document.getElementById("testDropdownBtn").click();
+        const first = document.querySelector(".nuDropdownMenu");
+        expect(first).to.exist;
+
+        // 再クリック → 前のが削除されて新たに作成される
+        document.getElementById("testDropdownBtn").click();
+        const second = document.querySelector(".nuDropdownMenu");
+        expect(second).to.exist;
+        expect(second).to.not.equal(first); // 別インスタンス
+    });
+});
 
 //------------------------------------------------------------------------------------
 // TODO テスト: セグメントボタン

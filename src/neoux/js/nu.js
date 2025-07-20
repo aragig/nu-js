@@ -65,6 +65,7 @@
         };
     }
 
+    //TODO オーバーレイをクリックしたら閉じたい場合もあるため、コールバックを実装する
     //------------------------------------------------------------------------------------
     // オーバーレイ制御ユーティリティ
     //------------------------------------------------------------------------------------
@@ -110,19 +111,28 @@
         /**
          * @private
          * @param {string} message
-         * @param {HTMLElement} buttons
+         * @param {Array.<Object>} buttonMap - ボタンアイテム
+         * @param {Object} [handlers] - オプションのコールバック関数
          */
-        function showSheet(message, buttons) {
+        function showSheet(message, buttonMap, handlers) {
             window.nu.overlay.show();
 
+            // ボタンにコールバックを登録
+            const buttons = [];
+            for (let key in buttonMap) {
+                const label = buttonMap[key];
+                const handlerName = "on" + key[0].toUpperCase() + key.slice(1);
+                const callback = handlers?.[handlerName];
+                const btnClassName = key.toUpperCase();
+
+                buttons.push({ label, callback, btnClassName });
+            }
+
             const box = document.createElement("div");
-            box.className = "nuAlertBox";
 
             // ボタン数でシートモードを判定
             const isSheetMode = buttons.length >= 3;
-            if (isSheetMode) {
-                box.classList.add("sheetMode");
-            }
+            box.className = isSheetMode ? "nuSheetBox" : "nuAlertBox";
 
             box.style.opacity = "0";
 
@@ -137,7 +147,12 @@
             buttons.forEach(btn => {
                 const button = document.createElement("button");
                 button.className = "nuAlertButton";
-                if (btn.cancel) button.classList.add("cancel");
+
+                // キーに応じたクラス名を付ける
+                if (btn.btnClassName) {
+                    button.classList.add(`nuAlertButton_${btn.btnClassName}`); // プレフィックス付きが無難
+                }
+
                 button.textContent = btn.label;
 
                 button.addEventListener("click", async () => {
@@ -168,18 +183,16 @@
         // グローバルに公開
         //------------------------------------------------------------------------------------
         window.nu.alert = function (message, onOk) {
-            showSheet(message, [
-                { label: "OK", callback: () => onOk?.() }
-            ]);
+            showSheet(message, { ok: "OK" }, {onOk: onOk});
         };
         window.nu.confirm = function (message, onOk, onCancel) {
-            showSheet(message, [
-                { label: "キャンセル", cancel: true, callback: () => onCancel?.() },
-                { label: "OK", callback: () => onOk?.() }
-            ]);
+            showSheet(message, { cancel: "キャンセル", ok: "OK" }, {
+                onOk: onOk,
+                onCancel: onCancel
+            });
         };
-        window.nu.sheet = function (message, buttons) {
-            showSheet(message, buttons);
+        window.nu.sheet = function (message, buttons, callbacks) {
+            showSheet(message, buttons, callbacks);
         };
     }
 
@@ -237,33 +250,57 @@
     // トースト通知
     //------------------------------------------------------------------------------------
     {
-        if(!window.nu.toast) window.nu.toast = {};
 
-        function showToast(message, duration = 3000) {
+        /**
+         * トースト通知を表示する
+         * @param {string} message - 表示するメッセージ
+         * @param {Object} [options] - 表示オプション（省略可）
+         * @param {number} [options.duration=5000] - 表示時間（ミリ秒）
+         * @param {string} [options.type="default"] - スタイルタイプ: "success" | "error" | "warning" | "info"
+         * @param {string} [options.position="bottom"] - スタイルタイプ: "top" | "bottom"
+         */
+        window.nu.toast = function showToast(message, options = {}) {
+            const duration = options.duration ?? 5000;
+            const type = options.type ?? "default";
+            const position = options.position ?? "bottom";
+
             const toast = document.createElement("div");
             toast.className = "nuToast";
+            toast.classList.add(`nuToast_${type.toUpperCase()}`);
+            toast.classList.add(`nuToast_${position.toUpperCase()}`);
+
             toast.textContent = message;
+
+            // Y方向のアニメーションだけJSで制御（X方向はCSSで吸収）
+            let initialTransformY = "translateY(0)";
+            let exitTransformY = "translateY(0)";
+            if (position === "top") {
+                initialTransformY = "translateY(-20px)";
+                exitTransformY = "translateY(-20px)";
+            } else if (position === "bottom") {
+                initialTransformY = "translateY(20px)";
+                exitTransformY = "translateY(20px)";
+            }
+
+            toast.style.opacity = "0";
+            toast.style.transform = initialTransformY;
 
             document.body.appendChild(toast);
 
             // 表示トリガー（アニメーション）
             requestAnimationFrame(() => {
                 toast.style.opacity = "1";
-                toast.style.transform = "translateY(0)";
+                toast.style.transform = `translateY(0)`;
             });
 
             // 一定時間後に非表示
             setTimeout(() => {
                 toast.style.opacity = "0";
-                toast.style.transform = "translateY(20px)";
+                toast.style.transform = exitTransformY;
                 setTimeout(() => toast.remove(), 200);
             }, duration);
         }
 
-        //------------------------------------------------------------------------------------
-        // グローバルに公開
-        //------------------------------------------------------------------------------------
-        window.nu.toast.show = showToast;
     }
 
 
@@ -328,20 +365,27 @@
         //------------------------------------------------------------------------------------
         // グローバルに公開
         //------------------------------------------------------------------------------------
-        if (!window.nu.dropdown) window.nu.dropdown = {};
+        // if (!window.nu.dropdown) window.nu.dropdown = {};
         /**
          * メニューボタンにアタッチ
-         * @param idOrElement - メニューボタンのbutton
-         * @param {Array.<Object>} items - ドロップダウンアイテム（{label, callback}の形式）
+         * @param buttonId - メニューボタンのid名
+         * @param {Array.<Object>} menuMap - ドロップダウンアイテム
+         * @param {Object} [handlers] - コールバック
          */
-        window.nu.dropdown.attach = function (idOrElement, items) {
-            const buttonElement =
-                typeof idOrElement === "string"
-                    ? document.getElementById(idOrElement)
-                    : idOrElement;
+        window.nu.dropdown = function (buttonId, menuMap, handlers) {
+            const buttonElement = document.getElementById(buttonId);
             if (!buttonElement) {
-                console.error("nu.dropdown.attach: ボタンが見つかりません", idOrElement);
+                console.error("ボタンが見つかりません", buttonId);
                 return;
+            }
+
+            const items = [];
+            for (let key in menuMap) {
+                const label = menuMap[key];
+                const handlerName = "on" + key[0].toUpperCase() + key.slice(1);
+                const callback = handlers?.[handlerName];
+
+                items.push({ label, callback });
             }
 
             buttonElement.addEventListener("click", (e) => {

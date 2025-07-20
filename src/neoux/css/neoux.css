@@ -1,3 +1,10 @@
+/* iosevka-curly-slab-latin-400-normal */
+@font-face {
+  font-family: 'Iosevka Curly Slab';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/iosevka-curly-slab@latest/latin-400-normal.woff2) format("woff2"), url(https://cdn.jsdelivr.net/fontsource/fonts/iosevka-curly-slab@latest/latin-400-normal.woff) format("woff"); }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
   margin: 0;
@@ -71,9 +78,9 @@ pre.nuCodeBlock {
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: anywhere;
-  font-size: 0.80rem;
+  font-size: 0.85rem;
   line-height: 1.2rem;
-  font-family: SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-family: "Iosevka Curly Slab", SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   padding: 1rem;
   margin-bottom: 1.5rem; }
 
@@ -185,24 +192,6 @@ pre.nuCodeBlock {
   text-align: center;
   opacity: 0;
   transition: opacity 0.2s ease; }
-  .nuAlertBox.sheetMode {
-    padding: 20px 0 10px; }
-    .nuAlertBox.sheetMode .nuAlertButtonRow {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0; }
-    .nuAlertBox.sheetMode .nuAlertButton {
-      background: #f9f9f9;
-      color: #007AFF;
-      border-top: 1px solid #ccc;
-      border-radius: 0;
-      font-weight: normal;
-      padding: 12px 0; }
-      .nuAlertBox.sheetMode .nuAlertButton:last-child {
-        background: #fff;
-        font-weight: bold; }
-      .nuAlertBox.sheetMode .nuAlertButton.cancel {
-        color: #ff3b30; }
   .nuAlertBox .nuAlertMessage {
     margin-bottom: 20px;
     font-size: 16px; }
@@ -219,8 +208,52 @@ pre.nuCodeBlock {
     cursor: pointer;
     font-size: 14px;
     min-width: 70px; }
-    .nuAlertBox .nuAlertButton.cancel {
+    .nuAlertBox .nuAlertButton.nuAlertButton_DELETE {
+      background: #ff3b30; }
+    .nuAlertBox .nuAlertButton.nuAlertButton_CANCEL {
       background: #aaa; }
+
+.nuSheetBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px 0 10px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  max-width: 90%;
+  min-width: 250px;
+  font-family: sans-serif;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.2s ease; }
+  .nuSheetBox .nuAlertButtonRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0; }
+  .nuSheetBox .nuAlertMessage {
+    margin-bottom: 20px;
+    font-size: 16px; }
+  .nuSheetBox .nuAlertButtonRow {
+    display: flex;
+    justify-content: center;
+    gap: 0; }
+  .nuSheetBox .nuAlertButton {
+    cursor: pointer;
+    font-size: 15px;
+    padding: 12px 0;
+    background: white;
+    border: none;
+    border-top: 1px solid #ededed;
+    font-weight: normal;
+    color: #007AFF; }
+    .nuSheetBox .nuAlertButton:last-child {
+      background: #fff;
+      font-weight: bold; }
+    .nuSheetBox .nuAlertButton.nuAlertButton_DELETE {
+      color: #ff3b30; }
 
 .nuLoadingSpinner {
   width: 48px;
@@ -257,21 +290,43 @@ pre.nuCodeBlock {
     transform: translate(-50%, -50%) rotate(360deg); } }
 .nuToast {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  margin-left: 20px;
-  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  display: block;
+  max-width: 80vw;
+  padding: 10px 16px;
+  background: #333;
   color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-family: sans-serif;
-  font-size: 14px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  z-index: 10000;
+  border-radius: 6px;
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  pointer-events: none; }
+  transition: all 0.3s ease;
+  pointer-events: none;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  font-size: 14px;
+  width: fit-content; }
+  .nuToast.nuToast_SUCCESS {
+    background: #2ecc71; }
+  .nuToast.nuToast_ERROR {
+    background: #e74c3c; }
+  .nuToast.nuToast_WARNING {
+    background: #f39c12; }
+  .nuToast.nuToast_INFO {
+    background: #3498db; }
+  .nuToast.nuToast_TOP {
+    top: 20px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    transform: translateY(-20px); }
+  .nuToast.nuToast_BOTTOM {
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    transform: translateY(20px); }
 
 .nuDropdownMenu {
   position: absolute;
