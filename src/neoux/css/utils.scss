@@ -1,0 +1,86 @@
+//------------------------------------------------------------------------------------
+// 汎用スタイル
+//------------------------------------------------------------------------------------
+.mt10 { margin-top: 10px; }
+.mt20 { margin-top: 20px; }
+.mt30 { margin-top: 30px; }
+.mt40 { margin-top: 40px; }
+.mt50 { margin-top: 50px; }
+.mt60 { margin-top: 60px; }
+.mt70 { margin-top: 70px; }
+.mt80 { margin-top: 80px; }
+.mt90 { margin-top: 90px; }
+.mt100 { margin-top: 100px; }
+.wFull { width: 100%; }
+.gap5 { gap: 5px; }
+.gap10 { gap: 10px; }
+.gap15 { gap: 15px; }
+.gap20 { gap: 20px; }
+.gap30 { gap: 30px; }
+.gap40 { gap: 40px; }
+
+
+.nuFlexRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.nuFlexColumn {
+  display: flex;
+  flex-direction: column;
+}
+.nuFlexSpread {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+//------------------------------------------------------------------------------------
+// pre コード表現（模索中）
+//------------------------------------------------------------------------------------
+
+/* iosevka-curly-slab-latin-400-normal */
+@font-face {
+  font-family: 'Iosevka Curly Slab';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/iosevka-curly-slab@latest/latin-400-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/iosevka-curly-slab@latest/latin-400-normal.woff) format('woff');
+}
+
+pre.nuCodeBlock {
+  display: block;
+  //overflow-x: auto;
+  //white-space: pre;
+  //word-break: normal;
+  white-space: pre-wrap;     // 折り返しを有効にする
+  word-break: break-word;    // 単語単位で折り返す（長いURLなどにも対応）
+  overflow-wrap: anywhere;   // ブラウザによってはこちらも必要
+
+  font-size: 0.85rem;
+  line-height:1.2rem;
+  //font-family: Menlo, Consolas, monospace;
+  //font-family: Iosevka, SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-family: "Iosevka Curly Slab", SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  //font-family: SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  padding:1rem;
+  margin-bottom: 1.5rem;
+}
+.nuCodeToggle {
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  padding: 0;
+  font-family: inherit;
+  font-size: 0.9rem;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  width: fit-content;
+}
+.nuCodeBlock {
+  &.collapsed {
+    display: none;
+  }
+}
