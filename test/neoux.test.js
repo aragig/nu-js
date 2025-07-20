@@ -265,13 +265,8 @@ describe("nu.toast", () => {
             done();
         }, 800); // 500ms + α（アニメーション猶予）
     });
-});
 
-describe("nu.toast - カラータイプ付き", () => {
-    beforeEach(() => {
-        document.body.innerHTML = "";
-    });
-
+    // nu.toast - カラータイプ付き
     it("type: success のとき nuToast_SUCCESS が付与される", () => {
         nu.toast("成功メッセージ", { type: "success", duration: 100 });
 
@@ -343,6 +338,7 @@ describe("nu.toast - カラータイプ付き", () => {
     });
 });
 
+
 //------------------------------------------------------------------------------------
 // テスト: ドロップダウンメニュー
 //------------------------------------------------------------------------------------
@@ -408,9 +404,69 @@ describe("nu.dropdown", () => {
     });
 });
 
+
 //------------------------------------------------------------------------------------
-// TODO テスト: セグメントボタン
+// テスト: セグメントボタン
 //------------------------------------------------------------------------------------
+describe("nu.segment", () => {
+    beforeEach(() => {
+        document.body.innerHTML = `<div id="testSegmentArea"></div>`;
+    });
+
+    it("セグメントボタンが正しくレンダリングされる", () => {
+        const config = {
+            name: "testOption",
+            value: "b",
+            options: [
+                { label: "A", value: "a" },
+                { label: "B", value: "b" },
+                { label: "C", value: "c" }
+            ]
+        };
+
+        nu.segment("testSegmentArea", config, () => {});
+
+        const container = document.querySelector("#testSegmentArea_segment");
+        expect(container).to.exist;
+        expect(container.className).to.equal("nuSegment");
+
+        const radios = container.querySelectorAll('input[type="radio"]');
+        const labels = container.querySelectorAll('label');
+
+        expect(radios.length).to.equal(3);
+        expect(labels.length).to.equal(3);
+
+        expect(radios[1].checked).to.be.true;
+        expect(labels[1].textContent).to.equal("B");
+    });
+
+    it("ラジオボタンの選択時にコールバックが呼ばれる", () => {
+        let selectedValue = null;
+
+        const config = {
+            name: "fruitOption",
+            value: "banana",
+            options: [
+                { label: "Apple", value: "apple" },
+                { label: "Banana", value: "banana" },
+                { label: "Melon", value: "melon" }
+            ]
+        };
+
+        nu.segment("testSegmentArea", config, (val) => {
+            selectedValue = val;
+        });
+
+        const input = document.querySelector('input[value="melon"]');
+        input.checked = true;
+
+        const event = new window.Event("change", { bubbles: true });
+        input.dispatchEvent(event);
+
+        expect(selectedValue).to.equal("melon");
+    });
+});
+
 
 //------------------------------------------------------------------------------------
 // TODO テスト: 検索ボックス
