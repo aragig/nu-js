@@ -445,9 +445,9 @@
 		/**
 		 * @param {string} mountId - 表示領域のID
 		 * @param {Object} options - オプション（省略可能）
-		 * @param {Function} options.onUploaded - アップロード成功時のコールバック
+		 * @param {Object} [handlers] - コールバック
 		 */
-		window.nu.upload = function (mountId, options = {}) {
+		window.nu.upload = function (mountId, options = {}, handlers  ) {
 			const mountEl = document.getElementById(mountId);
 			if (!mountEl) return;
 
@@ -489,6 +489,10 @@
 
 				files.forEach(file => {
 					if (!file.type.startsWith("image/")) return;
+					if (options.maxSize && file.size > options.maxSize) {
+						handlers.onError(`${file.name} はサイズ制限(${options.maxSize}バイト)を超えています`);
+						return;
+					}
 
 					const reader = new FileReader();
 					reader.onload = () => {
@@ -496,20 +500,36 @@
 						img.src = reader.result;
 						img.className = "nuUploaderImage";
 						preview.appendChild(img);
-
-						// モック送信（実際にはfetchでPOST）
-						mockUpload(file).then(() => {
-							nu.toast(`${file.name} をアップロードしました`, { type: "success" });
-							options.onUploaded?.(file);
-						});
 					};
 					reader.readAsDataURL(file);
+
+					// 実際のアップロード処理
+					uploadFile(file)
+						.then(response => {
+							// handlers.onSuccess(`${response}`);
+							handlers.onSuccess(`${file.name} をアップロードしました`);
+						})
+						.catch(err => {
+							handlers.onError(`${err}`);
+						});
 				});
 			}
 
-			// モックのアップロード関数
-			function mockUpload(file) {
-				return new Promise(resolve => setTimeout(resolve, 500)); // 疑似ディレイ
+			async function uploadFile(file) {
+				if (!options.url) {
+					// モックアップロード
+					return new Promise(resolve => setTimeout(() => resolve({mock: true}), 500));
+				}
+
+				const formData = new FormData();
+				formData.append("file", file);
+
+				const response = await fetch(options.url, {
+					method: "POST",
+					body: formData
+				});
+				if (!response.ok) throw new Error(`Upload failed: ${response.status}`);
+				return await response.json(); // JSONレスポンスを想定
 			}
 
 			// DOMに追加

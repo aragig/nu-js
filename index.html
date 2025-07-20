@@ -484,8 +484,14 @@ nu.dropdown("__nuDropdownTriggerRBtn", {
 		{
 			const code = `
 nu.upload("uploadArea", {
-	onUploaded: function(file) {
-		console.log("アップロード完了:", file.name);
+	maxSize: 1024 * 1024, // 1MBまで
+	url: "/api/upload/image"
+}, {
+	onError: function (msg) {
+		nu.toast.e("エラー: " + msg);
+	},
+	onSuccess: function(msg) {
+		nu.toast.s("登録完了: "+ msg);
 	}
 });
 `.trim();
