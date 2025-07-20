@@ -13,7 +13,7 @@ global.cancelAnimationFrame = dom.window.cancelAnimationFrame;
 
 
 const {expect} = require("chai");
-const nu = require("../js/neoux.js")
+const nu = require("../src/neoux/js/nu.js")
 
 
 //------------------------------------------------------------------------------------
@@ -243,7 +243,7 @@ describe("nu.toast", () => {
     });
 
     it("toastがDOMに追加される", (done) => {
-        nu.toast("テストメッセージ", 1000); // 1秒表示
+        nu.toast("テストメッセージ", {duration: 1000}); // 1秒表示
 
         const toast = document.querySelector(".nuToast");
         expect(toast).to.exist;
@@ -257,7 +257,7 @@ describe("nu.toast", () => {
     });
 
     it("一定時間後にtoastが消える", (done) => {
-        nu.toast("消えるテスト", 500); // 0.5秒表示
+        nu.toast("消えるテスト", {duration: 500}); // 0.5秒表示
 
         setTimeout(() => {
             const toast = document.querySelector(".nuToast");

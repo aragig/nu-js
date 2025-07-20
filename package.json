@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --require ./test/setup.js",
-    "doc": "jsdoc js/neoux.js -d docs"
+    "doc": "jsdoc src/neoux/js/nu.js -d docs"
   },
   "repository": {
     "type": "git",
