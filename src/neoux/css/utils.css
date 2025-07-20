@@ -80,7 +80,9 @@ pre.nuCodeBlock {
   font-size: 0.85rem;
   line-height: 1.2rem;
   font-family: "Iosevka Curly Slab", SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  padding: 1rem;
+  padding: 1rem 0.5rem;
+  background: #fafafa;
+  border: 1px solid #f7f7f7;
   margin-bottom: 1.5rem; }
 
 .nuCodeToggle {

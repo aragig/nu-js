@@ -62,7 +62,9 @@ pre.nuCodeBlock {
 	//font-family: Iosevka, SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 	font-family: "Iosevka Curly Slab", SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 	//font-family: SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-	padding:1rem;
+	padding:1rem 0.5rem;
+	background: #fafafa;
+	border: 1px solid #f7f7f7;
 	margin-bottom: 1.5rem;
 }
 .nuCodeToggle {
