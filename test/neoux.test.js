@@ -267,6 +267,52 @@ describe("nu.toast", () => {
     });
 });
 
+describe("nu.toast - カラータイプ付き", () => {
+    beforeEach(() => {
+        document.body.innerHTML = "";
+    });
+
+    it("type: success のとき nuToast_SUCCESS が付与される", () => {
+        nu.toast("成功メッセージ", { type: "success", duration: 100 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast).to.exist;
+        expect(toast.classList.contains("nuToast_SUCCESS")).to.be.true;
+    });
+
+    it("type: error のとき nuToast_ERROR が付与される", () => {
+        nu.toast("エラーメッセージ", { type: "error", duration: 100 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast).to.exist;
+        expect(toast.classList.contains("nuToast_ERROR")).to.be.true;
+    });
+
+    it("type: warning のとき nuToast_WARNING が付与される", () => {
+        nu.toast("警告メッセージ", { type: "warning", duration: 100 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast).to.exist;
+        expect(toast.classList.contains("nuToast_WARNING")).to.be.true;
+    });
+
+    it("type: info のとき nuToast_INFO が付与される", () => {
+        nu.toast("情報メッセージ", { type: "info", duration: 100 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast).to.exist;
+        expect(toast.classList.contains("nuToast_INFO")).to.be.true;
+    });
+
+    it("type未指定時は nuToast_DEFAULT が付与される", () => {
+        nu.toast("デフォルトメッセージ", { duration: 100 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast).to.exist;
+        expect(toast.classList.contains("nuToast_DEFAULT")).to.be.true;
+    });
+});
+
 //------------------------------------------------------------------------------------
 // テスト: ドロップダウンメニュー
 //------------------------------------------------------------------------------------
