@@ -3,83 +3,83 @@
 // デフォルトUIスタイル
 //------------------------------------------------------------------------------------
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-  margin: 0;
-  padding: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+	margin: 0;
+	padding: 0;
 
-  #nuContents {
-    margin: 0 auto;
-    padding: 16px 8px;
-    max-width: 480px;
-  }
+	#nuContents {
+		margin: 0 auto;
+		padding: 16px 8px;
+		max-width: 480px;
+	}
 }
 
 .nuButton {
-  all: unset; // すべてのデフォルトをリセット
-  box-sizing: border-box;
-  display: inline-block;
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: linear-gradient(to bottom, #fefefe, #eaeaea);
-  color: #333;
-  cursor: pointer;
-  //box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); // 控えめな影
-  transition: background 0.2s ease, box-shadow 0.2s ease;
+	all: unset; // すべてのデフォルトをリセット
+	box-sizing: border-box;
+	display: inline-block;
+	padding: 8px 16px;
+	font-size: 14px;
+	font-weight: 500;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	background: linear-gradient(to bottom, #fefefe, #eaeaea);
+	color: #333;
+	cursor: pointer;
+	//box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); // 控えめな影
+	transition: background 0.2s ease, box-shadow 0.2s ease;
 
-  &:hover {
-    background: linear-gradient(to bottom, #ffffff, #dddddd);
-  }
+	&:hover {
+		background: linear-gradient(to bottom, #ffffff, #dddddd);
+	}
 
-  &:active {
-    background: linear-gradient(to bottom, #e0e0e0, #cfcfcf);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.15); // 押し込み感
-  }
+	&:active {
+		background: linear-gradient(to bottom, #e0e0e0, #cfcfcf);
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.15); // 押し込み感
+	}
 
-  //&:focus {
-  //    outline: none;
-  //    box-shadow: 0 0 0 2px rgba(100, 150, 250, 0.3);
-  //}
+	//&:focus {
+	//    outline: none;
+	//    box-shadow: 0 0 0 2px rgba(100, 150, 250, 0.3);
+	//}
 
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-  height: fit-content;
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
+	height: fit-content;
 }
 .nuInput,
 .nuTextarea,
 .nuSelect {
-  box-sizing: border-box;
-  display: inline-block;
-  //width: 100%;
-  //max-width: 100%;
-  padding: 10px 12px;
-  font-size: 16px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-  color: #333;
-  background: white;
-  //background: linear-gradient(to bottom, #fefefe, #eaeaea);
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  appearance: none;
-  -webkit-appearance: none; // iOSのdefault UI無効
-  -moz-appearance: none;
+	box-sizing: border-box;
+	display: inline-block;
+	//width: 100%;
+	//max-width: 100%;
+	padding: 10px 12px;
+	font-size: 16px;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+	color: #333;
+	background: white;
+	//background: linear-gradient(to bottom, #fefefe, #eaeaea);
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+	appearance: none;
+	-webkit-appearance: none; // iOSのdefault UI無効
+	-moz-appearance: none;
 
-  &:focus {
-    outline: none;
-    border-color: #6496fa;
-    box-shadow: 0 0 0 2px rgba(100, 150, 250, 0.3);
-  }
+	&:focus {
+		outline: none;
+		border-color: #6496fa;
+		box-shadow: 0 0 0 2px rgba(100, 150, 250, 0.3);
+	}
 
-  &::placeholder {
-    color: #aaa;
-  }
+	&::placeholder {
+		color: #aaa;
+	}
 
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
 }
 //textarea {
 //    resize: vertical; // 高さ調整のみ許可（PC）
@@ -88,11 +88,11 @@ body {
 //}
 
 .nuSelect {
-  background-image: url("data:image/svg+xml,%3Csvg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 6px center;
-  background-size: 24px;
-  padding-right: 40px; // アイコン分余白
+	background-image: url("data:image/svg+xml,%3Csvg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 6px center;
+	background-size: 24px;
+	padding-right: 40px; // アイコン分余白
 }
 
 
@@ -102,13 +102,13 @@ body {
 // オーバーレイ制御ユーティリティ
 //------------------------------------------------------------------------------------
 .nuOverlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 9998;
-  opacity: 0;
-  transition: opacity 0.2s ease;
+	position: fixed;
+	top: 0; left: 0;
+	width: 100%; height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 9998;
+	opacity: 0;
+	transition: opacity 0.2s ease;
 }
 
 
@@ -116,107 +116,107 @@ body {
 // アラート用スタイル
 //------------------------------------------------------------------------------------
 .nuAlertBox {
-  position: fixed;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 20px 30px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  z-index: 9999;
-  max-width: 90%;
-  min-width: 250px;
-  font-family: sans-serif;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.2s ease;
+	position: fixed;
+	top: 50%; left: 50%;
+	transform: translate(-50%, -50%);
+	background: white;
+	padding: 20px 30px;
+	border-radius: 10px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+	z-index: 9999;
+	max-width: 90%;
+	min-width: 250px;
+	font-family: sans-serif;
+	text-align: center;
+	opacity: 0;
+	transition: opacity 0.2s ease;
 
-  .nuAlertMessage {
-    margin-bottom: 20px;
-    font-size: 16px;
-  }
+	.nuAlertMessage {
+		margin-bottom: 20px;
+		font-size: 16px;
+	}
 
-  .nuAlertButtonRow {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
+	.nuAlertButtonRow {
+		display: flex;
+		justify-content: center;
+		gap: 20px;
+	}
 
-  .nuAlertButton {
-    padding: 8px 16px;
-    background: #007AFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    min-width: 70px;
+	.nuAlertButton {
+		padding: 8px 16px;
+		background: #007AFF;
+		color: white;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		font-size: 14px;
+		min-width: 70px;
 
-    &.nuAlertButton_DELETE {
-      background: #ff3b30;
-    }
-    &.nuAlertButton_CANCEL {
-      background: #aaa;
-    }
-  }
+		&.nuAlertButton_DELETE {
+			background: #ff3b30;
+		}
+		&.nuAlertButton_CANCEL {
+			background: #aaa;
+		}
+	}
 }
 
 .nuSheetBox {
-  position: fixed;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 20px 0 10px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  z-index: 9999;
-  max-width: 90%;
-  min-width: 250px;
-  font-family: sans-serif;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.2s ease;
+	position: fixed;
+	top: 50%; left: 50%;
+	transform: translate(-50%, -50%);
+	background: white;
+	padding: 20px 0 10px;
+	border-radius: 10px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+	z-index: 9999;
+	max-width: 90%;
+	min-width: 250px;
+	font-family: sans-serif;
+	text-align: center;
+	opacity: 0;
+	transition: opacity 0.2s ease;
 
 
-  .nuAlertButtonRow {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-  }
+	.nuAlertButtonRow {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0;
+	}
 
-  .nuAlertMessage {
-    margin-bottom: 20px;
-    font-size: 16px;
-  }
+	.nuAlertMessage {
+		margin-bottom: 20px;
+		font-size: 16px;
+	}
 
-  .nuAlertButtonRow {
-    display: flex;
-    justify-content: center;
-    gap: 0;
-  }
+	.nuAlertButtonRow {
+		display: flex;
+		justify-content: center;
+		gap: 0;
+	}
 
-  .nuAlertButton {
-    cursor: pointer;
-    font-size: 15px;
-    padding: 12px 0;
-    background: white;
-    border: none;
-    border-top: 1px solid #ededed;
-    font-weight: normal;
-    color: #007AFF;
+	.nuAlertButton {
+		cursor: pointer;
+		font-size: 15px;
+		padding: 12px 0;
+		background: white;
+		border: none;
+		border-top: 1px solid #ededed;
+		font-weight: normal;
+		color: #007AFF;
 
-    &:last-child {
-      background: #fff;
-      font-weight: bold;
-    }
+		&:last-child {
+			background: #fff;
+			font-weight: bold;
+		}
 
-    &.nuAlertButton_DELETE {
-      color: #ff3b30;
-    }
-    //&.nuAlertButton_CANCEL {
-    //    color: #999;
-    //}
-  }
+		&.nuAlertButton_DELETE {
+			color: #ff3b30;
+		}
+		//&.nuAlertButton_CANCEL {
+		//    color: #999;
+		//}
+	}
 
 }
 
@@ -224,240 +224,240 @@ body {
 // ローディングインジケータ用スタイル
 //------------------------------------------------------------------------------------
 .nuLoadingSpinner {
-  width: 48px;
-  height: 48px;
-  border: 4px solid #ccc;
-  border-top: 4px solid #333;
-  border-radius: 50%;
-  animation: spinnerRotate 0.8s linear infinite;
-  position: fixed;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0;
+	width: 48px;
+	height: 48px;
+	border: 4px solid #ccc;
+	border-top: 4px solid #333;
+	border-radius: 50%;
+	animation: spinnerRotate 0.8s linear infinite;
+	position: fixed;
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 9999;
+	pointer-events: none;
+	opacity: 0;
 }
 
 .nuLoadingMessage {
-  position: fixed;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 16px;
-  font-family: sans-serif;
-  color: #fff;
-  z-index: 9999;
-  opacity: 0;
-  pointer-events: none;
-  text-align: center;
+	position: fixed;
+	top: 55%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 16px;
+	font-family: sans-serif;
+	color: #fff;
+	z-index: 9999;
+	opacity: 0;
+	pointer-events: none;
+	text-align: center;
 }
 
 @keyframes spinnerRotate {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
+	0% {
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+	100% {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
 }
 
 //------------------------------------------------------------------------------------
 // トースト通知
 //------------------------------------------------------------------------------------
 .nuToast {
-  position: fixed;
-  z-index: 9999;
-  display: block;
-  max-width: 80vw;
-  padding: 10px 16px;
-  background: #333;
-  color: white;
-  border-radius: 6px;
-  opacity: 0;
-  transition: all 0.3s ease;
-  pointer-events: none;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  white-space: normal;
-  font-size: 14px;
-  width: fit-content;
+	position: fixed;
+	z-index: 9999;
+	display: block;
+	max-width: 80vw;
+	padding: 10px 16px;
+	background: #333;
+	color: white;
+	border-radius: 6px;
+	opacity: 0;
+	transition: all 0.3s ease;
+	pointer-events: none;
+	word-break: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
+	font-size: 14px;
+	width: fit-content;
 
-  &.nuToast_SUCCESS { background: #2ecc71; }
-  &.nuToast_ERROR { background: #e74c3c; }
-  &.nuToast_WARNING { background: #f39c12; }
-  &.nuToast_INFO { background: #3498db; }
+	&.nuToast_SUCCESS { background: #2ecc71; }
+	&.nuToast_ERROR { background: #e74c3c; }
+	&.nuToast_WARNING { background: #f39c12; }
+	&.nuToast_INFO { background: #3498db; }
 
-  &.nuToast_TOP  {
-    top: 20px;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    transform: translateY(-20px);
-  }
-  &.nuToast_BOTTOM {
-    bottom: 20px;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    transform: translateY(20px);
-  }
+	&.nuToast_TOP  {
+		top: 20px;
+		left: 0;
+		right: 0;
+		margin-left: auto;
+		margin-right: auto;
+		transform: translateY(-20px);
+	}
+	&.nuToast_BOTTOM {
+		bottom: 20px;
+		left: 0;
+		right: 0;
+		margin-left: auto;
+		margin-right: auto;
+		transform: translateY(20px);
+	}
 }
 
 //------------------------------------------------------------------------------------
 // ドロップダウンメニュー
 //------------------------------------------------------------------------------------
 .nuDropdownMenu {
-  position: absolute;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 10001;
-  min-width: 160px;
-  padding: 4px 0;
-  font-family: sans-serif;
-  overflow: hidden;
-  font-size: 14px;
+	position: absolute;
+	background: white;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	z-index: 10001;
+	min-width: 160px;
+	padding: 4px 0;
+	font-family: sans-serif;
+	overflow: hidden;
+	font-size: 14px;
 }
 
 .nuDropdownItem {
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: background 0.2s ease;
+	padding: 8px 16px;
+	cursor: pointer;
+	transition: background 0.2s ease;
 
-  &:hover {
-    background: #f0f0f0;
-  }
+	&:hover {
+		background: #f0f0f0;
+	}
 }
 
 .nuMenuButton {
-  width: 40px;
-  height: 40px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
+	width: 40px;
+	height: 40px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	border-radius: 8px;
 
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='3' y1='6' x2='21' y2='6'/%3E%3Cline x1='3' y1='12' x2='21' y2='12'/%3E%3Cline x1='3' y1='18' x2='21' y2='18'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 28px 28px;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='3' y1='6' x2='21' y2='6'/%3E%3Cline x1='3' y1='12' x2='21' y2='12'/%3E%3Cline x1='3' y1='18' x2='21' y2='18'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 28px 28px;
 
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.05);
+	}
 
-  &:active {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
+	&:active {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
 }
 
 //------------------------------------------------------------------------------------
 // UISegmentedControl風ラジオボタン
 //------------------------------------------------------------------------------------
 .nuSegment{
-  display: inline-flex;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-  font-family: sans-serif;
+	display: inline-flex;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	overflow: hidden;
+	font-family: sans-serif;
 
-  input[type="radio"] {
-    display: none;
+	input[type="radio"] {
+		display: none;
 
-    &:checked + label {
-      background: linear-gradient(to bottom, #ffffff, #e0e0e0);
-      color: black;
-    }
+		&:checked + label {
+			background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+			color: black;
+		}
 
-    &:focus + label {
-      outline: 2px solid #4d90fe;
-      z-index: 1;
-    }
-  }
+		&:focus + label {
+			outline: 2px solid #4d90fe;
+			z-index: 1;
+		}
+	}
 
-  label {
-    padding: 8px 16px;
-    cursor: pointer;
-    background: #f2f2f2;
-    color: #666;
-    font-size: 14px;
-    border-right: 1px solid #ccc;
-    user-select: none;
-    //transition: background 0.2s;
+	label {
+		padding: 8px 16px;
+		cursor: pointer;
+		background: #f2f2f2;
+		color: #666;
+		font-size: 14px;
+		border-right: 1px solid #ccc;
+		user-select: none;
+		//transition: background 0.2s;
 
-    &:last-of-type {
-      border-right: none;
-    }
+		&:last-of-type {
+			border-right: none;
+		}
 
-    &:hover {
-      background: #e8e8e8;
-    }
-  }
+		&:hover {
+			background: #e8e8e8;
+		}
+	}
 }
 
 //------------------------------------------------------------------------------------
 // 検索ボックス
 //------------------------------------------------------------------------------------
 .nuSearchContainer {
-  position: relative;
-  display: inline-block;
+	position: relative;
+	display: inline-block;
 
-  .nuSearchIcon {
-    position: absolute;
-    top: 50%;
-    left: 12px;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
-    color: #888888;
-    pointer-events: none;
-  }
+	.nuSearchIcon {
+		position: absolute;
+		top: 50%;
+		left: 12px;
+		transform: translateY(-50%);
+		width: 16px;
+		height: 16px;
+		color: #888888;
+		pointer-events: none;
+	}
 
-  .nuSearchInput {
-    padding: 8px 12px 8px 36px;
-    border: 1px solid #cccccc;
-    border-radius: 8px;
-    font-size: 16px;
-    font-family: sans-serif;
-    outline: none;
+	.nuSearchInput {
+		padding: 8px 12px 8px 36px;
+		border: 1px solid #cccccc;
+		border-radius: 8px;
+		font-size: 16px;
+		font-family: sans-serif;
+		outline: none;
 
-    &:focus {
-      border-color: #007aff;
-    }
-    &::placeholder {
-      color: #aaa;
-    }
-  }
+		&:focus {
+			border-color: #007aff;
+		}
+		&::placeholder {
+			color: #aaa;
+		}
+	}
 }
 .nuSearchResults {
-  margin-top: 8px;
-  font-family: sans-serif;
-  font-size: 14px;
+	margin-top: 8px;
+	font-family: sans-serif;
+	font-size: 14px;
 
-  a {
-    display: block;
-    padding: 4px 8px;
-    text-decoration: none;
-    color: #007aff;
-    border-radius: 4px;
+	a {
+		display: block;
+		padding: 4px 8px;
+		text-decoration: none;
+		color: #007aff;
+		border-radius: 4px;
 
-    &:hover {
-      background-color: #f0f0f0;
-    }
-  }
+		&:hover {
+			background-color: #f0f0f0;
+		}
+	}
 }
 
 //------------------------------------------------------------------------------------
 // 入力欄に対して文字数カウンターを追加する
 //------------------------------------------------------------------------------------
 .nuCharCounter {
-  font-size: 12px;
-  color: #888;
-  pointer-events: none;
-  text-align: right;
+	font-size: 12px;
+	color: #888;
+	pointer-events: none;
+	text-align: right;
 }
 

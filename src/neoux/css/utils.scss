@@ -21,19 +21,19 @@
 
 
 .nuFlexRow {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 .nuFlexColumn {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 .nuFlexSpread {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
 }
 
 //------------------------------------------------------------------------------------
@@ -42,45 +42,45 @@
 
 /* iosevka-curly-slab-latin-400-normal */
 @font-face {
-  font-family: 'Iosevka Curly Slab';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/iosevka-curly-slab@latest/latin-400-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/iosevka-curly-slab@latest/latin-400-normal.woff) format('woff');
+	font-family: 'Iosevka Curly Slab';
+	font-style: normal;
+	font-display: swap;
+	font-weight: 400;
+	src: url(https://cdn.jsdelivr.net/fontsource/fonts/iosevka-curly-slab@latest/latin-400-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/iosevka-curly-slab@latest/latin-400-normal.woff) format('woff');
 }
 
 pre.nuCodeBlock {
-  display: block;
-  //overflow-x: auto;
-  //white-space: pre;
-  //word-break: normal;
-  white-space: pre-wrap;     // 折り返しを有効にする
-  word-break: break-word;    // 単語単位で折り返す（長いURLなどにも対応）
-  overflow-wrap: anywhere;   // ブラウザによってはこちらも必要
+	display: block;
+	//overflow-x: auto;
+	//white-space: pre;
+	//word-break: normal;
+	white-space: pre-wrap;     // 折り返しを有効にする
+	word-break: break-word;    // 単語単位で折り返す（長いURLなどにも対応）
+	overflow-wrap: anywhere;   // ブラウザによってはこちらも必要
 
-  font-size: 0.85rem;
-  line-height:1.2rem;
-  //font-family: Menlo, Consolas, monospace;
-  //font-family: Iosevka, SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-family: "Iosevka Curly Slab", SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  //font-family: SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  padding:1rem;
-  margin-bottom: 1.5rem;
+	font-size: 0.85rem;
+	line-height:1.2rem;
+	//font-family: Menlo, Consolas, monospace;
+	//font-family: Iosevka, SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+	font-family: "Iosevka Curly Slab", SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+	//font-family: SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+	padding:1rem;
+	margin-bottom: 1.5rem;
 }
 .nuCodeToggle {
-  cursor: pointer;
-  background: none;
-  border: none;
-  text-decoration: underline;
-  padding: 0;
-  font-family: inherit;
-  font-size: 0.9rem;
-  margin-top: 1.2em;
-  margin-bottom: 0.5em;
-  width: fit-content;
+	cursor: pointer;
+	background: none;
+	border: none;
+	text-decoration: underline;
+	padding: 0;
+	font-family: inherit;
+	font-size: 0.9rem;
+	margin-top: 1.2em;
+	margin-bottom: 0.5em;
+	width: fit-content;
 }
 .nuCodeBlock {
-  &.collapsed {
-    display: none;
-  }
+	&.collapsed {
+		display: none;
+	}
 }

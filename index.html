@@ -1,164 +1,163 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>nu.js</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <link rel="stylesheet" href="src/neoux/css/utils.css">
-  <link rel="stylesheet" href="src/neoux/css/neoux.css">
-  <script src="src/neoux/js/nu.js"></script>
-  <script src="lib/js/jquery-3.7.1.js"></script>
+	<meta charset="UTF-8">
+	<title>nu.js</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+	<link rel="stylesheet" href="src/neoux/css/utils.css">
+	<link rel="stylesheet" href="src/neoux/css/neoux.css">
+	<script src="src/neoux/js/nu.js"></script>
+	<script src="lib/js/jquery-3.7.1.js"></script>
 </head>
 <body>
 <div id="nuContents">
-  <h1>ぬ - nu.js</h1>
-
-  nu.jsはライブラリに依存しない Vanilla JS で作られているUI補助ツールです。jqueryとの共存も可能です。
-  <form id="nuForm">
-    <h2 class="mt40">アラート</h2>
-    <div class="nuFlexRow gap10 mt30">
-      <h3>nu.alert</h3>
-      <button id="nuAlertSimple" class="nuButton" type="button">Run</button>
-    </div>
-    <pre id="nuAlertSimplePre" class="nuCodeBlock"></pre>
-
-
-    <div class="nuFlexRow gap10 mt30">
-      <h3>nu.alert</h3>
-        <button id="nuAlert" class="nuButton" type="button">Run</button>
-      </div>
-    <pre id="nuAlertPre" class="nuCodeBlock" data-html-safe></pre>
+	<h1>ぬ - nu.js</h1>
+	nu.jsはライブラリに依存しない Vanilla JS で作られているUI補助ツールです。jqueryとの共存も可能です。
+	<form id="nuForm">
+		<h2 class="mt40">アラート</h2>
+		<div class="nuFlexRow gap10 mt30">
+			<h3>nu.alert</h3>
+			<button id="nuAlertSimple" class="nuButton" type="button">Run</button>
+		</div>
+		<pre id="nuAlertSimplePre" class="nuCodeBlock"></pre>
 
 
-    <div class="nuFlexRow gap10 mt30">
-      <h3>nu.confirm</h3>
-      <button id="nuConfirm" class="nuButton" type="button">Run</button>
-    </div>
-    <pre id="nuConfirmPre" class="nuCodeBlock"></pre>
-
-    <div class="nuFlexRow gap10 mt30">
-      <h3>nu.sheet</h3>
-      <button id="nuSheetCustomAlert" class="nuButton" type="button" data-html-safe>Run</button>
-    </div>
-    <pre id="nuSheetCustomAlertPre" class="nuCodeBlock"></pre>
+		<div class="nuFlexRow gap10 mt30">
+			<h3>nu.alert</h3>
+			<button id="nuAlert" class="nuButton" type="button">Run</button>
+		</div>
+		<pre id="nuAlertPre" class="nuCodeBlock" data-html-safe></pre>
 
 
-    <div class="nuFlexRow gap10 mt30">
-      <h3>nu.sheet</h3>
-      <button id="nuSheet" class="nuButton" type="button" data-html-safe>Run</button>
-    </div>
-    <pre id="nuSheetPre" class="nuCodeBlock"></pre>
+		<div class="nuFlexRow gap10 mt30">
+			<h3>nu.confirm</h3>
+			<button id="nuConfirm" class="nuButton" type="button">Run</button>
+		</div>
+		<pre id="nuConfirmPre" class="nuCodeBlock"></pre>
+
+		<div class="nuFlexRow gap10 mt30">
+			<h3>nu.sheet</h3>
+			<button id="nuSheetCustomAlert" class="nuButton" type="button" data-html-safe>Run</button>
+		</div>
+		<pre id="nuSheetCustomAlertPre" class="nuCodeBlock"></pre>
 
 
-    <h2 class="mt80">ローディングインジケータ</h2>
-    <div class="nuFlexRow gap10 mt30">
-      <h3>nu.loading</h3>
-      <button id="nuLoading" class="nuButton" type="button">Run</button>
-    </div>
-    <pre id="nuLoadingPre" class="nuCodeBlock"></pre>
+		<div class="nuFlexRow gap10 mt30">
+			<h3>nu.sheet</h3>
+			<button id="nuSheet" class="nuButton" type="button" data-html-safe>Run</button>
+		</div>
+		<pre id="nuSheetPre" class="nuCodeBlock"></pre>
 
 
-    <h2 class="mt80">トースト</h2>
-    <div class="nuFlexRow gap10 mt30">
-      <h3>nu.toast</h3>
-      <button id="nuToast" class="nuButton" type="button">Run</button>
-    </div>
-    <pre id="nuToastPre" class="nuCodeBlock"></pre>
+		<h2 class="mt80">ローディングインジケータ</h2>
+		<div class="nuFlexRow gap10 mt30">
+			<h3>nu.loading</h3>
+			<button id="nuLoading" class="nuButton" type="button">Run</button>
+		</div>
+		<pre id="nuLoadingPre" class="nuCodeBlock"></pre>
 
 
-    <div class="nuFlexRow gap10 mt30">
-      <h3>nu.toast</h3>
-      <button id="nuToastDelay" class="nuButton" type="button">Run</button>
-    </div>
-    <pre id="nuToastDelayPre" class="nuCodeBlock"></pre>
+		<h2 class="mt80">トースト</h2>
+		<div class="nuFlexRow gap10 mt30">
+			<h3>nu.toast</h3>
+			<button id="nuToast" class="nuButton" type="button">Run</button>
+		</div>
+		<pre id="nuToastPre" class="nuCodeBlock"></pre>
 
 
-    <h2 class="mt80">ドロップダウンメニュー</h2>
-    <div class="nuFlexRow gap10 mt30">
-      <h3>nu.dropdown</h3>
-      <button id="dropdownBtn" class="nuButton" type="button">Run</button>
-    </div>
-    <pre id="dropdownBtnPre" class="nuCodeBlock"></pre>
+		<div class="nuFlexRow gap10 mt30">
+			<h3>nu.toast</h3>
+			<button id="nuToastDelay" class="nuButton" type="button">Run</button>
+		</div>
+		<pre id="nuToastDelayPre" class="nuCodeBlock"></pre>
 
 
-    <div class="nuFlexSpread gap10 mt30">
-      <h3>nu.dropdown</h3>
-      <button id="dropdownBtnLeft" class="nuMenuButton" type="button"></button>
-    </div>
-    <pre id="dropdownBtnLeftPre" class="nuCodeBlock"></pre>
+		<h2 class="mt80">ドロップダウンメニュー</h2>
+		<div class="nuFlexRow gap10 mt30">
+			<h3>nu.dropdown</h3>
+			<button id="dropdownBtn" class="nuButton" type="button">Run</button>
+		</div>
+		<pre id="dropdownBtnPre" class="nuCodeBlock"></pre>
 
 
-    <h2 class="mt80">セグメントボタン</h2>
-    <div class="nuFlexColumn gap10 mt30">
-      <h3>nu.segment</h3>
-      <div id="sortSegmentArea"></div>
-    </div>
-    <pre id="sortSegmentAreaPre" class="nuCodeBlock"></pre>
+		<div class="nuFlexSpread gap10 mt30">
+			<h3>nu.dropdown</h3>
+			<button id="dropdownBtnLeft" class="nuMenuButton" type="button"></button>
+		</div>
+		<pre id="dropdownBtnLeftPre" class="nuCodeBlock"></pre>
 
 
-    <div class="nuFlexColumn gap10 mt30">
-      <h3>nu.segment</h3>
-      <div id="fruitsSegmentArea"></div>
-    </div>
-    <pre id="fruitsSegmentAreaPre" class="nuCodeBlock"></pre>
+		<h2 class="mt80">セグメントボタン</h2>
+		<div class="nuFlexColumn gap10 mt30">
+			<h3>nu.segment</h3>
+			<div id="sortSegmentArea"></div>
+		</div>
+		<pre id="sortSegmentAreaPre" class="nuCodeBlock"></pre>
 
 
-    <h2 class="mt80">検索ボックス</h2>
-    <div class="nuFlexColumn gap10 mt30">
-      <h3>nu.search</h3>
-      <div id="searchArea"></div>
-    </div>
-    <pre id="searchAreaPre" class="nuCodeBlock"></pre>
-    ※「/」キー押下で検索ボックスにフォーカス
+		<div class="nuFlexColumn gap10 mt30">
+			<h3>nu.segment</h3>
+			<div id="fruitsSegmentArea"></div>
+		</div>
+		<pre id="fruitsSegmentAreaPre" class="nuCodeBlock"></pre>
 
-    <h2 class="mt80">入力欄に対して文字数カウンターを追加する</h2>
-    <div class="nuFlexColumn gap10 mt30">
-      <h3>nu.charCount</h3>
-      <input id="formName" name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
-    </div>
-    <pre id="formNamePre" class="nuCodeBlock"></pre>
 
-    <div class="nuFlexColumn gap10 mt30">
-      <h3>nu.charCount</h3>
-      <textarea id="formInquire" name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5">テキスト</textarea>
-    </div>
-    <pre id="formInquirePre" class="nuCodeBlock"></pre>
+		<h2 class="mt80">検索ボックス</h2>
+		<div class="nuFlexColumn gap10 mt30">
+			<h3>nu.search</h3>
+			<div id="searchArea"></div>
+		</div>
+		<pre id="searchAreaPre" class="nuCodeBlock"></pre>
+		※「/」キー押下で検索ボックスにフォーカス
 
-    <h2 class="mt80">フォーム値取得</h2>
-    <div class="nuFlexRow gap10 mt30">
-      <h3>nu.submit</h3>
-      <button id="nuSubmit" class="nuButton" type="button">Submit</button>
-    </div>
-    <pre id="nuSubmitResultArea" class="nuCodeBlock"></pre>
+		<h2 class="mt80">入力欄に対して文字数カウンターを追加する</h2>
+		<div class="nuFlexColumn gap10 mt30">
+			<h3>nu.charCount</h3>
+			<input id="formName" name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
+		</div>
+		<pre id="formNamePre" class="nuCodeBlock"></pre>
 
-    <pre id="nuSubmitPre" class="nuCodeBlock"></pre>
+		<div class="nuFlexColumn gap10 mt30">
+			<h3>nu.charCount</h3>
+			<textarea id="formInquire" name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5">テキスト</textarea>
+		</div>
+		<pre id="formInquirePre" class="nuCodeBlock"></pre>
 
-    <hr class="mt80">
+		<h2 class="mt80">フォーム値取得</h2>
+		<div class="nuFlexRow gap10 mt30">
+			<h3>nu.submit</h3>
+			<button id="nuSubmit" class="nuButton" type="button">Submit</button>
+		</div>
+		<pre id="nuSubmitResultArea" class="nuCodeBlock"></pre>
 
-    <h2 class="mt40">色々なinput</h2>
-    <div class="nuFlexColumn gap20">
-      <div>
-        <select name="sampleSelect" class="nuSelect">
-          <option value="">選択してください</option>
-          <option value="a">選択肢A</option>
-          <option value="b">選択肢B</option>
-        </select>
-      </div>
-      <div>
-        <label>年/月/日：<input name="sampleDate" type="date"></label>
-      </div>
-      <div>
-        <label>年 / 月 / 日 +時:分：<input name="sampleDatetimeLocal" type="datetime-local"></label>
-      </div>
-      <div>
-        <label>カラーパレッド：<input name="sampleColor" type="color" value="#0b80dc"></label>
-      </div>
-      <div>
-        <label>範囲を選択：<input name="sampleRange" type="range" min="0" max="100"></label>
-      </div>
-    </div>
+		<pre id="nuSubmitPre" class="nuCodeBlock"></pre>
 
-  </form>
+		<hr class="mt80">
+
+		<h2 class="mt40">色々なinput</h2>
+		<div class="nuFlexColumn gap20">
+			<div>
+				<select name="sampleSelect" class="nuSelect">
+					<option value="">選択してください</option>
+					<option value="a">選択肢A</option>
+					<option value="b">選択肢B</option>
+				</select>
+			</div>
+			<div>
+				<label>年/月/日：<input name="sampleDate" type="date"></label>
+			</div>
+			<div>
+				<label>年 / 月 / 日 +時:分：<input name="sampleDatetimeLocal" type="datetime-local"></label>
+			</div>
+			<div>
+				<label>カラーパレッド：<input name="sampleColor" type="color" value="#0b80dc"></label>
+			</div>
+			<div>
+				<label>範囲を選択：<input name="sampleRange" type="range" min="0" max="100"></label>
+			</div>
+		</div>
+
+	</form>
 </div>
 
 
@@ -166,40 +165,40 @@
 
 
 
-    document.addEventListener("DOMContentLoaded", () => {
-        "use strict";
+	document.addEventListener("DOMContentLoaded", () => {
+		"use strict";
 
-        nu.d.begin("🚀Welcome to nu.js !");
-        nu.d.log("ログメッセージ");
-        // nu.d.warn("警告メッセージ");
-        // nu.d.error("エラーが発生しました");
-        // nu.d.info("インフォメーション");
-        nu.d.json("jojo.json", {
-            "name": "空条承太郎",
-            "stand": "ザ・ワールド"
-        });
+		nu.d.begin("🚀Welcome to nu.js !");
+		nu.d.log("ログメッセージ");
+		// nu.d.warn("警告メッセージ");
+		// nu.d.error("エラーが発生しました");
+		// nu.d.info("インフォメーション");
+		nu.d.json("jojo.json", {
+			"name": "空条承太郎",
+			"stand": "ザ・ワールド"
+		});
 
-        nu.d.end();
+		nu.d.end();
 
-        //------------------------------------------------------------------------------------
-        // カスタムアラート もっともシンプル
-        //------------------------------------------------------------------------------------
-        {
-            const code = `
+		//------------------------------------------------------------------------------------
+		// カスタムアラート もっともシンプル
+		//------------------------------------------------------------------------------------
+		{
+			const code = `
 $("#nuAlertSimple").click(function() {
   nu.alert("メッセージ");
 });
             `.trim();
 
-            $("#nuAlertSimplePre").text(code); // 表示用
-            new Function(code)(); // 実行用
-        }
+			$("#nuAlertSimplePre").text(code); // 表示用
+			new Function(code)(); // 実行用
+		}
 
-        //------------------------------------------------------------------------------------
-        // カスタムアラート　メッセージをHTMLで装飾
-        //------------------------------------------------------------------------------------
-        {
-            const code = `
+		//------------------------------------------------------------------------------------
+		// カスタムアラート　メッセージをHTMLで装飾
+		//------------------------------------------------------------------------------------
+		{
+			const code = `
 const message=\`
 <b>HTML</b>で装飾できます。<br>
 なんと<br>
@@ -215,16 +214,16 @@ $("#nuAlert").click(function() {
 });
             `.trim();
 
-            $("#nuAlertPre").html(code); // 表示用
-            new Function(code)(); // 実行用
-        }
+			$("#nuAlertPre").html(code); // 表示用
+			new Function(code)(); // 実行用
+		}
 
 
-        //------------------------------------------------------------------------------------
-        // カスタムアラート　二つのボタン --OKとキャンセル
-        //------------------------------------------------------------------------------------
-        {
-            const code = `
+		//------------------------------------------------------------------------------------
+		// カスタムアラート　二つのボタン --OKとキャンセル
+		//------------------------------------------------------------------------------------
+		{
+			const code = `
 $("#nuConfirm").click(function() {
   nu.confirm("カスタムアラート", function() {
     nu.toast("Clicked OK");
@@ -234,16 +233,16 @@ $("#nuConfirm").click(function() {
 });
             `.trim();
 
-            $("#nuConfirmPre").text(code); // 表示用
-            new Function(code)(); // 実行用
-        }
+			$("#nuConfirmPre").text(code); // 表示用
+			new Function(code)(); // 実行用
+		}
 
 
-        //------------------------------------------------------------------------------------
-        // カスタムアラート　二つのボタン --ボタンの名前を自由にカスタマイズ
-        //------------------------------------------------------------------------------------
-        {
-            const code = `
+		//------------------------------------------------------------------------------------
+		// カスタムアラート　二つのボタン --ボタンの名前を自由にカスタマイズ
+		//------------------------------------------------------------------------------------
+		{
+			const code = `
 $("#nuSheetCustomAlert").click(function() {
   nu.sheet("削除しますがよろしいですか？",
    {cancel:"キャンセル",delete:"削除"},{
@@ -257,16 +256,16 @@ $("#nuSheetCustomAlert").click(function() {
 });
             `.trim();
 
-            $("#nuSheetCustomAlertPre").text(code); // 表示用
-            new Function(code)(); // 実行用
-        }
+			$("#nuSheetCustomAlertPre").text(code); // 表示用
+			new Function(code)(); // 実行用
+		}
 
 
-        //------------------------------------------------------------------------------------
-        // カスタムアラート　３つ以上のボタン --シート表現
-        //------------------------------------------------------------------------------------
-        {
-            const code = `
+		//------------------------------------------------------------------------------------
+		// カスタムアラート　３つ以上のボタン --シート表現
+		//------------------------------------------------------------------------------------
+		{
+			const code = `
 const items = {
   edit: "編集",
   duplicate: "複製",
@@ -292,16 +291,16 @@ $("#nuSheet").click(function() {
 });
             `.trim();
 
-            $("#nuSheetPre").text(code); // 表示用
-            new Function(code)(); // 実行用
+			$("#nuSheetPre").text(code); // 表示用
+			new Function(code)(); // 実行用
 
-        }
+		}
 
-        //------------------------------------------------------------------------------------
-        // ローディングインジケータ
-        //------------------------------------------------------------------------------------
-        {
-            const code = `
+		//------------------------------------------------------------------------------------
+		// ローディングインジケータ
+		//------------------------------------------------------------------------------------
+		{
+			const code = `
 $("#nuLoading").click(function() {
     nu.loading.show("読み込み中...");
 
@@ -312,46 +311,46 @@ $("#nuLoading").click(function() {
 });
             `.trim();
 
-            $("#nuLoadingPre").text(code); // 表示用
-            new Function(code)(); // 実行用
-        }
+			$("#nuLoadingPre").text(code); // 表示用
+			new Function(code)(); // 実行用
+		}
 
 
-        //------------------------------------------------------------------------------------
-        // トースト通知　その1
-        //------------------------------------------------------------------------------------
-        {
-            const code = `
+		//------------------------------------------------------------------------------------
+		// トースト通知　その1
+		//------------------------------------------------------------------------------------
+		{
+			const code = `
 $("#nuToast").click(function() {
     nu.toast("保存が完了しました！");
 });
             `.trim();
 
-            $("#nuToastPre").text(code); // 表示用
-            new Function(code)(); // 実行用
-        }
+			$("#nuToastPre").text(code); // 表示用
+			new Function(code)(); // 実行用
+		}
 
-        //------------------------------------------------------------------------------------
-        // トースト通知　その2
-        //------------------------------------------------------------------------------------
-        {
-            const code = `
+		//------------------------------------------------------------------------------------
+		// トースト通知　その2
+		//------------------------------------------------------------------------------------
+		{
+			const code = `
 $("#nuToastDelay").click(function() {
     nu.toast("エラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しましたエラーが発生しました",
     {duration: 5000, type: "error", position: "top"}); // 5秒表示
 });
             `.trim();
 
-            $("#nuToastDelayPre").text(code); // 表示用
-            new Function(code)(); // 実行用
-        }
+			$("#nuToastDelayPre").text(code); // 表示用
+			new Function(code)(); // 実行用
+		}
 
 
-        //------------------------------------------------------------------------------------
-        // ドロップダウンメニュー　その１
-        //------------------------------------------------------------------------------------
-        {
-            const code = `
+		//------------------------------------------------------------------------------------
+		// ドロップダウンメニュー　その１
+		//------------------------------------------------------------------------------------
+		{
+			const code = `
 nu.dropdown("dropdownBtn", {
   setting: "設定",
   logout: "ログアウト",
@@ -369,15 +368,15 @@ nu.dropdown("dropdownBtn", {
 });
             `.trim();
 
-            $("#dropdownBtnPre").text(code); // 表示用
-            new Function(code)(); // 実行用
-        }
+			$("#dropdownBtnPre").text(code); // 表示用
+			new Function(code)(); // 実行用
+		}
 
-        //------------------------------------------------------------------------------------
-        // ドロップダウンメニュー　その2 --ハンバーガータイプ
-        //------------------------------------------------------------------------------------
-        {
-            const code = `
+		//------------------------------------------------------------------------------------
+		// ドロップダウンメニュー　その2 --ハンバーガータイプ
+		//------------------------------------------------------------------------------------
+		{
+			const code = `
 nu.dropdown("dropdownBtnLeft", {
   hoge: "ほげ",
   fuga: "ふが",
@@ -395,17 +394,17 @@ nu.dropdown("dropdownBtnLeft", {
 });
             `.trim();
 
-            $("#dropdownBtnLeftPre").text(code); // 表示用
-            new Function(code)(); // 実行用
-        }
+			$("#dropdownBtnLeftPre").text(code); // 表示用
+			new Function(code)(); // 実行用
+		}
 
 
 
-        //------------------------------------------------------------------------------------
-        // セグメントボタン　その１
-        //------------------------------------------------------------------------------------
-        {
-            const code = `
+		//------------------------------------------------------------------------------------
+		// セグメントボタン　その１
+		//------------------------------------------------------------------------------------
+		{
+			const code = `
 nu.segment("sortSegmentArea", {
     name: "sampleSortOption",
     value: "最新",
@@ -418,16 +417,16 @@ nu.segment("sortSegmentArea", {
             `.trim();
 
 
-            $("#sortSegmentAreaPre").text(code); // 表示用
-            new Function(code)(); // 実行用
-        }
+			$("#sortSegmentAreaPre").text(code); // 表示用
+			new Function(code)(); // 実行用
+		}
 
 
-        //------------------------------------------------------------------------------------
-        // セグメントボタン　その２
-        //------------------------------------------------------------------------------------
-        {
-            const code = `
+		//------------------------------------------------------------------------------------
+		// セグメントボタン　その２
+		//------------------------------------------------------------------------------------
+		{
+			const code = `
 nu.segment("fruitsSegmentArea", {
     name: "sampleFruitsOption",
     value: "メロン",
@@ -439,17 +438,17 @@ nu.segment("fruitsSegmentArea", {
 }, (val) => nu.toast(val));
             `.trim();
 
-            $("#fruitsSegmentAreaPre").text(code); // 表示用
-            new Function(code)(); // 実行用
-        }
+			$("#fruitsSegmentAreaPre").text(code); // 表示用
+			new Function(code)(); // 実行用
+		}
 
 
 
-        //------------------------------------------------------------------------------------
-        // 検索ボックス
-        //------------------------------------------------------------------------------------
-        {
-            const code = `
+		//------------------------------------------------------------------------------------
+		// 検索ボックス
+		//------------------------------------------------------------------------------------
+		{
+			const code = `
 nu.search("searchArea", "/sample/site_search_index.json", {
     onConfirm: function (text) {
         nu.toast("🔍検索確定: " + text, {position: "top"});
@@ -459,36 +458,36 @@ nu.search("searchArea", "/sample/site_search_index.json", {
     }
 });
 `.trim();
-            $("#searchAreaPre").text(code); // 表示用
-            new Function(code)(); // 実行用
-        }
+			$("#searchAreaPre").text(code); // 表示用
+			new Function(code)(); // 実行用
+		}
 
 
-        //------------------------------------------------------------------------------------
-        // 入力欄に対して文字数カウンターを追加する　フィールド
-        //------------------------------------------------------------------------------------
-        {
-            const code = `nu.count("formName", 30);`;
-            $("#formNamePre").text(code); // 表示用
-            new Function(code)(); // 実行用
-        }
+		//------------------------------------------------------------------------------------
+		// 入力欄に対して文字数カウンターを追加する　フィールド
+		//------------------------------------------------------------------------------------
+		{
+			const code = `nu.count("formName", 30);`;
+			$("#formNamePre").text(code); // 表示用
+			new Function(code)(); // 実行用
+		}
 
-        //------------------------------------------------------------------------------------
-        // 入力欄に対して文字数カウンターを追加する　テキストエリア
-        //------------------------------------------------------------------------------------
-        {
-            const code = `nu.count("formInquire", 140);`;
-            $("#formInquirePre").text(code); // 表示用
-            new Function(code)(); // 実行用
-        }
+		//------------------------------------------------------------------------------------
+		// 入力欄に対して文字数カウンターを追加する　テキストエリア
+		//------------------------------------------------------------------------------------
+		{
+			const code = `nu.count("formInquire", 140);`;
+			$("#formInquirePre").text(code); // 表示用
+			new Function(code)(); // 実行用
+		}
 
 
 
-        //------------------------------------------------------------------------------------
-        // Submit
-        //------------------------------------------------------------------------------------
-        {
-            const code = `
+		//------------------------------------------------------------------------------------
+		// Submit
+		//------------------------------------------------------------------------------------
+		{
+			const code = `
 $("#nuSubmit").click(function() {
   nu.submit.values(
     "nuForm",
@@ -500,29 +499,29 @@ $("#nuSubmit").click(function() {
 });
             `.trim();
 
-            $("#nuSubmitPre").text(code); // 表示用
-            new Function(code)(); // 実行用
+			$("#nuSubmitPre").text(code); // 表示用
+			new Function(code)(); // 実行用
 
-        }
+		}
 
 
-        //------------------------------------------------------------------------------------
-        // 表示用補助ツール　HTMLコードをエスケープさせる
-        //------------------------------------------------------------------------------------
-        function escapeHtml(str) {
-            return str
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
-        document.querySelectorAll('pre.nuCodeBlock[data-html-safe]').forEach(pre => {
-            const raw = pre.innerHTML.trim();
-            pre.innerHTML = escapeHtml(raw);
-        });
+		//------------------------------------------------------------------------------------
+		// 表示用補助ツール　HTMLコードをエスケープさせる
+		//------------------------------------------------------------------------------------
+		function escapeHtml(str) {
+			return str
+				.replace(/&/g, "&amp;")
+				.replace(/</g, "&lt;")
+				.replace(/>/g, "&gt;")
+				.replace(/"/g, "&quot;")
+				.replace(/'/g, "&#039;");
+		}
+		document.querySelectorAll('pre.nuCodeBlock[data-html-safe]').forEach(pre => {
+			const raw = pre.innerHTML.trim();
+			pre.innerHTML = escapeHtml(raw);
+		});
 
-    });
+	});
 </script>
 
 </body>
