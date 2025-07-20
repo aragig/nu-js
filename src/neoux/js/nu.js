@@ -512,8 +512,8 @@
 				radio.addEventListener('change', () => {
 					if (radio.checked && radio.value !== currentValue) {
 						currentValue = radio.value;
-						if (typeof handlers.onChanged === "function") {
-							handlers.onChanged(currentValue);
+						if (typeof handlers.onChange === "function") {
+							handlers.onChange(currentValue);
 						}
 					}
 				});

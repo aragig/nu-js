@@ -492,7 +492,7 @@ describe("nu.segment", () => {
 		};
 
 		nu.segment("testSegmentArea", config, {
-			onChanged: (val) => selectedValue = val
+			onChange: (val) => selectedValue = val
 		});
 
 		const input = document.querySelector('input[value="melon"]');
