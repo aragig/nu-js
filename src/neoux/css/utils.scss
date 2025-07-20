@@ -51,9 +51,7 @@
 
 pre.nuCodeBlock {
 	display: block;
-	//overflow-x: auto;
-	//white-space: pre;
-	//word-break: normal;
+	tab-size: 2;
 	white-space: pre-wrap;     // 折り返しを有効にする
 	word-break: break-word;    // 単語単位で折り返す（長いURLなどにも対応）
 	overflow-wrap: anywhere;   // ブラウザによってはこちらも必要
