@@ -336,7 +336,8 @@ $("#nuToast").click(function() {
         {
             const code = `
 $("#nuToastDelay").click(function() {
-    nu.toast("エラーが発生しました<br>エラーが発生しましたエラーが発生しましたエラーが発生しました", 5000); // 5秒表示
+    nu.toast("エラーが発生しました",
+    {duration: 5000, type: "error"}); // 5秒表示
 });
             `.trim();
 
