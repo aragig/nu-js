@@ -145,7 +145,6 @@
 					<div id="__nuSearchBox"></div>
 				</div>
 				<pre class="nuCodeBlock"></pre>
-				※「/」キー押下で検索ボックスにフォーカス
 			</div>
 		</section>
 
@@ -479,7 +478,9 @@ nu.segment("__nuSegmentSortBtns", {
 		{ label: "人気", value: "人気" },
 		{ label: "古い順", value: "古い順" }
 	]
-}, (val) => nu.toast(val));
+}, {
+	onChanged: (val) => nu.toast(val)
+});
             `.trim();
 
 
@@ -501,7 +502,9 @@ nu.segment("__nuSegmentFruitsBtns", {
 		{ label: "バナナ", value: "バナナ" },
 		{ label: "メロン", value: "メロン" }
 	]
-}, (val) => nu.toast(val));
+}, {
+	onChanged: (val) => nu.toast(val)
+});
             `.trim();
 
 			$("#__nuSegmentFruits pre").text(code); // 表示用

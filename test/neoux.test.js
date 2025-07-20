@@ -462,7 +462,7 @@ describe("nu.segment", () => {
 			]
 		};
 
-		nu.segment("testSegmentArea", config, () => {});
+		nu.segment("testSegmentArea", config, {});
 
 		const container = document.querySelector("#testSegmentArea_segment");
 		expect(container).to.exist;
@@ -491,8 +491,8 @@ describe("nu.segment", () => {
 			]
 		};
 
-		nu.segment("testSegmentArea", config, (val) => {
-			selectedValue = val;
+		nu.segment("testSegmentArea", config, {
+			onChanged: (val) => selectedValue = val
 		});
 
 		const input = document.querySelector('input[value="melon"]');

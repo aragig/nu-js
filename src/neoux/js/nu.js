@@ -452,6 +452,7 @@
 	//------------------------------------------------------------------------------------
 	// セグメントボタン
 	//------------------------------------------------------------------------------------
+	//TODO コールバックはonChangeで返す→clickした場合でもコールバックが帰ってしまうため
 	{
 		// if (!window.nu.segment) window.nu.segment = {};
 		/**
@@ -478,12 +479,14 @@
 		 * @param {string} config.name - ラジオグループ名
 		 * @param {Array.<{label: string, value: string}>} config.options - 選択肢の配列
 		 * @param {string} config.value - 初期選択値
-		 * @param {Function} callback - 選択時のコールバック（引数: value）
+		 * @param {Object} [handlers] - 選択時のコールバック（引数: value）
 		 */
-		window.nu.segment = function (mountId, config, callback) {
+		window.nu.segment = function (mountId, config, handlers = {}) {
 			const container = document.createElement("div");
 			container.className = "nuSegment";
 			container.id = mountId + "_segment";
+
+			let currentValue = config.value;
 
 			config.options.forEach(opt => {
 				const inputId = `${container.id}_${opt.value}`;
@@ -504,7 +507,17 @@
 			});
 
 			// コールバックバインド
-			segmentAttach(container, callback);
+			const radios = container.querySelectorAll('input[type="radio"]');
+			radios.forEach(radio => {
+				radio.addEventListener('change', () => {
+					if (radio.checked && radio.value !== currentValue) {
+						currentValue = radio.value;
+						if (typeof handlers.onChanged === "function") {
+							handlers.onChanged(currentValue);
+						}
+					}
+				});
+			});
 
 			// DOMに追加
 			document.getElementById(mountId).appendChild(container);
@@ -536,7 +549,7 @@
             <svg class="nuSearchIcon" viewBox="0 0 24 24" fill="none">
                 <path d="M10 2a8 8 0 015.292 13.708l5 5a1 1 0 01-1.414 1.414l-5-5A8 8 0 1110 2zm0 2a6 6 0 100 12 6 6 0 000-12z" fill="currentColor"/>
             </svg>
-            <input type="search" class="nuSearchInput" id="nuSearchBox" placeholder="検索" />
+            <input type="search" class="nuSearchInput" id="nuSearchBox" placeholder="「/」キー押下で検索" />
         `;
 
 			// 結果表示エリア
