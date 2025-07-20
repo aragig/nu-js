@@ -311,6 +311,36 @@ describe("nu.toast - カラータイプ付き", () => {
         expect(toast).to.exist;
         expect(toast.classList.contains("nuToast_DEFAULT")).to.be.true;
     });
+
+    // nu.toast position指定のテスト
+    it("position: 'top' を指定すると nuToast_TOP クラスが付く", () => {
+        nu.toast("上部トースト", { position: "top", duration: 1000 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast.classList.contains("nuToast_TOP")).to.be.true;
+    });
+
+    it("position: 'bottom' を指定すると nuToast_BOTTOM クラスが付く", () => {
+        nu.toast("下部トースト", { position: "bottom", duration: 1000 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast.classList.contains("nuToast_BOTTOM")).to.be.true;
+    });
+
+    it("position未指定の場合はデフォルトでnuToast_BOTTOMクラスが付く", () => {
+        nu.toast("デフォルト位置トースト", { duration: 1000 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast.classList.contains("nuToast_BOTTOM")).to.be.true;
+    });
+
+    it("typeとpositionを両方指定したとき、両方のクラスが付与される", () => {
+        nu.toast("error-top toast", { type: "error", position: "top", duration: 1000 });
+
+        const toast = document.querySelector(".nuToast");
+        expect(toast.classList.contains("nuToast_ERROR")).to.be.true;
+        expect(toast.classList.contains("nuToast_TOP")).to.be.true;
+    });
 });
 
 //------------------------------------------------------------------------------------
