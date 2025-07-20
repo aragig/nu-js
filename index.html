@@ -250,7 +250,7 @@ $("#nuSheetCustomAlert").click(function() {
       nu.toast("Clicked キャンセル");
     },
     onDelete: function() {
-      nu.toast("Clicked 削除");
+      nu.toast("Clicked 削除", { type:"error"});
     }
   });
 });
@@ -357,13 +357,13 @@ nu.dropdown("dropdownBtn", {
   others: "その他"
 }, {
   onSetting: function () {
-    console.log("clicked 設定");
+    nu.toast("clicked 設定");
   },
   onLogout: function () {
-    console.log("clicked ログアウト");
+    nu.toast("clicked ログアウト");
   },
   onOthers: function () {
-    console.log("clicked その他");
+    nu.toast("clicked その他");
   }
 });
             `.trim();
@@ -383,13 +383,13 @@ nu.dropdown("dropdownBtnLeft", {
   pico: "ぴこ"
 }, {
   onHoge: function () {
-    console.log("clicked ほげ");
+    nu.toast("clicked ほげ");
   },
   onFuga: function () {
-    console.log("clicked ふが");
+    nu.toast("clicked ふが");
   },
   onPico: function () {
-    console.log("clicked ぴこ");
+    nu.toast("clicked ぴこ");
   }
 });
             `.trim();
@@ -413,7 +413,7 @@ nu.segment("sortSegmentArea", {
         { label: "人気", value: "人気" },
         { label: "古い順", value: "古い順" }
     ]
-}, (val) => console.log("Sort:", val));
+}, (val) => nu.toast(val));
             `.trim();
 
 
@@ -435,7 +435,7 @@ nu.segment("fruitsSegmentArea", {
         { label: "バナナ", value: "バナナ" },
         { label: "メロン", value: "メロン" }
     ]
-}, (val) => console.log("Fruits:", val));
+}, (val) => nu.toast(val));
             `.trim();
 
             $("#fruitsSegmentAreaPre").text(code); // 表示用
@@ -451,11 +451,10 @@ nu.segment("fruitsSegmentArea", {
             const code = `
 nu.search("searchArea", "/sample/site_search_index.json", {
     onConfirm: function (text) {
-        console.log("🔍検索確定:", text);
-        nu.toast("検索確定: " + text);
+        nu.toast("🔍検索確定: " + text, {position: "top"});
     },
     onBlur: function (text) {
-        console.log("🔎フォーカスアウト:", text);
+        nu.toast("🔎フォーカスアウト: " + text, {position: "top"});
     }
 });
 `.trim();
