@@ -346,36 +346,42 @@ pre.nuCodeBlock {
 //------------------------------------------------------------------------------------
 .nuToast {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    margin-left:20px;
-    background: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    display: block;
+    max-width: 80vw;
+    padding: 10px 16px;
+    background: #333;
     color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-family: sans-serif;
-    font-size: 14px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    z-index: 10000;
+    border-radius: 6px;
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
     pointer-events: none;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    font-size: 14px;
+    width: fit-content;
 
-    &.nuToast_SUCCESS {
-        background: #2ecc71;
+    &.nuToast_SUCCESS { background: #2ecc71; }
+    &.nuToast_ERROR { background: #e74c3c; }
+    &.nuToast_WARNING { background: #f39c12; }
+    &.nuToast_INFO { background: #3498db; }
+
+    &.nuToast_TOP  {
+        top: 20px;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        transform: translateY(-20px);
     }
-
-    &.nuToast_ERROR {
-        background: #e74c3c;
-    }
-
-    &.nuToast_WARNING {
-        background: #f39c12;
-    }
-
-    &.nuToast_INFO {
-        background: #3498db;
+    &.nuToast_BOTTOM {
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        transform: translateY(20px);
     }
 }
 
