@@ -276,16 +276,16 @@ const items = {
 $("#nuSheet").click(function() {
 	nu.sheet("操作を選んでください", items, {
 		onEdit: function() {
-			nu.toast("clicked 編集", { type:"info"})
+			nu.toast("clicked 編集")
 		},
 		onDuplicate: function() {
-			nu.toast("clicked 複製", { type:"success"})
+			nu.toast("clicked 複製")
 		},
 		onDelete: function() {
-			nu.toast("clicked 削除", { type:"error"});
+			nu.toast("clicked 削除");
 		},
 		onCancel: function() {
-			nu.toast("clicked キャンセル", { type:"warn"});
+			nu.toast("clicked キャンセル");
 		}
 	});
 });
@@ -358,18 +358,22 @@ $("#nuToastDelay").click(function() {
 		{
 			const code = `
 nu.dropdown("dropdownBtn", {
-		setting: "設定",
-		logout: "ログアウト",
-		others: "その他"
+		success: "成功",
+		error: "エラー",
+		warning: "警告",
+		info: "インフォ",
 	}, {
-	onSetting: function () {
-		nu.toast("clicked 設定");
+	onSuccess: function () {
+		nu.toast.s("clicked 成功");
 	},
-	onLogout: function () {
-		nu.toast("clicked ログアウト");
+	onError: function () {
+		nu.toast.e("clicked エラー");
 	},
-	onOthers: function () {
-		nu.toast("clicked その他");
+	onWarning: function () {
+		nu.toast.w("clicked 警告");
+	},
+	onInfo: function () {
+		nu.toast.i("clicked インフォ");
 	}
 });
             `.trim();

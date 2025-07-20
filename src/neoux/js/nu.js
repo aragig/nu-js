@@ -250,6 +250,7 @@
 	// トースト通知
 	//------------------------------------------------------------------------------------
 	{
+		if(!window.nu.toast) window.nu.toast = {};
 
 		/**
 		 * トースト通知を表示する
@@ -300,7 +301,28 @@
 				setTimeout(() => toast.remove(), 200);
 			}, duration);
 		}
+		//------------------------------------------------------------------------------------
+		// ショートカット関数（type固定）
+		//------------------------------------------------------------------------------------
+		window.nu.toast.s = function (message, options = {}) {
+			options.type = "success";
+			window.nu.toast(message, options);
+		};
 
+		window.nu.toast.e = function (message, options = {}) {
+			options.type = "error";
+			window.nu.toast(message, options);
+		};
+
+		window.nu.toast.w = function (message, options = {}) {
+			options.type = "warning";
+			window.nu.toast(message, options);
+		};
+
+		window.nu.toast.i = function (message, options = {}) {
+			options.type = "info";
+			window.nu.toast(message, options);
+		};
 	}
 
 

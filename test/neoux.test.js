@@ -336,6 +336,44 @@ describe("nu.toast", () => {
 		expect(toast.classList.contains("nuToast_ERROR")).to.be.true;
 		expect(toast.classList.contains("nuToast_TOP")).to.be.true;
 	});
+
+	// ショートカット関数
+	it("nu.toast.s は success トーストを表示する", () => {
+		nu.toast.s("成功", { duration: 100 });
+
+		const toast = document.querySelector(".nuToast");
+		expect(toast).to.exist;
+		expect(toast.classList.contains("nuToast_SUCCESS")).to.be.true;
+		expect(toast.textContent).to.equal("成功");
+	});
+
+	it("nu.toast.e は error トーストを表示する", () => {
+		nu.toast.e("エラー", { duration: 100 });
+
+		const toast = document.querySelector(".nuToast");
+		expect(toast).to.exist;
+		expect(toast.classList.contains("nuToast_ERROR")).to.be.true;
+		expect(toast.textContent).to.equal("エラー");
+	});
+
+	it("nu.toast.w は warning トーストを表示する", () => {
+		nu.toast.w("警告", { duration: 100 });
+
+		const toast = document.querySelector(".nuToast");
+		expect(toast).to.exist;
+		expect(toast.classList.contains("nuToast_WARNING")).to.be.true;
+		expect(toast.textContent).to.equal("警告");
+	});
+
+	it("nu.toast.i は info トーストを表示する", () => {
+		nu.toast.i("情報", { duration: 100 });
+
+		const toast = document.querySelector(".nuToast");
+		expect(toast).to.exist;
+		expect(toast.classList.contains("nuToast_INFO")).to.be.true;
+		expect(toast.textContent).to.equal("情報");
+	});
+
 });
 
 
