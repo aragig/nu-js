@@ -49,16 +49,16 @@
 .gap40 {
   gap: 40px; }
 
-.nuFlexRow {
+.flexRow {
   display: flex;
   flex-direction: row;
   align-items: center; }
 
-.nuFlexColumn {
+.flexColumn {
   display: flex;
   flex-direction: column; }
 
-.nuFlexSpread {
+.flexSpread {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
