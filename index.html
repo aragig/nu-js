@@ -167,7 +167,7 @@
 			<h2 class="mt80">入力欄に対して文字数カウンターを追加する</h2>
 			<div id="__nuCountInput">
 				<div class="flexColumn gap10 mt30">
-					<h3>nu.charCount</h3>
+					<h3>nu.count</h3>
 					<input id="__nuCountInputTarget" name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
 				</div>
 				<pre class="nuCodeBlock"></pre>
@@ -175,7 +175,7 @@
 
 			<div id="__nuCountTextarea">
 				<div class="flexColumn gap10 mt30">
-					<h3>nu.charCount</h3>
+					<h3>nu.count</h3>
 					<textarea id="__nuCountTextareaTarget" name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5">テキスト</textarea>
 				</div>
 				<pre class="nuCodeBlock"></pre>
@@ -185,10 +185,10 @@
 		<!-- セクション: フォーム値取得-->
 		<section>
 			<h2 class="mt80">フォーム値取得</h2>
-			<div id="__nuSubmit">
+			<div id="__nuForms">
 				<div class="flexRow gap10 mt30">
-					<h3>nu.submit</h3>
-					<button class="nuButton" type="button">Submit</button>
+					<h3>nu.formData</h3>
+					<button class="nuButton" type="button">Run</button>
 				</div>
 				<textarea id="nuSubmitRestArea" class="nuTextarea wFull" rows="12" readonly></textarea>
 				<pre class="nuCodeBlock"></pre>
@@ -592,17 +592,15 @@ nu.search("__nuSearchBox", "/sample/site_search_index.json", {
 		//------------------------------------------------------------------------------------
 		{
 			const code = `
-$("#__nuSubmit button").click(function() {
-	nu.submit.values("__nuForm",
-		function(vals) {
-			const jstr = JSON.stringify(vals, null , 2);
-			$("#nuSubmitRestArea").text(jstr);
-			nu.d.table("nu.submit.values", vals);
-		});
+$("#__nuForms button").click(function() {
+	const res = nu.forms("__nuForm");
+	const jstr = JSON.stringify(res, null , 2);
+	$("#nuSubmitRestArea").text(jstr);
+	nu.d.table("nu.formData", res);
 });
             `.trim();
 
-			$("#__nuSubmit pre").text(code); // 表示用
+			$("#__nuForms pre").text(code); // 表示用
 			new Function(code)(); // 実行用
 
 		}

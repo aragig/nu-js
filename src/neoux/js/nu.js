@@ -784,10 +784,10 @@
 		/**
 		 * フォームの値を取得し、コールバックに渡す
 		 * @param {string} formId - 対象のform id名
-		 * @param {Function} callback - 結果を受け取る関数（formDataを引数に渡す）
+		 * @returns {Object} formDataを渡す
 		 */
-		window.nu.submit.values = function (formId, callback) {
-			if (!formId || typeof callback !== "function") return;
+		window.nu.forms = function (formId) {
+			if (!formId) return;
 
 			const el = document.getElementById(formId);
 			if (!el) {
@@ -795,8 +795,7 @@
 				return;
 			}
 
-			const values = getFormValues(document.getElementById(formId));
-			callback(values);
+			return getFormValues(document.getElementById(formId));
 		};
 
 	}
