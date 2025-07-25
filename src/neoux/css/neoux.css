@@ -11,11 +11,11 @@ body {
   all: unset;
   box-sizing: border-box;
   display: inline-block;
-  padding: 8px 16px;
+  padding: 6px 14px;
   font-size: 14px;
   font-weight: 500;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 4px;
   background: linear-gradient(to bottom, #fefefe, #eaeaea);
   color: #333;
   cursor: pointer;
@@ -300,22 +300,22 @@ body {
 .nuSegment {
   display: inline-flex;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   font-family: sans-serif; }
   .nuSegment input[type="radio"] {
     display: none; }
     .nuSegment input[type="radio"]:checked + label {
-      background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+      background: linear-gradient(to bottom, #fefefe, #eaeaea);
       color: black; }
     .nuSegment input[type="radio"]:focus + label {
       outline: 2px solid #4d90fe;
       z-index: 1; }
   .nuSegment label {
-    padding: 8px 16px;
+    padding: 6px 14px;
     cursor: pointer;
-    background: #f2f2f2;
-    color: #666;
+    background: #eaeaea;
+    color: #8c8c8c;
     font-size: 14px;
     border-right: 1px solid #ccc;
     user-select: none; }
