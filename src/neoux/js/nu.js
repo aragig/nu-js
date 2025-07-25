@@ -394,7 +394,7 @@
 		 * @param {Array.<Object>} menuMap - ドロップダウンアイテム
 		 * @param {Object} [handlers] - コールバック
 		 */
-		window.nu.dropdown = function (buttonId, menuMap, handlers) {
+		window.nu.menu = function (buttonId, menuMap, handlers) {
 			const buttonElement = document.getElementById(buttonId);
 			if (!buttonElement) {
 				console.error("ボタンが見つかりません", buttonId);

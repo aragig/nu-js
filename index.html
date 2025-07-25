@@ -99,18 +99,18 @@
 		<!-- セクション: ドロップダウンメニュー -->
 		<section>
 			<h2 class="mt80">ドロップダウンメニュー</h2>
-			<div id="__nuDropdownTrigger">
+			<div id="__nuMenuTrigger">
 				<div class="flexRow gap10 mt30">
-					<h3>nu.dropdown</h3>
-					<button id="__nuDropdownTriggerBtn" class="nuButton" type="button">Run</button>
+					<h3>nu.menu</h3>
+					<button id="__nuMenuTriggerBtn" class="nuButton" type="button">Run</button>
 				</div>
 				<pre class="nuCodeBlock"></pre>
 			</div>
 
-			<div id="__nuDropdownTriggerR">
+			<div id="__nuMenuTriggerR">
 				<div class="flexSpread gap10 mt30">
-					<h3>nu.dropdown</h3>
-					<button id="__nuDropdownTriggerRBtn" class="nuMenuButton" type="button"></button>
+					<h3>nu.menu</h3>
+					<button id="__nuMenuTriggerRBtn" class="nuMenuButton" type="button"></button>
 				</div>
 				<pre class="nuCodeBlock"></pre>
 			</div>
@@ -424,9 +424,9 @@ $("#__nuToastDelay button").click(function() {
 		// ドロップダウンメニュー　その１
 		//------------------------------------------------------------------------------------
 		{
-			// TODO $("#__nuDropdownTrigger button").click の形でメニューを表示できるようにしたい
+			// TODO $("#__nuMenuTrigger button").click の形でメニューを表示できるようにしたい
 			const code = `
-nu.dropdown("__nuDropdownTriggerBtn", {
+nu.menu("__nuMenuTriggerBtn", {
 		success: "成功",
 		error: "エラー",
 		warning: "警告",
@@ -447,7 +447,7 @@ nu.dropdown("__nuDropdownTriggerBtn", {
 });
             `.trim();
 
-			$("#__nuDropdownTrigger pre").text(code); // 表示用
+			$("#__nuMenuTrigger pre").text(code); // 表示用
 			new Function(code)(); // 実行用
 		}
 
@@ -456,7 +456,7 @@ nu.dropdown("__nuDropdownTriggerBtn", {
 		//------------------------------------------------------------------------------------
 		{
 			const code = `
-nu.dropdown("__nuDropdownTriggerRBtn", {
+nu.menu("__nuMenuTriggerRBtn", {
 		hoge: "ほげ",
 		fuga: "ふが",
 		pico: "ぴこ"
@@ -473,7 +473,7 @@ nu.dropdown("__nuDropdownTriggerRBtn", {
 });
             `.trim();
 
-			$("#__nuDropdownTriggerR pre").text(code); // 表示用
+			$("#__nuMenuTriggerR pre").text(code); // 表示用
 			new Function(code)(); // 実行用
 		}
 
