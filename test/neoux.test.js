@@ -390,7 +390,7 @@ describe("nu.dropdown", () => {
 	it("ドロップダウンメニューの正常動作", () => {
 		let calledItem = null;
 
-		nu.dropdown("testDropdownBtn", {
+		nu.menu("testDropdownBtn", {
 			foo: "項目1",
 			bar: "項目2"
 		}, {
@@ -418,12 +418,12 @@ describe("nu.dropdown", () => {
 
 	it("存在しないボタンIDを指定した場合はエラーにならない", () => {
 		expect(() => {
-			nu.dropdown("notExistBtn", { foo: "foo" }, { onFoo: () => {} });
+			nu.menu("notExistBtn", { foo: "foo" }, { onFoo: () => {} });
 		}).to.not.throw();
 	});
 
 	it("2回目の表示では1回目のインスタンスが使われないことを確認", () => {
-		nu.dropdown("testDropdownBtn", {
+		nu.menu("testDropdownBtn", {
 			foo: "一番"
 		}, {
 			onFoo: () => {}
@@ -677,22 +677,20 @@ describe("nu.submit.values", () => {
 		form.appendChild(noName);
 
 		document.body.appendChild(form);
+		const values = window.nu.vals("myForm");
 
-		window.nu.submit.values("myForm", (values) => {
-			expect(values).to.deep.equal({
-				username: "Alice",
-				comment: "Hello",
-				color: "blue",
-				subscribe: true,
-				gender: "female"
-			});
-			done();
+		expect(values).to.deep.equal({
+			username: "Alice",
+			comment: "Hello",
+			color: "blue",
+			subscribe: true,
+			gender: "female"
 		});
+		done();
 	});
 
-	it("targetが不正またはcallbackが関数でない場合はエラーにならない", () => {
-		expect(() => window.nu.submit.values(null, () => {})).to.not.throw();
-		expect(() => window.nu.submit.values(document.createElement('div'), null)).to.not.throw();
+	it("targetが不正はエラーにならない", () => {
+		expect(() => window.nu.vals(null)).to.not.throw();
 	});
 });
 

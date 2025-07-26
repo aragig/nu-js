@@ -360,15 +360,15 @@ nu.search("__nuSearchBox", "/sample/site_search_index.json", {
 	//------------------------------------------------------------------------------------
 	{
 		const code = `
-$("#__nuForms button").click(function() {
-	const res = nu.forms("__nuForm");
+$("#__nuVals button").click(function() {
+	const res = nu.vals("__nuForm");
 	const jstr = JSON.stringify(res, null , 2);
 	$("#nuSubmitRestArea").text(jstr);
 	nu.d.table("nu.formData", res);
 });
             `.trim();
 
-		$("#__nuForms pre").text(code); // 表示用
+		$("#__nuVals pre").text(code); // 表示用
 		new Function(code)(); // 実行用
 
 	}

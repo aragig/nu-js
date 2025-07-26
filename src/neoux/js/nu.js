@@ -786,7 +786,7 @@
 		 * @param {string} formId - 対象のform id名
 		 * @returns {Object} formDataを渡す
 		 */
-		window.nu.forms = function (formId) {
+		window.nu.vals = function (formId) {
 			if (!formId) return;
 
 			const el = document.getElementById(formId);
