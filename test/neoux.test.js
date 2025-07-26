@@ -13,7 +13,7 @@ global.cancelAnimationFrame = dom.window.cancelAnimationFrame;
 
 
 const {expect} = require("chai");
-const nu = require("../src/neoux/js/nu.js")
+const nu = require("../src/nu/js/nu.js")
 
 
 //------------------------------------------------------------------------------------
