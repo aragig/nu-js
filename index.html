@@ -1,47 +1,178 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>neoux.js</title>
-    <script src="./js/neoux.js"></script>
+	<meta charset="UTF-8">
+	<title>nu.js</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+	<link rel="stylesheet" href="src/nu/css/utils.css">
+	<link rel="stylesheet" href="src/nu/css/nu.css">
+	<script src="src/nu/js/nu.js"></script>
+	<script src="lib/js/jquery-3.7.1.js"></script>
+	<script src="static/js/index.js"></script>
 </head>
 <body>
-<h1>neoux.js</h1>
+<div id="nuContents">
+	<h1>ぬ - nu.js</h1>
+	nu.jsはライブラリに依存しない Vanilla JS で作られているUI補助ツールです。jqueryとの共存も可能です。
 
-<h2>アラート</h2>
-<button id="nuAlert">Alert</button>
-<button id="nuConfirm">Confirm</button>
-<button id="nuSheet">Sheet</button>
+	<form id="__nuForm">
+		<!-- セクション: アラート -->
+		<section>
+			<h2 class="mt40">アラート nu.alert</h2>
+			<div id="__nuAlertSimple">
+				<button id="nuAlertSimpleBtn" class="nuButton" type="button">Run</button>
+				<pre class="nuCodeBlock"></pre>
+			</div>
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
+			<div id="__nuAlert">
+				<button class="nuButton" type="button">Run</button>
+				<pre class="nuCodeBlock" data-html-safe></pre>
+			</div>
 
-        document.getElementById("nuAlert").addEventListener("click", () => {
-            neoux.alert("This is some message area.", function(ans) {
-                alert(ans);
-            });
-        });
-        document.getElementById("nuConfirm").addEventListener("click", () => {
-            neoux.confirm("This is some message area.", function(ans) {
-                // ok
-                alert(ans);
-            }, function(ans) {
-                // cancel
-                alert(ans);
-            });
-        });
-        document.getElementById("nuSheet").addEventListener("click", () => {
-            neoux.sheet("どれを選びますか？", [
-                { label: "編集", callback: () => console.log("編集") },
-                { label: "削除", callback: () => console.log("削除") },
-                { label: "複製", callback: () => console.log("複製") },
-                { label: "キャンセル", callback: null } // キャンセル時はcallbackなし（または明示的にnull）
-            ]);
-        });
 
-    });
-</script>
+			<div id="__nuConfirm">
+				<button class="nuButton" type="button">Run</button>
+				<pre class="nuCodeBlock"></pre>
+			</div>
+
+			<div id="__nuSheetAlert">
+				<button class="nuButton" type="button" data-html-safe>Run</button>
+				<pre class="nuCodeBlock"></pre>
+			</div>
+
+
+			<div id="__nuSheet">
+				<button class="nuButton" type="button" data-html-safe>Run</button>
+				<pre class="nuCodeBlock"></pre>
+			</div>
+		</section>
+
+		<!-- セクション: ローディングインジケータ -->
+		<section>
+			<div id="__nuLoading">
+				<h2 class="mt80">インジケータ nu.loading</h2>
+				<button class="nuButton" type="button">Run</button>
+				<pre class="nuCodeBlock"></pre>
+			</div>
+		</section>
+
+
+		<!-- セクション: トースト -->
+		<section>
+			<h2 class="mt80">トースト nu.toast</h2>
+			<div id="__nuToast">
+				<button class="nuButton" type="button">Run</button>
+				<pre class="nuCodeBlock"></pre>
+			</div>
+
+			<div id="__nuToastDelay">
+				<button class="nuButton" type="button">Run</button>
+				<pre class="nuCodeBlock"></pre>
+			</div>
+		</section>
+
+
+		<!-- セクション: ドロップダウンメニュー -->
+		<section>
+			<h2 class="mt80">メニュー nu.menu</h2>
+			<div id="__nuMenuTrigger">
+				<button id="__nuMenuTriggerBtn" class="nuButton" type="button">Run</button>
+				<pre class="nuCodeBlock"></pre>
+			</div>
+
+			<div id="__nuMenuTriggerR">
+				<button id="__nuMenuTriggerRBtn" class="nuMenuButton" type="button"></button>
+				<pre class="nuCodeBlock"></pre>
+			</div>
+		</section>
+
+		<!-- セクション: 画像アップロード -->
+		<section>
+			<div id="__nuUpload">
+				<h2 class="mt80">画像アップロード nu.upload</h2>
+				<div id="uploadArea"></div>
+				<pre class="nuCodeBlock"></pre>
+			</div>
+		</section>
+
+		<!-- セクション: セグメントボタン -->
+		<section>
+			<div id="__nuSegmentSort">
+				<h2 class="mt80">セグメント nu.segment</h2>
+				<div id="__nuSegmentSortBtns"></div>
+				<pre class="nuCodeBlock"></pre>
+			</div>
+
+			<div id="__nuSegmentFruits">
+				<div id="__nuSegmentFruitsBtns"></div>
+				<pre class="nuCodeBlock"></pre>
+			</div>
+		</section>
+
+		<!-- セクション: 検索ボックス -->
+		<section>
+			<div id="__nuSearch">
+				<h2 class="mt80">検索ボックス　nu.search</h2>
+				<div id="__nuSearchBox"></div>
+				<pre class="nuCodeBlock"></pre>
+			</div>
+		</section>
+
+		<!-- セクション: 入力欄に対して文字数カウンターを追加する-->
+		<section>
+			<h2 class="mt80">文字数 nu.count</h2>
+			<div id="__nuCountInput">
+				<input id="__nuCountInputTarget" name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
+				<pre class="nuCodeBlock"></pre>
+			</div>
+
+			<div id="__nuCountTextarea">
+				<textarea id="__nuCountTextareaTarget" name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5">テキスト</textarea>
+				<pre class="nuCodeBlock"></pre>
+			</div>
+		</section>
+
+		<!-- セクション: フォーム値取得-->
+		<section>
+			<h2 class="mt80">フォーム値取得 nu.vals</h2>
+			<div id="__nuVals">
+				<button class="nuButton" type="button">Run</button>
+				<textarea id="nuSubmitRestArea" class="nuTextarea wFull mt20" rows="12" readonly></textarea>
+				<pre class="nuCodeBlock"></pre>
+			</div>
+		</section>
+
+
+		<hr class="mt80">
+		<!-- セクション: 色々なinput-->
+		<section>
+			<h2 class="mt40">色々なinput</h2>
+			<div class="flexColumn gap20">
+				<div>
+					<select name="sampleSelect" class="nuSelect">
+						<option value="">選択してください</option>
+						<option value="a">選択肢A</option>
+						<option value="b">選択肢B</option>
+					</select>
+				</div>
+				<div>
+					<label>年/月/日：<input name="sampleDate" type="date"></label>
+				</div>
+				<div>
+					<label>年 / 月 / 日 +時:分：<input name="sampleDatetimeLocal" type="datetime-local"></label>
+				</div>
+				<div>
+					<label>カラーパレッド：<input name="sampleColor" type="color" value="#0b80dc"></label>
+				</div>
+				<div>
+					<label>範囲を選択：<input name="sampleRange" type="range" min="0" max="100"></label>
+				</div>
+			</div>
+		</section>
+
+	</form>
+</div>
 
 </body>
 </html>
