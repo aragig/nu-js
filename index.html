@@ -179,6 +179,25 @@
 			</div>
 		</section>
 
+		<!-- セクション: ドラッグ＆ドロップで順序替え-->
+		<section>
+			<h2 class="mt80">編集可能なセル nu.sortable</h2>
+			<div id="__nuSortable">
+				<table id="sortableTable" class="nuTable">
+					<thead>
+					<tr><th>ID</th><th>名前</th></tr>
+					</thead>
+					<tbody>
+					<tr data-id="1"><td>1</td><td>りんご</td></tr>
+					<tr data-id="2"><td>2</td><td>バナナ</td></tr>
+					<tr data-id="3"><td>3</td><td>みかん</td></tr>
+					</tbody>
+				</table>
+
+				<pre class="nuCodeBlock"></pre>
+			</div>
+		</section>
+
 		<hr class="mt80">
 		<!-- セクション: 色々なinput-->
 		<section>
@@ -208,5 +227,10 @@
 
 	</form>
 </div>
+<script>
+	nu.sortable("sortableTable", (newOrder) => {
+		nu.toast("新しい順序: " + newOrder.join(", "), { position: "top" });
+	});
+</script>
 </body>
 </html>

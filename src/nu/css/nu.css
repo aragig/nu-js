@@ -375,4 +375,7 @@ body {
     width: 100%;
     box-sizing: border-box; }
 
+tr.dragging {
+  opacity: 0.4; }
+
 /*# sourceMappingURL=nu.css.map */

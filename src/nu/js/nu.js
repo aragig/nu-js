@@ -839,6 +839,7 @@
 		};
 	}
 
+
 	//------------------------------------------------------------------------------------
 	// 編集可能なセル
 	//------------------------------------------------------------------------------------
@@ -898,6 +899,63 @@
 						}
 					});
 				});
+			});
+		};
+	}
+
+
+	//------------------------------------------------------------------------------------
+	// テーブル行の並び替え（ドラッグアンドドロップ）
+	//------------------------------------------------------------------------------------
+	{
+
+		/**
+		 * テーブル行をドラッグアンドドロップで並び替え可能にする
+		 * @param {string} tableId - 対象のtable要素のid
+		 * @param {Function} [onReorder] - 並び替え完了時のコールバック（新しい順序の配列を渡す）
+		 */
+		window.nu.sortable = function(tableId, onReorder) {
+			const table = document.getElementById(tableId);
+			if (!table || !table.querySelector("tbody")) return;
+
+			const tbody = table.querySelector("tbody");
+			let draggingRow = null;
+
+			tbody.querySelectorAll("tr").forEach(row => {
+				row.setAttribute("draggable", true);
+
+				row.addEventListener("dragstart", e => {
+					draggingRow = row;
+					row.classList.add("dragging");
+					e.dataTransfer.effectAllowed = "move";
+				});
+
+				row.addEventListener("dragend", () => {
+					draggingRow = null;
+					row.classList.remove("dragging");
+				});
+
+				row.addEventListener("dragover", e => {
+					e.preventDefault();
+					const targetRow = e.currentTarget;
+					if (targetRow === draggingRow) return;
+
+					const bounding = targetRow.getBoundingClientRect();
+					const offset = e.clientY - bounding.top;
+
+					if (offset > bounding.height / 2) {
+						targetRow.after(draggingRow);
+					} else {
+						targetRow.before(draggingRow);
+					}
+				});
+			});
+
+			tbody.addEventListener("drop", () => {
+				if (typeof onReorder === "function") {
+					const newOrder = [...tbody.querySelectorAll("tr")].map(tr => tr.dataset.id || tr.rowIndex);
+					onReorder(newOrder);
+				}
 			});
 		};
 	}
