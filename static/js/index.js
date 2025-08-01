@@ -381,7 +381,7 @@ $("#__nuVals button").click(function() {
 		const code = `
 // 編集したい要素に .nuEditable を指定しておく
 
-window.nu.edit((newValue, oldValue, tdEl) => {
+window.nu.editable((newValue, oldValue, tdEl) => {
   const name = tdEl.getAttribute("data-name");
   nu.toast.i("変更:" + name + ":" + oldValue + "→" + newValue);
 });

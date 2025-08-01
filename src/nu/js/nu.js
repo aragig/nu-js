@@ -847,7 +847,7 @@
 		 * 編集可能セル機能
 		 * @param {Function} [onEdited] - 編集終了時のコールバック（引数: newValue, oldValue, td要素）
 		 */
-		window.nu.edit = function (onEdited) {
+		window.nu.editable = function (onEdited) {
 			const elements = document.querySelectorAll(".nuEditable");
 
 			elements.forEach(el => {
