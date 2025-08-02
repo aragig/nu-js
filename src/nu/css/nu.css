@@ -367,4 +367,17 @@ body {
   pointer-events: none;
   text-align: right; }
 
+.nuEditable {
+  cursor: pointer; }
+  .nuEditable .nuInputEdit {
+    padding: 4px 6px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box; }
+
+.nuSortable tr.dragging {
+  opacity: 0.2; }
+.nuSortable tr {
+  cursor: move; }
+
 /*# sourceMappingURL=nu.css.map */

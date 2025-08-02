@@ -100,4 +100,31 @@ pre.nuCodeBlock {
 .nuCodeBlock.collapsed {
   display: none; }
 
+.nuTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px; }
+  .nuTable thead {
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #ccc; }
+    .nuTable thead th {
+      padding: 12px 10px;
+      text-align: left;
+      font-weight: bold; }
+  .nuTable tbody tr {
+    border-bottom: 1px solid #eee; }
+    .nuTable tbody tr:hover {
+      background-color: #f9f9f9; }
+    .nuTable tbody tr td {
+      padding: 10px;
+      vertical-align: middle; }
+      .nuTable tbody tr td a {
+        color: #3498db;
+        text-decoration: none; }
+        .nuTable tbody tr td a:hover {
+          text-decoration: underline; }
+      .nuTable tbody tr td button {
+        padding: 4px 8px;
+        font-size: 13px; }
+
 /*# sourceMappingURL=utils.css.map */

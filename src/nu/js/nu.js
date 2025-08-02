@@ -749,11 +749,9 @@
 
 
 	//------------------------------------------------------------------------------------
-	// Submit
+	// フォームの値を取得
 	//------------------------------------------------------------------------------------
 	{
-		if (!window.nu.submit) window.nu.submit = {};
-
 		/**
 		 * 指定したフォーム（またはdiv）内のすべての入力値をオブジェクトで取得する
 		 * @param {HTMLElement} container - form要素またはdiv要素
@@ -840,6 +838,127 @@
 			update(); // 初期表示
 		};
 	}
+
+
+	//------------------------------------------------------------------------------------
+	// 編集可能なセル
+	//------------------------------------------------------------------------------------
+	{
+		/**
+		 * 編集可能セル機能
+		 * @param {Function} [onEdited] - 編集終了時のコールバック（引数: newValue, oldValue, td要素）
+		 */
+		window.nu.editable = function (onEdited) {
+			const elements = document.querySelectorAll(".nuEditable");
+
+			elements.forEach(el => {
+				el.addEventListener("click", function handleClick() {
+					const oldValue = this.textContent.trim();
+					const originalTag = this.tagName.toLowerCase(); // td, div, etc.
+					const originalClasses = this.className;         // クラスも維持
+					const originalAttributes = [...this.attributes];
+
+					// input要素
+					const input = document.createElement("input");
+					input.type = "text";
+					input.value = oldValue;
+					input.className = "nuInput";
+					input.style.marginRight = "6px";
+
+					// 保存ボタン
+					const saveBtn = document.createElement("button");
+					saveBtn.type = "button";
+					saveBtn.className = "nuButton";
+					saveBtn.textContent = "保存";
+
+					// ラッパー
+					const wrapper = document.createElement("div");
+					wrapper.className = "nuEditWrapper";
+					wrapper.appendChild(input);
+					wrapper.appendChild(saveBtn);
+
+					this.replaceWith(wrapper);
+					input.focus();
+
+					saveBtn.addEventListener("click", () => {
+						const newValue = input.value.trim();
+						const replacement = document.createElement(originalTag);
+						replacement.className = originalClasses;
+						replacement.textContent = newValue || oldValue;
+						originalAttributes.forEach(attr => {
+							if (attr.name !== "class") {
+								replacement.setAttribute(attr.name, attr.value);
+							}
+						});
+
+						replacement.addEventListener("click", handleClick);
+						wrapper.replaceWith(replacement);
+
+						if (newValue !== oldValue && typeof onEdited === "function") {
+							onEdited(newValue, oldValue, replacement);
+						}
+					});
+				});
+			});
+		};
+	}
+
+
+	//------------------------------------------------------------------------------------
+	// テーブル行の並び替え（ドラッグアンドドロップ）
+	//------------------------------------------------------------------------------------
+	{
+		/**
+		 * テーブル行をドラッグアンドドロップで並び替え可能にする
+		 * @param {string} tableId - 対象のtable要素のid
+		 * @param {Function} [onReorder] - 並び替え完了時のコールバック（新しい順序の配列を渡す）
+		 */
+		window.nu.sortable = function(tableId, onReorder) {
+			const table = document.getElementById(tableId);
+			if (!table || !table.querySelector("tbody")) return;
+
+			const tbody = table.querySelector("tbody");
+			let draggingRow = null;
+
+			tbody.querySelectorAll("tr").forEach(row => {
+				row.setAttribute("draggable", true);
+
+				row.addEventListener("dragstart", e => {
+					draggingRow = row;
+					row.classList.add("dragging");
+					e.dataTransfer.effectAllowed = "move";
+				});
+
+				row.addEventListener("dragend", () => {
+					draggingRow = null;
+					row.classList.remove("dragging");
+				});
+
+				row.addEventListener("dragover", e => {
+					e.preventDefault();
+					const targetRow = e.currentTarget;
+					if (targetRow === draggingRow) return;
+
+					const bounding = targetRow.getBoundingClientRect();
+					const offset = e.clientY - bounding.top;
+
+					if (offset > bounding.height / 2) {
+						targetRow.after(draggingRow);
+					} else {
+						targetRow.before(draggingRow);
+					}
+				});
+			});
+
+			tbody.addEventListener("drop", () => {
+				if (typeof onReorder === "function") {
+					const newOrder = [...tbody.querySelectorAll("tr")].map(tr => tr.dataset.id || tr.rowIndex);
+					onReorder(newOrder);
+				}
+			});
+		};
+	}
+
 
 })();
 
