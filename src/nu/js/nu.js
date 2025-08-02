@@ -873,7 +873,7 @@
 
 					// ラッパー
 					const wrapper = document.createElement("div");
-					wrapper.className = "nuEditWrapper";
+					wrapper.className = "nuEditWrapper flexRow";
 					wrapper.appendChild(input);
 					wrapper.appendChild(saveBtn);
 
@@ -920,6 +920,17 @@
 			const tbody = table.querySelector("tbody");
 			let draggingRow = null;
 
+			const handleDrop = () => {
+				if (typeof onReorder === "function") {
+					// data-id がセットされればそれを優先して使う
+					const newOrder = [...tbody.querySelectorAll("tr")].map(tr => tr.dataset.id || tr.rowIndex);
+					onReorder(newOrder);
+				}
+			};
+
+			// ------------------------------
+			// PC用: HTML5 Drag and Drop API
+			// ------------------------------
 			tbody.querySelectorAll("tr").forEach(row => {
 				row.setAttribute("draggable", true);
 
@@ -950,11 +961,42 @@
 				});
 			});
 
-			tbody.addEventListener("drop", () => {
-				if (typeof onReorder === "function") {
-					const newOrder = [...tbody.querySelectorAll("tr")].map(tr => tr.dataset.id || tr.rowIndex);
-					onReorder(newOrder);
-				}
+			tbody.addEventListener("drop", handleDrop);
+
+			// ------------------------------
+			// スマホ対応: Touch Events
+			// ------------------------------
+			let touchStartY = 0;
+
+			tbody.querySelectorAll("tr").forEach(row => {
+				row.addEventListener("touchstart", e => {
+					draggingRow = row;
+					touchStartY = e.touches[0].clientY;
+					row.classList.add("dragging");
+				});
+
+				row.addEventListener("touchmove", e => {
+					e.preventDefault();
+					const y = e.touches[0].clientY;
+					const overRow = document.elementFromPoint(10, y); // 横方向を固定（左10px）
+
+					if (!overRow || !overRow.closest("tr") || overRow.closest("tr") === draggingRow) return;
+					const targetRow = overRow.closest("tr");
+					const bounding = targetRow.getBoundingClientRect();
+					const offset = y - bounding.top;
+
+					if (offset > bounding.height / 2) {
+						targetRow.after(draggingRow);
+					} else {
+						targetRow.before(draggingRow);
+					}
+				}, { passive: false });
+
+				row.addEventListener("touchend", () => {
+					draggingRow?.classList.remove("dragging");
+					handleDrop();
+					draggingRow = null;
+				});
 			});
 		};
 	}
