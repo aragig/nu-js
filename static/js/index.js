@@ -381,13 +381,30 @@ $("#__nuVals button").click(function() {
 		const code = `
 // 編集したい要素に .nuEditable を指定しておく
 
-window.nu.editable((newValue, oldValue, tdEl) => {
+nu.editable((newValue, oldValue, tdEl) => {
   const name = tdEl.getAttribute("data-name");
   nu.toast.i("変更:" + name + ":" + oldValue + "→" + newValue);
 });
             `.trim();
 
 		$("#__nuEditable pre").text(code); // 表示用
+		new Function(code)(); // 実行用
+
+
+	}
+
+
+	//------------------------------------------------------------------------------------
+	// テーブル行の並び替え（ドラッグアンドドロップ）
+	//------------------------------------------------------------------------------------
+	{
+		const code = `
+nu.sortable("sortableTable", (newOrder) => {
+  nu.toast("新しい順序: " + newOrder.join(", "));
+});
+            `.trim();
+
+		$("#__nuSortable pre").text(code); // 表示用
 		new Function(code)(); // 実行用
 
 

@@ -181,9 +181,9 @@
 
 		<!-- セクション: ドラッグ＆ドロップで順序替え-->
 		<section>
-			<h2 class="mt80">編集可能なセル nu.sortable</h2>
+			<h2 class="mt80">ドラッグ＆ドロップで順序替え nu.sortable</h2>
 			<div id="__nuSortable">
-				<table id="sortableTable" class="nuTable">
+				<table id="sortableTable" class="nuTable nuSortable">
 					<thead>
 					<tr><th>ID</th><th>名前</th></tr>
 					</thead>
@@ -227,10 +227,6 @@
 
 	</form>
 </div>
-<script>
-	nu.sortable("sortableTable", (newOrder) => {
-		nu.toast("新しい順序: " + newOrder.join(", "), { position: "top" });
-	});
-</script>
+
 </body>
 </html>

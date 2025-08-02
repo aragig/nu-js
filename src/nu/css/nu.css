@@ -375,7 +375,9 @@ body {
     width: 100%;
     box-sizing: border-box; }
 
-tr.dragging {
-  opacity: 0.4; }
+.nuSortable tr.dragging {
+  opacity: 0.2; }
+.nuSortable tr {
+  cursor: move; }
 
 /*# sourceMappingURL=nu.css.map */
