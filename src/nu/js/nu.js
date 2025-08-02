@@ -873,7 +873,7 @@
 
 					// ラッパー
 					const wrapper = document.createElement("div");
-					wrapper.className = "nuEditWrapper";
+					wrapper.className = "nuEditWrapper flexRow";
 					wrapper.appendChild(input);
 					wrapper.appendChild(saveBtn);
 
