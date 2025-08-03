@@ -129,7 +129,6 @@ $("#__nuSheet button").click(function() {
 
 		$("#__nuSheet pre").text(code); // 表示用
 		new Function(code)(); // 実行用
-
 	}
 
 	//------------------------------------------------------------------------------------
@@ -367,10 +366,8 @@ $("#__nuVals button").click(function() {
 	nu.d.table("nu.formData", res);
 });
             `.trim();
-
 		$("#__nuVals pre").text(code); // 表示用
 		new Function(code)(); // 実行用
-
 	}
 
 
@@ -386,11 +383,8 @@ nu.editable((newValue, oldValue, tdEl) => {
   nu.toast.i("変更:" + name + ":" + oldValue + "→" + newValue);
 });
             `.trim();
-
 		$("#__nuEditable pre").text(code); // 表示用
 		new Function(code)(); // 実行用
-
-
 	}
 
 
@@ -403,11 +397,19 @@ nu.sortable("sortableTable", (newOrder) => {
   nu.toast("新しい順序: " + newOrder.join(", "));
 });
             `.trim();
-
 		$("#__nuSortable pre").text(code); // 表示用
 		new Function(code)(); // 実行用
+	}
 
-
+	//------------------------------------------------------------------------------------
+	// アコーディオン（開閉パネル）
+	//------------------------------------------------------------------------------------
+	{
+		const code = `
+nu.accordion(".nuAccordion");
+            `.trim();
+		$("#__nuAccordion pre").text(code); // 表示用
+		new Function(code)(); // 実行用
 	}
 
 
