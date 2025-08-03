@@ -127,4 +127,17 @@ pre.nuCodeBlock {
         padding: 4px 8px;
         font-size: 13px; }
 
+.nuFooter {
+  margin-top: 80px;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+  border-top: 1px solid #ccc; }
+  .nuFooter .nuVersionInfo {
+    margin-bottom: 4px;
+    font-weight: bold; }
+  .nuFooter .nuCopyright {
+    font-size: 12px; }
+
 /*# sourceMappingURL=utils.css.map */

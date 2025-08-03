@@ -149,3 +149,24 @@ pre.nuCodeBlock {
 		}
 	}
 }
+
+//------------------------------------------------------------------------------------
+// フッタークレジット
+//------------------------------------------------------------------------------------
+.nuFooter {
+	margin-top: 80px;
+	padding: 20px;
+	text-align: center;
+	font-size: 14px;
+	color: #888;
+	border-top: 1px solid #ccc;
+
+	.nuVersionInfo {
+		margin-bottom: 4px;
+		font-weight: bold;
+	}
+
+	.nuCopyright {
+		font-size: 12px;
+	}
+}
