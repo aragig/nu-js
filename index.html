@@ -12,8 +12,15 @@
 </head>
 <body>
 <div id="nuContents">
-	<h1>ぬ - nu.js</h1>
-	nu.jsはライブラリに依存しない Vanilla JS で作られているUI補助ツールです。jqueryとの共存も可能です。
+	<header class="nuHeader">
+		<div class="flexSpread">
+			<h1>nu.js</h1>
+			<p class="nuGithubLink">
+				<a href="https://github.com/aragig/nu-js" target="_blank" rel="noopener" aria-label="GitHub Repository" class="githubIcon"></a>
+			</p>
+		</div>
+		nu.jsはライブラリに依存しない Vanilla JS で作られているUI補助ツールです。jqueryとの共存も可能です。
+	</header>
 
 	<form id="__nuForm">
 		<!-- セクション: アラート -->
@@ -112,96 +119,113 @@
 
 		<!-- セクション: 検索ボックス -->
 		<section>
-			<div id="__nuSearch">
-				<h2 class="mt80">検索ボックス　nu.search</h2>
-				<div id="__nuSearchBox"></div>
-				<pre class="nuCodeBlock"></pre>
+			<h2 class="mt80">検索ボックス</h2>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.search</div>
+				<div id="__nuSearch" class="nuAccordionContent">
+					<div id="__nuSearchBox"></div>
+					<pre class="nuCodeBlock"></pre>
+				</div>
 			</div>
 		</section>
 
 		<!-- セクション: 入力欄に対して文字数カウンターを追加する-->
 		<section>
 			<h2 class="mt80">文字数 nu.count</h2>
-			<div id="__nuCountInput">
-				<input id="__nuCountInputTarget" name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
-				<pre class="nuCodeBlock"></pre>
-			</div>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.count</div>
+				<div class="nuAccordionContent">
+					<div id="__nuCountInput">
+						<input id="__nuCountInputTarget" name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
+						<pre class="nuCodeBlock"></pre>
+					</div>
+					<div id="__nuCountTextarea">
+						<textarea id="__nuCountTextareaTarget" name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5">テキスト</textarea>
+						<pre class="nuCodeBlock"></pre>
+					</div>
 
-			<div id="__nuCountTextarea">
-				<textarea id="__nuCountTextareaTarget" name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5">テキスト</textarea>
-				<pre class="nuCodeBlock"></pre>
+				</div>
 			</div>
 		</section>
 
 		<!-- セクション: フォーム値取得-->
 		<section>
-			<h2 class="mt80">フォーム値取得 nu.vals</h2>
-			<div id="__nuVals">
-				<button class="nuButton" type="button">Run</button>
-				<textarea id="nuSubmitRestArea" class="nuTextarea wFull mt20" rows="12" readonly></textarea>
-				<pre class="nuCodeBlock"></pre>
+			<h2 class="mt80">フォーム値取得</h2>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.vals</div>
+				<div id="__nuVals" class="nuAccordionContent">
+					<button class="nuButton" type="button">Run</button>
+					<textarea id="nuSubmitRestArea" class="nuTextarea wFull mt20" rows="12" readonly></textarea>
+					<pre class="nuCodeBlock"></pre>
+				</div>
 			</div>
 		</section>
 
 
 		<!-- セクション: 編集可能なセル-->
 		<section>
-			<h2 class="mt80">編集可能なセル nu.editable</h2>
-			<div id="__nuEditable">
-				<table class="nuTable">
-					<thead>
-					<tr>
-						<th style="width: 100px;">名前</th>
-						<th>年齢</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td>太郎</td>
-						<td class="nuEditable" data-name="age">22</td>
-					</tr>
-					<tr>
-						<td>花子</td>
-						<td class="nuEditable" data-name="age">45</td>
-					</tr>
-					<tr>
-						<td>早紀</td>
-						<td class="nuEditable" data-name="age">29</td>
-					</tr>
-					<tr>
-						<td>健太郎</td>
-						<td class="nuEditable" data-name="age">36</td>
-					</tr>
-					</tbody>
-				</table>
-
-				<pre class="nuCodeBlock"></pre>
+			<h2 class="mt80">編集可能なセル</h2>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.editable</div>
+				<div id="__nuEditable" class="nuAccordionContent">
+					<table class="nuTable">
+						<thead>
+						<tr>
+							<th style="width: 100px;">名前</th>
+							<th>年齢</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>太郎</td>
+							<td class="nuEditable" data-name="age">22</td>
+						</tr>
+						<tr>
+							<td>花子</td>
+							<td class="nuEditable" data-name="age">45</td>
+						</tr>
+						<tr>
+							<td>早紀</td>
+							<td class="nuEditable" data-name="age">29</td>
+						</tr>
+						<tr>
+							<td>健太郎</td>
+							<td class="nuEditable" data-name="age">36</td>
+						</tr>
+						</tbody>
+					</table>
+					<pre class="nuCodeBlock"></pre>
+				</div>
 			</div>
+
 		</section>
 
 		<!-- セクション: ドラッグ＆ドロップで順序替え-->
 		<section>
-			<h2 class="mt80">ドラッグ＆ドロップで順序替え nu.sortable</h2>
-			<div id="__nuSortable">
-				<table id="sortableTable" class="nuTable nuSortable">
-					<thead>
-					<tr><th>ID</th><th>名前</th></tr>
-					</thead>
-					<tbody>
-					<tr data-id="1"><td>1</td><td>りんご</td></tr>
-					<tr data-id="2"><td>2</td><td>バナナ</td></tr>
-					<tr data-id="3"><td>3</td><td>みかん</td></tr>
-					</tbody>
-				</table>
+			<h2 class="mt80">ドラッグ＆ドロップで順序替え</h2>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.sortable</div>
+				<div id="__nuSortable" class="nuAccordionContent">
+					<table id="sortableTable" class="nuTable nuSortable">
+						<thead>
+						<tr><th>ID</th><th>名前</th></tr>
+						</thead>
+						<tbody>
+						<tr data-id="1"><td>1</td><td>りんご</td></tr>
+						<tr data-id="2"><td>2</td><td>バナナ</td></tr>
+						<tr data-id="3"><td>3</td><td>みかん</td></tr>
+						</tbody>
+					</table>
 
-				<pre class="nuCodeBlock"></pre>
+					<pre class="nuCodeBlock"></pre>
+				</div>
 			</div>
 		</section>
 
 		<!-- セクション: アコーディオン（開閉パネル）-->
-		<section>
+		<section id="__nuAccordion">
 			<h2 class="mt80">アコーディオン nu.accordion</h2>
-			<div id="__nuAccordion" class="nuAccordion">
+			<div class="nuAccordion">
 				<div class="nuAccordionHeader">クリックして開閉</div>
 				<div class="nuAccordionContent">
 					<p>ここがコンテンツです。</p>
@@ -244,6 +268,9 @@
 
 	</form>
 	<footer class="mt80 nuFooter">
+		<p class="nuGithubLink">
+			<a href="https://github.com/aragig/nu-js" target="_blank" rel="noopener" aria-label="GitHub Repository" class="githubIcon"></a>
+		</p>
 		<p class="nuVersionInfo">nu.js Version: __VERSION__</p>
 		<p class="nuCopyright">© 2025 Toshihiko Arai. All rights reserved.</p>
 	</footer>
