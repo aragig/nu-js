@@ -87,8 +87,16 @@ if (typeof module !== "undefined") {
 
 			if (!header || !content) return;
 
+			// ---- 初期状態をdata属性から判定 (#11 T.Arai 2025/08/10 added.) --------
+			// data-initial="open" | "closed"（未指定はclosed）
+			const initial = (item.dataset.initial || "").toLowerCase();
+			const isOpen = initial === "open";
+
 			// 初期状態
-			content.style.display = "none";
+			content.style.display = isOpen ? "block" : "none";
+			item.classList.toggle("isOpen", isOpen);
+			// ----------------------------------------------------------------------
+
 
 			header.addEventListener("click", () => {
 				// #7 アコーディオンを開くと全選択状態になってしまう対処 (2025/08/10 T.Arai)
