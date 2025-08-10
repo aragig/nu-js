@@ -108,16 +108,16 @@ if (typeof module !== "undefined") {
 	// カスタムアラート
 	//------------------------------------------------------------------------------------
 
-	window.nu.alert = function (message, onOk) {
+	nu.alert = function (message, onOk) {
 		showSheet(message, { ok: "OK" }, {onOk: onOk});
 	};
-	window.nu.confirm = function (message, onOk, onCancel) {
+	nu.confirm = function (message, onOk, onCancel) {
 		showSheet(message, { cancel: "キャンセル", ok: "OK" }, {
 			onOk: onOk,
 			onCancel: onCancel
 		});
 	};
-	window.nu.sheet = function (message, buttons, callbacks) {
+	nu.sheet = function (message, buttons, callbacks) {
 		showSheet(message, buttons, callbacks);
 	};
 
@@ -131,7 +131,7 @@ if (typeof module !== "undefined") {
 	 * @param {Object} [handlers] - オプションのコールバック関数
 	 */
 	function showSheet(message, buttonMap, handlers) {
-		window.nu.overlay.show();
+		nu.overlay.show();
 
 		// ボタンにコールバックを登録
 		const buttons = [];
@@ -178,7 +178,7 @@ if (typeof module !== "undefined") {
 
 				box.style.opacity = "0";
 				// オーバーレイを非表示 → 完了を待ってからボックス削除
-				await window.nu.overlay.hide();
+				await nu.overlay.hide();
 				document.body.removeChild(box);
 			});
 
@@ -556,38 +556,34 @@ if (typeof module !== "undefined") {
 	//------------------------------------------------------------------------------------
 	// オーバーレイ制御ユーティリティ
 	//------------------------------------------------------------------------------------
-	{
+	const overlayClassName = "nuOverlay";
+	const defaultTimeout = 200; // 外部からもアクセス可能にするための初期値
 
-		const overlayClassName = "nuOverlay";
-		const defaultTimeout = 200; // 外部からもアクセス可能にするための初期値
+	nu.overlay = {
+		show: function () {
+			const overlay = document.createElement("div");
+			overlay.className = overlayClassName;
+			overlay.style.opacity = "0";
+			document.body.appendChild(overlay);
 
-		nu.overlay = {
-			show: function () {
-				const overlay = document.createElement("div");
-				overlay.className = overlayClassName;
-				overlay.style.opacity = "0";
-				document.body.appendChild(overlay);
+			requestAnimationFrame(() => {
+				overlay.style.opacity = "1";
+			});
 
-				requestAnimationFrame(() => {
-					overlay.style.opacity = "1";
-				});
+			return overlay;
+		},
 
-				return overlay;
-			},
+		hide: async function () {
+			const overlay = document.querySelector(`.${overlayClassName}`);
+			if (!overlay) return false;
 
-			hide: async function () {
-				const overlay = document.querySelector(`.${overlayClassName}`);
-				if (!overlay) return false;
-
-				overlay.style.opacity = "0";
-				await new Promise(resolve => setTimeout(resolve, defaultTimeout));
-				overlay.remove();
-				return true;
-			},
-			timeout: defaultTimeout
-		};
-	}
-
+			overlay.style.opacity = "0";
+			await new Promise(resolve => setTimeout(resolve, defaultTimeout));
+			overlay.remove();
+			return true;
+		},
+		timeout: defaultTimeout
+	};
 
 })(window);
 ;(function (global) {

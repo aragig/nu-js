@@ -8,37 +8,33 @@
 	//------------------------------------------------------------------------------------
 	// オーバーレイ制御ユーティリティ
 	//------------------------------------------------------------------------------------
-	{
+	const overlayClassName = "nuOverlay";
+	const defaultTimeout = 200; // 外部からもアクセス可能にするための初期値
 
-		const overlayClassName = "nuOverlay";
-		const defaultTimeout = 200; // 外部からもアクセス可能にするための初期値
+	nu.overlay = {
+		show: function () {
+			const overlay = document.createElement("div");
+			overlay.className = overlayClassName;
+			overlay.style.opacity = "0";
+			document.body.appendChild(overlay);
 
-		nu.overlay = {
-			show: function () {
-				const overlay = document.createElement("div");
-				overlay.className = overlayClassName;
-				overlay.style.opacity = "0";
-				document.body.appendChild(overlay);
+			requestAnimationFrame(() => {
+				overlay.style.opacity = "1";
+			});
 
-				requestAnimationFrame(() => {
-					overlay.style.opacity = "1";
-				});
+			return overlay;
+		},
 
-				return overlay;
-			},
+		hide: async function () {
+			const overlay = document.querySelector(`.${overlayClassName}`);
+			if (!overlay) return false;
 
-			hide: async function () {
-				const overlay = document.querySelector(`.${overlayClassName}`);
-				if (!overlay) return false;
-
-				overlay.style.opacity = "0";
-				await new Promise(resolve => setTimeout(resolve, defaultTimeout));
-				overlay.remove();
-				return true;
-			},
-			timeout: defaultTimeout
-		};
-	}
-
+			overlay.style.opacity = "0";
+			await new Promise(resolve => setTimeout(resolve, defaultTimeout));
+			overlay.remove();
+			return true;
+		},
+		timeout: defaultTimeout
+	};
 
 })(window);
