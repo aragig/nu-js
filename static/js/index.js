@@ -274,7 +274,7 @@ nu.upload("uploadArea", {
 		const code = `
 $("#__nuLoadImages button").click(function() {
 	nu.loadImages("nuLoadImages", {
-		endpoint: "/sample/images_list.json"
+		endpoint: "/sample/load_images/img_list.json"
 	}, {
 		onTapped: function(path) {
 			nu.toast.s("クリックされました: "+ path);
