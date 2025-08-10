@@ -576,7 +576,7 @@
 		} // renderArticleImages() end.
 
 
-		window.nu.loadImages = async function (mountId, options = {}, handlers  ) {
+		window.nu.loadImages = async function (mountId, options = {}, handlers) {
 			const grid = document.getElementById(mountId);
 			if (!grid) { nu.toast.e(`要素 ${mountId} が存在しません`); return; }
 
@@ -589,7 +589,7 @@
 
 			// サーバーから画像リストを取得
 			try {
-				if(!options.endpoint) throw new Error('endpointが未設定です！');
+				if (!options.endpoint) throw new Error('endpointが未設定です！');
 
 				const res = await fetch(options.endpoint, {
 					method: "GET",
