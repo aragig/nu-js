@@ -24,7 +24,7 @@
 			// ---- 初期状態をdata属性から判定 (#11 T.Arai 2025/08/10 added.) --------
 			// data-initial="open" | "closed"（未指定はclosed）
 			const initial = (item.dataset.initial || "").toLowerCase();
-			let isOpen = initial === "open";
+			const isOpen = initial === "open";
 
 			// 初期状態
 			content.style.display = isOpen ? "block" : "none";
