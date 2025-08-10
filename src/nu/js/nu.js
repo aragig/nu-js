@@ -91,6 +91,9 @@ if (typeof module !== "undefined") {
 			content.style.display = "none";
 
 			header.addEventListener("click", () => {
+				// #7 アコーディオンを開くと全選択状態になってしまう対処 (2025/08/10 T.Arai)
+				window.getSelection()?.removeAllRanges();
+
 				const isOpen = content.style.display === "block";
 				content.style.display = isOpen ? "none" : "block";
 			});
