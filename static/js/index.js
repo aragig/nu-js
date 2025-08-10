@@ -254,16 +254,39 @@ nu.upload("uploadArea", {
 	maxSize: 1024 * 1024, // 1MBまで
 	url: "/api/upload/image"
 }, {
-	onError: function (msg) {
-		nu.toast.e("エラー: " + msg);
-	},
 	onSuccess: function(msg) {
 		nu.toast.s("登録完了: "+ msg);
+	},
+	onError: function (msg) {
+		nu.toast.e("エラー: " + msg);
 	}
 });
 `.trim();
 
 		$("#__nuUpload pre").text(code); // 表示用
+		new Function(code)(); // 実行用
+	}
+
+	//------------------------------------------------------------------------------------
+	// 画像一覧取得・表示
+	//------------------------------------------------------------------------------------
+	{
+		const code = `
+$("#__nuLoadImages button").click(function() {
+	nu.loadImages("nuLoadImages", {
+		endpoint: "/sample/images_list.json"
+	}, {
+		onTapped: function(path) {
+			nu.toast.s("クリックされました: "+ path);
+		},
+		onError: function (msg) {
+			nu.toast.e("エラー: " + msg);
+		}
+	});
+});
+`.trim();
+
+		$("#__nuLoadImages pre").text(code); // 表示用
 		new Function(code)(); // 実行用
 	}
 
