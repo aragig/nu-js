@@ -129,7 +129,6 @@ $("#__nuSheet button").click(function() {
 
 		$("#__nuSheet pre").text(code); // 表示用
 		new Function(code)(); // 実行用
-
 	}
 
 	//------------------------------------------------------------------------------------
@@ -255,16 +254,39 @@ nu.upload("uploadArea", {
 	maxSize: 1024 * 1024, // 1MBまで
 	url: "/api/upload/image"
 }, {
-	onError: function (msg) {
-		nu.toast.e("エラー: " + msg);
-	},
 	onSuccess: function(msg) {
 		nu.toast.s("登録完了: "+ msg);
+	},
+	onError: function (msg) {
+		nu.toast.e("エラー: " + msg);
 	}
 });
 `.trim();
 
 		$("#__nuUpload pre").text(code); // 表示用
+		new Function(code)(); // 実行用
+	}
+
+	//------------------------------------------------------------------------------------
+	// 画像一覧取得・表示
+	//------------------------------------------------------------------------------------
+	{
+		const code = `
+$("#__nuLoadImages button").click(function() {
+	nu.loadImages("nuLoadImages", {
+		endpoint: "/sample/load_images/img_list.json"
+	}, {
+		onTapped: function(path) {
+			nu.toast.s("クリックされました: "+ path);
+		},
+		onError: function (msg) {
+			nu.toast.e("エラー: " + msg);
+		}
+	});
+});
+`.trim();
+
+		$("#__nuLoadImages pre").text(code); // 表示用
 		new Function(code)(); // 実行用
 	}
 
@@ -367,10 +389,8 @@ $("#__nuVals button").click(function() {
 	nu.d.table("nu.formData", res);
 });
             `.trim();
-
 		$("#__nuVals pre").text(code); // 表示用
 		new Function(code)(); // 実行用
-
 	}
 
 
@@ -386,11 +406,8 @@ nu.editable((newValue, oldValue, tdEl) => {
   nu.toast.i("変更:" + name + ":" + oldValue + "→" + newValue);
 });
             `.trim();
-
 		$("#__nuEditable pre").text(code); // 表示用
 		new Function(code)(); // 実行用
-
-
 	}
 
 
@@ -403,11 +420,19 @@ nu.sortable("sortableTable", (newOrder) => {
   nu.toast("新しい順序: " + newOrder.join(", "));
 });
             `.trim();
-
 		$("#__nuSortable pre").text(code); // 表示用
 		new Function(code)(); // 実行用
+	}
 
-
+	//------------------------------------------------------------------------------------
+	// アコーディオン（開閉パネル）
+	//------------------------------------------------------------------------------------
+	{
+		const code = `
+nu.accordion(".nuAccordion");
+            `.trim();
+		$("#__nuAccordion pre").text(code); // 表示用
+		new Function(code)(); // 実行用
 	}
 
 

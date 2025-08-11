@@ -12,193 +12,270 @@
 </head>
 <body>
 <div id="nuContents">
-	<h1>ぬ - nu.js</h1>
-	nu.jsはライブラリに依存しない Vanilla JS で作られているUI補助ツールです。jqueryとの共存も可能です。
+	<header class="nuHeader">
+		<div class="flexSpread">
+			<h1>nu.js</h1>
+			<p class="nuGithubLink">
+				<a href="https://github.com/aragig/nu-js" target="_blank" rel="noopener" aria-label="GitHub Repository" class="githubIcon"></a>
+			</p>
+		</div>
+		nu.jsはライブラリに依存しない Vanilla JS で作られているUI補助ツールです。jqueryとの共存も可能です。
+	</header>
 
 	<form id="__nuForm">
 		<!-- セクション: アラート -->
 		<section>
-			<h2 class="mt40">アラート nu.alert</h2>
-			<div id="__nuAlertSimple">
-				<button id="nuAlertSimpleBtn" class="nuButton" type="button">Run</button>
-				<pre class="nuCodeBlock"></pre>
-			</div>
+			<h2 class="mt40">アラート</h2>
+			<div class="nuAccordion" data-initial="open">
+				<div class="nuAccordionHeader">nu.alert</div>
+				<div class="nuAccordionContent">
+					<div id="__nuAlertSimple">
+						<button id="nuAlertSimpleBtn" class="nuButton" type="button">Run</button>
+						<pre class="nuCodeBlock"></pre>
+					</div>
+
+					<div id="__nuAlert">
+						<button class="nuButton" type="button">Run</button>
+						<pre class="nuCodeBlock" data-html-safe></pre>
+					</div>
 
 
-			<div id="__nuAlert">
-				<button class="nuButton" type="button">Run</button>
-				<pre class="nuCodeBlock" data-html-safe></pre>
-			</div>
+					<div id="__nuConfirm">
+						<button class="nuButton" type="button">Run</button>
+						<pre class="nuCodeBlock"></pre>
+					</div>
 
+					<div id="__nuSheetAlert">
+						<button class="nuButton" type="button" data-html-safe>Run</button>
+						<pre class="nuCodeBlock"></pre>
+					</div>
 
-			<div id="__nuConfirm">
-				<button class="nuButton" type="button">Run</button>
-				<pre class="nuCodeBlock"></pre>
-			</div>
-
-			<div id="__nuSheetAlert">
-				<button class="nuButton" type="button" data-html-safe>Run</button>
-				<pre class="nuCodeBlock"></pre>
-			</div>
-
-
-			<div id="__nuSheet">
-				<button class="nuButton" type="button" data-html-safe>Run</button>
-				<pre class="nuCodeBlock"></pre>
+					<div id="__nuSheet">
+						<button class="nuButton" type="button" data-html-safe>Run</button>
+						<pre class="nuCodeBlock"></pre>
+					</div>
+				</div>
 			</div>
 		</section>
 
 		<!-- セクション: ローディングインジケータ -->
 		<section>
-			<div id="__nuLoading">
-				<h2 class="mt80">インジケータ nu.loading</h2>
-				<button class="nuButton" type="button">Run</button>
-				<pre class="nuCodeBlock"></pre>
+			<h2 class="mt80">インジケータ</h2>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.loading</div>
+				<div id="__nuLoading" class="nuAccordionContent">
+					<button class="nuButton" type="button">Run</button>
+					<pre class="nuCodeBlock"></pre>
+				</div>
 			</div>
 		</section>
 
 
 		<!-- セクション: トースト -->
 		<section>
-			<h2 class="mt80">トースト nu.toast</h2>
-			<div id="__nuToast">
-				<button class="nuButton" type="button">Run</button>
-				<pre class="nuCodeBlock"></pre>
-			</div>
+			<h2 class="mt80">トースト</h2>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.toast</div>
+				<div class="nuAccordionContent">
+					<div id="__nuToast">
+						<button class="nuButton" type="button">Run</button>
+						<pre class="nuCodeBlock"></pre>
+					</div>
 
-			<div id="__nuToastDelay">
-				<button class="nuButton" type="button">Run</button>
-				<pre class="nuCodeBlock"></pre>
+					<div id="__nuToastDelay">
+						<button class="nuButton" type="button">Run</button>
+						<pre class="nuCodeBlock"></pre>
+					</div>
+				</div>
 			</div>
 		</section>
 
 
 		<!-- セクション: ドロップダウンメニュー -->
 		<section>
-			<h2 class="mt80">メニュー nu.menu</h2>
-			<div id="__nuMenuTrigger">
-				<button id="__nuMenuTriggerBtn" class="nuButton" type="button">Run</button>
-				<pre class="nuCodeBlock"></pre>
-			</div>
+			<h2 class="mt80">メニュー</h2>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.menu</div>
+				<div class="nuAccordionContent">
+					<div id="__nuMenuTrigger">
+						<button id="__nuMenuTriggerBtn" class="nuButton" type="button">Run</button>
+						<pre class="nuCodeBlock"></pre>
+					</div>
 
-			<div id="__nuMenuTriggerR">
-				<button id="__nuMenuTriggerRBtn" class="nuMenuButton" type="button"></button>
-				<pre class="nuCodeBlock"></pre>
+					<div id="__nuMenuTriggerR">
+						<button id="__nuMenuTriggerRBtn" class="nuMenuButton" type="button"></button>
+						<pre class="nuCodeBlock"></pre>
+					</div>
+				</div>
 			</div>
 		</section>
 
 		<!-- セクション: 画像アップロード -->
 		<section>
-			<div id="__nuUpload">
-				<h2 class="mt80">画像アップロード nu.upload</h2>
-				<div id="uploadArea"></div>
-				<pre class="nuCodeBlock"></pre>
+			<h2 class="mt80">画像アップロード</h2>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.upload</div>
+				<div id="__nuUpload" class="nuAccordionContent">
+					<div id="uploadArea"></div>
+					<pre class="nuCodeBlock"></pre>
+				</div>
+			</div>
+		</section>
+
+		<!-- セクション: 画像一覧取得・表示 -->
+		<section>
+			<h2 class="mt80">画像一覧取得・表示</h2>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.loadImages</div>
+				<div id="__nuLoadImages" class="nuAccordionContent">
+					<button class="nuButton" type="button">Run</button>
+					<div id="nuLoadImages" class="nuLoadImages mt15" aria-live="polite"></div>
+					<pre class="nuCodeBlock"></pre>
+				</div>
 			</div>
 		</section>
 
 		<!-- セクション: セグメントボタン -->
 		<section>
-			<div id="__nuSegmentSort">
-				<h2 class="mt80">セグメント nu.segment</h2>
-				<div id="__nuSegmentSortBtns"></div>
-				<pre class="nuCodeBlock"></pre>
-			</div>
-
-			<div id="__nuSegmentFruits">
-				<div id="__nuSegmentFruitsBtns"></div>
-				<pre class="nuCodeBlock"></pre>
+			<h2 class="mt80">セグメント</h2>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.segment</div>
+				<div class="nuAccordionContent">
+					<div id="__nuSegmentSort">
+						<div id="__nuSegmentSortBtns"></div>
+						<pre class="nuCodeBlock"></pre>
+					</div>
+					<div id="__nuSegmentFruits">
+						<div id="__nuSegmentFruitsBtns"></div>
+						<pre class="nuCodeBlock"></pre>
+					</div>
+				</div>
 			</div>
 		</section>
 
 		<!-- セクション: 検索ボックス -->
 		<section>
-			<div id="__nuSearch">
-				<h2 class="mt80">検索ボックス　nu.search</h2>
-				<div id="__nuSearchBox"></div>
-				<pre class="nuCodeBlock"></pre>
+			<h2 class="mt80">検索ボックス</h2>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.search</div>
+				<div id="__nuSearch" class="nuAccordionContent">
+					<div id="__nuSearchBox"></div>
+					<pre class="nuCodeBlock"></pre>
+				</div>
 			</div>
 		</section>
 
 		<!-- セクション: 入力欄に対して文字数カウンターを追加する-->
 		<section>
-			<h2 class="mt80">文字数 nu.count</h2>
-			<div id="__nuCountInput">
-				<input id="__nuCountInputTarget" name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
-				<pre class="nuCodeBlock"></pre>
-			</div>
+			<h2 class="mt80">文字数</h2>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.count</div>
+				<div class="nuAccordionContent">
+					<div id="__nuCountInput">
+						<input id="__nuCountInputTarget" name="name" type="text" class="nuInput" placeholder="お名前を入力してください" autocomplete="on" />
+						<pre class="nuCodeBlock"></pre>
+					</div>
+					<div id="__nuCountTextarea">
+						<textarea id="__nuCountTextareaTarget" name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5">テキスト</textarea>
+						<pre class="nuCodeBlock"></pre>
+					</div>
 
-			<div id="__nuCountTextarea">
-				<textarea id="__nuCountTextareaTarget" name="inquire" class="nuTextarea wFull" placeholder="ご意見・ご感想" rows="5">テキスト</textarea>
-				<pre class="nuCodeBlock"></pre>
+				</div>
 			</div>
 		</section>
 
 		<!-- セクション: フォーム値取得-->
 		<section>
-			<h2 class="mt80">フォーム値取得 nu.vals</h2>
-			<div id="__nuVals">
-				<button class="nuButton" type="button">Run</button>
-				<textarea id="nuSubmitRestArea" class="nuTextarea wFull mt20" rows="12" readonly></textarea>
-				<pre class="nuCodeBlock"></pre>
+			<h2 class="mt80">フォーム値取得</h2>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.vals</div>
+				<div id="__nuVals" class="nuAccordionContent">
+					<button class="nuButton" type="button">Run</button>
+					<textarea id="nuSubmitRestArea" class="nuTextarea wFull mt20" rows="12" readonly></textarea>
+					<pre class="nuCodeBlock"></pre>
+				</div>
 			</div>
 		</section>
 
 
 		<!-- セクション: 編集可能なセル-->
 		<section>
-			<h2 class="mt80">編集可能なセル nu.editable</h2>
-			<div id="__nuEditable">
-				<table class="nuTable">
-					<thead>
-					<tr>
-						<th style="width: 100px;">名前</th>
-						<th>年齢</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td>太郎</td>
-						<td class="nuEditable" data-name="age">22</td>
-					</tr>
-					<tr>
-						<td>花子</td>
-						<td class="nuEditable" data-name="age">45</td>
-					</tr>
-					<tr>
-						<td>早紀</td>
-						<td class="nuEditable" data-name="age">29</td>
-					</tr>
-					<tr>
-						<td>健太郎</td>
-						<td class="nuEditable" data-name="age">36</td>
-					</tr>
-					</tbody>
-				</table>
-
-				<pre class="nuCodeBlock"></pre>
+			<h2 class="mt80">編集可能なセル</h2>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.editable</div>
+				<div id="__nuEditable" class="nuAccordionContent">
+					<table class="nuTable">
+						<thead>
+						<tr>
+							<th style="width: 100px;">名前</th>
+							<th>年齢</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>太郎</td>
+							<td class="nuEditable" data-name="age">22</td>
+						</tr>
+						<tr>
+							<td>花子</td>
+							<td class="nuEditable" data-name="age">45</td>
+						</tr>
+						<tr>
+							<td>早紀</td>
+							<td class="nuEditable" data-name="age">29</td>
+						</tr>
+						<tr>
+							<td>健太郎</td>
+							<td class="nuEditable" data-name="age">36</td>
+						</tr>
+						</tbody>
+					</table>
+					<pre class="nuCodeBlock"></pre>
+				</div>
 			</div>
+
 		</section>
 
 		<!-- セクション: ドラッグ＆ドロップで順序替え-->
 		<section>
-			<h2 class="mt80">ドラッグ＆ドロップで順序替え nu.sortable</h2>
-			<div id="__nuSortable">
-				<table id="sortableTable" class="nuTable nuSortable">
-					<thead>
-					<tr><th>ID</th><th>名前</th></tr>
-					</thead>
-					<tbody>
-					<tr data-id="1"><td>1</td><td>りんご</td></tr>
-					<tr data-id="2"><td>2</td><td>バナナ</td></tr>
-					<tr data-id="3"><td>3</td><td>みかん</td></tr>
-					</tbody>
-				</table>
+			<h2 class="mt80">ドラッグ＆ドロップで順序替え</h2>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.sortable</div>
+				<div id="__nuSortable" class="nuAccordionContent">
+					<table id="sortableTable" class="nuTable nuSortable">
+						<thead>
+						<tr><th>ID</th><th>名前</th></tr>
+						</thead>
+						<tbody>
+						<tr data-id="1"><td>1</td><td>りんご</td></tr>
+						<tr data-id="2"><td>2</td><td>バナナ</td></tr>
+						<tr data-id="3"><td>3</td><td>みかん</td></tr>
+						</tbody>
+					</table>
 
-				<pre class="nuCodeBlock"></pre>
+					<pre class="nuCodeBlock"></pre>
+				</div>
 			</div>
 		</section>
 
+		<!-- セクション: アコーディオン（開閉パネル）-->
+		<section id="__nuAccordion">
+			<h2 class="mt80">アコーディオン nu.accordion</h2>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">クリックして開閉</div>
+				<div class="nuAccordionContent">
+					<p>ここがコンテンツです。</p>
+					<p>表示・非表示が切り替わります。</p>
+				</div>
+			</div>
+			<pre class="nuCodeBlock"></pre>
+		</section>
+
+
+
 		<hr class="mt80">
+
+
 		<!-- セクション: 色々なinput-->
 		<section>
 			<h2 class="mt40">色々なinput</h2>
@@ -227,6 +304,9 @@
 
 	</form>
 	<footer class="mt80 nuFooter">
+		<p class="nuGithubLink">
+			<a href="https://github.com/aragig/nu-js" target="_blank" rel="noopener" aria-label="GitHub Repository" class="githubIcon"></a>
+		</p>
 		<p class="nuVersionInfo">nu.js Version: __VERSION__</p>
 		<p class="nuCopyright">© 2025 Toshihiko Arai. All rights reserved.</p>
 	</footer>
