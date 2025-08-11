@@ -1,0 +1,100 @@
+name: deploy-nu-js
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'VERSION（例: v2025.8.11.1）未入力なら実行時刻で生成'
+        required: false
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  buildAndDeploy:
+    runs-on: ubuntu-latest
+    env:
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_PORT: ${{ secrets.SSH_PORT }}
+      REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Decide version string
+        id: ver
+        shell: bash
+        run: |
+          if [ "${{ github.ref_type }}" = "tag" ] && [ -n "${{ github.ref_name }}" ]; then
+            V="${{ github.ref_name }}"
+          elif [ -n "${{ inputs.version }}" ]; then
+            V="${{ inputs.version }}"
+          else
+            V="v$(date +%Y.%m.%d.%H%M)"
+          fi
+          echo "version=$V" >> "$GITHUB_OUTPUT"
+
+      - name: Build (same as your script)
+        shell: bash
+        run: |
+          set -e
+          find ./ -name '.DS_Store' -delete -print || true
+          echo "👉 build/ ディレクトリを再作成..."
+          rm -rf build
+          mkdir -p build/src build/static build/sample build/lib
+
+          echo "📁 必要なファイルをコピー中..."
+          cp index.html build/
+          cp -R src build/
+          cp -R static build/
+          cp -R sample build/
+          cp -R lib build/
+
+          # バージョン埋め込み（Linux sed は -i 拡張子不要）
+          sed -i "s/__VERSION__/${{ steps.ver.outputs.version }}/g" "build/index.html"
+
+      # 入力の事前チェック（空なら明示的に fail）
+      - name: Preflight check
+        shell: bash
+        run: |
+          [ -n "${{ secrets.SSH_HOST }}" ] || { echo "❌ SSH_HOST is empty. Set repository secret or variable."; exit 1; }
+          [ -n "${{ secrets.SSH_USER }}" ] || { echo "❌ SSH_USER is empty."; exit 1; }
+          [ -n "${{ secrets.SSH_PRIVATE_KEY || '' }}" ] || { echo "❌ SSH_PRIVATE_KEY is empty."; exit 1; }
+          [ -n "${{ secrets.REMOTE_PATH }}" ] || { echo "❌ REMOTE_PATH is empty."; exit 1; }
+
+      - name: Setup SSH key
+        shell: bash
+        run: |
+          set -e
+          install -m 700 -d ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          # known_hosts 登録（ホスト鍵検証）
+          ssh-keyscan -p "${SSH_PORT:-22}" "${SSH_HOST}" >> ~/.ssh/known_hosts
+
+      - name: Prepare remote directory
+        shell: bash
+        run: |
+          ssh -i ~/.ssh/id_deploy -p "${SSH_PORT:-22}" \
+            -o StrictHostKeyChecking=yes \
+            "${SSH_USER}@${SSH_HOST}" "mkdir -p '${REMOTE_PATH}'"
+
+      # 乾燥走行が欲しければ、pull_request トリガで -n を使う step を足せます
+      # - name: Dry-run
+      #   if: github.event_name == 'pull_request'
+      #   run: |
+      #     rsync -avun --delete --exclude='.sass-cache' \
+      #       -e "ssh -i ~/.ssh/id_deploy -p ${SSH_PORT:-22}" \
+      #       build/ "${SSH_USER}@${SSH_HOST}:${REMOTE_PATH}"
+
+      - name: Deploy (rsync over SSH)
+        shell: bash
+        run: |
+          rsync -avu --delete --exclude='.sass-cache' \
+            -e "ssh -i ~/.ssh/id_deploy -p ${SSH_PORT:-22} -o StrictHostKeyChecking=yes" \
+            build/ "${SSH_USER}@${SSH_HOST}:${REMOTE_PATH}"
+
+      - name: Done
+        run: echo "Done🎉 https://apppppp.com/kit/nu-js/"
