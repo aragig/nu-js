@@ -55,6 +55,15 @@ jobs:
           # バージョン埋め込み（Linux sed は -i 拡張子不要）
           sed -i "s/__VERSION__/${{ steps.ver.outputs.version }}/g" "build/index.html"
 
+      # 入力の事前チェック（空なら明示的に fail）
+      - name: Preflight check
+        shell: bash
+        run: |
+          [ -n "${{ env.SSH_HOST }}" ] || { echo "❌ SSH_HOST is empty. Set repository secret or variable."; exit 1; }
+          [ -n "${{ env.SSH_USER }}" ] || { echo "❌ SSH_USER is empty."; exit 1; }
+          [ -n "${{ secrets.SSH_PRIVATE_KEY || '' }}" ] || { echo "❌ SSH_PRIVATE_KEY is empty."; exit 1; }
+          [ -n "${{ env.REMOTE_PATH }}" ] || { echo "❌ REMOTE_PATH is empty."; exit 1; }
+
       - name: Setup SSH key
         shell: bash
         run: |
