@@ -1,10 +1,10 @@
 [
-	"/sample/load_images/img/mozu-a.jpg",
-	"/sample/load_images/img/mozu-b.jpg",
-	"/sample/load_images/img/mozu-c.jpg",
-	"/sample/load_images/img/mozu-d.jpg",
-	"/sample/load_images/img/mozu-e.jpg",
-	"/sample/load_images/img/mozu-f.jpg",
-	"/sample/load_images/img/mozu-g.jpg",
-	"/sample/load_images/img/mozu-h.jpg"
+	"./sample/load_images/img/mozu-a.jpg",
+	"./sample/load_images/img/mozu-b.jpg",
+	"./sample/load_images/img/mozu-c.jpg",
+	"./sample/load_images/img/mozu-d.jpg",
+	"./sample/load_images/img/mozu-e.jpg",
+	"./sample/load_images/img/mozu-f.jpg",
+	"./sample/load_images/img/mozu-g.jpg",
+	"./sample/load_images/img/mozu-h.jpg"
 ]
