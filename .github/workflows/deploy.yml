@@ -59,10 +59,10 @@ jobs:
       - name: Preflight check
         shell: bash
         run: |
-          [ -n "${{ env.SSH_HOST }}" ] || { echo "❌ SSH_HOST is empty. Set repository secret or variable."; exit 1; }
-          [ -n "${{ env.SSH_USER }}" ] || { echo "❌ SSH_USER is empty."; exit 1; }
+          [ -n "${{ secrets.SSH_HOST }}" ] || { echo "❌ SSH_HOST is empty. Set repository secret or variable."; exit 1; }
+          [ -n "${{ secrets.SSH_USER }}" ] || { echo "❌ SSH_USER is empty."; exit 1; }
           [ -n "${{ secrets.SSH_PRIVATE_KEY || '' }}" ] || { echo "❌ SSH_PRIVATE_KEY is empty."; exit 1; }
-          [ -n "${{ env.REMOTE_PATH }}" ] || { echo "❌ REMOTE_PATH is empty."; exit 1; }
+          [ -n "${{ secrets.REMOTE_PATH }}" ] || { echo "❌ REMOTE_PATH is empty."; exit 1; }
 
       - name: Setup SSH key
         shell: bash
