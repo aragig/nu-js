@@ -160,6 +160,26 @@ body {
     .nuSheetBox .nuAlertButton.nuAlertButton_DELETE {
       color: #ff3b30; }
 
+.nuAlertBox .nuAlertInputRow,
+.nuSheetBox .nuAlertInputRow {
+  margin: 12px 0 24px; }
+.nuAlertBox .nuAlertInput,
+.nuSheetBox .nuAlertInput {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box; }
+  .nuAlertBox .nuAlertInput:focus,
+  .nuSheetBox .nuAlertInput:focus {
+    border-color: #4ca1af;
+    box-shadow: 0 0 0 3px rgba(76, 161, 175, 0.2); }
+.nuAlertBox .nuAlertButtonRow,
+.nuSheetBox .nuAlertButtonRow {
+  margin-top: 12px; }
+
 .nuLoadingSpinner {
   width: 48px;
   height: 48px;

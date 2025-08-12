@@ -132,6 +132,24 @@ if (typeof module !== "undefined") {
 		showSheet(message, buttons, callbacks);
 	};
 
+// 入力付きアラート（プロンプト）
+	nu.prompt = function (message, options = {}, handlers = {}) {
+		const buttons = options.buttons || {
+			cancel: options.cancelLabel || "キャンセル",
+			ok: options.okLabel || "OK"
+		};
+		const callbacks = {
+			onOk: (val) => handlers.onOk && handlers.onOk(val),
+			onCancel: (val) => handlers.onCancel && handlers.onCancel(val)
+		};
+
+		showSheet(message, buttons, callbacks, {
+			input: true,
+			placeholder: options.placeholder,
+			value: options.value,
+			type: options.type || "text"
+		});
+	};
 
 	//--- 以下は private メソッド
 
@@ -140,8 +158,9 @@ if (typeof module !== "undefined") {
 	 * @param {string} message
 	 * @param {Array.<Object>} buttonMap - ボタンアイテム
 	 * @param {Object} [handlers] - オプションのコールバック関数
+	 * @param opts
 	 */
-	function showSheet(message, buttonMap, handlers) {
+	function showSheet(message, buttonMap, handlers, opts = {}) {
 		nu.overlay.show();
 
 		// ボタンにコールバックを登録
@@ -168,6 +187,27 @@ if (typeof module !== "undefined") {
 		// msg.textContent = message;
 		msg.innerHTML = message;
 
+		// ▼▼ 追加：入力欄（必要なときだけ描画） ▼▼
+		const hasInput = !!opts.input;
+		let inputEl = null;
+		if (hasInput) {
+			const inputRow = document.createElement("div");
+			inputRow.className = "nuAlertInputRow";
+
+			inputEl = document.createElement("input");
+			inputEl.type = opts.type || "text";
+			inputEl.className = "nuAlertInput";
+			if (opts.placeholder) inputEl.placeholder = opts.placeholder;
+			if (opts.value != null) inputEl.value = opts.value;
+
+			inputRow.appendChild(inputEl);
+			box.appendChild(msg);
+			box.appendChild(inputRow);
+		} else {
+			box.appendChild(msg);
+		}
+		// ▲▲ 追加ここまで ▲▲
+
 		const buttonRow = document.createElement("div");
 		buttonRow.className = "nuAlertButtonRow";
 
@@ -184,7 +224,8 @@ if (typeof module !== "undefined") {
 
 			button.addEventListener("click", async () => {
 				if (typeof btn.callback === "function") {
-					btn.callback();
+					const val = hasInput ? inputEl.value : undefined;
+					btn.callback(val);
 				}
 
 				box.style.opacity = "0";
@@ -196,7 +237,6 @@ if (typeof module !== "undefined") {
 			buttonRow.appendChild(button);
 		});
 
-		box.appendChild(msg);
 		box.appendChild(buttonRow);
 		document.body.appendChild(box);
 
