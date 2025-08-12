@@ -224,8 +224,8 @@ if (typeof module !== "undefined") {
 
 			button.addEventListener("click", async () => {
 				if (typeof btn.callback === "function") {
-					const val = hasInput ? inputEl.value : undefined;
-					btn.callback(val);
+					const inputVal = hasInput ? inputEl.value : undefined;
+					btn.callback(inputVal);
 				}
 
 				box.style.opacity = "0";
