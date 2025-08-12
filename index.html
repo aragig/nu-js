@@ -28,32 +28,49 @@
 			<h2 class="mt40">アラート</h2>
 			<div class="nuAccordion" data-initial="open">
 				<div class="nuAccordionHeader">nu.alert</div>
-				<div class="nuAccordionContent">
-					<div id="__nuAlertSimple">
-						<button id="nuAlertSimpleBtn" class="nuButton" type="button">Run</button>
-						<pre class="nuCodeBlock"></pre>
-					</div>
+				<div class="nuAccordionContent" id="__nuAlertSimple">
+					<button id="nuAlertSimpleBtn" class="nuButton" type="button">Run</button>
+					<pre class="nuCodeBlock"></pre>
+				</div>
+			</div>
 
-					<div id="__nuAlert">
-						<button class="nuButton" type="button">Run</button>
-						<pre class="nuCodeBlock" data-html-safe></pre>
-					</div>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.alert (HTMLで装飾)</div>
+				<div class="nuAccordionContent" id="__nuAlert">
+					<button class="nuButton" type="button">Run</button>
+					<pre class="nuCodeBlock" data-html-safe></pre>
+				</div>
+			</div>
 
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.confirm</div>
+				<div class="nuAccordionContent" id="__nuConfirm">
+					<button class="nuButton" type="button">Run</button>
+					<pre class="nuCodeBlock"></pre>
+				</div>
+			</div>
 
-					<div id="__nuConfirm">
-						<button class="nuButton" type="button">Run</button>
-						<pre class="nuCodeBlock"></pre>
-					</div>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.sheet (アラート表現)</div>
+				<div class="nuAccordionContent" id="__nuSheetAlert">
+					<button class="nuButton" type="button" data-html-safe>Run</button>
+					<pre class="nuCodeBlock"></pre>
+				</div>
+			</div>
 
-					<div id="__nuSheetAlert">
-						<button class="nuButton" type="button" data-html-safe>Run</button>
-						<pre class="nuCodeBlock"></pre>
-					</div>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.sheet (複数ボタン)</div>
+				<div class="nuAccordionContent" id="__nuSheet">
+					<button class="nuButton" type="button" data-html-safe>Run</button>
+					<pre class="nuCodeBlock"></pre>
+				</div>
+			</div>
 
-					<div id="__nuSheet">
-						<button class="nuButton" type="button" data-html-safe>Run</button>
-						<pre class="nuCodeBlock"></pre>
-					</div>
+			<div class="nuAccordion">
+				<div class="nuAccordionHeader">nu.prompt (入力フォーム付き)</div>
+				<div class="nuAccordionContent" id="__nuPrompt">
+					<button class="nuButton" type="button" data-html-safe>Run</button>
+					<pre class="nuCodeBlock"></pre>
 				</div>
 			</div>
 		</section>

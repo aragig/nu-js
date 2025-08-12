@@ -222,6 +222,30 @@ body {
 
 }
 
+.nuAlertBox,
+.nuSheetBox {
+	.nuAlertInputRow {
+		margin: 12px 0 24px;
+	}
+	.nuAlertInput {
+		width: 100%;
+		padding: 10px 12px;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		font-size: 14px;
+		outline: none;
+		box-sizing: border-box;
+
+		&:focus {
+			border-color: #4ca1af;
+			box-shadow: 0 0 0 3px rgba(76, 161, 175, 0.2);
+		}
+	}
+	.nuAlertButtonRow {
+		margin-top: 12px; // 入力欄とボタンの間隔を少し広げる
+	}
+}
+
 //------------------------------------------------------------------------------------
 // ローディングインジケータ用スタイル
 //------------------------------------------------------------------------------------
