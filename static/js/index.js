@@ -275,7 +275,7 @@ nu.menu("__nuMenuTriggerRBtn", {
 		const code = `
 nu.upload("uploadArea", {
 	maxSize: 1024 * 1024, // 1MBまで
-	url: "/api/upload/image"
+	url: "./api/upload/image"
 }, {
 	onSuccess: function(msg) {
 		nu.toast.s("登録完了: "+ msg);
@@ -366,7 +366,7 @@ nu.segment("__nuSegmentFruitsBtns", {
 	//------------------------------------------------------------------------------------
 	{
 		const code = `
-nu.search("__nuSearchBox", "/sample/site_search_index.json", {
+nu.search("__nuSearchBox", "./sample/site_search_index.json", {
 	onConfirm: function (text) {
 		nu.toast("🔍検索確定: " + text, {position: "top"});
 	},
