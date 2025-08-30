@@ -50,7 +50,7 @@
 	 * @param opts
 	 */
 	function showSheet(message, buttonMap, handlers, opts = {}) {
-		nu.overlay.show();
+		const ov = nu.overlay.show();
 
 		// ボタンにコールバックを登録
 		const buttons = [];
@@ -119,7 +119,7 @@
 
 				box.style.opacity = "0";
 				// オーバーレイを非表示 → 完了を待ってからボックス削除
-				await nu.overlay.hide();
+				await nu.overlay.hide(ov);
 				document.body.removeChild(box);
 			});
 
