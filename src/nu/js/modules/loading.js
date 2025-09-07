@@ -19,17 +19,25 @@
 	function showLoading(message) {
 		window.nu.overlay.show();
 
-		// スピナー
-		const spinner = document.createElement("div");
-		spinner.className = "nuLoadingSpinner";
+		// すでに生成済みなら再利用（シングルトン化）
+		let spinner = document.querySelector(".nuLoadingSpinner");
+		let msgBox  = document.querySelector(".nuLoadingMessage");
 
-		// メッセージ（省略可能）
-		const msgBox = document.createElement("div");
-		msgBox.className = "nuLoadingMessage";
+		if (!spinner) {
+			// スピナー
+			spinner = document.createElement("div");
+			spinner.className = "nuLoadingSpinner";
+			document.body.appendChild(spinner);
+		}
+		if (!msgBox) {
+			// メッセージ（省略可能）
+			msgBox = document.createElement("div");
+			msgBox.className = "nuLoadingMessage";
+			document.body.appendChild(msgBox);
+		}
+
+		// メッセージ更新
 		msgBox.textContent = message || "";
-
-		document.body.appendChild(spinner);
-		document.body.appendChild(msgBox);
 
 		// フェードイン
 		requestAnimationFrame(() => {
@@ -40,15 +48,14 @@
 
 	async function hideLoading() {
 
-		const spinner = document.querySelector(".nuLoadingSpinner");
-		const msgBox = document.querySelector(".nuLoadingMessage");
-		if (spinner) spinner.style.opacity = "0";
-		if (msgBox) msgBox.style.opacity = "0";
+		// 複数存在しても全部フェードアウト
+		const els = document.querySelectorAll(".nuLoadingSpinner, .nuLoadingMessage");
+		els.forEach(el => { el.style.opacity = "0"; });
 
 		await window.nu.overlay.hide();
 
-		if (spinner) spinner.remove();
-		if (msgBox) msgBox.remove();
+		// 全部削除
+		els.forEach(el => { el.remove(); });
 	}
 
 })(window);
